@@ -1,0 +1,358 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+DOC - Retro-Frame Common Documentation
+
+Universal Path Specification
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-path.txt//
+Version:     01.00!00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2025-03-03 : 01.00!00 : Ingo : Draft
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. UNIVERSAL PATH REPRESENTATION
+   2.1  Character set
+   2.2  Additional terminal symbols
+   2.3  Syntax
+   2.4  Semantics
+
+3. UNIVERSAL PATH TRANSLATION
+   3.1  Native path to universal path
+   3.2  Universal path to native path
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines and templates) as well as specifications which are
+intended for use in retrospective programming and may be used as a whole or
+partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to a
+specific release version. If a general intention of compliance is expressed, a
+reference to the major version may be given by "Retro-Frame 1.x". However, an
+actual reference should specify the minor version as well (e.g. "Retro-Frame
+1.0").
+
+Note that the individual Retro-Frame specifications (e.g. data formats) may use
+independent version numbers.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides a SPECIFICATION of a universal path representation which
+is used to locate an object on a file system in an environment-independent
+manner. In addition, the translation of a universal path from or to a native
+(i.e. environment-dependent) path is specified.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME]
+Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
+
+
+
+2. UNIVERSAL PATH REPRESENTATION
+===============================================================================
+
+
+2.1 Character set
+-------------------------------------------------------------------------------
+
+For internal representation, universal paths use the Retro-Frame character set
+(see /spec/rf-char.txt//). The non-character 0x00110130 (PATH_SEPARATOR) is
+used to represent the path separator.
+
+For external representation, universal paths use printable characters which
+depends on the printable level (see /spec/rf-char.txt//, chapter 4) and the
+PATH_SEPARATOR is replaced by a solidus ('/').
+
+The specified escape sequences (see /spec/rf-char.txt//, chapter 5.5) are used
+to represent the following codepoints:
+
+- control characters,
+- no-characters,
+- direct encodings,
+- a circumflex accent ('^'),
+- a solidus ('/'), unless representing a PATH_SEPARATOR,
+- a right square bracket (']') in a native selector without having a
+  corresponding left square bracket ('['),
+- non-printable characters (i.e. characters which cannot be represented by
+  a native character in the environment in which the universal path is
+  represented).
+
+The representation of other codepoints by escape sequences may be accepted or
+even required in a context-specific manner.
+
+Universal paths are case sensitive. Thus, special care must be taken when
+translating a universal path to a case-insensitive native path (see chapter
+3.2).
+
+
+2.2 Additional terminal symbols
+-------------------------------------------------------------------------------
+
+In addition to the terminal symbols defined by the metasyntax (see
+/spec/rf-syntax.txt//, chapter 2), the following terminal symbols are
+specified:
+
+Symbol         Definition
+-------------  ---------------------------------------------------------------
+PATH-CHAR      Any Retro-Frame character which is printable in the environment
+               except the circumflex accent ('^'), the solidus ('/'), the
+               right square bracket (']') and any other printable character
+               which should not be directly represented in a specific context
+               (e.g. space or delimiter).
+ESCAPE-STRING  A valid escape string according to /spec/rf-char.txt//, chapter
+               5.5.
+
+
+2.3 Syntax
+-------------------------------------------------------------------------------
+
+<native-selector-char>:
+
+  PATH-CHAR | "^"_ESCAPE-STRING
+
+<native-selector>:
+
+  "["_(_<native-selector-char>_|_"/"_|_":"_|_<native-selector>_)*_"]"
+
+<relative-selector>:
+
+  ":"
+
+<absolute-selector>:
+
+  "/" | "."_[_"!"_]*_"/" | "~/" | "+/" | "?/"
+
+<selector>:
+
+  <relative-selector> | <absolute-selector> | <native-selector>
+
+<name-char>:
+
+  <native-selector-char> | "]"
+
+<name-part>:
+
+  (_<name-char>_)*
+
+<locator>:
+
+  [_<name-part>_"/"_]*_<name-part>
+
+<type-mark>:
+
+  [ "/" ] "/"
+
+<universal-representation>:
+
+  <selector>_<locator>_[_<type-mark>_]
+
+<native-representation>:
+
+  "$"_(_<name-char>_|_"/")*
+
+<universal-path>:
+
+  <universal-representation> | <native-representation>
+
+
+2.4 Semantics
+-------------------------------------------------------------------------------
+
+A <universal-path> is a character sequence. All characters which are not
+printable or have a special meaning are represented as an escape sequence which
+is introduced by a circumflex accent ('^') as specified in /spec/rf-char.txt//.
+A character that results of an escape sequence stands for its own and has no
+special meaning (e.g. "^^" results in a single circumflex accent but does not
+introduce another escape sequence).
+
+Though <universal-path> is intended to represent a file system path in an
+environment-independent manner, it may consist of native (i.e. environment-
+dependent) parts.
+
+If the first character of a <universal-path> is a dollar sign ('$'), the entire
+remaining character sequence is considered a native representation (which is,
+however, not identical to the actual native path if escape sequences occur).
+
+A <selector> is a component of a universal path that specifies the base
+directory of the <locator>. The following types of selectors are specified:
+
+- <relative-selector> is represented by a colon (':'). The base directory is
+  intentionally unspecified (e.g. a path in an archive). A universal path with
+  a relative selector cannot be directly translated to a native path.
+
+- <absolute-selector> refers to an abstract base path which can be translated
+  to an environment-specific respective context-specific native base path. The
+  following absolute selectors are defined:
+
+  - "/"   Represents a context-specific root directory (i.e. the root directory
+          of the file system, current drive or a repository).
+
+  - "./"  Represents the current directory of the file system. After the full
+          stop ('.') an optional sequence of exclamation marks ('!') may
+          follow, each one representing the parent directory. This may pose a
+          security risk (directory traversal) if not properly handled. However,
+          as parent directories cannot occur within a <locator>, the acceptable
+          number of parent directories may be validated easily.
+
+  - "~/"  Represents the user's home directory of the file system. If the
+          environment does not specify a home directory, this selector cannot
+          be used.
+
+  - "+/"  Represents the program directory of the file system. If the
+          program directory is not specified or cannot be determined, this
+          selector cannot be used.
+
+  - "?/"  Represents a temporary directory of the file system.
+
+- <native-selector> represents the base directory by a native path. Thus, a
+  native selector is environment-dependent. A native selector starts with a
+  left square bracket ('[') and ends with a right square bracket (']'). If the
+  native path contains square brackets, each right square bracket closes a
+  preceding left square bracket. If no left square bracket is given, the right
+  square bracket must be represented by an escape sequence (i.e. "^]").
+
+A <type-mark> is an optional component of a universal path that specifies
+whether the object is a directory or a file:
+
+- "/"   represents a directory
+- "//"  represents a file
+
+If a type mark is missing, the type of the object represented by the universal
+path is unspecified (i.e. the object may be a directory or a file).
+
+
+
+3. UNIVERSAL PATH TRANSLATION
+===============================================================================
+
+
+3.1 Native path to universal path
+-------------------------------------------------------------------------------
+
+When a native path is translated to a universal path, the following rules
+should apply:
+
+- The case of letters is preserved.
+
+- If the path is absolute, an appropriate selector has to be chosen in a
+  context-specific manner. By default, if the absolute path contains components
+  other than directory names and a file name (e.g. a drive letter), the not
+  representable part may be encoded as a native selector (e.g. "A:\DIR\FILE"
+  may use "[A:\]" as the selector).
+
+- All references to the current respective parent directory must be resolved.
+  If one or more references to the parent directories remain, they may be
+  represented by exclamation marks ('!') if the absolute selector "./" is
+  used (e.g. "./test/x/./../y/../../z" is resolved to ".!/z"), or considered
+  invalid otherwise.
+
+- In the locator, a native path separator is represented by a PATH_SEPARATOR
+  character.
+
+- If the native path represents a directory, one PATH_SEPARATOR character
+  should be appended, if it represents a file, two PATH_SEPARATOR characters
+  should be appended as the type mark. If it is not known whether the native
+  path represents a directory or a file, no type mark should be appended.
+
+- If the native path contains other components (e.g. a version or alternate
+  data stream identifiers), those information is lost or must, if required, be
+  represented by other means.
+
+Note that objects which have a specific meaning on the native file system may
+have a different meaning on on a different file system. A universal path should
+represent either a normal directory or a normal file.
+
+
+3.2 Universal path to native path
+-------------------------------------------------------------------------------
+
+When a universal path is translated to a native path, the following rules
+should apply (note that relative paths cannot be translated):
+
+- All escape sequences and direct encodings, if given, are translated to the
+  actual codepoints. No no-character except PATH_SEPARATOR should be left.
+
+- A native encoding (i.e. a native selector or a native representation), if
+  given, are validated according to the native path specification of the
+  environment. If required, appropriate characters may be appended to a native
+  selector (e.g. a native path separator).
+
+- An absolute selector, if given, is replaced by the current relating base
+  path, if specified.
+
+- All name parts of the locator are validated according to the native path
+  specification of the environment.
+
+- The name parts of the locator are appended to the selector, separated by
+  native path separators.
+
+- Depending on the native path specification, appropriate characters may be
+  appended, possibly depending on the type mark.
+
+- If the native file system is case-insenstive, possible conflicts must be
+  handled in a context-specific manner. Under certain circumstances, it may
+  pose a security risk if such cases are not properly handled (e.g. if a file
+  is overwritten by another file whose path only differs by case).
+
+If validation fails (e.g. the resulting path cannot be represented by a valid
+native path or if conflicts occur due to case-insensitivity), the resulting
+path may be considered invalid, the user may be prompted or surrogates may be
+used (in which case the resulting native path does not comply to the rules
+specified above).

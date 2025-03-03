@@ -1,0 +1,419 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+DOC - Retro-Frame Common Documentation
+
+Definitions
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /doc/rf-def.txt//
+Version:     01.00!00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2025-03-03 : 01.00!00 : Ingo : Draft
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. DOCUMENTATION-RELATED TERMS
+   2.1  Definition
+   2.2  Taxonomy
+   2.3  Guidelines
+   2.4  Description
+   2.5  Instruction
+   2.6  Template
+
+3. SPECIFICATION-RELATED TERMS
+   3.1  Specification
+   3.2  Code list
+   3.3  Algorithm
+   3.4  Algorithm specification
+   3.5  Data format
+   3.6  Data format specification
+   3.7  Environment
+   3.8  Environment specification
+   3.9  Protocol
+   3.10 Protocol specification
+
+4. SOFTWARE-RELATED TERMS
+   4.1  Documentation
+   4.2  Program
+   4.3  Source code
+   4.4  Resource
+   4.5  Software
+   4.6  Product
+
+5. FILE-RELATED TERMS
+   5.1  Work file
+   5.2  Document
+   5.3  Source file
+   5.4  Unit
+   5.5  Resource file
+   5.6  Control file
+   5.7  Executable
+   5.8  Program file
+   5.9  Repository
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines and templates) as well as specifications which are
+intended for use in retrospective programming and may be used as a whole or
+partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to a
+specific release version. If a general intention of compliance is expressed, a
+reference to the major version may be given by "Retro-Frame 1.x". However, an
+actual reference should specify the minor version as well (e.g. "Retro-Frame
+1.0").
+
+Note that the individual Retro-Frame specifications (e.g. data formats) may use
+independent version numbers.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document contains common definitions.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[REQUIREMENT LEVEL KEYWORDS]
+RFC: 2119 - Key words for use in RFCs to Indicate Requirement Levels, see
+<https://datatracker.ietf.org/doc/html/rfc3986>.
+
+[RETRO-FRAME]
+Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
+
+
+
+2. DOCUMENTATION-RELATED TERMS
+===============================================================================
+
+
+2.1 Definition
+-------------------------------------------------------------------------------
+
+A 'DEFINITION' is a mapping of a simple term to a complex term, expressed as
+text, in order to clarify terminology (i.e. a word or a phrase is explained by
+other words) or to introduce a simplified code which may be used equivalently
+to a (e.g. more complex or less memorizable) term. The simple term should be
+capitalized and enclosed by apostrophes (''') at the first occurence in the
+DEFINITION. It should be replaceable by the defined complex term in any context
+outside the DEFINITION and may be capitalized to emphasize that it is a defined
+term. In DOCUMENTS, apostrophes which are enclosing more than one character
+should only be used outside a DEFINITION if their meaning is clear (e.g.
+according to the rules of a metasyntax). The complex term should consist only
+of terms that have already been defined or do not need to be defined and ends
+at the first full stop (if given). Further explaining text, including examples,
+may follow.
+
+
+2.2 Taxonomy
+-------------------------------------------------------------------------------
+
+A 'TAXONOMY' is a set of related definitions where each definition is relating
+to exactly one other definition of the same TAXONOMY an hierarchical order
+(i.e. there should be no circle of definitions). In most cases, the relating
+definition adds further attributes to the related definition which results in a
+more special term of a more generic term.
+
+
+2.3 Guidelines
+-------------------------------------------------------------------------------
+
+'GUIDELINES' are a set of normative rules expressed as text using [REQUIREMENT
+LEVEL KEYWORDS], whether in upper or lower case letters, to indicate under
+which circumstances each rule must be observed in order to comply.
+
+
+2.4 Description
+-------------------------------------------------------------------------------
+
+A 'DESCRIPTION' is a non-defining and non-normative explaining text to support
+understanding.
+
+
+2.5 Instruction
+-------------------------------------------------------------------------------
+
+An 'INSTRUCTION' is a non-defining and non-normative explaining text to enable
+the proper usage of a program, product or application.
+
+
+2.6 Template
+-------------------------------------------------------------------------------
+
+A 'TEMPLATE' is a layout of a text structure without any content.
+
+
+
+3. SPECIFICATION-RELATED TERMS
+===============================================================================
+
+
+3.1 Specification
+-------------------------------------------------------------------------------
+
+A 'SPECIFICATION' is an explaining text which defines normative and possible
+optional rules for a particular subject identified by a term (called the
+"identifier", e.g. a name or a code) and a version number. Conformance to a
+particular SPECIFICATION is given if all normative (i.e. non-optional) rules
+are fulfilled. The identifiers of multiple SPECIFICATIONS may or may not form a
+taxonomy. If they do, the SPECIFICATION of a subject must be a superset of all
+higher related SPECIFICATIONS (i.e. conformance to a SPECIFICATION always
+implies conformance to all higher related SPECIFICATIONS).
+
+
+3.2 Code list
+-------------------------------------------------------------------------------
+
+A 'CODE LIST' is a set of homogeneous DEFINITIONS as part of a SPECIFICATION
+where the simple term is represented as a code (i.e. a sequence of alphanumeric
+and possible non-delimiting symbol characters). 
+
+The entire CODE LIST or parts of it may or may not be a taxonomy. Apart from
+relations possibly constituted by a taxonomy, a CODE LIST should not depend on
+the order of the definitions.
+
+
+3.3 Algorithm
+-------------------------------------------------------------------------------
+
+An 'ALGORITHM' is a sequence of operations to translate a defined input into a
+defined output. Each operation is either another ALGORITHM (which may even be
+recursively the ALGORITHM itself) or an atomic operation which is clear how to
+be executed.
+
+
+3.4 Algorithm specification
+-------------------------------------------------------------------------------
+
+An 'ALGORITHM SPECIFICATION' is a SPECIFICATION whose subject is a specific
+ALGORITHM.
+
+
+3.5 Data format
+-------------------------------------------------------------------------------
+
+A 'DATA FORMAT' is a combination of syntax and semantics which allows the
+interpretation of a sequence of characters or bytes. While the syntax is used
+to arrange multiple elements of data, the semantics determine the meaning of
+those elements.
+
+
+3.6 Data format specification
+-------------------------------------------------------------------------------
+
+A 'DATA FORMAT SPECIFICATION' is a SPECIFICATION whose subject is a specific
+DATA FORMAT.
+
+
+3.7 Environment
+-------------------------------------------------------------------------------
+
+An 'ENVIRONMENT' is an abstract class of systems for data processing with
+specific common characteristics (e.g. properties, capabilities and/or
+constraints). While all systems of a specific ENVIRONMENT must be identical
+regarding those characteristics, the may be different otherwise.
+
+
+3.8 Environment specification
+-------------------------------------------------------------------------------
+
+An 'ENVIRONMENT SPECIFICATION' is a SPECIFICATION whose subject is a specific
+ENVIRONMENT.
+
+
+3.9 Protocol
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL' is a set of rules to exchange information between two or more
+parties by means of data transmission.
+
+
+3.10 Protocol specification
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL SPECIFICATION' is a SPECIFICATION whose subject is a specific
+PROTOCOL.
+
+
+
+4. SOFTWARE-RELATED TERMS
+===============================================================================
+
+
+4.1 Documentation
+-------------------------------------------------------------------------------
+
+'DOCUMENTATION' is a set of DEFINITIONS, GUIDELINES, DESCRIPTIONS,
+INSTRUCTIONS, TEMPLATES and/or SPECIFICATIONS.
+
+
+4.2 Program
+-------------------------------------------------------------------------------
+
+A 'PROGRAM' is a set of optional declarations, optional internal data and
+sequences of instructions which can be executed by a machine.
+
+
+4.3 Source code
+-------------------------------------------------------------------------------
+
+A 'SOURCE CODE' is a human-readable text that represents an entire or a part of
+a PROGRAM. Thus, a SOURCE CODE may or may not be a PROGRAM. In case it only
+represents a part of a PROGRAM, which is not entirely executable by a machine,
+it is considered a PROGRAM fragment (e.g. a module or an include file).
+
+
+4.4 Resource
+-------------------------------------------------------------------------------
+
+A 'RESOURCE' text or binary data which is supplementary to a program in order
+to execute as intended (i.e. not SOURCE CODE) or to a user in order to use a
+program as intended (i.e. not DOCUMENTATION). Thus, a RESOURCE is considered
+additional external data (e.g. configuration, images or strings) but not a
+PROGRAM or even a part of it.
+
+
+4.5 Software
+-------------------------------------------------------------------------------
+
+A 'SOFTWARE' is a set of one or more PROGRAMS and/or RESOURCES which are
+considered a unity in order to serve one or more specific purposes. While
+related or associated DOCUMENTATION is not implicitly considered part of a
+SOFTWARE, it may be covered if explicitly stated (e.g. by the MIT license).
+Note that a software may or may not include SOURCE CODE.
+
+
+4.6 Product
+-------------------------------------------------------------------------------
+
+A 'PRODUCT' is SOFTWARE in a DATA FORMAT which can be processed in a specific
+execution ENVIRONMENT and optionally related DOCUMENTATION. Thus, a PRODUCT is
+the outcome of software development process which does not require and further
+translation (e.g. compilation) and may include additional DOCUMENTATION, if not
+already part of the SOFTWARE.
+
+
+
+5. FILE-RELATED TERMS
+===============================================================================
+
+
+5.1 Work file
+-------------------------------------------------------------------------------
+
+A 'WORK FILE' is a file which contains non-deducible data and is required to
+develop a SOFTWARE including related or associated DOCUMENTATION. Creating,
+editing and/or deleting WORK FILES is performed through the software
+development process. Files which are deducible (e.g. translation results or
+temporary files) are not considered WORK FILES.
+
+
+5.2 Document
+-------------------------------------------------------------------------------
+
+A 'DOCUMENT' is a WORK FILE which contains DOCUMENTATION.
+
+
+5.3 Source file
+-------------------------------------------------------------------------------
+
+A 'SOURCE FILE' is a WORK FILE which contains SOURCE CODE.
+
+
+5.4 Unit
+-------------------------------------------------------------------------------
+
+A 'UNIT' is a set of one or more SOURCE FILES which are considered an entity
+which is a part of a PROGRAM and independently translateable and/or partially
+executable (i.e. if invoked in a specific manner which is not necessarily
+provided by the execution ENVIRONMENT).
+
+
+5.5 Resource file
+-------------------------------------------------------------------------------
+
+A 'RESOURCE FILE' is a WORK FILE which contains RESOURCES.
+
+
+5.6 Control file
+-------------------------------------------------------------------------------
+
+A 'CONTROL FILE' is a WORK FILE which contains data used for the software
+development process but not being part of the SOFTWARE itself (e.g. build,
+project and/or configuration files of the translation ENVIRONMENT).
+
+
+5.7 Executable
+-------------------------------------------------------------------------------
+
+An 'EXECUTABLE' is a binary (i.e. not human-readable) file which can processed
+in a specific execution ENVIRONMENT.
+
+
+5.8 Program file
+-------------------------------------------------------------------------------
+
+A 'PROGRAM FILE' is an EXECUTABLE or a SOURCE FILE which can be processed in a
+specific execution ENVIRONMENT (e.g. by an interpreter). Thus, a SOURCE FILE
+which needs translation in order to be executable (e.g. by a compiler) is still
+considered a PROGRAM but not a PROGRAM FILE.
+
+
+5.9 Repository
+-------------------------------------------------------------------------------
+
+A 'REPOSITORY' is a set of related WORK FILES and optionally other related
+files (e.g. CONTROL FILES) with version control (i.e. on changes, older
+versions of the files are kept).

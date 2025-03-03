@@ -1,0 +1,448 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+DOC - Retro-Frame Common Documentation
+
+Data Types Specification
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-types.txt//
+Version:     01.00!00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2025-03-03 : 01.00!00 : Ingo : Draft
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. INTEGER TYPES
+   2.1  Integers with unspecified representation
+   2.2  Unsigned integers
+   2.3  Two's complement signed integers
+   2.4  Special integers
+
+3. FLOATING POINT NUMBER TYPES
+   3.1  Floating point numbers with unspecified representation
+   3.2  IEEE 754 floating point numbers
+   3.3  Microsoft binary format floating point numbers
+
+4. CHARACTER TYPES
+   4.1  Single byte character encodings (codepages)
+   4.2  Multibyte character encodings
+   4.3  Wide character encodings
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines and templates) as well as specifications which are
+intended for use in retrospective programming and may be used as a whole or
+partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to a
+specific release version. If a general intention of compliance is expressed, a
+reference to the major version may be given by "Retro-Frame 1.x". However, an
+actual reference should specify the minor version as well (e.g. "Retro-Frame
+1.0").
+
+Note that the individual Retro-Frame specifications (e.g. data formats) may use
+independent version numbers.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides common codes (i.e. a code list) for specified data
+types. In particular, those codes may be used as terminal symbols for binary
+data format specifications (see /01/spec/rf-syntax.txt//) and environment
+constraints (see /01/spec/rf-template.txt//).
+
+The data types covered are integer, floating point number and character types.
+Other data types may be used anyway but there is no defined code specified by
+Retro-Frame.
+
+Parts of a data type or its representation may remain intentionally unspecified
+(e.g. endianness) and may be specified in a specific context.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[GWBASIC]
+Microsoft(R) GW-BASIC User's Guide and Reference, Microsoft Corporation, 1987.
+
+[IEEE 754]
+IEEE Standard for Floating-Point Arithmetic, IEEE, July 2019, see
+<https://ieeexplore.ieee.org/document/8766229>
+
+[ISO 10646]
+International Standard ISO/IEC 10646:2020 - Information technology - Universal
+coded characters set (UCS), sixth edition, 2020-12.
+
+[MBF]
+Microsoft Binary Format, Wikipedia, see
+<https://en.wikipedia.org/wiki/Microsoft_Binary_Format>
+
+[RETRO-FRAME]
+Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
+
+[UNICODE]
+The Unicode(R) Standard, The Unicode Consortium, for latest version see
+<https://www.unicode.org/versions/latest/>.
+
+
+
+2. INTEGER TYPES
+===============================================================================
+
+
+2.1 Integers with unspecified representation
+-------------------------------------------------------------------------------
+
+Integers with unspecified representation are generic integers which may be
+further specified in a specific context.
+
+Identifier  Description
+----------  --------------------------------------------------------
+UINT        unsigned integer
+SINT        signed integer (i.e. negative values can be represented)
+
+
+2.2 Unsigned integers
+-------------------------------------------------------------------------------
+
+Unsigned integers represent positive values, always in the range 0..(2^n - 1)
+with n denoting the number of significant bits. The size of an unsigned integer
+is always n / 8 bytes.
+
+Identifier  Size         Endianness   Description
+----------  -----------  -----------  ---------------------------------------
+UINT8       1 byte       n/a          8 bit unsigned integer
+UINT16      2 bytes      unspecified  16 bit unsigned integer
+UINT16-LE   2 bytes      little       16 bit unsigned integer, little endian
+UINT16-BE   2 bytes      big          16 bit unsigned integer, big endian
+UINT32      4 bytes      unspecified  32 bit unsigned integer
+UINT32-LE   4 bytes      little       32 bit unsigned integer, little endian
+UINT32-BE   4 bytes      big          32 bit unsigned integer, big endian
+UINT64      8 bytes      unspecified  64 bit unsigned integer
+UINT64-LE   8 bytes      little       64 bit unsigned integer, little endian
+UINT64-BE   8 bytes      big          64 bit unsigned integer, big endian
+UINT128     16 bytes     unspecified  128 bit unsigned integer
+UINT128-LE  16 bytes     little       128 bit unsigned integer, little endian
+UINT128-BE  16 bytes     big          128 bit unsigned integer, big endian
+
+
+2.3 Two's complement signed integers
+-------------------------------------------------------------------------------
+
+Two's complement signed integers can represent positive and negative values,
+always in the range -2^(n - 1)..(2^(n - 1) - 1) with n denoting the number of
+significant bits. The size of an unsigned integer is always n / 8 bytes. There
+is no negative zero.
+
+Identifier  Size      Endianness   Description
+----------  --------  -----------  -------------------------------------
+SINT8       1 byte    n/a          8 bit signed integer
+SINT16      2 bytes   unspecified  16 bit signed integer
+SINT16-LE   2 bytes   little       16 bit signed integer, little endian
+SINT16-BE   2 bytes   big          16 bit signed integer, big endian
+SINT32      4 bytes   unspecified  32 bit signed integer
+SINT32-LE   4 bytes   little       32 bit signed integer, little endian
+SINT32-BE   4 bytes   big          32 bit signed integer, big endian
+SINT64      8 bytes   unspecified  64 bit signed integer
+SINT64-LE   8 bytes   little       64 bit signed integer, little endian
+SINT64-BE   8 bytes   big          64 bit signed integer, big endian
+SINT128     16 bytes  unspecified  128 bit signed integer
+SINT128-LE  16 bytes  little       128 bit signed integer, little endian
+SINT128-BE  16 bytes  big          128 bit signed integer, big endian
+
+
+2.4 Special integers
+-------------------------------------------------------------------------------
+
+Special integers are all fixed-length integers which do not meet the
+specifications of unsigned integers or two's complement signed integers. If
+parity bits are used (i.e. the number of significant bits does not equal the
+size in bytes times 8), those bits are expected to be the highest bits and set
+appropriately to match even respective odd parity.
+
+Identifier  Size    Endianness  Description
+----------  ------  ----------  -----------------------------------
+UINT7E      1 byte  n/a         7 bit unsigned integer, even parity
+UINT7O      1 byte  n/a         7 bit unsigned integer, odd parity
+
+
+
+3. FLOATING POINT NUMBER TYPES
+===============================================================================
+
+
+3.1 Floating point numbers with unspecified representation
+-------------------------------------------------------------------------------
+
+Floating point numbers with unspecified representation may be used to specify
+the required size and/or the capability to represent infinity respective "not a
+number" (NaN) values.
+
+Identifier  Size         Infinity      NaN
+----------  -----------  ------------  ------------
+FLT         unspecified  not required  not required
+FLT16       2 bytes      not required  not required
+FLT32       4 bytes      not required  not required
+FLT40       5 bytes      not required  not required
+FLT64       8 bytes      not required  not required
+FLT128      16 bytes     not required  not required
+FLTI        unspecified  required      not required
+FLTI16      2 bytes      required      not required
+FLTI32      4 bytes      required      not required
+FLTI40      5 bytes      required      not required
+FLTI64      8 bytes      required      not required
+FLTI128     16 bytes     required      not required
+FLTN        unspecified  not required  required
+FLTN16      2 bytes      not required  required
+FLTN32      4 bytes      not required  required
+FLTN40      5 bytes      not required  required
+FLTN64      8 bytes      not required  required
+FLTN128     16 bytes     not required  required
+FLTIN       unspecified  required      required
+FLTIN16     2 bytes      required      required
+FLTIN32     4 bytes      required      required
+FLTIN40     5 bytes      required      required
+FLTIN64     8 bytes      required      required
+FLTIN128    16 bytes     required      required
+
+
+3.2 IEEE 754 floating point numbers
+-------------------------------------------------------------------------------
+
+IEEE 754 floating point numbers are specified by [IEEE 754]. All formats have
+the capability to represent infinity and "not a number" (NaN) values. Only the
+formats of base 2 (i.e. binary formats) are specified here.
+
+For each format, the most significant bit represents the sign, followed by an
+exponent field of r bits and a significand field (i.e. the fractional part of
+the mantissa) of p bits. Thus, 1 + r + p equals the size in bytes times 8. The
+interpretation depends on the value of the exponent field:
+
+- If the exponent field is zero, the integer part of the mantissa is considered
+  zero (so-called subnormal number). Thus, if in this case the significand
+  field is also zero, the whole value is zero (i.e. 0.0). Note that if the sign
+  bit is set, a negative zero is possible (i.e. -0.0).
+
+- If the exponent field is in the range 1..(2^r - 2), the integer part of the
+  mantissa is considered 1 (i.e. the mantissa is normalized) and the exponent
+  is biased by 2^(r - 1) - 1 (e.g. an exponent of 1 is represented by 2^(r - 1)
+  in the exponent field).
+
+- If the exponent field is 2^r - 1, the value represents either infinity (if
+  the significand fiels is zero) or NaN (if the significand field is not zero).
+  Note that in the case of infinity, the sign bit remains meaningful. In case
+  of NaN, the sign bit has no meaning but the actual value of the significand
+  field may have meaning (e.g. signaling vs. quiet NaN). However, the meaning
+  of different NaNs is not specified here and it is recommended always to
+  represent a NaN by setting all bits of the floating point number to 1.
+
+Identifier      Size      r   p    Endianness   Format
+--------------  --------  --  ---  -----------  -------------------------------
+IEEE754-16      2 bytes   5   10   unspecified  binary16 (half precision)
+IEEE754-16-LE   2 bytes   5   10   little       binary16 (half precision)
+IEEE754-16-BE   2 bytes   5   10   big          binary16 (half precision)
+IEEE754-32      4 bytes   8   23   unspecified  binary32 (single precision)
+IEEE754-32-LE   4 bytes   8   23   little       binary32 (single precision)
+IEEE754-32-BE   4 bytes   8   23   big          binary32 (single precision)
+IEEE754-64      8 bytes   11  52   unspecified  binary64 (double precision)
+IEEE754-64-LE   8 bytes   11  52   little       binary64 (double precision)
+IEEE754-64-BE   8 bytes   11  52   big          binary64 (double precision)
+IEEE754-128     16 bytes  15  112  unspecified  binary128 (quadruple precision)
+IEEE754-128-LE  16 bytes  15  112  little       binary128 (quadruple precision)
+IEEE754-128-BE  16 bytes  15  112  big          binary128 (quadruple precision)
+
+
+3.3 Microsoft binary format floating point numbers
+-------------------------------------------------------------------------------
+
+Microsoft binary format floating point numbers use the format implemented by
+former Microsoft BASIC versions. There is no official specification but the
+format can be determined from [GWBASIC], GW-BASIC User's Guide, Appendix D,
+chapter 10.3 and a full description is given by [MBF]. The repesentation of
+infinity or "not a number" (NaN) is not supported.
+
+For each format, the most significant 8 bits represent the exponent field,
+followed by a sign bit and the remaining (i.e. least significant) bits for the
+significand field. The exponent is biased minus 128 (e.g. an exponent of 1 is
+represented by 129 in the exponent field) and a value of zero in the exponent
+field indicates that the whole value is zero. The significand field represents
+the fractional part of the mantissa with an implied leading 1 and an implied
+integer part of zero (thus, a significand field of all zeros represents a
+mantissa of value 0.5).
+
+Note that this description follows the original documentation ("the exponent,
+minus 128. The binary point is to the left of the most significant bit of the
+mantissa"). If a normalized mantissa would be used instead (i.e. an implied
+integer part of 1 and the significand field represents the entire fractional
+part of the mantissa), the bias would be 129.
+
+Identifier  Size     Endianness   Format
+----------  -------  -----------  ------------------
+MBF32       4 bytes  unspecified  single-precision
+MBF32-LE    4 bytes  little       single-precision
+MBF32-BE    4 bytes  big          single-precision
+MBF40       5 bytes  unspecified  extended-precision
+MBF40-LE    5 bytes  little       extended-precision
+MBF40-BE    5 bytes  big          extended-precision
+MBF64       8 bytes  unspecified  double-precision
+MBF64-LE    8 bytes  little       double-precision
+MBF64-BE    8 bytes  big          double-precision
+
+
+
+4. CHARACTER TYPES
+===============================================================================
+
+
+4.1 Single byte character encodings (codepages)
+-------------------------------------------------------------------------------
+
+A single byte character encoding represents each character (i.e. codepoint) by
+exactly one byte. Due to the limited number of representable codepoints, a vast
+number of so-called codepages exist. As an appropriate code list for codepages
+seems to require many changes, in this document only ASCII characters (i.e. the
+codepoints 0..127 according to [UNICODE]) are specified while codepages must be
+specified implicitly or explicitly otherwise.
+
+Note that unknown codepoints may still be processed using direct encoding if
+translated to a Retro-Frame character (see /01/spec/rf-char.txt//).
+
+Identifier  Description
+----------  ----------------------------------------------------------------
+CHAR        unspecified single byte character type
+ASCII       7 bit ASCII character, most significant bit must be zero
+ASCIIE      7 bit ASCII character, most significant bit set to even parity
+ASCIIO      7 bit ASCII character, most significant bit set to odd parity
+ASCII-CP    8 bit character codepage, codepoints 0..127 are ASCII characters
+CP          8 bit character codepage with no ASCII compatibility
+
+
+4.2 Multibyte character encodings
+-------------------------------------------------------------------------------
+
+A multibyte character encoding represents each character (i.e. codepoint) by a
+variable number of bytes. Thus, the actual number of bytes depends on the
+codepoint. The specified codes determine the encoding scheme as well as the
+character set.
+
+For the Unicode character set, and a specification of UTF-8 see [ISO 10646] or
+[UNICODE]. While in standard-conforming encodings, the Unicode surrogates must
+not occur (and are thus not decoded), CESU-8 treat matching surrogate pairs
+like UTF-16.
+
+Note that invalid encodings may still be processed using direct encoding if
+translated to a Retro-Frame character (see /01/spec/rf-char.txt//).
+
+Identifier  Character set  Description
+----------  -------------  ----------------------------------------------------
+UTF-8       Unicode        Standard-conforming UTF-8 encoding. If surrogates
+                           or other non-characters occur, the encoding has to
+                           be considered invalid.
+CESU-8      Unicode        UTF-8 encoding which may represent surrogate pairs
+                           which are decoded according to UTF-16. Non-matching
+                           surrogate pairs or non-characters have to be
+                           considered invalid.
+PCS         Retro-Frame    Single packed character of a packed character string
+                           (PCS), see /01/spec/rf-char.txt//, chapter 5.4.
+
+
+4.3 Wide character encodings
+-------------------------------------------------------------------------------
+
+A wide character encoding uses unsigned integer types of more than one byte to
+represent the codepoints. Thus, endianness has to be considered. Nevertheless,
+in some cases surrogate pairs respective shifted values may be uses so that
+more than one values may be used for a single character.
+
+For the Unicode character set, and a specification of UTF-16 and UTF-32 see
+[ISO 10646] or [UNICODE]. While high/low surrogate pairs represent a single
+codepoint in UTF-16 and 16 bit representations of Retro-Frame characters,
+surrogate codepoints are considered invalid (but may be represented by direct
+encoding) in UCS 2.
+
+Retro-Frame characters may use shifted values to represent a direct encoding
+(see /01/spec/rf-char.txt//, chapters 3.4 and 5.2).
+
+Identifier  Size         Endianness   Character set  Description
+----------  -----------  -----------  -------------  --------------------------
+WCHAR       unspecified  unspecified  unspecified    unspecified wide character
+UCS2        2 bytes      unspecified  Unicode        UTF-16 without surrogates
+UCS2-LE     2 bytes      little       Unicode        UTF-16 without surrogates,
+                                                     little endian
+UCS2-BE     2 bytes      big          Unicode        UTF-16 without surrogates,
+                                                     big endian
+UTF16       2/4 bytes    unspecified  Unicode        UTF-16 with surrogates
+UTF16-LE    2/4 bytes    little       Unicode        UTF-16 with surrogates,
+                                                     little endian
+UTF16-BE    2/4 bytes    big          Unicode        UTF-16 with surrogates,
+                                                     big endian
+UTF32       4 bytes      unspecified  Unicode        UTF-32
+UTF32-LE    4 bytes      little       Unicode        UTF-32, little endian
+UTF32-BE    4 bytes      big          Unicode        UTF-32, big endian
+CHAR16      n * 2 bytes  unspecified  Retro-Frame    16 bit Retro-Frame
+                                                     character representation
+CHAR16-LE   n * 2 bytes  little       Retro-Frame    16 bit Retro-Frame
+                                                     character representation,
+                                                     little endian
+CHAR16-BE   n * 4 bytes  big          Retro-Frame    16 bit Retro-Frame
+                                                     character representation,
+                                                     big endian
+CHAR32      n * 4 bytes  unspecified  Retro-Frame    32 bit Retro-Frame
+                                                     character representation
+CHAR32-LE   n * 4 bytes  little       Retro-Frame    32 bit Retro-Frame
+                                                     character representation,
+                                                     little endian
+CHAR32-BE   n * 4 bytes  big          Retro-Frame    32 bit Retro-Frame
+                                                     character representation,
+                                                     big endian
