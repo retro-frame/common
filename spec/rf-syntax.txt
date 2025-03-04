@@ -168,6 +168,8 @@ SPC     A single space (i.e. " ")
 9       An arbitrary digit (i.e. "0"-"9")
 A       An arbitrary uppercase letter (i.e. "A"-"Z")
 a       An arbitrary lowercase letter (i.e. "a"-"z")
+X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9", "A"-"F")
+x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9", "a"-"f")
 ?       An arbitrary letter (i.e. A | a)
 !       An arbitrary defined character of the input text, excluding END and the
         first character of a variant (e.g. ! | "^"_ESCAPE-STRING) or the first

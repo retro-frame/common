@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!00
+Version:     01.00!01
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-03 : 01.00!00 : Ingo : Draft
+2025-03-04 : 01.00!01 : Ingo : Draft
 
 
 Contents
@@ -791,6 +791,32 @@ should be distinguished:
 
 7.2 Classification of information
 -------------------------------------------------------------------------------
+
+In order to simplify the classification of information, only a scalar level of
+sensitivity is used which is determined by the potential impact in case of the
+loss of one or more of the following security objectives:
+
+- Confidentiality (i.e. no unauthorized disclosure of information).
+
+- Integrity (i.e. no unauthorized modification of information).
+
+- Availability (i.e. information can be processed when required).
+
+
+Level   Criteria
+------  -----------------------------------------------------------------------
+none    Information may be publicly available. There is no security objective
+        or the loss a secrity objective would be insignificant.
+low     Access to information should be restricted to the local network and the
+        loss of a secrity objective would be neglectable.
+medium  Access to information should be restricted to the execution environment
+        and the loss of a secrity objective could have moderate impact.
+high    Access to information should be restricted to individual users and the
+        loss of a secrity objective could have severe impact.
+
+
+If the levels of sensitivity differ for the individual security objectives, the
+highest (i.e. maximum) level is chosen.
 
 
 7.3 Potential threats and risks
