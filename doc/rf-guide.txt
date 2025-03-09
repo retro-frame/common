@@ -7,7 +7,7 @@
 |_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
 
 
-DOC - Retro-Frame Common Documentation
+COMMON - Retro-Frame Common Documentation
 
 Guidelines
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-04 : 01.00!01 : Ingo : Draft
+2025-03-09 : 01.00!01 : Ingo : Draft
 
 
 Contents
@@ -66,28 +66,26 @@ Contents
    3.2  Release (initial, major or minor)
    3.3  Support (patch / correction, deprecation)
 
-4. REPOSITORY TYPES AND LICENSING
-   4.1  Manual repositories
-   4.2  Offline repositories
-   4.3  Private repositories
-   4.4  Public repositories
-   4.5  Collaborative repositories
+4. FILE SYSTEM AND REPOSITORIES
+   4.1  Local paths
+   4.2  Commits and tags
+   4.3  Branching, merging and pull requests
+   4.4  License and readme files
+   4.5  Directory structures and exclusions
 
-5. VERSIONING
-   5.1  Regular version numbers
-   5.2  Repository versioning
-   5.3  Work file versioning
-   5.4  Product versioning
-   5.5  Data format version numbers
+5. REPOSITORY TYPES AND LICENSING
+   5.1  Manual repositories
+   5.2  Offline repositories
+   5.3  Private repositories
+   5.4  Public repositories
+   5.5  Collaborative repositories
 
-6. REPOSITORY USAGE AND FILE SYSTEM
-   6.1  Local paths
-   6.2  Exclusions
-   6.3  License and readme files
-   6.4  Directory structures
-   6.5  Branching
-   6.6  Merging
-   6.7  Pull requests
+6. VERSIONING
+   6.1  Regular version numbers
+   6.2  Repository versioning
+   6.3  Work file versioning
+   6.4  Product versioning
+   6.5  Data format version numbers
 
 7. SECURITY
    7.1  General considerations
@@ -396,7 +394,7 @@ which fixes the problem may be created so that the release becomes valid again
 
 
 
-4. REPOSITORY TYPES AND LICENSING
+4. FILE SYSTEM AND REPOSITORIES
 ===============================================================================
 
 All workfiles should be part of a REPOSITORY. Access control, version control
@@ -404,34 +402,148 @@ All workfiles should be part of a REPOSITORY. Access control, version control
 affects the entire repository.
 
 
-4.1 Manual repositories
+4.1 Local paths
+-------------------------------------------------------------------------------
+
+There should be a dedicated directory for each Retro-Endeavor, which is of
+interest, on the local file system. It is recommended to choose an appropriate
+common base directory and to create a directory for each Retro-Endeavor using
+its name as the directory name (if possible), for example:
+
+  :Retro-Frame/
+  :Retro-BASIC/
+  :Retro-C/
+
+If not all directory names would be allowed by the file system, the initials
+of the Retro-Endeavors may be used in uppercase and without the hyphen, for
+example:
+
+  :RF/
+  :RB/
+  :RC/
+
+In each Retro-Endeavor directory, the following sub-directories should be used
+as the mount point for REPOSITORIES:
+
+- The sub-directory dev/ should be the mount point for development repositories
+  whose work files may be modified by development activities. Note that during
+  development, the repository may not have a valid version (see chapter 6).
+
+- The sub-directory release/ should be the mount point for release repositories
+  whose work files must have a fixed version state and must not be modified any
+  more. If all versions and dependencies haven been chosen properly, a clean
+  build may be performed and/or program files may be executed.
+
+Additional sub-directories may be used (e.g. to keep multiple versions of
+documentation or libraries in parallel, to make program files executable from
+the command line or to collect individual files of a PRODUCT). However, those
+parts remain unspecified.
+
+If a repository is created, exported or cloned to such a mount point, the local
+relative path of the repository should be the name of the repository except
+that if the name contains periods ('.'), each part of the name separated by the
+periods should be a separate directory (i.e. the periods should be replaced by
+an environment-dependent path separator).
+
+Examples:
+
+- Local path for development of the Retro-Frame repository "common":
+  :Retro-Frame/dev/common/
+
+- Local path for releases of the Retro-BASIC repository "test":
+  :Retro-BASIC/release/test/
+
+- Local path for development of the Retro-C repository "comp.stdc.recma55":
+  :Retro-C/dev/comp/stdc/recma55/
+
+
+4.2 Commits and tags
+-------------------------------------------------------------------------------
+
+A REPOSITORY must provide a commit mechanism, which preserves a certain state
+of all comprised files and may be called a snapshot.
+
+Each commit should be identifiable by a timestamp, representing the current
+date and time when the commit took place. The timestamp must be UTC except
+while the repository resides on the local filesystem, in which case the
+timestamp may also be local time.
+
+In addition, a repository shall provide tags (sometimes called labels) which
+may be used to associate a specific commit with a text string.
+
+It must be possible to retrieve (i.e. check out or export) an arbitrary commit
+state at any time.
+
+
+4.3 Branching, merging and pull requests
+-------------------------------------------------------------------------------
+
+
+4.4 License and readme files
+-------------------------------------------------------------------------------
+
+If licensing is provided for a repository (see chapter 5), the license text
+including a copyright notice should be stored as a plain text file "LICENSE"
+which should be located in the root directory of the repository.
+
+In addition, each repository should contain a readme file which provides
+
+-
+-
+
+The readme file should either be a plain text file "README" or a [MARKDOWN]
+file "README.md" and should also be located in the root directory of the
+repository.
+
+
+4.5 Directory structures and exclusions
+-------------------------------------------------------------------------------
+
+- build, doc, src, test
+
+Directories or sub-directories starting with a commercial at symbol ('@')
+should be excluded from all repositories. Such directories may be used for
+files which are related to the repository but should remain on the local
+filesystem only.
+
+In addition, directories and/or files which contain temporary or generated data
+(i.e. are no WORK FILES) should also be excluded. The specification of such
+files depends on the development environment.
+
+
+
+5. REPOSITORY TYPES AND LICENSING
+===============================================================================
+
+
+5.1 Manual repositories
 -------------------------------------------------------------------------------
 
 A manual REPOSITORY is maintained on a local disk. Access control, branching
-and backup must be performed manually on the file system. Instead of commits,
-the entire repository is packed as a ZIP file which name should consist of the
-repositorie's name, a timestamp and one or more optional tags (e.g. version
-numbers).
+and backup must be performed manually on the file system. Commits are done by
+packing the entire repository as a ZIP file whose name shall consist of the
+repositorie's name, a timestamp in the format YYYYMMDDHHMM and one or more
+optional tags, all separated by low lines ('_').
 
 As the repository is not published, no licensing is required.
 
 
-4.2 Offline repositories
+5.2 Offline repositories
 -------------------------------------------------------------------------------
 
-An offline REPOSITORY is maintained on a local disk by means of a version
-control system (e.g. Git) which should support branching and tagging. Access
-control and backup has to be performed manually.
+An offline REPOSITORY is maintained on a local filesystem by means of a version
+control system (e.g. Git) which should support automated commits, branching and
+merging. Access control and backup has to be performed manually.
 
 As the repository is not published, no licensing is required.
 
 
-4.3 Private repositories
+5.3 Private repositories
 -------------------------------------------------------------------------------
 
 A private REPOSITORY is maintained on a version control platform (e.g. GitHub)
-which should provide access control, branching, tagging and backup facilities.
-A "pull request" mechanism is not required but recommended.
+which should provide access control and backup facilities. A pull request
+mechanism is recommended.
 
 The owner of such a repository may be a person or a technical user. The owner
 may grant read access to individual users and write access to contributers.
@@ -444,12 +556,12 @@ As the repository is not published to the public, licensing is not required but
 recommended.
 
 
-4.4 Public repositories
+5.4 Public repositories
 -------------------------------------------------------------------------------
 
 A public REPOSITORY is maintained on a version control platform (e.g. GitHub)
-which should provide access control, branching, tagging and backup facilities.
-A "pull request" mechanism is not required but recommended.
+which should provide access control and backup facilities. A pull request
+mechanism is recommended.
 
 The owner of such a repository may be a person or a technical user. Read access
 is not restricted (i.e. the repository is public readable). The owner may grant
@@ -464,12 +576,12 @@ to ensure high license compatibility, each Retro-Frame compliant public
 repository should be published under the [MIT LICENSE].
 
 
-4.5 Collaborative repositories
+5.5 Collaborative repositories
 -------------------------------------------------------------------------------
 
 A collaborative REPOSITORY is maintained on a version control platform (e.g.
-GitHub) which should provide access control, branching, tagging and backup
-facilities. A "pull request" mechanism is required.
+GitHub) which should provide access control, backup facilities and a pull
+request mechanism.
 
 The owner of such a repository should be a technical user. Read access is not
 restricted (i.e. the repository is public readable). The owner may grant write
@@ -485,14 +597,14 @@ repository should be published under the [MIT LICENSE].
 
 
 
-5. VERSIONING
+6. VERSIONING
 ===============================================================================
 
 Retro-Frame follows the ideas of [SEMANTIC VERSIONING] but does not fully
 comply with it.
 
 
-5.1 Regular version numbers
+6.1 Regular version numbers
 -------------------------------------------------------------------------------
 
 A <major-version> number is a decimal value in the range 1..16 and, if it
@@ -551,19 +663,16 @@ respective v15.2.3). The initial release version has always <patch> set to
 zero. For each patch respective correction, <patch> is incremented by one.
 
 
-5.2 Repository versioning
+6.2 Repository versioning
 -------------------------------------------------------------------------------
 
-As a REPOSITORY comprises a set of related files with version control, the
-repository itself has no version. Instead, a certain state of all comprised
-files (which may be called a snapshot) can be preserved by means of a commit.
+As a REPOSITORY represents a sequence of individual commits, the repository
+itself has no version. However, a specific commit may be considered a version.
+In this case, the pre-release or patch version should be specified by means of
+a tag.
 
-If a specific commit is considered a version, the pre-release or patch version
-must be specified by means of a tag (sometimes called a label).
-
-Thus, if a specific commit associated with a version tag is retrieved (checked
-out) from the repository, the resulting files have a defined version according
-to the tag.
+Thus, if a specific commit associated with a version tag is retrieved from the
+repository, the resulting files have a defined version according to the tag.
 
 In the following cases, as second tag should be added:
 
@@ -576,12 +685,16 @@ Commits without a version tag do not have a version. The latest commit is
 called the head. Thus, the head represents the current state of development
 (which may not have a version yet).
 
-If branches are used (see chapter 6.3) and commits with the same tag(s) occur
-in multiple branches, the state must be identical. However, each branch has its
-own head.
+If branches are used and commits with the same tag(s) occur in multiple
+branches, the state must be identical. However, each branch has its own head.
+
+The readme file of the repository should always represent the current version
+number. If changes are made after a commit with a version tag, the pre-release
+respective patch version should be incremented by one and "(dev)" should be
+appended to the version number until the changes become a new version.
 
 
-5.3 Work file versioning
+6.3 Work file versioning
 -------------------------------------------------------------------------------
 
 If a WORK FILE shows a version number (either in the source or as output when
@@ -614,7 +727,7 @@ If the version tag is a new test stage or a release (i.e. patch version is set
 to zero), all work files must show exactly the same version.
 
 
-5.4 Product versioning
+6.4 Product versioning
 -------------------------------------------------------------------------------
 
 If a PRODUCT comprises multiple SOFTWARE and/or DOCUMENTATION components, each
@@ -627,7 +740,7 @@ the resulting number should be used for all components which have been changed
 for the patch.
 
 
-5.5 Data format version numbers
+6.5 Data format version numbers
 -------------------------------------------------------------------------------
 
 DATA FORMAT version numbers are in the format
@@ -666,92 +779,6 @@ minor version numbers of the same major version number unless deprecated. Thus,
 no new minor version number must be created as soon as a new major version
 number is released. Deprecated versions should be recognized as soon as the
 implementation becomes aware of deprecation.
-
-
-
-6. REPOSITORY USAGE AND FILE SYSTEM
-===============================================================================
-
-
-6.1 Local paths
--------------------------------------------------------------------------------
-
-On the local file system, each Retro-Endeavor which is used should have its own
-directory. It is recommended to choose an appropriate base directory and to
-create a directory for each relevant Retro-Endeavor using its name as the
-directory name (if possible), for example:
-
-  :Retro-Frame/
-  :Retro-BASIC/
-  :Retro-C/
-
-If not all directory names would be allowed by the file system, the initials
-of the Retro-Endeavors should be used in uppercase and without the hyphen, for
-example:
-
-  :RF/
-  :RB/
-  :RC/
-
-If a repository contains SOFTWARE, the local path should start at the directory
-of its Retro-Endeavor, followed by a directory named "dev", followed by the
-name of the repository. If the name of the repository contains periods ('.'),
-each part of the name separated by the periods should be a separate directory.
-If a repository does not contain software (i.e. only DOCUMENTATION), the local
-path is chosen in the same way except the directory named "dev".
-
-Examples:
-
-- The local path of the Retro-Frame repository "rfdfs" is:
-  :Retro-Frame/rfdfs/
-
-- The local path of the Retro-BASIC repository "doc" on an MS-DOS system is:
-  :RB\DOC
-
-- The local path of the Retro-BASIC repository "test" (containing programs) is:
-  :Retro-BASIC/dev/test/
-
-- The local path of the Retro-C repository "comp.stdc.recma55" is:
-  :Retro-C/dev/comp/stdc/recma55/
-
-
-6.2 Exclusions
--------------------------------------------------------------------------------
-
-Directories or sub-directories starting with a commercial at symbol ('@')
-should be excluded from all repositories.
-
-In addition, directories and/or files which contain temporary or generated data
-(i.e. no WORK FILES) should also be excluded. The specification of such files
-depends on the development environment.
-
-
-6.3 License and readme files
--------------------------------------------------------------------------------
-
-If licensing is provided for the repository (see chapter 4), the license text
-including a copyright notice should be stored as a plain text file "LICENSE"
-which should be located in the root directory of the repository.
-
-In addition, each repository should contain a readme file which provides
-
-[MARKDOWN]
-
-
-6.4 Directory structures
--------------------------------------------------------------------------------
-
-
-6.5 Branching
--------------------------------------------------------------------------------
-
-
-6.6 Merging
--------------------------------------------------------------------------------
-
-
-6.7 Pull requests
--------------------------------------------------------------------------------
 
 
 

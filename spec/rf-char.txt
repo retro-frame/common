@@ -7,13 +7,13 @@
 |_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
 
 
-DOC - Retro-Frame Common Documentation
+COMMON - Retro-Frame Common Documentation
 
 Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00!00
+Version:     01.00!01
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-03 : 01.00!00 : Ingo : Draft
+2025-03-09 : 01.00!01 : Ingo : Draft
 
 
 Contents

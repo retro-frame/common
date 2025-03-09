@@ -2,7 +2,7 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.0!1**  
+**Version: 1.0!1 (dev)**  
 
 
 ## Contents
