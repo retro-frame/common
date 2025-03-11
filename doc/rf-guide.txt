@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-09 : 01.00!01 : Ingo : Draft
+2025-03-11 : 01.00!01 : Ingo : Draft
 
 
 Contents
@@ -69,9 +69,9 @@ Contents
 4. FILE SYSTEM AND REPOSITORIES
    4.1  Local paths
    4.2  Commits and tags
-   4.3  Branching, merging and pull requests
-   4.4  License and readme files
-   4.5  Directory structures and exclusions
+   4.3  License and readme files
+   4.4  Directory structures and exclusions
+   4.5  Branching, merging and pull requests
 
 5. REPOSITORY TYPES AND LICENSING
    5.1  Manual repositories
@@ -398,8 +398,8 @@ which fixes the problem may be created so that the release becomes valid again
 ===============================================================================
 
 All workfiles should be part of a REPOSITORY. Access control, version control
-(i.e. commits, branches, tags and pull requests), backup and licensing always
-affects the entire repository.
+(i.e. commits, tags, branches, merges and pull requests), backup and licensing
+always affects the entire repository.
 
 
 4.1 Local paths
@@ -465,50 +465,112 @@ of all comprised files and may be called a snapshot.
 
 Each commit should be identifiable by a timestamp, representing the current
 date and time when the commit took place. The timestamp must be UTC except
-while the repository resides on the local filesystem, in which case the
+while the repository resides on the local file system, in which case the
 timestamp may also be local time.
 
-In addition, a repository shall provide tags (sometimes called labels) which
-may be used to associate a specific commit with a text string.
+In addition, a repository should provide tags (sometimes called labels) which
+may be used to associate a specific commit with a text string. Each tag shall
+be up to eight characters, consisting of alphanumeric characters, the hyphen
+'-', the period '.' and the exclamation mark '!', at minimum. Tags may or may
+not be case sensitive.
 
 It must be possible to retrieve (i.e. check out or export) an arbitrary commit
 state at any time.
 
 
-4.3 Branching, merging and pull requests
--------------------------------------------------------------------------------
-
-
-4.4 License and readme files
+4.3 License and readme files
 -------------------------------------------------------------------------------
 
 If licensing is provided for a repository (see chapter 5), the license text
 including a copyright notice should be stored as a plain text file "LICENSE"
 which should be located in the root directory of the repository.
 
-In addition, each repository should contain a readme file which provides
+In addition, each repository should contain a readme file which shall comprise
+the following elements:
 
--
--
+- The repository's title
+- A reference to the Retro-Endeavor
+- The repository's location
+- Environmental constraints, if applicable
+- Dependencies, if applicable
+- A table of contents
+- An overview of the contents of the repository
+- Instructions how to build an executable from the source, if applicable
+- Usage (i.e. an overview how to use the SOFTWARE), if applicable
+- Configuration options, if applicable
+- A description of DOCUMENTATION parts, if applicable
+- The security level(s), if applicable (see chapter 7)
+- References (including one to the Retro-Frame Common Documentation)
 
 The readme file should either be a plain text file "README" or a [MARKDOWN]
 file "README.md" and should also be located in the root directory of the
-repository.
+repository. A generic template is provided by /template/rf-readme.md//.
 
 
-4.5 Directory structures and exclusions
+4.4 Directory structures and exclusions
 -------------------------------------------------------------------------------
 
-- build, doc, src, test
+In general, the contents of a repository is unspecified. However, the following
+directories in the root of the repository should be used if applicable:
+
+- /doc/ should contain general DOCUMENTS
+- /src/ should contain all SOURCE FILES
+- /res/ should contain all RESOURCE FILES
+- /build/ should contain CONTROL FILES
+- /test/ should contain test files and test logs
+- /notes/ should contain temporary DOCUMENTS during development, open issues
+  (e.g. bugs or security flaws) and change logs of patches
 
 Directories or sub-directories starting with a commercial at symbol ('@')
 should be excluded from all repositories. Such directories may be used for
 files which are related to the repository but should remain on the local
-filesystem only.
+file system only.
 
 In addition, directories and/or files which contain temporary or generated data
-(i.e. are no WORK FILES) should also be excluded. The specification of such
-files depends on the development environment.
+(i.e. are neither WORK FILES or CONTROL FILES) should also be excluded. The
+specification of such files depends on the development environment.
+
+
+4.5 Branching, merging and pull requests
+-------------------------------------------------------------------------------
+
+If a REPOSITORY provides branching, the initial branch shall be named "root"
+and contain nothing but the license, if given, and the readme file. For each
+release, a dedicated branch shall be used in order to allow parallel work on
+releases and patches without affecting other releases.
+
+A new minor release shall be branched from the previous minor release if there
+is no branching depth limit reached so that at least one more sub-branch would
+still be allowed (or from root otherwise). However, new major releases should
+always be branched from root.
+
+If a default branch can be chosen, the release branch of the highest version
+(see chapter 6.2) shall be the default branch. While the repository does not
+have a release yet, the root branch shall remain the default branch.
+
+Additional working branches may be used during development. When work on such a
+branch is finished, the results should be merged into the parent branch (e.g.
+the release branch). Pull requests, if provided, may be used to indicate that
+such a merge is requested. If conflicts occur during merge, automatic resolving
+may take place but in some cases manual resolving is required.
+
+The branches of a repository may be depicted as follows:
+
+root branch
+|
++-- major release branch
+|   |
+|   +-- minor release branch <--+
+|       |                       | merge
+|       +-- working branch -----+
+|       |                       |
+|       +-- working branch -----+
+|       |
+|       +-- minor release branch
+|           |
+|           +-- minor release branch
+|
++-- major release branch
 
 
 
@@ -522,8 +584,11 @@ files depends on the development environment.
 A manual REPOSITORY is maintained on a local disk. Access control, branching
 and backup must be performed manually on the file system. Commits are done by
 packing the entire repository as a ZIP file whose name shall consist of the
-repositorie's name, a timestamp in the format YYYYMMDDHHMM and one or more
-optional tags, all separated by low lines ('_').
+repository's name, a timestamp in the format YYYYMMDDHHMM and one or more
+optional tags, all separated by low lines ('_'). If the file system does not
+allow such file names (see chapter 4.2 regarding the character set of tags),
+the ZIP files should be numbered in ascending order and a text file should be
+maintained to provide timestamp and tag information.
 
 As the repository is not published, no licensing is required.
 
@@ -531,9 +596,9 @@ As the repository is not published, no licensing is required.
 5.2 Offline repositories
 -------------------------------------------------------------------------------
 
-An offline REPOSITORY is maintained on a local filesystem by means of a version
-control system (e.g. Git) which should support automated commits, branching and
-merging. Access control and backup has to be performed manually.
+An offline REPOSITORY is maintained on the local file system by means of a
+version control system (e.g. Git) for commits, branching and merging. Access
+control and backup has to be performed manually.
 
 As the repository is not published, no licensing is required.
 
@@ -877,7 +942,7 @@ Security level "low":
   entail any known risk for the environment (e.g. a buffer overflow) and even
   the confidentiality or integrity of the data processed by the program which
   require protection may only be impacted under certain preconditions (e.g.
-  storing credentials in clear text on a filesystem).
+  storing credentials in clear text on a file system).
 
 - Cryptographic algorithms which are known to be broken are always considered
   weak operations (this may lead to cases where unencrypted processing of non-

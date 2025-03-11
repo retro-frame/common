@@ -13,7 +13,7 @@
 
 3. Common specifications
 
-4. Document template
+4. Document templates
 
 5. References
 
@@ -82,14 +82,17 @@ The directory `spec/` contains the following common specifications:
   number and character types.
 
 
-## 4. Document template
+## 4. Document templates
 
-The directory `template/` contains the generic document template
-`template/rf-doc.txt`.
+The directory `template/` contains the following document templates:
 
-As this template may be used for endeavors other then Retro-Frame, the FIGlet
-of the text "\<Retro-Endeavor\>" should be replaced by the name of the actual
-endeavor in FIGlet standard font.
+* `template/rf-readme.md` provides a generic readme file template in Markdown
+  format.
+
+* `template/rf-doc.txt` contains the generic document template in text format.
+  As this template may be used for endeavors other then Retro-Frame, the
+  FIGlet of the text "\<Retro-Endeavor\>" should be replaced by the name of
+  the actual endeavor in FIGlet standard font.
 
 
 ## 5. References
@@ -98,6 +101,11 @@ endeavor in FIGlet standard font.
 
 For the official website of FIGlet ("Frank, Ian and Glenn's LETters"), see
 \<[http://www.figlet.org/](http://www.figlet.org/)\>.
+
+### Markdown
+
+Markdown homepage by John Gruber, Daring Fireball Company LLC., see
+<https://daringfireball.net/projects/markdown/>.
 
 ### Retro-Frame Common Documentation
 

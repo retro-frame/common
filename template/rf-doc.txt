@@ -11,7 +11,7 @@
 
 <Document Title>
 
-Repository:  <http://source.<retro-endeavor>.net/<Repository>>
+Repository:  <http://source.<retro-endeavor>.net/<repository>>
 File:        /<File path>//
 Version:     <INTERNAL VERSION>
 [ Environments:  <CODE> [ , <CODE> ]*
