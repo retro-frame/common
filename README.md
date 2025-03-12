@@ -2,12 +2,15 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.0!1 (dev)**  
+**Version: 1.0!1**  
+**License: MIT (see `LICENSE`)**  
+
+Copyright (c) 2025 Ingo Boehmer \<ingo@retro-leisure.net\>
 
 
 ## Contents
 
-1. About Retro-Frame
+1. Overview
 
 2. Definitions and guidelines
 
@@ -18,7 +21,7 @@
 5. References
 
 
-## 1. About Retro-Frame
+## 1. Overview
 
 Retro-Frame is a Retro-Endeavor that provides common documentation (i.e.
 definitions, guidelines and templates) as well as specifications which are
@@ -53,7 +56,7 @@ The directory `doc/` contains the following general documents:
 * `doc/rf-def.txt` provides common definitions. Additional definitions may be
   part of any documentation.
 
-* `doc/rf-guide.txt` provides guidelines (i.e. normative rules) which must be
+* `doc/rf-guide.txt` provides guidelines (i.e. normative rules) which should be
   observed for compliance to this version of Retro-Frame. While all Retro-Frame
   guidelines are covered by this single document, other Retro-Endeavors may
   provide subsidiary guidelines.
@@ -90,7 +93,7 @@ The directory `template/` contains the following document templates:
   format.
 
 * `template/rf-doc.txt` contains the generic document template in text format.
-  As this template may be used for endeavors other then Retro-Frame, the
+  As this template may be used for endeavors other than Retro-Frame, the
   FIGlet of the text "\<Retro-Endeavor\>" should be replaced by the name of
   the actual endeavor in FIGlet standard font.
 

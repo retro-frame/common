@@ -3,11 +3,14 @@
 **Endeavor: <Retro-Endeavor>**  
 **Repository: \<[http://source.<retro-endeavor>.net/<repository name>](http://source.<retro-endeavor>.net/<repository name>)\>**  
 **Version: <external version> [ (dev) ]**  
+**License: MIT (see `LICENSE`)**  
+
+Copyright (c) <Year(s)> <User full name> \<<User e-mail address>\>
 
 
 ## Contents
 
-1. <Chapter 1>
+1. Overview
 
 2. <Chapter 2>
 
@@ -16,7 +19,7 @@
 <n>. References
 
 
-## 1. <Chapter 1>
+## 1. Overview
 
 [...]
 

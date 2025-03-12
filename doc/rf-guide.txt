@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-11 : 01.00!01 : Ingo : Draft
+2025-03-12 : 01.00!01 : Ingo : Draft
 
 
 Contents
@@ -89,8 +89,8 @@ Contents
 
 7. SECURITY
    7.1  General considerations
-   7.2  Classification of information
-   7.3  Potential threats and risks
+   7.2  Security objectives and potential threats
+   7.3  Impact classification
    7.4  Security levels
 
 
@@ -120,7 +120,7 @@ independent version numbers.
 1.2 Scope
 -------------------------------------------------------------------------------
 
-This document provides GUIDELINES (i.e. normative rules) which must be
+This document provides GUIDELINES (i.e. normative rules) which should be
 observed, depending on the [REQUIREMENT LEVEL KEYWORDS] used, in order to
 comply to this version of Retro-Frame.
 
@@ -163,7 +163,7 @@ RFC: 3986 - Uniform Resource Identifier (URI): Generic Syntax, see
 -------------------------------------------------------------------------------
 
 If part of a text, including comments of source files, the "Retro" prefixed
-words should be hyphenated and capitalized (e.g. Retro-Leisure, Retro-Frame,
+words shall be hyphenated and capitalized (e.g. Retro-Leisure, Retro-Frame,
 Retro-BASIC or Retro-C). Note that BASIC is considered an acronym and thus
 fully capitalized.
 
@@ -181,10 +181,10 @@ RETRO-BASIC or RETRO-C).
 In order to keep formal guidelines low, a change history is only required for
 each new version of a DOCUMENT that is considered final (i.e. a release or
 correction version, see chapters 3.2 and 3.3). The format of a change history
-entry is determined by the document template (see /rf-template.txt//).
+entry is determined by the document template (see /template/rf-doc.txt//).
 
-While a version is not considered final, the description should be "Draft" and
-the date may be updated at discretion.
+While a version is not considered final yet, the description should be "Draft"
+and the date may be updated at discretion.
 
 When a version becomes final, the description should be "Initial version" on
 the first entry or a brief summary of the changes in relation to the previous
@@ -193,7 +193,7 @@ changed.
 
 In case a document becomes deprecated (but should not be deleted for any
 reason), a final entry should be made, using "INVALID" instead of the version
-number, and the description should be "Withdrawn".
+number, and the description should be "Deprecated".
 
 
 2.3 Quotes and syntax notations
@@ -202,7 +202,7 @@ number, and the description should be "Withdrawn".
 A single character should be enclosed by single quotes (i.e. apostrophes ''').
 Note that an apostrophe itself may be represented in that way and that a
 sequence of more than one character enclosed by apostrophes is considered a
-term to be defined (see /rf-def.txt//, chapter 2.1).
+term to be defined (see /doc/rf-def.txt//, chapter 2.1).
 
 A text literal (i.e. a fixed sequence of characters) should be enclosed by
 double quotes (i.e. quotation marks '"'). If a quotation mark itself is part of
@@ -410,17 +410,17 @@ interest, on the local file system. It is recommended to choose an appropriate
 common base directory and to create a directory for each Retro-Endeavor using
 its name as the directory name (if possible), for example:
 
-  :Retro-Frame/
-  :Retro-BASIC/
-  :Retro-C/
+  [<base-directory>]Retro-Frame/
+  [<base-directory>]Retro-BASIC/
+  [<base-directory>]Retro-C/
 
 If not all directory names would be allowed by the file system, the initials
 of the Retro-Endeavors may be used in uppercase and without the hyphen, for
 example:
 
-  :RF/
-  :RB/
-  :RC/
+  [<base-directory>]RF/
+  [<base-directory>]RB/
+  [<base-directory>]RC/
 
 In each Retro-Endeavor directory, the following sub-directories should be used
 as the mount point for REPOSITORIES:
@@ -448,13 +448,13 @@ an environment-dependent path separator).
 Examples:
 
 - Local path for development of the Retro-Frame repository "common":
-  :Retro-Frame/dev/common/
+  [<base-directory>]Retro-Frame/dev/common/
 
 - Local path for releases of the Retro-BASIC repository "test":
-  :Retro-BASIC/release/test/
+  [<base-directory>]Retro-BASIC/release/test/
 
 - Local path for development of the Retro-C repository "comp.stdc.recma55":
-  :Retro-C/dev/comp/stdc/recma55/
+  [<base-directory>]Retro-C/dev/comp/stdc/recma55/
 
 
 4.2 Commits and tags
@@ -491,15 +491,18 @@ the following elements:
 - The repository's title
 - A reference to the Retro-Endeavor
 - The repository's location
+- The repository's version (see chapter 6.2)
 - Environmental constraints, if applicable
 - Dependencies, if applicable
-- A table of contents
-- An overview of the contents of the repository
+- License type and file, if applicable
+- Copyright notice
+- Table of contents
+- Overview of the contents of the repository
 - Instructions how to build an executable from the source, if applicable
 - Usage (i.e. an overview how to use the SOFTWARE), if applicable
 - Configuration options, if applicable
 - A description of DOCUMENTATION parts, if applicable
-- The security level(s), if applicable (see chapter 7)
+- Security level(s), if applicable (see chapter 7)
 - References (including one to the Retro-Frame Common Documentation)
 
 The readme file should either be a plain text file "README" or a [MARKDOWN]
@@ -866,27 +869,12 @@ great influence on the security respective the risks (e.g. network access
 control, user rights, system configuration or sandboxing) are out of scope and
 need to be considered separately.
 
-In addition, the impact of security threats heavily depends on the value which
-the affected assed has to the user. Thus, two classes of security threats
-should be distinguished:
 
-- Threats which affect the information processed by the PRODUCT which is build
-  from SOFTWARE developed by a Retro-Endeavor. In order to respect the
-  individual values those information may have to the user, classification of
-  information is used to assess the potential impact in case of loss of
-  confidentiality, integrity and/or availability (see next chapter).
-
-- Threats which affect the ENVIRONMENT (i.e. the system) in which the product
-  is executed. While the potential impact in these cases may vary, this is
-  always considered to have the highest impact.
-
-
-7.2 Classification of information
+7.2 Security objectives and potential threats
 -------------------------------------------------------------------------------
 
-In order to simplify the classification of information, only a scalar level of
-sensitivity is used which is determined by the potential impact in case of the
-loss of one or more of the following security objectives:
+In general, all threats should be considered which may result in a loss of one
+or more of the following security objectives:
 
 - Confidentiality (i.e. no unauthorized disclosure of information).
 
@@ -894,25 +882,87 @@ loss of one or more of the following security objectives:
 
 - Availability (i.e. information can be processed when required).
 
+Thus, two classes of security threats should be
+distinguished:
 
-Level   Criteria
-------  -----------------------------------------------------------------------
-none    Information may be publicly available. There is no security objective
-        or the loss a secrity objective would be insignificant.
-low     Access to information should be restricted to the local network and the
-        loss of a secrity objective would be neglectable.
-medium  Access to information should be restricted to the execution environment
-        and the loss of a secrity objective could have moderate impact.
-high    Access to information should be restricted to individual users and the
-        loss of a secrity objective could have severe impact.
+- Threats which affect the information processed by the PRODUCT which is build
+  from SOFTWARE developed by a Retro-Endeavor. In order to respect the
+  individual values those information may have to the user, the classification
+  of information (see chapter 7.3) is used to assess the potential impact in
+  case of loss of confidentiality, integrity and/or availability.
 
+- Threats which affect the ENVIRONMENT (e.g. the operating system) in which the
+  product is executed. While the potential impact in these cases may vary, this
+  is always considered to have the highest impact.
+
+Those two cases may not only distinguished in terms of the potential impact but
+also in terms of attack vectors:
+
+- The information may be attacked by gaining unauthorized access to the data
+  processing itself or while data is being transmitted or stored (or, in rare
+  cases, processed in virtual environments), if the attacker is able to bypass
+  the data processing through direct access to parts of the environment (e.g.
+  the system, storage or network).
+
+- The environment may be attacked by exploiting vulnerabilities of the programs
+  which may lead to unintended behavior (e.g. unauthorized code execution,
+  privilege escalation, system information disclosure etc.). In some cases the
+  vulnerabilities are inherent and cannot entirely be avoided (e.g. distributed
+  denial of service on a network).
+
+
+7.3 Impact levels
+-------------------------------------------------------------------------------
+
+The impact of security threats heavily depends on the value which the affected
+asset (i.e. information or environment) has to the user. In order to respect
+the individual values of assets in a simplified manner, the following impact
+levels are specified:
+
+Impact level "none":
+
+- There is no security objective or the loss a security objective would be
+  insignificant.
+
+- Information may be publicly available.
+
+- The environment where the program file(s) are executed will cause no harm if
+  compromised (e.g. a sandbox or honeypot).
+
+Impact level "low":
+
+- The loss of a security objective would be neglectable.
+
+- Information is considered internal (i.e. not intended to be publicly
+  available but not sensitive).
+
+- The environment where the program file(s) are executed will result in
+  minimal harm if compromised (e.g. a virtual test system which can be reverted
+  to a snapshot).
+
+Impact level "medium":
+
+- The loss of a security objective could have moderate impact.
+
+- Information is considered sensitive but not secret respective not critical in
+  terms of integrity and/or availability.
+
+- The environment where the program file(s) are executed will result in
+  limited harm if compromised (e.g. a computer where no secret or critical
+  information is stored).
+
+Impact level "high":
+
+- The loss of a security objective could have severe impact.
+
+- Information is considered secret respective critical in terms of integrity
+  and/or availability.
+
+- The environment where the program file(s) are executed will result in
+  significant harm if compromised (e.g. a server).
 
 If the levels of sensitivity differ for the individual security objectives, the
 highest (i.e. maximum) level is chosen.
-
-
-7.3 Potential threats and risks
--------------------------------------------------------------------------------
 
 
 7.4 Security levels
@@ -925,10 +975,12 @@ security level may be selectable on compile-time or even on run-time.
 Security level "insecure":
 
 - The security level "insecure" indicates that a program file is intentionally
-  insecure. If not used properly, the execution of the program file(s) may
-  cause severe harm not only regarding the confidentiality and integrity of the
-  information processed by the product but also for the environment in which
-  the respective program files are executed.
+  insecure. The execution of such a program file may cause severe harm not only
+  regarding the information but also for the environment.
+
+- If the environment where the program file(s) are executed respective data is
+  transmitted or stored is not trusted, only information or environments of
+  impact level "none" should be used.
 
 - Whenever a program file on this security level is started, the user must be
   warned in a clear and emphasized manner and explicitly and interactively
@@ -939,16 +991,17 @@ Security level "low":
 
 - The security level "low" indicates that security has not been explicitly
   considered or known weak operations are included, which however must not
-  entail any known risk for the environment (e.g. a buffer overflow) and even
-  the confidentiality or integrity of the data processed by the program which
-  require protection may only be impacted under certain preconditions (e.g.
-  storing credentials in clear text on a file system).
+  entail any known risk for the environment.
 
 - Cryptographic algorithms which are known to be broken are always considered
   weak operations (this may lead to cases where unencrypted processing of non-
   sensitive data is not considered a weak operation while encrypting the same
   data with a broken algorithm is considered a weak operation in order to avoid
   a false sense of security).
+
+- If the environment where the program file(s) are executed respective data is
+  transmitted or stored is not trusted, only information or environments of
+  impact level "low" should be used.
 
 - Whenever a program file on this security level is started, the user must be
   warned. Before weak operations become effective, the user's agreement should
@@ -968,6 +1021,10 @@ Security level "medium":
   deprecated (e.g. DES or MD5) and may be chosen by the user arbitrarily or
   negotiated (e.g. by a network protocol).
 
+- If the environment where the program file(s) are executed respective data is
+  transmitted or stored is not trusted, only information or environments of
+  impact level "medium" should be used.
+
 - This security level is considered the default mode of retro programming.
   Thus, an explicit warning or even confirmation is not required but a hint
   should be printed on the version / license output.
@@ -982,4 +1039,4 @@ Security level "high":
 - This security level must only be assumed if stated explicitly.
 
 Details regarding the security level(s) and specific security risks should be
-described in the readme file of the REPOSITORY.
+described in the readme file (see chapter 4.3).
