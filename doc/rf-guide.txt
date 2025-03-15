@@ -517,7 +517,7 @@ repository. A generic template is provided by /template/rf-readme.md//.
 In general, the contents of a repository is unspecified. However, the following
 directories in the root of the repository should be used if applicable:
 
-- /doc/ should contain general DOCUMENTS
+- /doc/ should contain general DOCUMENTATION
 - /src/ should contain all SOURCE FILES
 - /res/ should contain all RESOURCE FILES
 - /build/ should contain CONTROL FILES

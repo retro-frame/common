@@ -13,21 +13,20 @@ Copyright (c) 2025 Ingo Boehmer \<ingo@retro-leisure.net\>
 
 1. Overview
 
-2. Definitions and guidelines
+2. General documentation
 
 3. Common specifications
 
-4. Document templates
+4. Templates
 
 5. References
 
 
 ## 1. Overview
 
-Retro-Frame is a Retro-Endeavor that provides common documentation (i.e.
-definitions, guidelines and templates) as well as specifications which are
-intended for use in retrospective programming and may be used as a whole or
-partially for other purposes:
+Retro-Frame is an endeavor to provide common documentation (i.e. definitions,
+guidelines and templates) as well as specifications which are intended for use
+in retro programming and may be used as a whole or partially for other purposes:
 
 * This README file is part of the **Retro-Frame Common Documentation**
   repository which provides common definitions, guidelines, templates and
@@ -50,9 +49,9 @@ Note that the individual Retro-Frame specifications (e.g. data formats) may use
 independent version numbers.
 
 
-## 2. Definitions and guidelines
+## 2. General documentation
 
-The directory `doc/` contains the following general documents:
+The directory `doc/` contains the following general documentation:
 
 * `doc/rf-def.txt` provides common definitions. Additional definitions may be
   part of any documentation.
@@ -75,20 +74,19 @@ The directory `spec/` contains the following common specifications:
   environment-independent manner. In addition, the translation of a universal
   path from or to a native (i.e. environment-dependent) path is specified.
 
-* `spec/rf-syntax.txt` provides a specification of a metasyntax based on the
-  Backus-Naur Form (BNF) and, based on this, specifications of a syntax for
-  text respective binary data format specifications. Despite their intended
-  use, the metasyntax and/or the syntax specifications may also be used for
-  other purposes.
+* `spec/rf-syntax.txt` provides a specification of a metasyntax and, based on
+  this, specifications of a syntax for text respective binary data format
+  specifications. Despite their intended use, the metasyntax and/or the syntax
+  specifications may also be used for other purposes.
 
 * `spec/rf-types.txt` provides common Retro-Frame codes (i.e. a code list) for
   specified data types. The data types covered are integer, floating point
   number and character types.
 
 
-## 4. Document templates
+## 4. Templates
 
-The directory `template/` contains the following document templates:
+The directory `template/` contains the following templates:
 
 * `template/rf-readme.md` provides a generic readme file template in Markdown
   format.
@@ -108,15 +106,15 @@ For the official website of FIGlet ("Frank, Ian and Glenn's LETters"), see
 
 ### Markdown
 
-Markdown homepage by John Gruber, Daring Fireball Company LLC., see
-<https://daringfireball.net/projects/markdown/>.
+For the Markdown homepage by John Gruber, Daring Fireball Company LLC., see
+\<[https://daringfireball.net/projects/markdown/](https://daringfireball.net/projects/markdown/)\>.
 
 ### Retro-Frame Common Documentation
 
 For the Retro-Frame Common Documentation repository, see
-\<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>
+\<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>.
 
 ### Retro-Frame Specifications
 
 For the Retro-Frame Specifications repository, see
-\<[http://source.retro-frame.net/spec](http://source.retro-frame.net/spec)\>
+\<[http://source.retro-frame.net/spec](http://source.retro-frame.net/spec)\>.

@@ -13,7 +13,7 @@ Data Types Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-types.txt//
-Version:     01.00!01
+Version:     01.00!02
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-09 : 01.00!01 : Ingo : Draft
+2025-03-15 : 01.00!02 : Ingo : Draft
 
 
 Contents
@@ -99,8 +99,8 @@ independent version numbers.
 
 This document provides common codes (i.e. a code list) for specified data
 types. In particular, those codes may be used as terminal symbols for binary
-data format specifications (see /01/spec/rf-syntax.txt//) and environment
-constraints (see /01/spec/rf-template.txt//).
+data format specifications (see /spec/rf-syntax.txt//) and environment
+constraints (see /spec/rf-template.txt//).
 
 The data types covered are integer, floating point number and character types.
 Other data types may be used anyway but there is no defined code specified by
@@ -356,7 +356,7 @@ codepoints 0..127 according to [UNICODE]) are specified while codepages must be
 specified implicitly or explicitly otherwise.
 
 Note that unknown codepoints may still be processed using direct encoding if
-translated to a Retro-Frame character (see /01/spec/rf-char.txt//).
+translated to a Retro-Frame character (see /spec/rf-char.txt//).
 
 Identifier  Description
 ----------  ----------------------------------------------------------------
@@ -382,7 +382,7 @@ not occur (and are thus not decoded), CESU-8 treat matching surrogate pairs
 like UTF-16.
 
 Note that invalid encodings may still be processed using direct encoding if
-translated to a Retro-Frame character (see /01/spec/rf-char.txt//).
+translated to a Retro-Frame character (see /spec/rf-char.txt//).
 
 Identifier  Character set  Description
 ----------  -------------  ----------------------------------------------------
@@ -394,7 +394,7 @@ CESU-8      Unicode        UTF-8 encoding which may represent surrogate pairs
                            surrogate pairs or non-characters have to be
                            considered invalid.
 PCS         Retro-Frame    Single packed character of a packed character string
-                           (PCS), see /01/spec/rf-char.txt//, chapter 5.4.
+                           (PCS), see /spec/rf-char.txt//, chapter 5.4.
 
 
 4.3 Wide character encodings
@@ -412,7 +412,7 @@ surrogate codepoints are considered invalid (but may be represented by direct
 encoding) in UCS 2.
 
 Retro-Frame characters may use shifted values to represent a direct encoding
-(see /01/spec/rf-char.txt//, chapters 3.4 and 5.2).
+(see /spec/rf-char.txt//, chapters 3.4 and 5.2).
 
 Identifier  Size         Endianness   Character set  Description
 ----------  -----------  -----------  -------------  --------------------------

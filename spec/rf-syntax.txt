@@ -166,15 +166,12 @@ LB      Line break (i.e. end of line), including END
 WS      Any whitespace, excluding LB
 SPC     A single space (i.e. " ")
 9       An arbitrary digit (i.e. "0"-"9")
-A       An arbitrary uppercase letter (i.e. "A"-"Z")
-a       An arbitrary lowercase letter (i.e. "a"-"z")
 X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9", "A"-"F")
 x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9", "a"-"f")
+A       An arbitrary uppercase letter (i.e. "A"-"Z")
+a       An arbitrary lowercase letter (i.e. "a"-"z")
 ?       An arbitrary letter (i.e. A | a)
-!       An arbitrary defined character of the input text, excluding END and the
-        first character of a variant (e.g. ! | "^"_ESCAPE-STRING) or the first
-        character of a following matching symbol if this terminal symbol is the
-        first character of a repeateted sequence (e.g. [ ! ]* ".")
+!       An arbitrary defined character of the input text
 
 In a specific context, additional terminal symbols may be specified. However,
 when using the metasyntax, the predefined terminal symbols as specified above
@@ -196,27 +193,60 @@ digits and/or minus signs ('-'), enclosed in '<' and '>'. It may be used
 before, after or even within its definition (i.e. a recursive definition is
 allowed).
 
-[...]
+The symbol is defined if it occurs at the beginning of a line (i.e. not
+preceded by whitespace), followed by a colon (':'). The expression follows and
+may span multiple lines if the lines belonging to the expression are indented
+by at least one whitespace and are not empty (i.e. consist of at least one
+non-whitespace character) except after the colon where no more than one empty
+line is allowed.
 
-A sequence of literals and terminal or non-terminal symbols matches if each of
-the elements matches the input text in this order, separated by one or more
-WHITESPACE which must be explicitly defined if accepted respectively required.
+An expression may a combination of the following:
 
-[...]
+- A sequence of literals and terminal or non-terminal symbols matches if each
+  of the elements matches the input text in this order with the following rules
+  regarding whitespace (in this order):
 
-A non-terminal symbol is defined if the symbol occurs at the beginning of a
-line (i.e. not prefixed by whitespace), followed by a colon (':'). The
-expression follows and may span multiple lines if the lines belonging to the
-expression are indented by at least one whitespace and are not empty (i.e.
-consist of at least one non-whitespace character) except after the colon where
-no more than one empty line is allowed.
+  - If the terminal symbol WS is given, a whitespace is required.
+
+  - If a low line ('_') is given between two elements (i.e. trailing the first
+    element and/or preceding the second element), no whitespace is allowed.
+
+  - Otherwise, whitespace is optional.
+
+- Elements or sequences of elements which are separated by a vertical bar ('|')
+  are considered variants and match if one of the variants match.
+
+- A single element, a sequence of elements or variant elements which are
+  enclosed in parenthesis ('(' and ')') is evaluated as a single element.
+
+- Single elements, sequences of elements or variant elements which are enclosed
+  in parenthesis ('(' and ')') or square brackets ('[' and ']'), possibly
+  immediately followed by an asterisk ('*') are evaluated as a single element
+  by the following rules:
+
+  - If parenthesis are used and no asterisk immediately follows the right
+    parenthesis, the element must occur exactly once.
+
+  - If parenthesis are used and an asterisk immediately follows the right
+    parenthesis, the element must occur at least once.
+
+  - If square brackets are used and no asterisk immediately follows the right
+    square bracket, the element is optional (i.e. may not occur or occur once).
+
+  - If square brackets are used and an asterisk immediately follows the right
+    square bracket, the element may occur arbitrary times (even not at all).
+
+  If an element is optional or may occur multiple times and the next element
+  is a subset and matches, the later element matches rather than the optional
+  or repeated one (e.g. [ ! ]* ? matches a sequence of arbitrary characters and
+  the first occurence of a letter).
 
 Example:
 
-  <non-terminal-symbol-01>: [ "LITERAL" ]
-    <indented-other-non-terminal-symbol>
-    ( WHITESPACE | LB )*        ; terminal symbols, one or more occurences
-    | <non-terminal-symbol-01>  ; recursive definition
+<non-terminal-symbol-01>: [ "LITERAL" ]
+  <indented-other-non-terminal-symbol>
+  ( WS | LB )*                ; terminal symbols, one or more occurences
+  | <non-terminal-symbol-01>  ; recursive definition
 
 
 
@@ -237,10 +267,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 Symbol  Definition
 ------  -----------------------------------------------------------------------
-.       An arbitrary character of the input text, excluding END and the first
-        character of a variant (e.g. . | "^"_ESCAPE-STRING) or the first
-        character of a following matching symbol if this terminal symbol is the
-        first character of a repeateted sequence (e.g. [ . ]* ".")
+.       An arbitrary character of the input text
 NUL     Control character null
 SOH     Control character start of heading
 STX     Control character start of text
@@ -294,11 +321,11 @@ PS      Control character paragraph separator
 
 <terminal-symbol>:
 
-  "END" | "LB" | "WS" | "9" | "A" | "a" | "?" | "!" | "." | "NUL" | "SOH" |
-  "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" | "LF" | "VT" |
-  "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" | "DC4" | "NAK" |
-  "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" | "RS" | "US" |
-  "DEL" | "NEL" | "LS" | "PS"
+  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
+  "NUL" | "SOH" | "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" |
+  "LF" | "VT" | "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" |
+  "DC4" | "NAK" | "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" |
+  "RS" | "US" | "DEL" | "NEL" | "LS" | "PS"
 
 <non-terminal-symbol-char>:
 
