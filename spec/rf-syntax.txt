@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-09 : 01.00!01 : Ingo : Draft
+2025-03-16 : 01.00!01 : Ingo : Draft
 
 
 Contents
@@ -243,7 +243,7 @@ An expression may a combination of the following:
 
 Example:
 
-<non-terminal-symbol-01>: [ "LITERAL" ]
+<non-terminal-symbol-01>: [ "LITERAL"_]
   <indented-other-non-terminal-symbol>
   ( WS | LB )*                ; terminal symbols, one or more occurences
   | <non-terminal-symbol-01>  ; recursive definition
