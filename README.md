@@ -2,7 +2,8 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.0!1**  
+**Version: 1.0!2 (dev)**  
+**Compliance: Retro-Frame 1.0**  
 **License: MIT (see `LICENSE`)**  
 
 Copyright (c) 2025 Ingo Boehmer \<ingo@retro-leisure.net\>

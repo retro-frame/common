@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!01
+Version:     01.00!02
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-12 : 01.00!01 : Ingo : Draft
+2025-03-15 : 01.00!02 : Ingo : Draft
 
 
 Contents
@@ -90,7 +90,7 @@ Contents
 7. SECURITY
    7.1  General considerations
    7.2  Security objectives and potential threats
-   7.3  Impact classification
+   7.3  Impact levels
    7.4  Security levels
 
 
@@ -494,15 +494,16 @@ the following elements:
 - The repository's version (see chapter 6.2)
 - Environmental constraints, if applicable
 - Dependencies, if applicable
+- Compliance
 - License type and file, if applicable
 - Copyright notice
 - Table of contents
 - Overview of the contents of the repository
 - Instructions how to build an executable from the source, if applicable
-- Usage (i.e. an overview how to use the SOFTWARE), if applicable
+- Usage (i.e. instructions how to use the SOFTWARE), if applicable
 - Configuration options, if applicable
-- A description of DOCUMENTATION parts, if applicable
-- Security level(s), if applicable (see chapter 7)
+- Descriptions of the DOCUMENTATION parts, if applicable
+- Security considerations, if applicable (see chapter 7)
 - References (including one to the Retro-Frame Common Documentation)
 
 The readme file should either be a plain text file "README" or a [MARKDOWN]

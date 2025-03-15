@@ -3,6 +3,7 @@
 **Endeavor: <Retro-Endeavor>**  
 **Repository: \<[http://source.<retro-endeavor>.net/<repository name>](http://source.<retro-endeavor>.net/<repository name>)\>**  
 **Version: <external version> [ (dev) ]**  
+**Compliance: Retro-Frame 1.0**  
 **License: MIT (see `LICENSE`)**  
 
 Copyright (c) <Year(s)> <User full name> \<<User e-mail address>\>
