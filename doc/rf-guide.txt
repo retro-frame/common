@@ -927,8 +927,8 @@ Impact level "none":
 
 - Information may be publicly available.
 
-- The environment where the program file(s) are executed will cause no harm if
-  compromised (e.g. a sandbox or honeypot).
+- The environment in which the program file(s) are executed will cause no harm
+  if compromised (e.g. a sandbox or honeypot).
 
 Impact level "low":
 
@@ -937,7 +937,7 @@ Impact level "low":
 - Information is considered internal (i.e. not intended to be publicly
   available but not sensitive).
 
-- The environment where the program file(s) are executed will result in
+- The environment in which the program file(s) are executed will result in
   minimal harm if compromised (e.g. a virtual test system which can be reverted
   to a snapshot).
 
@@ -948,7 +948,7 @@ Impact level "medium":
 - Information is considered sensitive but not secret respective not critical in
   terms of integrity and/or availability.
 
-- The environment where the program file(s) are executed will result in
+- The environment in which the program file(s) are executed will result in
   limited harm if compromised (e.g. a computer where no secret or critical
   information is stored).
 
@@ -959,7 +959,7 @@ Impact level "high":
 - Information is considered secret respective critical in terms of integrity
   and/or availability.
 
-- The environment where the program file(s) are executed will result in
+- The environment in which the program file(s) are executed will result in
   significant harm if compromised (e.g. a server).
 
 If the levels of sensitivity differ for the individual security objectives, the
@@ -979,8 +979,8 @@ Security level "insecure":
   insecure. The execution of such a program file may cause severe harm not only
   regarding the information but also for the environment.
 
-- If the environment where the program file(s) are executed respective data is
-  transmitted or stored is not trusted, only information or environments of
+- If the environment in which the program file(s) are executed as well as data
+  is transmitted or stored is not trusted, only information or environments of
   impact level "none" should be used.
 
 - Whenever a program file on this security level is started, the user must be
@@ -1000,9 +1000,9 @@ Security level "low":
   data with a broken algorithm is considered a weak operation in order to avoid
   a false sense of security).
 
-- If the environment where the program file(s) are executed respective data is
-  transmitted or stored is not trusted, only information or environments of
-  impact level "low" should be used.
+- If the environment in which the program file(s) are executed as well as data
+  is transmitted or stored is not trusted, only information or environments of
+  maximum impact level "low" should be used.
 
 - Whenever a program file on this security level is started, the user must be
   warned. Before weak operations become effective, the user's agreement should
@@ -1022,9 +1022,9 @@ Security level "medium":
   deprecated (e.g. DES or MD5) and may be chosen by the user arbitrarily or
   negotiated (e.g. by a network protocol).
 
-- If the environment where the program file(s) are executed respective data is
-  transmitted or stored is not trusted, only information or environments of
-  impact level "medium" should be used.
+- If the environment in which the program file(s) are executed as well as data
+  is transmitted or stored is not trusted, only information or environments of
+  maximum impact level "medium" should be used.
 
 - This security level is considered the default mode of retro programming.
   Thus, an explicit warning or even confirmation is not required but a hint
