@@ -979,8 +979,8 @@ Security level "insecure":
   insecure. The execution of such a program file may cause severe harm not only
   regarding the information but also for the environment.
 
-- If the environment in which the program file(s) are executed as well as data
-  is transmitted or stored is not trusted, only information or environments of
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
   impact level "none" should be used.
 
 - Whenever a program file on this security level is started, the user must be
@@ -1000,8 +1000,8 @@ Security level "low":
   data with a broken algorithm is considered a weak operation in order to avoid
   a false sense of security).
 
-- If the environment in which the program file(s) are executed as well as data
-  is transmitted or stored is not trusted, only information or environments of
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
   maximum impact level "low" should be used.
 
 - Whenever a program file on this security level is started, the user must be
@@ -1022,8 +1022,8 @@ Security level "medium":
   deprecated (e.g. DES or MD5) and may be chosen by the user arbitrarily or
   negotiated (e.g. by a network protocol).
 
-- If the environment in which the program file(s) are executed as well as data
-  is transmitted or stored is not trusted, only information or environments of
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
   maximum impact level "medium" should be used.
 
 - This security level is considered the default mode of retro programming.
