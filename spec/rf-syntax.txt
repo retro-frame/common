@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!01
+Version:     01.00!03
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!01 : Ingo : Draft
+2025-03-16 : 01.00!03 : Ingo : Draft
 
 
 Contents
@@ -341,7 +341,7 @@ PS      Control character paragraph separator
 
 <spacing>:
 
-  [ <line-break> [ WS ]* ] ( WS | "_" )
+  <line-break> WS | (_WS_|_"_"_)
 
 <element>:
 
@@ -349,20 +349,20 @@ PS      Control character paragraph separator
 
 <sequence>:
 
-  ( <spacing> <element> )*
+  (_<spacing>_<element>_)*
 
 <variant-sequence>:
 
-  <sequence> [ <spacing> "|" <sequence> ]*
+  <sequence>_[_<spacing>_"|"_<sequence>_]*
 
 <variant-list>:
 
-  ( "(" <variant-sequence> <spacing> ")" |
-    "[" <variant-sequence> <spacing> "]" ) [_"*" ]
+  ( "("_<variant-sequence>_<spacing>_")" |
+    "["_<variant-sequence>_<spacing>_"]" ) [_"*" ]
 
 <definition>:
 
-  <non-terminal-symbol> ":" [ <line-break> ] <variant-sequence> <line-break>
+  <non-terminal-symbol>_":" [ <line-break> ] <variant-sequence> <line-break>
 
 
 3.3 Semantics
