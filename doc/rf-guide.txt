@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!03 (alpha)
+Version:     01.00!04
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Initial version
+2025-03-16 : 01.00!04 : Ingo : Initial version
 
 
 Contents
@@ -517,13 +517,13 @@ repository. A generic template is provided by /template/rf-readme.md//.
 In general, the contents of a repository is unspecified. However, the following
 directories in the root of the repository should be used if applicable:
 
-- /doc/ should contain general DOCUMENTATION
+- /doc/ should contain general DOCUMENTATION, release notes and change logs
 - /src/ should contain all SOURCE FILES
 - /res/ should contain all RESOURCE FILES
 - /build/ should contain CONTROL FILES
 - /test/ should contain test files and test logs
 - /notes/ should contain temporary DOCUMENTS during development, open issues
-  (e.g. bugs or security flaws) and change logs of patches
+  (e.g. bugs or security flaws)
 
 Directories or sub-directories starting with a commercial at symbol ('@')
 should be excluded from all repositories. Such directories may be used for
