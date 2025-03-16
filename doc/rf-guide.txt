@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!03
+Version:     01.00!03 (alpha)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Draft
+2025-03-16 : 01.00!03 : Ingo : Initial version
 
 
 Contents

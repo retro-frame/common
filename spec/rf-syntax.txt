@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!03
+Version:     01.00!03 (alpha)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Draft
+2025-03-16 : 01.00!03 : Ingo : Initial version
 
 
 Contents
@@ -437,6 +437,10 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
   a_[_<variable-name-char>_]*
 
+<name>:
+
+  <item-name> | <variable-name>
+
 <line-break>:
 
   [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
@@ -461,37 +465,41 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
   "1" "BYTE" | ( <value> | "?" ) "BYTES"
 
+<relation>:
+
+  "==" | "!=" | "<" | "<=" | ">" | ">="
+
 <operand>:
 
-  [ "+" | "-" | "~" ]* ( <value> | "(" <expression> ")" )
+  [ <line-break> ":" ] [ "+" | "-" | "~" ]* ( <value> | "(" <expression> ")" )
 
-<mul-expression>:
+<mul-div-expression>:
 
-  <operand> [ <mul-expression> ( "*" | "/" | "%" ) <operand> ]
+  [ <operand> ( "*" | "/" | "%" ) ] <operand>
 
-<add-expression>:
+<add-sub-expression>:
 
-  <mul-expression> [ <add-expression> ( "+" | "-" ) <mul-expression> ]
+  [ <add-sub-expression> ( "+" | "-" ) ] <mul-div-expression>
 
 <shift-expression>:
 
-  <add-expression> [ <shift-expression> ( "<<" | ">>" ) <add-expression> ]
+   [ <shift-expression> ( "<<" | ">>" ) ] <add-sub-expression>
 
 <and-expression>:
 
-  <shift-expression> [ "&" <shift-expression> ]
+  [ <and-expression> "&" ] <shift-expression>
 
 <xor-expression>:
 
-  <and-expression> [ "^" <xor-expression> ]
+  [ <xor-expression> "&" ] <and-expression>
 
 <expression>:
 
-  <xor-expression> [ "|" <expression> ]
+  [ <expression> "|" ] <xor-expression>
 
 <type-spec>:
 
-  ":" TYPE-IDENTIFIER [ "=" <expression> ]
+  ":" TYPE-IDENTIFIER [ [ <line-break> ":" ] "=" <expression> ]*
 
 <mask-item>:
 
@@ -503,7 +511,7 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 <condition>:
 
-  [ "!" ] <item-name> | <item-name> <relation> <constant-value>
+  [ "!" ] <name> | <name> <relation> <constant-value> | "*"
 
 <block-line>:
 
@@ -520,3 +528,20 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 4.3 Semantics
 -------------------------------------------------------------------------------
+
+The size of a block item should be specified if known, either by a constant
+value or by a variable which may be determined by an expression from a previous
+block item. If a block item has a type specification, the size should match the
+size of the type exactly. If all items of a block have a constant size value,
+the size of the block is the sum of all those values. If the size of a block
+item is not known, a question mark ("?") is used instead.
+
+If a condition is given, all subsequent block items until the next condition or
+the end of the block are only present if the condition is true. A condition
+consisting of a single asterisk ("*") is always true.
+
+Expressions and conditions are evaluated like C expressions.
+
+The mask values should be in the range of the item type and not overlap.
+
+The last block of a specification should have the format name as the item name.
