@@ -337,7 +337,7 @@ PS      Control character paragraph separator
 
 <line-break>:
 
-  [ ";" [ ! ]* ] LB
+  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
 
 <spacing>:
 
@@ -363,6 +363,10 @@ PS      Control character paragraph separator
 <definition>:
 
   <non-terminal-symbol>_":" [ <line-break> ] <variant-sequence> <line-break>
+
+<specification>:
+
+  (_<definition> LB )*
 
 
 3.3 Semantics
@@ -409,9 +413,109 @@ that the literal does not match.
 4.1 Additional terminal symbols
 -------------------------------------------------------------------------------
 
+Symbol           Definition
+---------------  --------------------------------------------------------------
+TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
+
 
 4.2 Syntax
 -------------------------------------------------------------------------------
+
+<item-name-char>:
+
+  9 | A | "_"
+
+<item-name>:
+
+  A [ <item-name-char> ]*
+
+<variable-name-char>:
+
+  9 | ? |
+
+<variable-name>:
+
+  a [ <variable-name-char> ]*
+
+<line-break>:
+
+  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
+
+<dec-value>:
+
+  (_9_)*
+
+<hex-value>:
+
+  "0x"_(_X_)*
+
+<constant-value>:
+
+  <dec-value> | <hex-value> |
+
+<value>:
+
+  <constant-value> | <variable-name>
+
+<size>:
+
+  "1" "BYTE" | ( <value> | "?" ) "BYTES"
+
+<operand>:
+
+  [ "+" | "-" | "~" ]* ( <value> | "(" <expression> ")" )
+
+<mul-expression>:
+
+  <operand> [ <mul-expression> ( "*" | "/" | "%" ) <operand> ]
+
+<add-expression>:
+
+  <mul-expression> [ <add-expression> ( "+" | "-" ) <mul-expression> ]
+
+<shift-expression>:
+
+  <add-expression> [ <shift-expression> ( "<<" | ">>" ) <add-expression> ]
+
+<and-expression>:
+
+  <shift-expression> [ "&" <shift-expression> ]
+
+<xor-expression>:
+
+  <and-expression> [ "^" <xor-expression> ]
+
+<expression>:
+
+  <xor-expression> [ "|" <expression> ]
+
+<type-spec>:
+
+  ":" TYPE-IDENTIFIER [ "=" <expression> ]
+
+<mask-item>:
+
+  WS "MASK" WS <hex-value> WS <item-name> <line-break>
+
+<block-item>:
+
+  <size> WS <item-name> [ <type-spec> ] <line-break> [ <mask-item> ]*
+
+<condition>:
+
+  [ "!" ] <item-name> | <item-name> <relation> <constant-value>
+
+<block-line>:
+
+  WS ( "[" <condition> "]" | <block-item> )
+
+<block>:
+
+  <item-name>_WS_"format:" LB LB ( <block-line> )*
+
+<specification>:
+
+  (_<block> LB )*
 
 
 4.3 Semantics
