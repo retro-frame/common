@@ -266,7 +266,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 -------------------------------------------------------------------------------
 
 Symbol  Definition
-------  -----------------------------------------------------------------------
+------  -------------------------------------------
 .       An arbitrary character of the input text
 NUL     Control character null
 SOH     Control character start of heading
@@ -414,7 +414,7 @@ that the literal does not match.
 -------------------------------------------------------------------------------
 
 Symbol           Definition
----------------  --------------------------------------------------------------
+---------------  ---------------------------------------------------
 TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 
@@ -427,15 +427,15 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 <item-name>:
 
-  A [ <item-name-char> ]*
+  A_[_<item-name-char>_]*
 
 <variable-name-char>:
 
-  9 | ? |
+  9 | ?
 
 <variable-name>:
 
-  a [ <variable-name-char> ]*
+  a_[_<variable-name-char>_]*
 
 <line-break>:
 
@@ -451,7 +451,7 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 <constant-value>:
 
-  <dec-value> | <hex-value> |
+  <dec-value> | <hex-value>
 
 <value>:
 
@@ -511,7 +511,7 @@ TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 <block>:
 
-  <item-name>_WS_"format:" LB LB ( <block-line> )*
+  <item-name> WS "format:" LB LB ( <block-line> )*
 
 <specification>:
 
