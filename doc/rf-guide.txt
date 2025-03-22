@@ -64,7 +64,7 @@ Contents
 3. SOFTWARE RELEASE LIFE CYCLE
    3.1  Pre-release (development, test)
    3.2  Release (initial, major or minor)
-   3.3  Support (patch / correction, deprecation)
+   3.3  Support (patches, additions, corrections and deprecation)
 
 4. FILE SYSTEM AND REPOSITORIES
    4.1  Local paths
@@ -349,9 +349,10 @@ fully backward compatible:
 
 While substancial changes in defintions or guidelines require an new minor
 version, additional DESCRIPTIONS, INSTRUCTIONS and/or SPECIFICATIONS may be
-introduced by a new pre-release or patch instead, as backward compatibility is
-never affected. However, for substancial changes of specifications, the exact
-meaning of backward compatibility depends of thy type of the specification:
+introduced by a new pre-release or support version instead, as backward
+compatibility is never affected. However, for substancial changes of
+specifications, the exact meaning of backward compatibility depends on the
+type of the specification:
 
 - A minor release of an API may add functions or declarations but must provide
   all functions or declarations of previous minor releases. Existing functions
@@ -369,7 +370,8 @@ meaning of backward compatibility depends of thy type of the specification:
   which support a specific data format release should also support lower major
   releases unless deprecated (see chapter 5.5).
 
-- A minor release of an ENVORONMENT
+- A minor release of an ENVORONMENT must support all features of the lower
+  minor releases.
 
 - A minor release of a PROTOCOL should accept lower minor releases of one or
   more of the participants. If this is not implicitly achieved by the design of
@@ -379,7 +381,7 @@ For types of specifications which are not included in this list, an analogous
 meaning of backward compatibility should be applied.
 
 
-3.3 Support (patch / correction, deprecation)
+3.3 Support (patches, additions, corrections and deprecation)
 -------------------------------------------------------------------------------
 
 After release, a software may still be supported in order to fix bugs and/or
@@ -394,6 +396,9 @@ considered too complex, the release may be deprecated. In this case, a patch
 should be created anyway which at least indicates deprecation. A new patch
 which fixes the problem may be created so that the release becomes valid again
 (thus, deprecation of a release is not considered final).
+
+Beside fixes, support versions may contain additional DESCRIPTIONS,
+INSTRUCTIONS and/or SPECIFICATIONS.
 
 
 
@@ -546,7 +551,7 @@ specification of such files depends on the development environment.
 If a REPOSITORY provides branching, the initial branch shall be named "root"
 and contain nothing but the license, if given, and the readme file. For each
 release, a dedicated branch shall be used in order to allow parallel work on
-releases and patches without affecting other releases.
+releases (e.g. providing a patch) without affecting other releases.
 
 A new minor release shall be branched from the previous minor release if there
 is no branching depth limit reached so that at least one more sub-branch would
@@ -727,14 +732,14 @@ incremented by one while <minor-version> is set to zero. For a new minor
 release, <major-version> remains unchanged and <minor-version> is incremented
 by one. 
 
-Patch respective correction version numbers are in the format
+Support version numbers are in the format
 
   <major-version>_'.'_<minor-version>_'.'_<patch>
 
 where the range of <major-version> and <minor-version> are in the same range
 as described above and <patch> should be in the range 0..31 (e.g. 15.02.03
 respective v15.2.3). The initial release version has always <patch> set to
-zero. For each patch respective correction, <patch> is incremented by one.
+zero. For each new support version, <patch> is incremented by one.
 
 
 6.2 Repository versioning
@@ -742,8 +747,8 @@ zero. For each patch respective correction, <patch> is incremented by one.
 
 As a REPOSITORY represents a sequence of individual commits, the repository
 itself has no version. However, a specific commit may be considered a version.
-In this case, the pre-release or patch version should be specified by means of
-a tag.
+In this case, the pre-release or support version should be specified by means
+of a tag.
 
 Thus, if a specific commit associated with a version tag is retrieved from the
 repository, the resulting files have a defined version according to the tag.
@@ -755,7 +760,8 @@ In the following cases, as second tag should be added:
   incremented during a test stage which remains unchanged, the existing tag
   remains unchanged as well.
 
-- If a patch version is considered deprecated, the tag "deprecated".
+- If a support version shall indicate deprecation of the release, the tag
+  "deprecated".
 
 Commits without a version tag do not have a version. The latest commit is
 called the head. Thus, the head represents the current state of development
@@ -766,7 +772,7 @@ branches, the state must be identical. However, each branch has its own head.
 
 The readme file of the repository should always represent the current version
 number. If changes are made after a commit with a version tag, the pre-release
-respective patch version should be incremented by one and "(dev)" should be
+respective support version should be incremented by one and "(dev)" should be
 appended to the version number until the changes become a new version. In
 addition, the test stage (if given) should be appended within parenthesis.
 
@@ -779,10 +785,10 @@ executed), the release version number must be the same than the release version
 number of the latest version tag (or, if no latest version tag exists on a
 branch, the next version tag in future).
 
-The pre-relase respective patch version of a work file may be individual for
+The pre-relase respective support version of a work file may be individual for
 the file. However, it must not be higher than the one of the current version
 tag, if one is given. If the work file is in the head an the head does not have
-a version tag, the pre-release respective patch version must equal the one of
+a version tag, the pre-release respective support version must equal the one of
 the last tag incremented by one (respective zero if no tag exists).
 
 Example:
@@ -800,8 +806,9 @@ Example:
 
 - The next version tag of a commit should be 01.00!02.
 
-If the version tag is a new test stage or a release (i.e. patch version is set
-to zero), all work files must show exactly the same version.
+If the version tag is a release (i.e. the support version is zero), or a test
+stage tag has been set (i.e. a pre-release version is considered a new test
+stage), all work files must show exactly the same version.
 
 
 6.4 Product versioning
@@ -810,11 +817,11 @@ to zero), all work files must show exactly the same version.
 If a PRODUCT comprises multiple SOFTWARE and/or DOCUMENTATION components, each
 component should have the same release version like the product.
 
-The pre-relase respective patch version of the product should be the maximum of
-those of the individual components. Thus, if a patch is applied to one or more
-components, the product's patch version number should be incremented by one and
-the resulting number should be used for all components which have been changed
-for the patch.
+The pre-relase respective support version of the product should be the maximum
+of those of the individual components. Thus, if a patch is applied to one or
+more components, the product's support version number should be incremented by
+one and the resulting number should be used for all components which have been
+changed for the patch.
 
 
 6.5 Data format version numbers
