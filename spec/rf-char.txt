@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00!03 (alpha)
+Version:     01.00!04
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Initial version
+2025-03-22 : 01.00!04 : Ingo : Draft
 
 
 Contents
@@ -140,39 +140,39 @@ The Unicode(R) Standard, The Unicode Consortium, for latest version see
 Each Retro-Frame codepoint is assigned to a category. The categories are
 related to one or more general categories defined by [UNICODE]:
 
-Category        Unicode category            Unicode basic type
---------------  --------------------------  ------------------
-Grapheme        Letter, uppercase           Graphic
-                Letter, lowercase           Graphic
-                Letter, titlecase           Graphic
-                Letter, modifier            Graphic
-                Letter, other               Graphic
-                Mark, nonspacing            Graphic
-                Mark, spacing combined      Graphic
-                Mark, enclosing             Graphic
-                Number, decimal digit       Graphic
-                Number, letter              Graphic
-                Number, other               Graphic
-                Punctuation, connector      Graphic
-                Punctuation, dash           Graphic
-                Punctuation, open           Graphic
-                Punctuation, close          Graphic
-                Punctuation, initial quote  Graphic
-                Punctuation, final quote    Graphic
-                Punctuation, other          Graphic
-                Symbol, math                Graphic
-                Symbol, currency            Graphic
-                Symbol, modifier            Graphic
-                Symbol, other               Graphic
-Spacing         Separator, space            Graphic
-Control         Separator, line             Format
-                Separator, paragraph        Format
-                Other, control              Control
-                Other, format               Format
-No-character    Other, surrogate            Surrogate
-                Other, not assigned         Noncharacter
-Unspecified     Other, private use          Private-use
-                Other, not assigned         Reserved
+  Category        Unicode category            Unicode basic type
+  --------------  --------------------------  ------------------
+  Grapheme        Letter, uppercase           Graphic
+                  Letter, lowercase           Graphic
+                  Letter, titlecase           Graphic
+                  Letter, modifier            Graphic
+                  Letter, other               Graphic
+                  Mark, nonspacing            Graphic
+                  Mark, spacing combined      Graphic
+                  Mark, enclosing             Graphic
+                  Number, decimal digit       Graphic
+                  Number, letter              Graphic
+                  Number, other               Graphic
+                  Punctuation, connector      Graphic
+                  Punctuation, dash           Graphic
+                  Punctuation, open           Graphic
+                  Punctuation, close          Graphic
+                  Punctuation, initial quote  Graphic
+                  Punctuation, final quote    Graphic
+                  Punctuation, other          Graphic
+                  Symbol, math                Graphic
+                  Symbol, currency            Graphic
+                  Symbol, modifier            Graphic
+                  Symbol, other               Graphic
+  Spacing         Separator, space            Graphic
+  Control         Separator, line             Format
+                  Separator, paragraph        Format
+                  Other, control              Control
+                  Other, format               Format
+  No-character    Other, surrogate            Surrogate
+                  Other, not assigned         Noncharacter
+  Unspecified     Other, private use          Private-use
+                  Other, not assigned         Reserved
 
 As each Unicode codepoint is assigned to exactly one Unicode general category,
 the assignment to a Retro-Frame character category can be derived (implicit
@@ -283,10 +283,10 @@ reserved for extended characters.
 
 The following extended characters are defined:
 
-Codepoint   Name  Category  Description
-----------  ----  --------  -------------------------------------------------
-0x00110000  CRLF  Control   Represents a CR/LF sequence as a single character
-                            and is considered a line break (see chapter 2.3)
+  Codepoint   Name  Category  Description
+  ----------  ----  --------  -------------------------------------------------
+  0x00110000  CRLF  Control   Represents a CR/LF sequence as a single character
+                              and is considered a line break (see chapter 2.3)
 
 The remaining, currently unspecified codepoints 0x00110001..0x00110136 are
 reserved.

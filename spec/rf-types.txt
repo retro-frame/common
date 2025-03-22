@@ -13,7 +13,7 @@ Data Types Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-types.txt//
-Version:     01.00!03 (alpha)
+Version:     01.00!04
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Initial version
+2025-03-22 : 01.00!04 : Ingo : Draft
 
 
 Contents
@@ -147,10 +147,10 @@ The Unicode(R) Standard, The Unicode Consortium, for latest version see
 Integers with unspecified representation are generic integers which may be
 further specified in a specific context.
 
-Identifier  Description
-----------  --------------------------------------------------------
-UINT        unsigned integer
-SINT        signed integer (i.e. negative values can be represented)
+  Identifier  Description
+  ----------  --------------------------------------------------------
+  UINT        unsigned integer
+  SINT        signed integer (i.e. negative values can be represented)
 
 
 2.2 Unsigned integers
@@ -160,21 +160,21 @@ Unsigned integers represent positive values, always in the range 0..(2^n - 1)
 with n denoting the number of significant bits. The size of an unsigned integer
 is always n / 8 bytes.
 
-Identifier  Size         Endianness   Description
-----------  -----------  -----------  ---------------------------------------
-UINT8       1 byte       n/a          8 bit unsigned integer
-UINT16      2 bytes      unspecified  16 bit unsigned integer
-UINT16-LE   2 bytes      little       16 bit unsigned integer, little endian
-UINT16-BE   2 bytes      big          16 bit unsigned integer, big endian
-UINT32      4 bytes      unspecified  32 bit unsigned integer
-UINT32-LE   4 bytes      little       32 bit unsigned integer, little endian
-UINT32-BE   4 bytes      big          32 bit unsigned integer, big endian
-UINT64      8 bytes      unspecified  64 bit unsigned integer
-UINT64-LE   8 bytes      little       64 bit unsigned integer, little endian
-UINT64-BE   8 bytes      big          64 bit unsigned integer, big endian
-UINT128     16 bytes     unspecified  128 bit unsigned integer
-UINT128-LE  16 bytes     little       128 bit unsigned integer, little endian
-UINT128-BE  16 bytes     big          128 bit unsigned integer, big endian
+  Identifier  Size         Endianness   Description
+  ----------  -----------  -----------  ---------------------------------------
+  UINT8       1 byte       n/a          8 bit unsigned integer
+  UINT16      2 bytes      unspecified  16 bit unsigned integer
+  UINT16-LE   2 bytes      little       16 bit unsigned integer, little endian
+  UINT16-BE   2 bytes      big          16 bit unsigned integer, big endian
+  UINT32      4 bytes      unspecified  32 bit unsigned integer
+  UINT32-LE   4 bytes      little       32 bit unsigned integer, little endian
+  UINT32-BE   4 bytes      big          32 bit unsigned integer, big endian
+  UINT64      8 bytes      unspecified  64 bit unsigned integer
+  UINT64-LE   8 bytes      little       64 bit unsigned integer, little endian
+  UINT64-BE   8 bytes      big          64 bit unsigned integer, big endian
+  UINT128     16 bytes     unspecified  128 bit unsigned integer
+  UINT128-LE  16 bytes     little       128 bit unsigned integer, little endian
+  UINT128-BE  16 bytes     big          128 bit unsigned integer, big endian
 
 
 2.3 Two's complement signed integers
@@ -185,21 +185,21 @@ always in the range -2^(n - 1)..(2^(n - 1) - 1) with n denoting the number of
 significant bits. The size of an unsigned integer is always n / 8 bytes. There
 is no negative zero.
 
-Identifier  Size      Endianness   Description
-----------  --------  -----------  -------------------------------------
-SINT8       1 byte    n/a          8 bit signed integer
-SINT16      2 bytes   unspecified  16 bit signed integer
-SINT16-LE   2 bytes   little       16 bit signed integer, little endian
-SINT16-BE   2 bytes   big          16 bit signed integer, big endian
-SINT32      4 bytes   unspecified  32 bit signed integer
-SINT32-LE   4 bytes   little       32 bit signed integer, little endian
-SINT32-BE   4 bytes   big          32 bit signed integer, big endian
-SINT64      8 bytes   unspecified  64 bit signed integer
-SINT64-LE   8 bytes   little       64 bit signed integer, little endian
-SINT64-BE   8 bytes   big          64 bit signed integer, big endian
-SINT128     16 bytes  unspecified  128 bit signed integer
-SINT128-LE  16 bytes  little       128 bit signed integer, little endian
-SINT128-BE  16 bytes  big          128 bit signed integer, big endian
+  Identifier  Size      Endianness   Description
+  ----------  --------  -----------  -------------------------------------
+  SINT8       1 byte    n/a          8 bit signed integer
+  SINT16      2 bytes   unspecified  16 bit signed integer
+  SINT16-LE   2 bytes   little       16 bit signed integer, little endian
+  SINT16-BE   2 bytes   big          16 bit signed integer, big endian
+  SINT32      4 bytes   unspecified  32 bit signed integer
+  SINT32-LE   4 bytes   little       32 bit signed integer, little endian
+  SINT32-BE   4 bytes   big          32 bit signed integer, big endian
+  SINT64      8 bytes   unspecified  64 bit signed integer
+  SINT64-LE   8 bytes   little       64 bit signed integer, little endian
+  SINT64-BE   8 bytes   big          64 bit signed integer, big endian
+  SINT128     16 bytes  unspecified  128 bit signed integer
+  SINT128-LE  16 bytes  little       128 bit signed integer, little endian
+  SINT128-BE  16 bytes  big          128 bit signed integer, big endian
 
 
 2.4 Special integers
@@ -211,10 +211,10 @@ parity bits are used (i.e. the number of significant bits does not equal the
 size in bytes times 8), those bits are expected to be the highest bits and set
 appropriately to match even respective odd parity.
 
-Identifier  Size    Endianness  Description
-----------  ------  ----------  -----------------------------------
-UINT7E      1 byte  n/a         7 bit unsigned integer, even parity
-UINT7O      1 byte  n/a         7 bit unsigned integer, odd parity
+  Identifier  Size    Endianness  Description
+  ----------  ------  ----------  -----------------------------------
+  UINT7E      1 byte  n/a         7 bit unsigned integer, even parity
+  UINT7O      1 byte  n/a         7 bit unsigned integer, odd parity
 
 
 
@@ -229,32 +229,32 @@ Floating point numbers with unspecified representation may be used to specify
 the required size and/or the capability to represent infinity respective "not a
 number" (NaN) values.
 
-Identifier  Size         Infinity      NaN
-----------  -----------  ------------  ------------
-FLT         unspecified  not required  not required
-FLT16       2 bytes      not required  not required
-FLT32       4 bytes      not required  not required
-FLT40       5 bytes      not required  not required
-FLT64       8 bytes      not required  not required
-FLT128      16 bytes     not required  not required
-FLTI        unspecified  required      not required
-FLTI16      2 bytes      required      not required
-FLTI32      4 bytes      required      not required
-FLTI40      5 bytes      required      not required
-FLTI64      8 bytes      required      not required
-FLTI128     16 bytes     required      not required
-FLTN        unspecified  not required  required
-FLTN16      2 bytes      not required  required
-FLTN32      4 bytes      not required  required
-FLTN40      5 bytes      not required  required
-FLTN64      8 bytes      not required  required
-FLTN128     16 bytes     not required  required
-FLTIN       unspecified  required      required
-FLTIN16     2 bytes      required      required
-FLTIN32     4 bytes      required      required
-FLTIN40     5 bytes      required      required
-FLTIN64     8 bytes      required      required
-FLTIN128    16 bytes     required      required
+  Identifier  Size         Infinity      NaN
+  ----------  -----------  ------------  ------------
+  FLT         unspecified  not required  not required
+  FLT16       2 bytes      not required  not required
+  FLT32       4 bytes      not required  not required
+  FLT40       5 bytes      not required  not required
+  FLT64       8 bytes      not required  not required
+  FLT128      16 bytes     not required  not required
+  FLTI        unspecified  required      not required
+  FLTI16      2 bytes      required      not required
+  FLTI32      4 bytes      required      not required
+  FLTI40      5 bytes      required      not required
+  FLTI64      8 bytes      required      not required
+  FLTI128     16 bytes     required      not required
+  FLTN        unspecified  not required  required
+  FLTN16      2 bytes      not required  required
+  FLTN32      4 bytes      not required  required
+  FLTN40      5 bytes      not required  required
+  FLTN64      8 bytes      not required  required
+  FLTN128     16 bytes     not required  required
+  FLTIN       unspecified  required      required
+  FLTIN16     2 bytes      required      required
+  FLTIN32     4 bytes      required      required
+  FLTIN40     5 bytes      required      required
+  FLTIN64     8 bytes      required      required
+  FLTIN128    16 bytes     required      required
 
 
 3.2 IEEE 754 floating point numbers
@@ -287,20 +287,23 @@ interpretation depends on the value of the exponent field:
   of different NaNs is not specified here and it is recommended always to
   represent a NaN by setting all bits of the floating point number to 1.
 
-Identifier      Size      r   p    Endianness   Format
---------------  --------  --  ---  -----------  -------------------------------
-IEEE754-16      2 bytes   5   10   unspecified  binary16 (half precision)
-IEEE754-16-LE   2 bytes   5   10   little       binary16 (half precision)
-IEEE754-16-BE   2 bytes   5   10   big          binary16 (half precision)
-IEEE754-32      4 bytes   8   23   unspecified  binary32 (single precision)
-IEEE754-32-LE   4 bytes   8   23   little       binary32 (single precision)
-IEEE754-32-BE   4 bytes   8   23   big          binary32 (single precision)
-IEEE754-64      8 bytes   11  52   unspecified  binary64 (double precision)
-IEEE754-64-LE   8 bytes   11  52   little       binary64 (double precision)
-IEEE754-64-BE   8 bytes   11  52   big          binary64 (double precision)
-IEEE754-128     16 bytes  15  112  unspecified  binary128 (quadruple precision)
-IEEE754-128-LE  16 bytes  15  112  little       binary128 (quadruple precision)
-IEEE754-128-BE  16 bytes  15  112  big          binary128 (quadruple precision)
+  Identifier      Size      r   p    Endianness   Format
+  --------------  --------  --  ---  -----------  ---------------------------
+  IEEE754-16      2 bytes   5   10   unspecified  binary16 (half precision)
+  IEEE754-16-LE   2 bytes   5   10   little       binary16 (half precision)
+  IEEE754-16-BE   2 bytes   5   10   big          binary16 (half precision)
+  IEEE754-32      4 bytes   8   23   unspecified  binary32 (single precision)
+  IEEE754-32-LE   4 bytes   8   23   little       binary32 (single precision)
+  IEEE754-32-BE   4 bytes   8   23   big          binary32 (single precision)
+  IEEE754-64      8 bytes   11  52   unspecified  binary64 (double precision)
+  IEEE754-64-LE   8 bytes   11  52   little       binary64 (double precision)
+  IEEE754-64-BE   8 bytes   11  52   big          binary64 (double precision)
+  IEEE754-128     16 bytes  15  112  unspecified  binary128 (quadruple
+                                                  precision)
+  IEEE754-128-LE  16 bytes  15  112  little       binary128 (quadruple
+                                                  precision)
+  IEEE754-128-BE  16 bytes  15  112  big          binary128 (quadruple
+                                                  precision)
 
 
 3.3 Microsoft binary format floating point numbers
@@ -327,17 +330,17 @@ mantissa"). If a normalized mantissa would be used instead (i.e. an implied
 integer part of 1 and the significand field represents the entire fractional
 part of the mantissa), the bias would be 129.
 
-Identifier  Size     Endianness   Format
-----------  -------  -----------  ------------------
-MBF32       4 bytes  unspecified  single-precision
-MBF32-LE    4 bytes  little       single-precision
-MBF32-BE    4 bytes  big          single-precision
-MBF40       5 bytes  unspecified  extended-precision
-MBF40-LE    5 bytes  little       extended-precision
-MBF40-BE    5 bytes  big          extended-precision
-MBF64       8 bytes  unspecified  double-precision
-MBF64-LE    8 bytes  little       double-precision
-MBF64-BE    8 bytes  big          double-precision
+  Identifier  Size     Endianness   Format
+  ----------  -------  -----------  ------------------
+  MBF32       4 bytes  unspecified  single-precision
+  MBF32-LE    4 bytes  little       single-precision
+  MBF32-BE    4 bytes  big          single-precision
+  MBF40       5 bytes  unspecified  extended-precision
+  MBF40-LE    5 bytes  little       extended-precision
+  MBF40-BE    5 bytes  big          extended-precision
+  MBF64       8 bytes  unspecified  double-precision
+  MBF64-LE    8 bytes  little       double-precision
+  MBF64-BE    8 bytes  big          double-precision
 
 
 
@@ -358,14 +361,14 @@ specified implicitly or explicitly otherwise.
 Note that unknown codepoints may still be processed using direct encoding if
 translated to a Retro-Frame character (see /spec/rf-char.txt//).
 
-Identifier  Description
-----------  ----------------------------------------------------------------
-CHAR        unspecified single byte character type
-ASCII       7 bit ASCII character, most significant bit must be zero
-ASCIIE      7 bit ASCII character, most significant bit set to even parity
-ASCIIO      7 bit ASCII character, most significant bit set to odd parity
-ASCII-CP    8 bit character codepage, codepoints 0..127 are ASCII characters
-CP          8 bit character codepage with no ASCII compatibility
+  Identifier  Description
+  ----------  ----------------------------------------------------------------
+  CHAR        unspecified single byte character type
+  ASCII       7 bit ASCII character, most significant bit must be zero
+  ASCIIE      7 bit ASCII character, most significant bit set to even parity
+  ASCIIO      7 bit ASCII character, most significant bit set to odd parity
+  ASCII-CP    8 bit character codepage, codepoints 0..127 are ASCII characters
+  CP          8 bit character codepage with no ASCII compatibility
 
 
 4.2 Multibyte character encodings
@@ -384,17 +387,18 @@ like UTF-16.
 Note that invalid encodings may still be processed using direct encoding if
 translated to a Retro-Frame character (see /spec/rf-char.txt//).
 
-Identifier  Character set  Description
-----------  -------------  ----------------------------------------------------
-UTF-8       Unicode        Standard-conforming UTF-8 encoding. If surrogates
-                           or other non-characters occur, the encoding has to
-                           be considered invalid.
-CESU-8      Unicode        UTF-8 encoding which may represent surrogate pairs
-                           which are decoded according to UTF-16. Non-matching
-                           surrogate pairs or non-characters have to be
-                           considered invalid.
-PCS         Retro-Frame    Single packed character of a packed character string
-                           (PCS), see /spec/rf-char.txt//, chapter 5.4.
+  Identifier  Character set  Description
+  ----------  -------------  --------------------------------------------------
+  UTF-8       Unicode        Standard-conforming UTF-8 encoding. If surrogates
+                             or other non-characters occur, the encoding has
+                             to be considered invalid.
+  CESU-8      Unicode        UTF-8 encoding which may represent surrogate pairs
+                             which are decoded according to UTF-16.
+                             Non-matching surrogate pairs or non-characters
+                             have to be considered invalid.
+  PCS         Retro-Frame    Single packed character of a packed character
+                             string (PCS), see /spec/rf-char.txt//, chapter
+                             5.4.
 
 
 4.3 Wide character encodings
@@ -414,35 +418,42 @@ encoding) in UCS 2.
 Retro-Frame characters may use shifted values to represent a direct encoding
 (see /spec/rf-char.txt//, chapters 3.4 and 5.2).
 
-Identifier  Size         Endianness   Character set  Description
-----------  -----------  -----------  -------------  --------------------------
-WCHAR       unspecified  unspecified  unspecified    unspecified wide character
-UCS2        2 bytes      unspecified  Unicode        UTF-16 without surrogates
-UCS2-LE     2 bytes      little       Unicode        UTF-16 without surrogates,
-                                                     little endian
-UCS2-BE     2 bytes      big          Unicode        UTF-16 without surrogates,
-                                                     big endian
-UTF16       2/4 bytes    unspecified  Unicode        UTF-16 with surrogates
-UTF16-LE    2/4 bytes    little       Unicode        UTF-16 with surrogates,
-                                                     little endian
-UTF16-BE    2/4 bytes    big          Unicode        UTF-16 with surrogates,
-                                                     big endian
-UTF32       4 bytes      unspecified  Unicode        UTF-32
-UTF32-LE    4 bytes      little       Unicode        UTF-32, little endian
-UTF32-BE    4 bytes      big          Unicode        UTF-32, big endian
-CHAR16      n * 2 bytes  unspecified  Retro-Frame    16 bit Retro-Frame
-                                                     character representation
-CHAR16-LE   n * 2 bytes  little       Retro-Frame    16 bit Retro-Frame
-                                                     character representation,
-                                                     little endian
-CHAR16-BE   n * 4 bytes  big          Retro-Frame    16 bit Retro-Frame
-                                                     character representation,
-                                                     big endian
-CHAR32      n * 4 bytes  unspecified  Retro-Frame    32 bit Retro-Frame
-                                                     character representation
-CHAR32-LE   n * 4 bytes  little       Retro-Frame    32 bit Retro-Frame
-                                                     character representation,
-                                                     little endian
-CHAR32-BE   n * 4 bytes  big          Retro-Frame    32 bit Retro-Frame
-                                                     character representation,
-                                                     big endian
+  Identifier  Size         Endianness   Character set  Description
+  ----------  -----------  -----------  -------------  ------------------------
+  WCHAR       unspecified  unspecified  unspecified    unspecified wide
+                                                       character
+  UCS2        2 bytes      unspecified  Unicode        UTF-16 without
+                                                       surrogates
+  UCS2-LE     2 bytes      little       Unicode        UTF-16 without
+                                                       surrogates, little
+                                                       endian
+  UCS2-BE     2 bytes      big          Unicode        UTF-16 without
+                                                       surrogates, big endian
+  UTF16       2/4 bytes    unspecified  Unicode        UTF-16 with surrogates
+  UTF16-LE    2/4 bytes    little       Unicode        UTF-16 with surrogates,
+                                                       little endian
+  UTF16-BE    2/4 bytes    big          Unicode        UTF-16 with surrogates,
+                                                       big endian
+  UTF32       4 bytes      unspecified  Unicode        UTF-32
+  UTF32-LE    4 bytes      little       Unicode        UTF-32, little endian
+  UTF32-BE    4 bytes      big          Unicode        UTF-32, big endian
+  CHAR16      n * 2 bytes  unspecified  Retro-Frame    16 bit Retro-Frame
+                                                       character representation
+  CHAR16-LE   n * 2 bytes  little       Retro-Frame    16 bit Retro-Frame
+                                                       character
+                                                       representation, little
+                                                       endian
+  CHAR16-BE   n * 4 bytes  big          Retro-Frame    16 bit Retro-Frame
+                                                       character
+                                                       representation, big
+                                                       endian
+  CHAR32      n * 4 bytes  unspecified  Retro-Frame    32 bit Retro-Frame
+                                                       character representation
+  CHAR32-LE   n * 4 bytes  little       Retro-Frame    32 bit Retro-Frame
+                                                       character
+                                                       representation, little
+                                                       endian
+  CHAR32-BE   n * 4 bytes  big          Retro-Frame    32 bit Retro-Frame
+                                                       character
+                                                       representation, big
+                                                       endian

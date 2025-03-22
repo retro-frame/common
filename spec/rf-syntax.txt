@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!03 (alpha)
+Version:     01.00!04
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Initial version
+2025-03-22 : 01.00!04 : Ingo : Draft
 
 
 Contents
@@ -159,19 +159,19 @@ one or more characters of the following character set:
 
 The metasyntax predefines the following terminal symbols:
 
-Symbol  Definition
-------  -----------------------------------------------------------------------
-END     End of text (e.g. end of chapter)
-LB      Line break (i.e. end of line), including END
-WS      Any whitespace, excluding LB
-SPC     A single space (i.e. " ")
-9       An arbitrary digit (i.e. "0"-"9")
-X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9", "A"-"F")
-x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9", "a"-"f")
-A       An arbitrary uppercase letter (i.e. "A"-"Z")
-a       An arbitrary lowercase letter (i.e. "a"-"z")
-?       An arbitrary letter (i.e. A | a)
-!       An arbitrary defined character of the input text
+  Symbol  Definition
+  ------  ----------------------------------------------------------------
+  END     End of text (e.g. end of chapter)
+  LB      Line break (i.e. end of line), including END
+  WS      Any whitespace, excluding LB
+  SPC     A single space (i.e. " ")
+  9       An arbitrary digit (i.e. "0"-"9")
+  X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9", "A"-"F")
+  x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9", "a"-"f")
+  A       An arbitrary uppercase letter (i.e. "A"-"Z")
+  a       An arbitrary lowercase letter (i.e. "a"-"z")
+  ?       An arbitrary letter (i.e. A | a)
+  !       An arbitrary defined character of the input text
 
 In a specific context, additional terminal symbols may be specified. However,
 when using the metasyntax, the predefined terminal symbols as specified above
@@ -265,45 +265,45 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 3.1 Additional terminal symbols
 -------------------------------------------------------------------------------
 
-Symbol  Definition
-------  -------------------------------------------
-.       An arbitrary character of the input text
-NUL     Control character null
-SOH     Control character start of heading
-STX     Control character start of text
-ETX     Control character end of text
-EOT     Control character end of transmission
-ENQ     Control character enquiry
-ACK     Control character acknowledge
-BEL     Control character bell
-BS      Control character backspace
-HT      Control character horizontal tab
-LF      Control character line feed
-VT      Control character vertical tab
-FF      Control character form feed
-CR      Control character carriage return
-SO      Control character shift out
-SI      Control character shift in
-DLE     Control character data link escape
-DC1     Control character device control 1
-DC2     Control character device control 2
-DC3     Control character device control 3
-DC4     Control character device control 4
-NAK     Control character negative acknowledge
-SYN     Control character synchronous idle
-ETB     Control character end of transmission block
-CAN     Control character cancel
-EM      Control character end of medium
-SUB     Control character substitution
-ESC     Control character escape
-FS      Control character file separator
-GS      Control character group separator
-RS      Control character record separator
-US      Control character unit separator
-DEL     Control character delete
-NEL     Control character next line
-LS      Control character line separator
-PS      Control character paragraph separator
+  Symbol  Definition
+  ------  -------------------------------------------
+  .       An arbitrary character of the input text
+  NUL     Control character null
+  SOH     Control character start of heading
+  STX     Control character start of text
+  ETX     Control character end of text
+  EOT     Control character end of transmission
+  ENQ     Control character enquiry
+  ACK     Control character acknowledge
+  BEL     Control character bell
+  BS      Control character backspace
+  HT      Control character horizontal tab
+  LF      Control character line feed
+  VT      Control character vertical tab
+  FF      Control character form feed
+  CR      Control character carriage return
+  SO      Control character shift out
+  SI      Control character shift in
+  DLE     Control character data link escape
+  DC1     Control character device control 1
+  DC2     Control character device control 2
+  DC3     Control character device control 3
+  DC4     Control character device control 4
+  NAK     Control character negative acknowledge
+  SYN     Control character synchronous idle
+  ETB     Control character end of transmission block
+  CAN     Control character cancel
+  EM      Control character end of medium
+  SUB     Control character substitution
+  ESC     Control character escape
+  FS      Control character file separator
+  GS      Control character group separator
+  RS      Control character record separator
+  US      Control character unit separator
+  DEL     Control character delete
+  NEL     Control character next line
+  LS      Control character line separator
+  PS      Control character paragraph separator
 
 
 3.2 Syntax
@@ -413,9 +413,9 @@ that the literal does not match.
 4.1 Additional terminal symbols
 -------------------------------------------------------------------------------
 
-Symbol           Definition
----------------  ---------------------------------------------------
-TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
+  Symbol           Definition
+  ---------------  ---------------------------------------------------
+  TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
 
 
 4.2 Syntax

@@ -13,7 +13,7 @@ Universal Path Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-path.txt//
-Version:     01.00!03 (alpha)
+Version:     01.00!04
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!03 : Ingo : Initial version
+2025-03-22 : 01.00!04 : Ingo : Draft
 
 
 Contents
@@ -149,15 +149,15 @@ In addition to the terminal symbols defined by the metasyntax (see
 /spec/rf-syntax.txt//, chapter 2), the following terminal symbols are
 specified:
 
-Symbol         Definition
--------------  ---------------------------------------------------------------
-PATH-CHAR      Any Retro-Frame character which is printable in the environment
-               except the circumflex accent ('^'), the solidus ('/'), the
-               right square bracket (']') and any other printable character
-               which should not be directly represented in a specific context
-               (e.g. space or delimiter).
-ESCAPE-STRING  A valid escape string according to /spec/rf-char.txt//, chapter
-               5.5.
+  Symbol         Definition
+  -------------  -------------------------------------------------------------
+  PATH-CHAR      Any Retro-Frame character which is printable in the
+                 environment except the circumflex accent ('^'), the solidus
+                 ('/'), the right square bracket (']') and any other printable
+                 character which should not be directly represented in a
+                 specific context (e.g. space or delimiter).
+  ESCAPE-STRING  A valid escape string according to /spec/rf-char.txt//,
+                 chapter 5.5.
 
 
 2.3 Syntax

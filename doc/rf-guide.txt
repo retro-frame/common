@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-16 : 01.00!04 : Ingo : Initial version
+2025-03-22 : 01.00!04 : Ingo : Draft
 
 
 Contents
@@ -313,9 +313,9 @@ may even be entirely redeveloped during pre-release.
 
 If a software is considered final and ready for test, pre-release stages may be
 indicated by using the greek alphabet (alpha, beta et cetera). In this case,
-changes on the software should be restricted to bug fixing and after each fix,
-the pre-release version number must be increased (while the stage may or may
-not be changed).
+changes on the software shall be restricted to bug fixing and minor changes and
+after each fix, the pre-release version number shall be increased (while the
+stage may or may not be changed, see chapter 6.2).
 
 
 3.2 Release (initial, major or minor)
@@ -347,8 +347,11 @@ fully backward compatible:
   not provide all definitions used, a higher minor version may have additional
   guidelines which are not satisfied).
 
-For SPECIFICATIONS, the exact meaning of backward compatibility depends of thy
-type of the specification:
+While substancial changes in defintions or guidelines require an new minor
+version, additional DESCRIPTIONS, INSTRUCTIONS and/or SPECIFICATIONS may be
+introduced by a new pre-release or patch instead, as backward compatibility is
+never affected. However, for substancial changes of specifications, the exact
+meaning of backward compatibility depends of thy type of the specification:
 
 - A minor release of an API may add functions or declarations but must provide
   all functions or declarations of previous minor releases. Existing functions
@@ -746,7 +749,9 @@ repository, the resulting files have a defined version according to the tag.
 In the following cases, as second tag should be added:
 
 - If a pre-release version is considered a new test stage, a tag representing
-  the stage (i.e. "alpha", "beta" et cetera).
+  the stage (i.e. "alpha", "beta" et cetera). If a pre-release version is
+  incremented during a test stage which remains unchanged, the existing tag
+  remains unchanged as well.
 
 - If a patch version is considered deprecated, the tag "deprecated".
 
@@ -760,7 +765,8 @@ branches, the state must be identical. However, each branch has its own head.
 The readme file of the repository should always represent the current version
 number. If changes are made after a commit with a version tag, the pre-release
 respective patch version should be incremented by one and "(dev)" should be
-appended to the version number until the changes become a new version.
+appended to the version number until the changes become a new version. In
+addition, the test stage (if given) should be appended within parenthesis.
 
 
 6.3 Work file versioning
