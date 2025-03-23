@@ -475,7 +475,7 @@ that the literal does not match.
 
 <mul-div-expression>:
 
-  [ <operand> ( "*" | "/" | "%" ) ] <operand>
+  [ <mul-div-expression> ( "*" | "/" | "%" ) ] <operand>
 
 <add-sub-expression>:
 
