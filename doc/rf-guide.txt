@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!04
+Version:     01.00!05
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-22 : 01.00!04 : Ingo : Draft
+2025-04-07 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -251,9 +251,9 @@ empty sequence of letters, digits or dollar signs:
   "."_(_?_|_9_|_"$"_)*
 
 In general, work file names are stored case sensitive but compared case
-insensitive. Thus, even if the file systems respective REPOSITORIES compares
-file names case sensitive, two work file names in the same directory must
-always be different if compared ignoring the case.
+insensitive. Thus, even if a file system or REPOSITORY compares file names case
+sensitive, two work file names in the same directory must always be different
+if compared ignoring the case.
 
 The total length prefix and base name together should not exceed 39 characters,
 the length of a base name should not exceed 8 characters and the length of a
@@ -281,7 +281,7 @@ the description should be enclosed by '<' and '>' (e.g. [<base-path>]). The
 universal root selector (i.e. "/") refers to the repository of which the work
 file belongs to (for expample, the root of universal path references in this
 document is the repository <http://source.retro-frame.net/doc>). A universal
-path should always end with a type mark (i.e. "//" for a file respective "/"
+path should always end with a type mark (i.e. "//" for a file respectively "/"
 for a directory) unless the path may refer to either (i.e. a file or a
 directory).
 
@@ -368,7 +368,7 @@ type of the specification:
   version data format (the added elements or interpretations will be ignored).
   As a special case of backward compatibility requirements, implementations
   which support a specific data format release should also support lower major
-  releases unless deprecated (see chapter 5.5).
+  releases unless deprecated (see chapter 6.5).
 
 - A minor release of an ENVORONMENT must support all features of the lower
   minor releases.
@@ -718,16 +718,16 @@ Pre-release version numbers are in the format
 
 where <major-version> is in the same range as described above, <minor-version>
 is in the range 0..31 and <pre-release> is in the range 0..94 (e.g. 01.23!08
-respective v1.23!8). For a new pre-release, <pre-release> is incremented by one
-until the version is released.
+respectively v1.23!8). For a new pre-release, <pre-release> is incremented by
+one until the version is released.
 
 Release version numbers are in the format
 
   <major-version>_'.'_<minor-version>
 
 where <major-version> and <minor-version> are in the same range as described
-above (e.g. 01.23 respective v1.23). An initial release always has version
-number 01.00 respective v1.0 and for a new major release, <major-version> is
+above (e.g. 01.23 respectively v1.23). An initial release always has version
+number 01.00 respectively v1.0 and for a new major release, <major-version> is
 incremented by one while <minor-version> is set to zero. For a new minor
 release, <major-version> remains unchanged and <minor-version> is incremented
 by one. 
@@ -738,7 +738,7 @@ Support version numbers are in the format
 
 where the range of <major-version> and <minor-version> are in the same range
 as described above and <patch> should be in the range 0..31 (e.g. 15.02.03
-respective v15.2.3). The initial release version has always <patch> set to
+respectively v15.2.3). The initial release version has always <patch> set to
 zero. For each new support version, <patch> is incremented by one.
 
 
@@ -772,7 +772,7 @@ branches, the state must be identical. However, each branch has its own head.
 
 The readme file of the repository should always represent the current version
 number. If changes are made after a commit with a version tag, the pre-release
-respective support version should be incremented by one and "(dev)" should be
+respectively support version should be incremented by one and "(dev)" should be
 appended to the version number until the changes become a new version. In
 addition, the test stage (if given) should be appended within parenthesis.
 
@@ -785,11 +785,11 @@ executed), the release version number must be the same than the release version
 number of the latest version tag (or, if no latest version tag exists on a
 branch, the next version tag in future).
 
-The pre-relase respective support version of a work file may be individual for
-the file. However, it must not be higher than the one of the current version
-tag, if one is given. If the work file is in the head an the head does not have
-a version tag, the pre-release respective support version must equal the one of
-the last tag incremented by one (respective zero if no tag exists).
+The pre-relase or support version of a work file may be individual for the
+file. However, it must not be higher than the one of the current version tag,
+if one is given. If the work file is in the head an the head does not have a
+version tag, the pre-release or support version must equal the one of the last
+tag incremented by one (or zero if no tag exists).
 
 Example:
 
@@ -817,10 +817,10 @@ stage), all work files must show exactly the same version.
 If a PRODUCT comprises multiple SOFTWARE and/or DOCUMENTATION components, each
 component should have the same release version like the product.
 
-The pre-relase respective support version of the product should be the maximum
-of those of the individual components. Thus, if a patch is applied to one or
-more components, the product's support version number should be incremented by
-one and the resulting number should be used for all components which have been
+The pre-relase or support version of the product should be the maximum of those
+of the individual components. Thus, if a patch is applied to one or more
+components, the product's support version number should be incremented by one
+and the resulting number should be used for all components which have been
 changed for the patch.
 
 
@@ -881,7 +881,7 @@ produce less secure programs.
 
 As the Retro-Endeavors focus on development, security considerations are
 limited to the SOFTWARE itself. Other environmental aspects which may have
-great influence on the security respective the risks (e.g. network access
+great influence on the security respectively the risks (e.g. network access
 control, user rights, system configuration or sandboxing) are out of scope and
 need to be considered separately.
 
@@ -889,8 +889,8 @@ need to be considered separately.
 7.2 Security objectives and potential threats
 -------------------------------------------------------------------------------
 
-In general, all threats should be considered which may result in a loss of one
-or more of the following security objectives:
+In general, all threats which may result in a loss of one or more of the
+following security objectives should be considered:
 
 - Confidentiality (i.e. no unauthorized disclosure of information).
 
@@ -898,8 +898,7 @@ or more of the following security objectives:
 
 - Availability (i.e. information can be processed when required).
 
-Thus, two classes of security threats should be
-distinguished:
+Thus, two classes of security threats should be distinguished:
 
 - Threats which affect the information processed by the PRODUCT which is build
   from SOFTWARE developed by a Retro-Endeavor. In order to respect the
@@ -960,25 +959,25 @@ Impact level "medium":
 
 - The loss of a security objective could have moderate impact.
 
-- Information is considered sensitive but not secret respective not critical in
-  terms of integrity and/or availability.
+- Information is considered sensitive but not secret respectively not critical
+  in terms of integrity and/or availability.
 
 - The environment in which the program file(s) are executed will result in
-  limited harm if compromised (e.g. a computer where no secret or critical
+  limited harm if compromised (e.g. a computer an which no secret or critical
   information is stored).
 
 Impact level "high":
 
 - The loss of a security objective could have severe impact.
 
-- Information is considered secret respective critical in terms of integrity
+- Information is considered secret respectively critical in terms of integrity
   and/or availability.
 
 - The environment in which the program file(s) are executed will result in
   significant harm if compromised (e.g. a server).
 
 If the levels of sensitivity differ for the individual security objectives, the
-highest (i.e. maximum) level is chosen.
+highest (i.e. maximum) level shall be chosen.
 
 
 7.4 Security levels
@@ -1043,14 +1042,14 @@ Security level "medium":
 
 - This security level is considered the default mode of retro programming.
   Thus, an explicit warning or even confirmation is not required but a hint
-  should be printed on the version / license output.
+  shall be printed on the version / license output.
 
 Security level "high":
 
 - The security level "high" indicates that security has been considered and is
   considered strong according to current standards. No insecure operations are
-  allowed. Weak or deprecated operations respective cryptographic algorithms
-  are allowed but require an explicit warning and confirmation by the user.
+  allowed. Weak or deprecated operations or cryptographic algorithms are
+  allowed but require an explicit warning and confirmation by the user.
 
 - This security level must only be assumed if stated explicitly.
 
