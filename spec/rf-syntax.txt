@@ -268,8 +268,8 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
   Symbol  Definition
   ------  ---------------------------------------------------------------------
   !       A character which is may occur in a format identifier (i.e. 9 | A |
-          "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" |
-          ">" | "=" | "?")
+          "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | "<" | ">" |
+          "=" | "?")
   NUL     Control character null
   SOH     Control character start of heading
   STX     Control character start of text
