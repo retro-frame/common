@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-04-07 : 01.00!05 : Ingo : Draft
+2025-04-27 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -831,10 +831,9 @@ DATA FORMAT version numbers are in the format
 
   <major-version>_':'_<minor-version>
 
-where both, <major-version> and <minor-version>, are in the range 0..255 for
-binary formats and in the range 33..126 for text formats at maximum. However,
-for each major version the allowed range of the minor version may be more
-restricted.
+where both, <major-version> and <minor-version>, are in the range 0..255.
+However, for each major version the allowed range of the minor version may be
+more restricted.
 
 The textual representation of a data format version numbers always uses two
 hexadecimal digits for each element. If the value of one element is less than

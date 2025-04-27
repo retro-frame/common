@@ -164,12 +164,12 @@ The metasyntax predefines the following terminal symbols:
   END     End of text (e.g. end of chapter)
   LB      Line break (i.e. end of line), including END
   WS      Any whitespace, excluding LB
-  SPC     A single space (i.e. " ")
-  9       An arbitrary digit (i.e. "0"-"9")
-  X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9" | "A"-"F")
-  x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9" | "a"-"f")
-  A       An arbitrary uppercase letter (i.e. "A"-"Z")
-  a       An arbitrary lowercase letter (i.e. "a"-"z")
+  SPC     A single space (i.e. ' ')
+  9       An arbitrary digit (i.e. '0'-'9')
+  X       An arbitrary uppercase hexadecimal digit (i.e. '0'-'9' | 'A'-'F')
+  x       An arbitrary lowercase hexadecimal digit (i.e. '0'-'9' | 'a'-'f')
+  A       An arbitrary uppercase letter (i.e. 'A'-'Z')
+  a       An arbitrary lowercase letter (i.e. 'a'-'z')
   ?       An arbitrary letter (i.e. A | a)
   .       An arbitrary character of the input text
 
@@ -266,10 +266,9 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 -------------------------------------------------------------------------------
 
   Symbol  Definition
-  ------  ---------------------------------------------------------------------
-  !       A character which is may occur in a format identifier (i.e. 9 | A |
-          "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | "<" | ">" |
-          "=" | "?")
+  ------  -------------------------------------------------------------------
+  !       A character which is may occur in an identifier (i.e. 9 | A | '*' |
+          '+' | '-' | '.' | '/')
   NUL     Control character null
   SOH     Control character start of heading
   STX     Control character start of text
@@ -503,21 +502,21 @@ that the literal does not match.
 
   ":" TYPE-IDENTIFIER [ [ <line-break> ":" ] "=" <expression> ]*
 
+<condition>:
+
+  "[" ( [ "!" ] <name> | <name> <relation> <constant-value> | "*" ) "]" LB
+
 <mask-item>:
 
-  WS "MASK" WS <hex-value> WS <item-name> <line-break>
+  [ <condition> ] WS "MASK" WS <hex-value> WS <item-name> <line-break>
 
 <block-item>:
 
   <size> WS <item-name> [ <type-spec> ] <line-break> [ <mask-item> ]*
 
-<condition>:
-
-  [ "!" ] <name> | <name> <relation> <constant-value> | "*"
-
 <block-line>:
 
-  WS ( "[" <condition> "]" | <block-item> )
+  WS ( <condition> | <block-item> )
 
 <block>:
 
@@ -536,11 +535,11 @@ value or by a variable which may be determined by an expression from a previous
 block item. If a block item has a type specification, the size should match the
 size of the type exactly. If all items of a block have a constant size value,
 the size of the block is the sum of all those values. If the size of a block
-item is not known, a question mark ("?") is used instead.
+item is not known, a question mark ('?') is used instead.
 
 If a condition is given, all subsequent block items until the next condition or
 the end of the block are only present if the condition is true. A condition
-consisting of a single asterisk ("*") is always true.
+consisting of a single asterisk ('*') is always true.
 
 Expressions and conditions are evaluated like C expressions.
 
