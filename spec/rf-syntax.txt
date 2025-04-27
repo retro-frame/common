@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-23 : 01.00!05 : Ingo : Draft
+2025-04-27 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -160,18 +160,18 @@ one or more characters of the following character set:
 The metasyntax predefines the following terminal symbols:
 
   Symbol  Definition
-  ------  ----------------------------------------------------------------
+  ------  -------------------------------------------------------------------
   END     End of text (e.g. end of chapter)
   LB      Line break (i.e. end of line), including END
   WS      Any whitespace, excluding LB
   SPC     A single space (i.e. " ")
   9       An arbitrary digit (i.e. "0"-"9")
-  X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9", "A"-"F")
-  x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9", "a"-"f")
+  X       An arbitrary uppercase hexadecimal digit (i.e. "0"-"9" | "A"-"F")
+  x       An arbitrary lowercase hexadecimal digit (i.e. "0"-"9" | "a"-"f")
   A       An arbitrary uppercase letter (i.e. "A"-"Z")
   a       An arbitrary lowercase letter (i.e. "a"-"z")
   ?       An arbitrary letter (i.e. A | a)
-  !       An arbitrary defined character of the input text
+  .       An arbitrary character of the input text
 
 In a specific context, additional terminal symbols may be specified. However,
 when using the metasyntax, the predefined terminal symbols as specified above
@@ -238,7 +238,7 @@ An expression may a combination of the following:
 
   If an element is optional or may occur multiple times and the next element
   is a subset and matches, the later element matches rather than the optional
-  or repeated one (e.g. [ ! ]* ? matches a sequence of arbitrary characters and
+  or repeated one (e.g. [ . ]* ? matches a sequence of arbitrary characters and
   the first occurence of a letter).
 
 Example:
@@ -266,8 +266,10 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 -------------------------------------------------------------------------------
 
   Symbol  Definition
-  ------  -------------------------------------------
-  .       An arbitrary character of the input text
+  ------  ---------------------------------------------------------------------
+  !       A character which is may occur in a format identifier (i.e. 9 | A |
+          "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" |
+          ">" | "=" | "?")
   NUL     Control character null
   SOH     Control character start of heading
   STX     Control character start of text
@@ -321,7 +323,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <terminal-symbol>:
 
-  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
+  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "." | "!" |
   "NUL" | "SOH" | "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" |
   "LF" | "VT" | "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" |
   "DC4" | "NAK" | "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" |
@@ -337,7 +339,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <line-break>:
 
-  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
+  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
 
 <spacing>:
 
@@ -443,7 +445,7 @@ that the literal does not match.
 
 <line-break>:
 
-  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
+  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
 
 <dec-value>:
 
