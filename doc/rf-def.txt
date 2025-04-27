@@ -464,15 +464,15 @@ a common CHARACTER DOMAIN.
 
 A 'CHARACTER STRING' (or just 'STRING' if it is clear that a CHARACTER STRING
 is meant) is an array (i.e. a sequence of elements of equal size) which
-represents a sequence of CHARACTERS (even none in which case the STRING is
-called empty) in a specific CHARACTER ENCODING. If the CHARACTER ENCODING is
-not fixed-width (i.e. variable-width), the STRING is called packed.
+represents a sequence of CHARACTERS or NO-CHARACTERS (even none in which case
+the STRING is called empty) in a specific CHARACTER ENCODING. If the CHARACTER
+ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
 
 
 5.11 String terminator
 -------------------------------------------------------------------------------
 
-A 'STRING TERMINATOR' is a CHARACTER OR NO-CHARACTER wich indicates the end of
+A 'STRING TERMINATOR' is a CHARACTER or NO-CHARACTER which indicates the end of
 a STRING. Thus, if the STRING TERMINATOR is a CHARACTER, it cannot be directly
 represented by the STRING. A STRING may or may not use STRING TERMINATORS.
 
@@ -480,9 +480,9 @@ represented by the STRING. A STRING may or may not use STRING TERMINATORS.
 5.12 String length
 -------------------------------------------------------------------------------
 
-The 'STRING LENGTH' denotes the number of CHARACTERS in a STRING (if the STRING
-is empty, the STRING LENGTH is zero). If STRING TERMINATORS are used, they are
-not included in the STRING LENGTH.
+The 'STRING LENGTH' denotes the number of CHARACTERS and NO-CHARACTERS (i.e.
+CODEPOINTS) in a STRING (if the STRING is empty, the STRING LENGTH is zero). If
+STRING TERMINATORS are used, they are not included in the STRING LENGTH.
 
 
 5.13 String count
@@ -490,8 +490,8 @@ not included in the STRING LENGTH.
 
 The 'STRING COUNT' denotes the number of elements in a STRING (if the STRING
 is empty, the STRING COUNT is zero). If STRING TERMINATORS are used, they are
-not included in the STRING COUNT. If the STRING is not packed, the STRING
-COUNT equals the STRING LENGTH.
+not included in the STRING COUNT. If the STRING is not packed, the STRING COUNT
+equals the STRING LENGTH.
 
 
 5.14 String size
