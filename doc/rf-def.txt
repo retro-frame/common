@@ -406,7 +406,7 @@ CHARACTERS and NO-CHARACTERS, the CODEPOINTS are 0 to n - 1.
 -------------------------------------------------------------------------------
 
 A 'MINIMAL CHARACTER SET' is a CHARACTER SET which includes CODEPOINTS for at
-least the following characters:
+least the following CHARACTERS:
 
 - the space ' ',
 - the digits '0'..'9',
@@ -447,19 +447,20 @@ must be of a size greater than one byte).
 5.9 Character domain
 -------------------------------------------------------------------------------
 
-A 'CHARACTER DOMAIN' denotes a CHARACTER SET which may not be not fully known
-but of which, however, at least some properties are known or required. Thus, a
-CHARACTER DOMAIN may be a CHARACTER SET which is entirely or partially known,
-but not entirely unknown.
+A 'CHARACTER DOMAIN' denotes a CHARACTER SET which may not be entirely known
+but of which at least some properties are known or required. Thus, a CHARACTER
+DOMAIN may be a CHARACTER SET which is entirely or partially known, but not
+entirely unknown.
 
 
 5.10 Codepage
 -------------------------------------------------------------------------------
 
-A 'CODEPAGE' is a SINGLE BYTE CHARACTER SET which shares the CODEPOINTS of at
-least the MINIMAL CHARACTER SET with other CODEPAGES. Thus, all CODEPAGES which
-share the same CODEPOINTS for these characters, form a common CHARACTER DOMAIN
-of the MINIMAL CHARACTER SET.
+A 'CODEPAGE' is a CHARACTER ENCODING with an element size of one byte of a
+specific MINIMAL CHARACTER SET where the mandatory CHARACTERS (see chapter 5.5)
+are encoded by exactly one element (i.e. one byte). Note that the CHARACTER SET
+of a CODEPAGE may be a SINGLE BYTE CHARACTER SET or a variable-width MULTI BYTE
+CHARACTER SET.
 
 
 5.11 Character string / string
