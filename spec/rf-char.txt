@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00!04
+Version:     01.00!05
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-22 : 01.00!04 : Ingo : Draft
+2025-04-27 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -401,14 +401,8 @@ be used as a value of a single character).
 4.1 Level 1 (minimum printable)
 -------------------------------------------------------------------------------
 
-The following characters are expected to be printable in all environments
-(level 1):
-
-- The space ' '
-- The digits '0'..'9'
-- The uppercase letters 'A'..'Z'
-- The symbols '"', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
-  '>'and '?'
+The characters of the MINIMAL CHARACTER SET are expected to be printable in all
+environments (level 1).
 
 However, as this set of printable characters is extremely limited, it should
 be used only if it is important that output is accurate on all systems.
