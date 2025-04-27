@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.00!04
+Version:     01.00!05
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-22 : 01.00!04 : Ingo : Draft
+2025-04-27 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -82,16 +82,36 @@ Contents
    4.5  Software
    4.6  Product
 
-5. FILE-RELATED TERMS
-   5.1  Work file
-   5.2  Document
-   5.3  Source file
-   5.4  Unit
-   5.5  Resource file
-   5.6  Control file
-   5.7  Executable
-   5.8  Program file
-   5.9  Repository
+5. CHARACTER-RELATED TERMS
+   5.1  Character
+   5.2  No-character
+   5.3  Codepoint
+   5.4  Character set
+   5.5  Character encoding
+   5.6  Single byte character set
+   5.7  Multi byte character set
+   5.8  Character domain
+   5.9  Codepage
+   5.10 Character string / string
+   5.11 String terminator
+   5.12 String length
+   5.13 String count
+   5.14 String size
+
+6. FILE-RELATED TERMS
+   6.1  File
+   6.2  Binary file
+   6.3  Text file
+   6.4  File system
+   6.5  Work file
+   6.6  Document
+   6.7  Source file
+   6.8  Unit
+   6.9  Resource file
+   6.10 Control file
+   6.11 Executable
+   6.12 Program file
+   6.13 Repository
 
 
 
@@ -346,11 +366,165 @@ already part of the SOFTWARE.
 
 
 
-5. FILE-RELATED TERMS
+5. CHARACTER-RELATED TERMS
 ===============================================================================
 
 
-5.1 Work file
+5.1 Character
+-------------------------------------------------------------------------------
+
+A 'CHARACTER' is the smallest entity that represents a human-readable text and
+is binary representable (i.e. by a number). It may be printable, in which case
+it is either a grapheme (i.e. have a graphical representation) or spacing (i.e.
+blank space of a certain width), or a control character, which advises how to
+interpret or to arrange the other characters (e.g. indicating a line break). If
+the meaning of a character is not known, it is called unspecified.
+
+
+5.2 No-character
+-------------------------------------------------------------------------------
+
+A 'NO-CHARACTER' is a number which has a specific meaning but is not considered
+a CHARACTER.
+
+
+5.3 Codepoint
+-------------------------------------------------------------------------------
+
+A 'CODEPOINT' is a number which distinctly represents a CHARACTER or a
+NO-CHARACTER.
+
+
+5.4 Character set
+-------------------------------------------------------------------------------
+
+A 'CHARACTER SET' is a set of contiguous CODEPOINTS, starting from zero, which
+represent at least one CHARACTER. Thus, NO-CHARACTERS may or may not be
+contained (however, a CHARACTER SET must not consist only of CODEPOINTS which
+represent NO-CHARACTERS). As a consequence, if a CHARACTER SET consists of n
+CHARACTERS and NO-CHARACTERS, the CODEPOINTS are 0 to n - 1.
+
+
+5.5 Character encoding
+-------------------------------------------------------------------------------
+
+A 'CHARACTER ENCODING' is the binary representation of CODEPOINTS by elements
+of equal size. If one element is capable to represent the entire CHARACTER SET,
+each element represents exactly one CODEPOINT and the CHARACTER ENCODING is
+called fixed-width. In contrast, if one or more consecutive elements represent
+a CODEPOINT according to a specified encoding rule, the CHARACTER ENCODING is
+called variable-width.
+
+
+5.6 Single byte character set
+-------------------------------------------------------------------------------
+
+A 'SINGLE BYTE CHARACTER SET' (SBCS) is a CHARACTER SET which consists of no
+more than 256 CODEPOINTS. Thus, each CODEPOINT can be represented by a single
+byte and character encoding is trivial.
+
+
+5.7 Multi byte character set
+-------------------------------------------------------------------------------
+
+A 'MULTI BYTE CHARACTER SET' (MBCS) is a CHARACTER SET which consists of more
+than 256 CODEPOINTS. Thus, at least some CODEPOINTS require more than one byte
+to be represented by CHARACTER ENCODING. Note that CODEPOINTS of a MULTI BYTE
+CHARACTER SET may still be represented by a single element (which in this case
+must be of a size greater than one byte).
+
+
+5.8 Character domain
+-------------------------------------------------------------------------------
+
+A 'CHARACTER DOMAIN' denotes a CHARACTER SET which may not be not fully known
+but of which, however, at least some properties are known or required. Thus, a
+CHARACTER DOMAIN may be a CHARACTER SET which is entirely or partially known,
+but not entirely unknown.
+
+
+5.9 Codepage
+-------------------------------------------------------------------------------
+
+A 'CODEPAGE' is a SINGLE BYTE CHARACTER SET which shares the CODEPOINTS of at
+least the following characters with oder CODEPAGES:
+
+- the space ' ',
+- the digits '0'..'9',
+- the uppercase letters 'A'..'Z' and
+- the symbols '"', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
+  '>'and '?'.
+
+Thus, all CODEPAGES which share the same CODEPOINTS for these characters, form
+a common CHARACTER DOMAIN.
+
+
+5.10 Character string / string
+-------------------------------------------------------------------------------
+
+A 'CHARACTER STRING' (or just 'STRING' if it is clear that a CHARACTER STRING
+is meant) is an array (i.e. a sequence of elements of equal size) which
+represents a sequence of CHARACTERS (even none in which case the STRING is
+called empty) in a specific CHARACTER ENCODING. If the CHARACTER ENCODING is
+not fixed-width (i.e. variable-width), the STRING is called packed.
+
+
+5.11 String terminator
+-------------------------------------------------------------------------------
+
+A 'STRING TERMINATOR' is a CHARACTER OR NO-CHARACTER wich indicates the end of
+a STRING. Thus, if the STRING TERMINATOR is a CHARACTER, it cannot be directly
+represented by the STRING. A STRING may or may not use STRING TERMINATORS.
+
+
+5.12 String length
+-------------------------------------------------------------------------------
+
+The 'STRING LENGTH' denotes the number of CHARACTERS in a STRING (if the STRING
+is empty, the STRING LENGTH is zero). If STRING TERMINATORS are used, they are
+not included in the STRING LENGTH.
+
+
+5.13 String count
+-------------------------------------------------------------------------------
+
+The 'STRING COUNT' denotes the number of elements in a STRING (if the STRING
+is empty, the STRING COUNT is zero). If STRING TERMINATORS are used, they are
+not included in the STRING COUNT. If the STRING is not packed, the STRING
+COUNT equals the STRING LENGTH.
+
+
+5.14 String size
+-------------------------------------------------------------------------------
+
+The 'STRING SIZE' denotes the size occupied by a STRING in bytes (if the STRING
+is empty, the STRING SIZE is zero). If STRING TERMINATORS are used, they are
+not included in the STRING SIZE. If the elements of a STRING are single bytes,
+the STRING SIZE equals the STRING COUNT.
+
+
+
+6. FILE-RELATED TERMS
+===============================================================================
+
+
+6.1 File
+-------------------------------------------------------------------------------
+
+
+6.2 Binary file
+-------------------------------------------------------------------------------
+
+
+6.3 Text file
+-------------------------------------------------------------------------------
+
+
+6.4 File system
+-------------------------------------------------------------------------------
+
+
+6.5 Work file
 -------------------------------------------------------------------------------
 
 A 'WORK FILE' is a file which contains non-deducible data and is required to
@@ -360,19 +534,19 @@ development process. Files which are deducible (e.g. translation results or
 temporary files) are not considered WORK FILES.
 
 
-5.2 Document
+6.6 Document
 -------------------------------------------------------------------------------
 
 A 'DOCUMENT' is a WORK FILE which contains DOCUMENTATION.
 
 
-5.3 Source file
+6.7 Source file
 -------------------------------------------------------------------------------
 
 A 'SOURCE FILE' is a WORK FILE which contains SOURCE CODE.
 
 
-5.4 Unit
+6.8 Unit
 -------------------------------------------------------------------------------
 
 A 'UNIT' is a set of one or more SOURCE FILES which are considered an entity
@@ -381,13 +555,13 @@ executable (i.e. if invoked in a specific manner which is not necessarily
 provided by the execution ENVIRONMENT).
 
 
-5.5 Resource file
+6.9 Resource file
 -------------------------------------------------------------------------------
 
 A 'RESOURCE FILE' is a WORK FILE which contains RESOURCES.
 
 
-5.6 Control file
+6.10 Control file
 -------------------------------------------------------------------------------
 
 A 'CONTROL FILE' is a WORK FILE which contains data used for the software
@@ -395,14 +569,14 @@ development process but not being part of the SOFTWARE itself (e.g. build,
 project and/or configuration files of the translation ENVIRONMENT).
 
 
-5.7 Executable
+6.11 Executable
 -------------------------------------------------------------------------------
 
 An 'EXECUTABLE' is a binary (i.e. not human-readable) file which can processed
 in a specific execution ENVIRONMENT.
 
 
-5.8 Program file
+6.12 Program file
 -------------------------------------------------------------------------------
 
 A 'PROGRAM FILE' is an EXECUTABLE or a SOURCE FILE which can be processed in a
@@ -411,7 +585,7 @@ which needs translation in order to be executable (e.g. by a compiler) is still
 considered a PROGRAM but not a PROGRAM FILE.
 
 
-5.9 Repository
+6.13 Repository
 -------------------------------------------------------------------------------
 
 A 'REPOSITORY' is a set of related WORK FILES and optionally other related
