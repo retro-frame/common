@@ -99,19 +99,15 @@ Contents
    5.14 String size
 
 6. FILE-RELATED TERMS
-   6.1  File
-   6.2  Binary file
-   6.3  Text file
-   6.4  File system
-   6.5  Work file
-   6.6  Document
-   6.7  Source file
-   6.8  Unit
-   6.9  Resource file
-   6.10 Control file
-   6.11 Executable
-   6.12 Program file
-   6.13 Repository
+   6.1  Work file
+   6.2  Document
+   6.3  Source file
+   6.4  Unit
+   6.5  Resource file
+   6.6  Control file
+   6.7  Executable
+   6.8  Program file
+   6.9  Repository
 
 
 
@@ -472,9 +468,9 @@ ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
 5.11 String terminator
 -------------------------------------------------------------------------------
 
-A 'STRING TERMINATOR' is a CHARACTER or NO-CHARACTER which indicates the end of
-a STRING. Thus, if the STRING TERMINATOR is a CHARACTER, it cannot be directly
-represented by the STRING. A STRING may or may not use STRING TERMINATORS.
+A 'STRING TERMINATOR' is a CHARACTER or NO-CHARACTER which indicates the end
+of a STRING. Thus, the STRING TERMINATOR itself cannot be represented by the
+STRING. A STRING may or may not use STRING TERMINATORS.
 
 
 5.12 String length
@@ -508,23 +504,7 @@ the STRING SIZE equals the STRING COUNT.
 ===============================================================================
 
 
-6.1 File
--------------------------------------------------------------------------------
-
-
-6.2 Binary file
--------------------------------------------------------------------------------
-
-
-6.3 Text file
--------------------------------------------------------------------------------
-
-
-6.4 File system
--------------------------------------------------------------------------------
-
-
-6.5 Work file
+6.1 Work file
 -------------------------------------------------------------------------------
 
 A 'WORK FILE' is a file which contains non-deducible data and is required to
@@ -534,19 +514,19 @@ development process. Files which are deducible (e.g. translation results or
 temporary files) are not considered WORK FILES.
 
 
-6.6 Document
+6.2 Document
 -------------------------------------------------------------------------------
 
 A 'DOCUMENT' is a WORK FILE which contains DOCUMENTATION.
 
 
-6.7 Source file
+6.3 Source file
 -------------------------------------------------------------------------------
 
 A 'SOURCE FILE' is a WORK FILE which contains SOURCE CODE.
 
 
-6.8 Unit
+6.4 Unit
 -------------------------------------------------------------------------------
 
 A 'UNIT' is a set of one or more SOURCE FILES which are considered an entity
@@ -555,13 +535,13 @@ executable (i.e. if invoked in a specific manner which is not necessarily
 provided by the execution ENVIRONMENT).
 
 
-6.9 Resource file
+6.5 Resource file
 -------------------------------------------------------------------------------
 
 A 'RESOURCE FILE' is a WORK FILE which contains RESOURCES.
 
 
-6.10 Control file
+6.6 Control file
 -------------------------------------------------------------------------------
 
 A 'CONTROL FILE' is a WORK FILE which contains data used for the software
@@ -569,14 +549,14 @@ development process but not being part of the SOFTWARE itself (e.g. build,
 project and/or configuration files of the translation ENVIRONMENT).
 
 
-6.11 Executable
+6.7 Executable
 -------------------------------------------------------------------------------
 
 An 'EXECUTABLE' is a binary (i.e. not human-readable) file which can processed
 in a specific execution ENVIRONMENT.
 
 
-6.12 Program file
+6.8 Program file
 -------------------------------------------------------------------------------
 
 A 'PROGRAM FILE' is an EXECUTABLE or a SOURCE FILE which can be processed in a
@@ -585,7 +565,7 @@ which needs translation in order to be executable (e.g. by a compiler) is still
 considered a PROGRAM but not a PROGRAM FILE.
 
 
-6.13 Repository
+6.9 Repository
 -------------------------------------------------------------------------------
 
 A 'REPOSITORY' is a set of related WORK FILES and optionally other related
