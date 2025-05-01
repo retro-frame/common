@@ -13,7 +13,7 @@ Universal Path Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-path.txt//
-Version:     01.00!04
+Version:     01.00!05
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-03-22 : 01.00!04 : Ingo : Draft
+2025-05-01 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -93,8 +93,9 @@ independent version numbers.
 
 This document provides a SPECIFICATION of a universal path representation which
 is used to locate an object on a file system in an environment-independent
-manner. In addition, the translation of a universal path from or to a native
-(i.e. environment-dependent) path is specified.
+manner using the STANDARD CHARACTER SET. In addition, the translation of a
+universal path from or to a native (i.e. environment-dependent) path is
+specified.
 
 
 1.3 References
@@ -112,24 +113,22 @@ Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
 2.1 Character set
 -------------------------------------------------------------------------------
 
-For internal representation, universal paths use the Retro-Frame character set
-(see /spec/rf-char.txt//). The non-character 0x00110130 (PATH_SEPARATOR) is
-used to represent the path separator.
+Universal path requires a STANDARD CHARACTER SET for representation.
 
-For external representation, universal paths use printable characters which
-depends on the printable level (see /spec/rf-char.txt//, chapter 4) and the
-PATH_SEPARATOR is replaced by a solidus ('/').
+If the Retro-Frame character set is used to represent a universal path (see
+/spec/rf-char.txt//), the non-character 0x00110130 (PATH_SEPARATOR) is used to
+represent the path separator.
 
-The specified escape sequences (see /spec/rf-char.txt//, chapter 5.5) are used
-to represent the following codepoints:
+Otherwise, universal paths use the printable characters which depends on the
+printable level (see /spec/rf-char.txt//, chapter 4) and the PATH_SEPARATOR is
+replaced by a solidus ('/') and escape sequences (see /spec/rf-char.txt//,
+chapter 5.5) are used to represent the following codepoints:
 
 - control characters,
 - no-characters,
 - direct encodings,
 - a circumflex accent ('^'),
 - a solidus ('/'), unless representing a PATH_SEPARATOR,
-- a right square bracket (']') in a native selector without having a
-  corresponding left square bracket ('['),
 - non-printable characters (i.e. characters which cannot be represented by
   a native character in the environment in which the universal path is
   represented).
@@ -153,9 +152,9 @@ specified:
   -------------  -------------------------------------------------------------
   PATH-CHAR      Any Retro-Frame character which is printable in the
                  environment except the circumflex accent ('^'), the solidus
-                 ('/'), the right square bracket (']') and any other printable
-                 character which should not be directly represented in a
-                 specific context (e.g. space or delimiter).
+                 ('/') and any other printable character which should not be
+                 directly represented in a specific context (e.g. space or
+                 delimiter).
   ESCAPE-STRING  A valid escape string according to /spec/rf-char.txt//,
                  chapter 5.5.
 
@@ -163,13 +162,17 @@ specified:
 2.3 Syntax
 -------------------------------------------------------------------------------
 
-<native-selector-char>:
+<name-char>:
 
   PATH-CHAR | "^"_ESCAPE-STRING
 
+<name-part>:
+
+  (_<name-char>_)*
+
 <native-selector>:
 
-  "["_(_<native-selector-char>_|_"/"_|_":"_|_<native-selector>_)*_"]"
+  "$"_<name-part>_"/"
 
 <relative-selector>:
 
@@ -181,15 +184,7 @@ specified:
 
 <selector>:
 
-  <relative-selector> | <absolute-selector> | <native-selector>
-
-<name-char>:
-
-  <native-selector-char> | "]"
-
-<name-part>:
-
-  (_<name-char>_)*
+  <native-selector> | <relative-selector> | <absolute-selector>
 
 <locator>:
 
@@ -205,7 +200,7 @@ specified:
 
 <native-representation>:
 
-  "$"_(_<name-char>_|_"/")*
+  "$/"_(_<name-char>_|_"/")*
 
 <universal-path>:
 
@@ -226,9 +221,10 @@ Though <universal-path> is intended to represent a file system path in an
 environment-independent manner, it may consist of native (i.e. environment-
 dependent) parts.
 
-If the first character of a <universal-path> is a dollar sign ('$'), the entire
-remaining character sequence is considered a native representation (which is,
-however, not identical to the actual native path if escape sequences occur).
+If the first character of a <universal-path> is a dollar sign ('$'), followed
+by a solidus ('/'), the entire remaining character sequence is considered a
+native representation (which is, however, not identical to the actual native
+path if escape sequences occur).
 
 A <selector> is a component of a universal path that specifies the base
 directory of the <locator>. The following types of selectors are specified:
@@ -263,10 +259,23 @@ directory of the <locator>. The following types of selectors are specified:
 
 - <native-selector> represents the base directory by a native path. Thus, a
   native selector is environment-dependent. A native selector starts with a
-  left square bracket ('[') and ends with a right square bracket (']'). If the
-  native path contains square brackets, each right square bracket closes a
-  preceding left square bracket. If no left square bracket is given, the right
-  square bracket must be represented by an escape sequence (i.e. "^]").
+  dollar sign ('$') and ends with a solidus ('/'). Ther must be at least one
+  character in between (otherwise, it would be considered the prefix of a
+  native path). If the solidus itself occurs in a native selector, it must be
+  escaped as usual.
+
+  Examples for MS-DOS native selectors (note that the usual path separator is
+  the reverse solidus ('\') but the solidus ('/') is also accepted as a native
+  path separator:
+
+  - "$C:/"    represents the current directory of drive C:.
+
+  - "$C:\/"   represents the root directory of drive C:.
+
+  - "$C:^//"  represents the root directory of drive C:.
+
+  - "$C://"   invalid universal path as <name-part> is missing after the first
+              solidus ('/').
 
 A <type-mark> is an optional component of a universal path that specifies
 whether the object is a directory or a file:
@@ -295,7 +304,7 @@ should apply:
   context-specific manner. By default, if the absolute path contains components
   other than directory names and a file name (e.g. a drive letter), the not
   representable part may be encoded as a native selector (e.g. "A:\DIR\FILE"
-  may use "[A:\]" as the selector).
+  may use "$A:\/" as the selector).
 
 - All references to the current respective parent directory must be resolved.
   If one or more references to the parent directories remain, they may be

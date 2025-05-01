@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-04-27 : 01.00!05 : Ingo : Draft
+2025-05-01 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -88,16 +88,19 @@ Contents
    5.3  Codepoint
    5.4  Character set
    5.5  Minimal character set
-   5.6  Character encoding
-   5.7  Single byte character set
-   5.8  Multi byte character set
-   5.9  Character domain
-   5.10 Codepage
-   5.11 Character string / string
-   5.12 String terminator
-   5.13 String length
-   5.14 String count
-   5.15 String size
+   5.6  Standard character set
+   5.7  Full character set
+   5.8  Sortable character set
+   5.9  Character encoding
+   5.10 Single byte character set
+   5.11 Multi byte character set
+   5.12 Character domain
+   5.13 Codepage
+   5.14 Character string / string
+   5.15 String terminator
+   5.16 String length
+   5.17 String count
+   5.18 String size
 
 6. FILE-RELATED TERMS
    6.1  Work file
@@ -188,8 +191,9 @@ more special term of a more generic term.
 -------------------------------------------------------------------------------
 
 'GUIDELINES' are a set of normative rules expressed as text using [REQUIREMENT
-LEVEL KEYWORDS], whether in upper or lower case letters, to indicate under
-which circumstances each rule must be observed in order to comply.
+LEVEL KEYWORDS], regardless whether in uppercase or lowercase letters, to
+indicate under which circumstances each rule must be observed in order to
+comply.
 
 
 2.4 Description
@@ -412,10 +416,48 @@ least the following CHARACTERS:
 - the digits '0'..'9',
 - the uppercase letters 'A'..'Z' and
 - the symbols '"', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
-  '>'and '?'.
+  '>'and '?'
+
+and the CODEPOINTS of the digits as well as the CODEPOINTS of the uppercase
+letters 'A'-'I', 'J'-'R' and 'S'-'Z' are consecutive.
 
 
-5.6 Character encoding
+5.6 Standard character set
+-------------------------------------------------------------------------------
+
+A 'STANDARD CHARACTER SET' is a MINIMAL CHARACTER SET which additionally
+includes CODEPOINTS for at least the following CHARACTERS:
+
+- the lowercase letters 'a'..'z' and
+- the symbols '!', '$', '%', '&', ''' and '^'
+
+and the CODEPOINTS of the lowercase letters 'a'-'i', 'j'-'t' and 's'-'z' are
+consecutive.
+
+
+5.7 Full character set
+-------------------------------------------------------------------------------
+
+A 'FULL CHARACTER SET' is a STANDARD CHARACTER SET which additionally includes
+CODEPOINTS for at least the following CHARACTERS:
+
+- the symbols '#', '@', '[', '\', ']', '_', '`', '{', '|', '}' and '~'.
+
+
+5.8 Sortable character set
+-------------------------------------------------------------------------------
+
+A 'SORTABLE CHARACTER SET' is a CHARACTER SET where the CODEPOINTS of the
+uppercase letters are consecutive and, if lowercase letters are given, also the
+CODEPOINTS of the lowercase letters are consecutive.
+
+Note that on case sensitive sort the order of uppercase letters and lowercase
+letters may be different (i.e. whether 'A' < 'a' or 'A' > 'a' is true) and that
+language-specific letters may be mapped to regular letters for sorting (e.g.
+the Umlaute and the sharp S in German).
+
+
+5.9 Character encoding
 -------------------------------------------------------------------------------
 
 A 'CHARACTER ENCODING' is the binary representation of CODEPOINTS by elements
@@ -426,7 +468,7 @@ a CODEPOINT according to a specified encoding rule, the CHARACTER ENCODING is
 called variable-width.
 
 
-5.7 Single byte character set
+5.10 Single byte character set
 -------------------------------------------------------------------------------
 
 A 'SINGLE BYTE CHARACTER SET' (SBCS) is a CHARACTER SET which consists of no
@@ -434,7 +476,7 @@ more than 256 CODEPOINTS. Thus, each CODEPOINT can be represented by a single
 byte and character encoding is trivial.
 
 
-5.8 Multi byte character set
+5.11 Multi byte character set
 -------------------------------------------------------------------------------
 
 A 'MULTI BYTE CHARACTER SET' (MBCS) is a CHARACTER SET which consists of more
@@ -444,16 +486,16 @@ CHARACTER SET may still be represented by a single element (which in this case
 must be of a size greater than one byte).
 
 
-5.9 Character domain
+5.12 Character domain
 -------------------------------------------------------------------------------
 
 A 'CHARACTER DOMAIN' denotes a CHARACTER SET which may not be entirely known
-but of which at least some properties are known or required. Thus, a CHARACTER
+but of which at least some CODEPOINTS are known or required. Thus, a CHARACTER
 DOMAIN may be a CHARACTER SET which is entirely or partially known, but not
 entirely unknown.
 
 
-5.10 Codepage
+5.13 Codepage
 -------------------------------------------------------------------------------
 
 A 'CODEPAGE' is a CHARACTER ENCODING with an element size of one byte of a
@@ -463,7 +505,7 @@ of a CODEPAGE may be a SINGLE BYTE CHARACTER SET or a variable-width MULTI BYTE
 CHARACTER SET.
 
 
-5.11 Character string / string
+5.14 Character string / string
 -------------------------------------------------------------------------------
 
 A 'CHARACTER STRING' (or just 'STRING' if it is clear that a CHARACTER STRING
@@ -473,7 +515,7 @@ the STRING is called empty) in a specific CHARACTER ENCODING. If the CHARACTER
 ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
 
 
-5.12 String terminator
+5.15 String terminator
 -------------------------------------------------------------------------------
 
 A 'STRING TERMINATOR' is a CHARACTER or NO-CHARACTER which indicates the end
@@ -481,7 +523,7 @@ of a STRING. Thus, the STRING TERMINATOR itself cannot be represented by the
 STRING. A STRING may or may not use STRING TERMINATORS.
 
 
-5.13 String length
+5.16 String length
 -------------------------------------------------------------------------------
 
 The 'STRING LENGTH' denotes the number of CHARACTERS and NO-CHARACTERS (i.e.
@@ -489,7 +531,7 @@ CODEPOINTS) in a STRING (if the STRING is empty, the STRING LENGTH is zero). If
 STRING TERMINATORS are used, they are not included in the STRING LENGTH.
 
 
-5.14 String count
+5.17 String count
 -------------------------------------------------------------------------------
 
 The 'STRING COUNT' denotes the number of elements in a STRING (if the STRING
@@ -498,7 +540,7 @@ not included in the STRING COUNT. If the STRING is not packed, the STRING COUNT
 equals the STRING LENGTH.
 
 
-5.15 String size
+5.18 String size
 -------------------------------------------------------------------------------
 
 The 'STRING SIZE' denotes the size occupied by a STRING in bytes (if the STRING

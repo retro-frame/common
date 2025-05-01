@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-04-27 : 01.00!05 : Ingo : Draft
+2025-05-01 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -415,20 +415,20 @@ always affects the entire repository.
 
 There should be a dedicated directory for each Retro-Endeavor, which is of
 interest, on the local file system. It is recommended to choose an appropriate
-common base directory and to create a directory for each Retro-Endeavor using
-its name as the directory name (if possible), for example:
+common native base directory and to create a directory for each Retro-Endeavor
+using its name as the directory name (if possible), for example:
 
-  [<base-directory>]Retro-Frame/
-  [<base-directory>]Retro-BASIC/
-  [<base-directory>]Retro-C/
+  $<native-base-directory>/Retro-Frame/
+  $<native-base-directory>/Retro-BASIC/
+  $<native-base-directory>/Retro-C/
 
 If not all directory names would be allowed by the file system, the initials
 of the Retro-Endeavors may be used in uppercase and without the hyphen, for
 example:
 
-  [<base-directory>]RF/
-  [<base-directory>]RB/
-  [<base-directory>]RC/
+  $<native-base-directory>/RF/
+  $<native-base-directory>/RB/
+  $<native-base-directory>/RC/
 
 In each Retro-Endeavor directory, the following sub-directories should be used
 as the mount point for REPOSITORIES:
@@ -456,13 +456,13 @@ an environment-dependent path separator).
 Examples:
 
 - Local path for development of the Retro-Frame repository "common":
-  [<base-directory>]Retro-Frame/dev/common/
+  $<native-base-directory>/Retro-Frame/dev/common/
 
 - Local path for releases of the Retro-BASIC repository "test":
-  [<base-directory>]Retro-BASIC/release/test/
+  $<native-base-directory>/Retro-BASIC/release/test/
 
 - Local path for development of the Retro-C repository "comp.stdc.recma55":
-  [<base-directory>]Retro-C/dev/comp/stdc/recma55/
+  $<native-base-directory>/Retro-C/dev/comp/stdc/recma55/
 
 
 4.2 Commits and tags

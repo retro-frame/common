@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-04-27 : 01.00!05 : Ingo : Draft
+2025-05-01 : 01.00!05 : Ingo : Draft
 
 
 Contents
@@ -414,11 +414,8 @@ mark ('?').
 4.2 Level 2 (standard printable)
 -------------------------------------------------------------------------------
 
-The following additional characters are expected to be printable in most
-environments which are in primary scope of Retro-Frame (level 2):
-
-- The lowercase letters 'a'..'z'
-- The symbols '!', '$', '%', '&', ''' and '^'
+The characters of the STANDARD CHARACTER SET are expected to be printable in
+most environments which are in primary scope of Retro-Frame (level 2).
 
 In this level, the following characters are considered the same codepoint even
 if the grapheme is different:
@@ -436,12 +433,8 @@ replaced by a question mark ('?').
 4.3 Level 3 (ASCII printable)
 -------------------------------------------------------------------------------
 
-The following additional characters are printable in all ASCII-compliant
-environments (level 3):
-
-- The symbols '#', '@', '[', '\', ']', '_', '`', '{', '|', '}' and '~'
-
-All printable ASCII characters should also be printable on most EBCDIC systems.
+The characters of the FULL CHARACTER SET are printable in all ASCII
+environments and even in most EBCDIC environments (level 3):
 
 A character which is not printable may be omitted, escaped (see chapter 5.5) or
 replaced by a question mark ('?').
@@ -450,10 +443,9 @@ replaced by a question mark ('?').
 4.4 Level 4 (codepages)
 -------------------------------------------------------------------------------
 
-A codepage is used if the native character encoding is not Unicode. In this
-case, a Retro-Frame character is mapped to a single byte or a sequence of
-multiple bytes. The codepage determines whether a character is printable or
-not.
+A codepage is used if the native character set is not Unicode. In this case,
+a Retro-Frame character is mapped to a single byte or a sequence of multiple
+bytes. The codepage determines whether a character is printable or not.
 
 A character which is not printable may be omitted, escaped (see chapter 5.5) or
 replaced by a question mark ('?') respective a codepage-specific replacement
@@ -463,15 +455,15 @@ character.
 4.5 Level 5 (Unicode)
 -------------------------------------------------------------------------------
 
-If the native character encoding is Unicode, characters of the categories
-grapheme and space are considered printable. However, for characters other than
-ASCII (i.e. codepoints > 127), it depends on the specific font whether or not
-a character is actually printable.
+If the native character set is Unicode, characters of the categories grapheme
+and space are considered printable. However, for characters other than ASCII
+(i.e. codepoints > 127), it depends on the font whether or not a character is
+actually printable.
 
 Thus, even in this level, only the output of printable ASCII characters should
 be assumed. A character which is not printable may be implicitly omitted or
 replaced by a system-dependent replacement character. If a character is
-intentionally replaced, the Unicode replacement character (0xFFFD) should be
+intentionally replaced, the Unicode replacement character (0xFFFD) shall be
 used.
 
 
@@ -711,9 +703,6 @@ occurence of an escape character:
 Examples:
 
 - "^^" represents the circumflex accent itself.
-
-- "^]" represents a right square bracket which does not close a preceding
-  left square bracket ('[').
 
 - "^t" represents the codepoint 0x09 (HT, horizontal tab).
 
