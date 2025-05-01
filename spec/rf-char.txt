@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00!05
+Version:     01.00!06
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!05 : Ingo : Draft
+2025-05-01 : 01.00!06 : Ingo : Draft
 
 
 Contents
@@ -217,8 +217,8 @@ specified otherwise in a specific context:
 - 0x00002029  PS (paragraph separator)
 
 If a CR is immediately followed by an LF, or vice versa, the combination is
-considered one line break only. Retro-Frame defines an extended characters to
-represent these combinations (see chapter 3.2).
+considered a single line break only. Retro-Frame defines extended characters
+to represent such combinations (see chapter 3.2).
 
 
 2.4 Whitespace
@@ -664,9 +664,9 @@ If escaping is recognized, the following sequences are defined after the
 occurence of an escape character:
 
 - Any character which is neither a digit ('0'..'9') nor a letter ('A'..'Z',
-  'a'..'z') nor a low line ('_'), stands for itself and will not have a special
-  meaning, even it would have one in the specific context (in particular, the
-  escape character itself may be represented this way).
+  'a'..'z') stands for itself and will not have a special meaning, even it
+  would have one in the specific context (in particular, the escape character
+  itself may be represented this way).
 
 - One of the following single characters represents a specific characters:
   - 'a' represents codepoint 0x07 (BEL, alert)
@@ -676,15 +676,17 @@ occurence of an escape character:
   - 'v' represents codepoint 0x0B (VT, vertical tab)
   - 'f' represents codepoint 0x0C (FF, form feed)
   - 'r' represents codepoint 0x0D (CR, carriage return)
-  - 'e' represents codepoint 0x1B (ESC, escape)
-  - '_' represents codepoint 0x20 (' ', space)
-  - 'X' represents codepoint 0x7F (DEL, delete)
+  - 'Z' represents codepoint 0x1A (SUB, substitute)
+  - 'E' represents codepoint 0x1B (ESC, escape)
+  - 'X' represents codepoint 0x20 (' ', space)
+  - 'D' represents codepoint 0x7F (DEL, delete)
   - 'N' represents codepoint 0x85 (NEL, next line)
   - 'L' represents codepoint 0x2028 (LS, line separator)
   - 'P' represents codepoint 0x2029 (PS, paragraph separator)
-  - 'R' represents codepoint 0x110000 (CRLF, CR/LF sequence)
+  - 'C' represents codepoint 0x110000 (CRLF, CR/LF sequence)
+  - 'c' represents codepoint 0x110001 (LFCR, LF/CR sequence)
 
-- A sequence of hexadecimal digits in uppercase ('0'..'9', 'A'..'F') represent
+- A sequence of hexadecimal digits in uppercase ('0'..'9', 'A'..'F') represents
   a single codepoint in the range 0x00000000..0x00FFFFFF. A comma (',') after
   the value indicates that another value follows. The sequence of one or more
   values must be terminated by a semicolon (';'). Note that not all such
@@ -708,7 +710,7 @@ Examples:
 
 - "^t" represents the codepoint 0x09 (HT, horizontal tab).
 
-- "^_" represents the codepoint 0x20 (' ', space)
+- "^X" represents the codepoint 0x20 (' ', space)
 
 - "^P" represents the codepoint 0x2029 (PS, paragraph separator).
 
