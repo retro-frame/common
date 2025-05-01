@@ -216,9 +216,9 @@ specified otherwise in a specific context:
 - 0x00002028  LS (line separator)
 - 0x00002029  PS (paragraph separator)
 
-If a CR is immediately followed by an LF, the combination is considered one
-line break only. Retro-Frame defines an extended character to represent this
-combination (see chapter 3.2).
+If a CR is immediately followed by an LF, or vice versa, the combination is
+considered one line break only. Retro-Frame defines an extended characters to
+represent these combinations (see chapter 3.2).
 
 
 2.4 Whitespace
@@ -287,8 +287,10 @@ The following extended characters are defined:
   ----------  ----  --------  -------------------------------------------------
   0x00110000  CRLF  Control   Represents a CR/LF sequence as a single character
                               and is considered a line break (see chapter 2.3)
+  0x00110001  LFCR  Control   Represents a LF/CR sequence as a single character
+                              and is considered a line break (see chapter 2.3)
 
-The remaining, currently unspecified codepoints 0x00110001..0x00110136 are
+The remaining, currently unspecified codepoints 0x00110002..0x00110136 are
 reserved.
 
 
