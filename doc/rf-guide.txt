@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!05
+Version:     01.00!06
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!05 : Ingo : Draft
+2025-05-02 : 01.00!06 : Ingo : Draft
 
 
 Contents
@@ -829,15 +829,11 @@ changed for the patch.
 
 DATA FORMAT version numbers are in the format
 
-  <major-version>_':'_<minor-version>
+  <major-version>_'.'_<minor-version>
 
 where both, <major-version> and <minor-version>, are in the range 0..255.
 However, for each major version the allowed range of the minor version may be
 more restricted.
-
-The textual representation of a data format version numbers always uses two
-hexadecimal digits for each element. If the value of one element is less than
-10 (i.e. 16 decimal), a leading zero ('0') is prepended (e.g. 0A:03).
 
 Implementations which support data format versions should be upward compatible,
 if the major version number is unchanged, for increasing minor version numbers
