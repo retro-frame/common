@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!05
+Version:     01.00!06
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-04-27 : 01.00!05 : Ingo : Draft
+2025-05-03 : 01.00!06 : Ingo : Draft
 
 
 Contents
@@ -265,46 +265,49 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 3.1 Additional terminal symbols
 -------------------------------------------------------------------------------
 
-  Symbol  Definition
-  ------  -------------------------------------------------------------------
-  !       A character which is may occur in an identifier (i.e. 9 | A | '*' |
-          '+' | '-' | '.' | '/')
-  NUL     Control character null
-  SOH     Control character start of heading
-  STX     Control character start of text
-  ETX     Control character end of text
-  EOT     Control character end of transmission
-  ENQ     Control character enquiry
-  ACK     Control character acknowledge
-  BEL     Control character bell
-  BS      Control character backspace
-  HT      Control character horizontal tab
-  LF      Control character line feed
-  VT      Control character vertical tab
-  FF      Control character form feed
-  CR      Control character carriage return
-  SO      Control character shift out
-  SI      Control character shift in
-  DLE     Control character data link escape
-  DC1     Control character device control 1
-  DC2     Control character device control 2
-  DC3     Control character device control 3
-  DC4     Control character device control 4
-  NAK     Control character negative acknowledge
-  SYN     Control character synchronous idle
-  ETB     Control character end of transmission block
-  CAN     Control character cancel
-  EM      Control character end of medium
-  SUB     Control character substitution
-  ESC     Control character escape
-  FS      Control character file separator
-  GS      Control character group separator
-  RS      Control character record separator
-  US      Control character unit separator
-  DEL     Control character delete
-  NEL     Control character next line
-  LS      Control character line separator
-  PS      Control character paragraph separator
+  Symbol       Definition
+  -----------  ------------------------------------------------------
+  !            A character which is may occur in a format identifier
+               (i.e. 9 | A | '*' | '+' | '-' | '.' | '/')
+  TEXT-BODY    A sequence or unspecified characters (i.e. [ . ]*)
+  TEXT-FORMAT  A TEXT-BODY which represents a Retro-Frame data format
+               (i.e. (_!_)*_[_"/"_(_9_)*_"."_(_9_)*_]_[_TEXT-BODY_])
+  NUL          Control character null
+  SOH          Control character start of heading
+  STX          Control character start of text
+  ETX          Control character end of text
+  EOT          Control character end of transmission
+  ENQ          Control character enquiry
+  ACK          Control character acknowledge
+  BEL          Control character bell
+  BS           Control character backspace
+  HT           Control character horizontal tab
+  LF           Control character line feed
+  VT           Control character vertical tab
+  FF           Control character form feed
+  CR           Control character carriage return
+  SO           Control character shift out
+  SI           Control character shift in
+  DLE          Control character data link escape
+  DC1          Control character device control 1
+  DC2          Control character device control 2
+  DC3          Control character device control 3
+  DC4          Control character device control 4
+  NAK          Control character negative acknowledge
+  SYN          Control character synchronous idle
+  ETB          Control character end of transmission block
+  CAN          Control character cancel
+  EM           Control character end of medium
+  SUB          Control character substitution
+  ESC          Control character escape
+  FS           Control character file separator
+  GS           Control character group separator
+  RS           Control character record separator
+  US           Control character unit separator
+  DEL          Control character delete
+  NEL          Control character next line
+  LS           Control character line separator
+  PS           Control character paragraph separator
 
 
 3.2 Syntax

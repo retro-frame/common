@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.00!05
+Version:     01.00!06
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!05 : Ingo : Draft
+2025-05-03 : 01.00!06 : Ingo : Draft
 
 
 Contents
@@ -69,10 +69,10 @@ Contents
    3.4  Algorithm specification
    3.5  Data format
    3.6  Data format specification
-   3.7  Environment
-   3.8  Environment specification
-   3.9  Protocol
-   3.10 Protocol specification
+   3.7  Protocol
+   3.8  Protocol specification
+   3.9  Environment
+   3.10 Environment specification
 
 4. SOFTWARE-RELATED TERMS
    4.1  Documentation
@@ -89,7 +89,7 @@ Contents
    5.4  Character set
    5.5  Minimal character set
    5.6  Standard character set
-   5.7  Full character set
+   5.7  Extended character set
    5.8  Sortable character set
    5.9  Character encoding
    5.10 Single byte character set
@@ -278,7 +278,21 @@ A 'DATA FORMAT SPECIFICATION' is a SPECIFICATION whose subject is a specific
 DATA FORMAT.
 
 
-3.7 Environment
+3.7 Protocol
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL' is a set of rules to exchange information between two or more
+parties by means of data transmission.
+
+
+3.8 Protocol specification
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL SPECIFICATION' is a SPECIFICATION whose subject is a specific
+PROTOCOL.
+
+
+3.9 Environment
 -------------------------------------------------------------------------------
 
 An 'ENVIRONMENT' is an abstract class of systems for data processing with
@@ -287,25 +301,11 @@ constraints). While all systems of a specific ENVIRONMENT must be identical
 regarding those characteristics, the may be different otherwise.
 
 
-3.8 Environment specification
+3.10 Environment specification
 -------------------------------------------------------------------------------
 
 An 'ENVIRONMENT SPECIFICATION' is a SPECIFICATION whose subject is a specific
 ENVIRONMENT.
-
-
-3.9 Protocol
--------------------------------------------------------------------------------
-
-A 'PROTOCOL' is a set of rules to exchange information between two or more
-parties by means of data transmission.
-
-
-3.10 Protocol specification
--------------------------------------------------------------------------------
-
-A 'PROTOCOL SPECIFICATION' is a SPECIFICATION whose subject is a specific
-PROTOCOL.
 
 
 
@@ -435,11 +435,11 @@ and the CODEPOINTS of the lowercase letters 'a'-'i', 'j'-'t' and 's'-'z' are
 consecutive.
 
 
-5.7 Full character set
+5.7 Extended character set
 -------------------------------------------------------------------------------
 
-A 'FULL CHARACTER SET' is a STANDARD CHARACTER SET which additionally includes
-CODEPOINTS for at least the following CHARACTERS:
+An 'EXTENDED CHARACTER SET' is a STANDARD CHARACTER SET which additionally
+includes CODEPOINTS for at least the following CHARACTERS:
 
 - the symbols '#', '@', '[', '\', ']', '_', '`', '{', '|', '}' and '~'.
 

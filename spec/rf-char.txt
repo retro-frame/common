@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!06 : Ingo : Draft
+2025-05-03 : 01.00!06 : Ingo : Draft
 
 
 Contents
@@ -72,9 +72,9 @@ Contents
 4. PRINTABLE AND REPLACEMENT CHARACTERS
    4.1  Level 1 (minimum printable)
    4.2  Level 2 (standard printable)
-   4.3  Level 3 (ASCII printable)
-   4.4  Level 4 (codepages)
-   4.5  Level 5 (Unicode)
+   4.3  Level 3 (extended printable)
+   4.4  Level 4 (codepage printable)
+   4.5  Level 5 (Unicode printable)
 
 5. ENCODING
    5.1  Internal 32 bit representation
@@ -208,17 +208,17 @@ chapter 3.3).
 The following [UNICODE] control characters are considered a line break if not
 specified otherwise in a specific context:
 
-- 0x0000000A  LF (line feed)
-- 0x0000000B  VT (vertical tab)
-- 0x0000000C  FF (form feed)
-- 0x0000000D  CR (carriage return)
-- 0x00000085  NEL (next line)
-- 0x00002028  LS (line separator)
-- 0x00002029  PS (paragraph separator)
+- 0x000A  LF (line feed)
+- 0x000B  VT (vertical tab)
+- 0x000C  FF (form feed)
+- 0x000D  CR (carriage return)
+- 0x0085  NEL (next line)
+- 0x2028  LS (line separator)
+- 0x2029  PS (paragraph separator)
 
 If a CR is immediately followed by an LF, or vice versa, the combination is
-considered a single line break only. Retro-Frame defines extended characters
-to represent such combinations (see chapter 3.2).
+considered a single line break. Retro-Frame defines extended characters to
+represent such combinations (see chapter 3.2).
 
 
 2.4 Whitespace
@@ -229,8 +229,8 @@ is always a word separator, the following [UNICODE] characters are considered a
 whitespace (i.e. a word separator) if not specified otherwise in a specific
 context:
 
-- 0x00000009  HT (horizontal tab)
-- 0x00000020  ' ' (space)
+- 0x0009  HT (horizontal tab)
+- 0x0020  ' ' (space)
 
 Thus, other characters of the category spacing are, in general, not considered
 a whitespace.
@@ -239,16 +239,15 @@ a whitespace.
 2.5 Digits
 -------------------------------------------------------------------------------
 
-Retro-Frame defines the codepoints 0x00000030..0x00000039 ('0'..'9') as digits
-respective decimal digits.
+Retro-Frame defines the codepoints 0x0030..0x0039 ('0'..'9') as decimal digits.
 
 
 2.6 Letters
 -------------------------------------------------------------------------------
 
-Retro-Frame defines the codepoints 0x00000041..0x0000005A ('A'..'Z') as
-uppercase letters and the codepoints 0x00000061..0x0000007A ('a'..'z') as
-lowercase letters. Together, these are the (only) letters.
+Retro-Frame defines the codepoints 0x0041..0x005A ('A'..'Z') as uppercase
+letters and the codepoints 0x0061..0x007A ('a'..'z') as lowercase letters.
+Together, these are the (only) letters.
 
 
 
@@ -259,15 +258,15 @@ lowercase letters. Together, these are the (only) letters.
 3.1 Unicode characters
 -------------------------------------------------------------------------------
 
-The range 0x00000000..0x0010FFFF of a Retro-Frame character is specified as the
+The range 0x000000..0x10FFFF of a Retro-Frame character is specified as the
 [UNICODE] character of the corresponding codepoint.
 
 Note that the following codepoints of Unicode must never be used:
 
-- 0x0000D800..0x0000DFFF  (may be used as surrogates in UTF-16)
-- 0x0000FDD0..0x0000FDEF
-- 0x000?FFFE..0x000?FFFF  (? = 0..F)
-- 0x0010FFFE..0x0010FFFF
+- 0x00D800..0x00DFFF  (may be used as surrogates in UTF-16)
+- 0x00FDD0..0x00FDEF
+- 0x0?FFFE..0x0?FFFF  (? = 0..F)
+- 0x10FFFE..0x10FFFF
 
 However, if such codepoints occur, they may be preserved by direct encoding
 (see chapter 3.4). Note that in this case the codepoints change (e.g. sorting
@@ -278,28 +277,28 @@ left unchanged).
 3.2 Extended characters
 -------------------------------------------------------------------------------
 
-The range 0x00110000..0x00110136 of Retro-Frame character codepoints is
-reserved for extended characters.
+The range 0x110000..0x110136 of Retro-Frame character codepoints is reserved
+for extended characters.
 
 The following extended characters are defined:
 
-  Codepoint   Name  Category  Description
-  ----------  ----  --------  -------------------------------------------------
-  0x00110000  CRLF  Control   Represents a CR/LF sequence as a single character
-                              and is considered a line break (see chapter 2.3)
-  0x00110001  LFCR  Control   Represents a LF/CR sequence as a single character
-                              and is considered a line break (see chapter 2.3)
+  Codepoint  Name  Category  Description
+  ---------  ----  --------  -------------------------------------------------
+  0x110000   CRLF  Control   Represents a CR/LF sequence as a single character
+                             and is considered a line break (see chapter 2.3)
+  0x110001   LFCR  Control   Represents a LF/CR sequence as a single character
+                             and is considered a line break (see chapter 2.3)
 
-The remaining, currently unspecified codepoints 0x00110002..0x00110136 are
+The remaining, currently unspecified codepoints 0x110002..0x110136 are
 reserved.
 
 
 3.3 No-characters
 -------------------------------------------------------------------------------
 
-The range 0x00110137..0x00800000 of Retro-Frame character codepoints is
-reserved for no-characters. No-characters may be used to encode additional
-information or states (e.g. error codes) by a character type.
+The range 0x110137..0x800000 of Retro-Frame character codepoints is reserved
+for no-characters. No-characters may be used to encode additional information
+or states (e.g. error codes) by a character type.
 
 With regards to 16 bit character implementations (see chapter 5.2), this range
 is divided into a low range codepoints (which can be represented by 16 bit
@@ -308,15 +307,15 @@ characters).
 
 The following no-characters are defined in the low range:
 
-- 0x00110137              NO_CHAR (generic no-character)
-- 0x00110138..0x0011017F  private use area (will always remain unspecified)
-- 0x00110180              PATH_SEPARATOR
-- 0x00110181..0x001101FF  (reserved)
+- 0x110137              NO_CHAR (generic no-character)
+- 0x110138..0x0011017F  private use area (will always remain unspecified)
+- 0x110180              PATH_SEPARATOR
+- 0x110181..0x001101FF  (reserved)
 
 The following no-characters are defined in the high range:
 
-- 0x00110200..0x007FF7FF  (reserved)
-- 0x00800000..0x00FFFFFF  private use area (will always remain unspecified)
+- 0x110200..0x007FF7FF  (reserved)
+- 0x800000..0x00FFFFFF  private use area (will always remain unspecified)
 
 
 3.4 Direct encodings
@@ -432,42 +431,45 @@ A character which is not printable may be omitted, escaped (see chapter 5.5) or
 replaced by a question mark ('?').
 
 
-4.3 Level 3 (ASCII printable)
+4.3 Level 3 (extended printable)
 -------------------------------------------------------------------------------
 
-The characters of the FULL CHARACTER SET are printable in all ASCII
-environments and even in most EBCDIC environments (level 3):
+The characters of the EXTENDED CHARACTER SET are printable in all ASCII
+environments and even in most EBCDIC environments (level 3).
 
 A character which is not printable may be omitted, escaped (see chapter 5.5) or
 replaced by a question mark ('?').
 
 
-4.4 Level 4 (codepages)
+4.4 Level 4 (codepage printable)
 -------------------------------------------------------------------------------
 
-A codepage is used if the native character set is not Unicode. In this case,
-a Retro-Frame character is mapped to a single byte or a sequence of multiple
-bytes. The codepage determines whether a character is printable or not.
+If a CODEPAGE is used, all grapheme or spacing CODEPOINTS are printable. Note
+that this level may not entail all the printable characters of the previous
+levels. However, in this level all printable characters of the CODEPAGE are
+covered.
 
 A character which is not printable may be omitted, escaped (see chapter 5.5) or
-replaced by a question mark ('?') respective a codepage-specific replacement
+replaced by a question mark ('?') respectively a CODEPAGE-specific replacement
 character.
 
 
-4.5 Level 5 (Unicode)
+4.5 Level 5 (Unicode printable)
 -------------------------------------------------------------------------------
 
-If the native character set is Unicode, characters of the categories grapheme
-and space are considered printable. However, for characters other than ASCII
-(i.e. codepoints > 127), it depends on the font whether or not a character is
-actually printable.
+If Unicode is used, all grapheme or spacing CODEPOINTS are printable. However,
+for characters other than ASCII (i.e. CODEPOINTS > 0x007F), it depends on the
+chosen font whether or not a character is actually printable.
 
-Thus, even in this level, only the output of printable ASCII characters should
-be assumed. A character which is not printable may be implicitly omitted or
-replaced by a system-dependent replacement character. If a character is
-intentionally replaced, the Unicode replacement character (0xFFFD) shall be
-used.
+It is expected that a character which is not printable is implicitly omitted or
+replaced in a system-dependent manner. However, if a character is intentionally
+replaced, the Unicode replacement character (0xFFFD) shall be used.
 
+If it is important that all printable characters are actually represented, only
+CODEPOINTS of the EXTENDED CHARACTER SET (i.e. ASCII printable) shall be used
+and all other CODEPOINTS shall be escaped (see chapter 5.5). In this case, it
+must be considered whether the line break CODEPOINTS 0x0085 NEL, 0x2028 LS and
+0x2029 PS shall be translated to 0x000D CR and/or 0x000A LF or escaped.
 
 
 5. ENCODING
@@ -547,91 +549,71 @@ string.
 
 Codepoints are encoded as follows:
 
-- 0x00000000..0x000000BF  Codepoints are unchanged and represented by a single
-                          byte.
+- 0x000000..0x0000BF  Codepoints are unchanged and represented by a single
+                      byte.
 
-- 0x000000C0..0x00002DF4  For encoding, 0x0000BF40 is added and the resulting
-                          values (0xC000..0xED34) are represented by two bytes.
+- 0x0000C0..0x002DF4  For encoding, 0x00BF40 is added and the resulting values
+                      (0xC000..0xED34) are represented by two bytes.
 
-- 0x00002DF5..0x0000D7FF  For encoding, 0x00ED070B is added and the resulting
-                          values (0xED3500..0xEDDF0A) are represented by three
-                          bytes.
+- 0x002DF5..0x00D7FF  For encoding, 0xED070B is added and the resulting values
+                      (0xED3500..0xEDDF0A) are represented by three bytes.
 
-- 0x0000E000..0x0000FDCF  For encoding, 0x00ECFF0B is added and the resulting
-                          values (0xEDDF0B..0xEDFCDA) are represented by three
-                          bytes.
+- 0x00E000..0x00FDCF  For encoding, 0xECFF0B is added and the resulting values
+                      (0xEDDF0B..0xEDFCDA) are represented by three bytes.
 
-- 0x0000FDF0..0x0000FFFD  For encoding, 0x00ECFEEB is added and the resulting
-                          values (0xEDFCDB..0xEDFEE8) are represented by three
-                          bytes.
+- 0x00FDF0..0x00FFFD  For encoding, 0xECFEEB is added and the resulting values
+                      (0xEDFCDB..0xEDFEE8) are represented by three bytes.
 
-- 0x00010000..0x0001FFFD  For encoding, 0x00ECFEE9 is added and the resulting
-                          values (0xEDFEE9..0xEEFEE6) are represented by three
-                          bytes.
+- 0x010000..0x01FFFD  For encoding, 0xECFEE9 is added and the resulting values
+                      (0xEDFEE9..0xEEFEE6) are represented by three bytes.
 
-- 0x00020000..0x0002FFFD  For encoding, 0x00ECFEE7 is added and the resulting
-                          values (0xEEFEE7..0xEFFEE4) are represented by three
-                          bytes.
+- 0x020000..0x02FFFD  For encoding, 0xECFEE7 is added and the resulting values
+                      (0xEEFEE7..0xEFFEE4) are represented by three bytes.
 
-- 0x00030000..0x0003FFFD  For encoding, 0x00ECFEE5 is added and the resulting
-                          values (0xEFFEE5..0xF0FEE2) are represented by three
-                          bytes.
+- 0x030000..0x03FFFD  For encoding, 0xECFEE5 is added and the resulting values
+                      (0xEFFEE5..0xF0FEE2) are represented by three bytes.
 
-- 0x00040000..0x0004FFFD  For encoding, 0x00ECFEE3 is added and the resulting
-                          values (0xF0FEE3..0xF1FEE0) are represented by three
-                          bytes.
+- 0x040000..0x04FFFD  For encoding, 0xECFEE3 is added and the resulting values
+                      (0xF0FEE3..0xF1FEE0) are represented by three bytes.
 
-- 0x00050000..0x0005FFFD  For encoding, 0x00ECFEE1 is added and the resulting
-                          values (0xF1FEE1..0xF2FEDE) are represented by three
-                          bytes.
+- 0x050000..0x05FFFD  For encoding, 0xECFEE1 is added and the resulting values
+                      (0xF1FEE1..0xF2FEDE) are represented by three bytes.
 
-- 0x00060000..0x0006FFFD  For encoding, 0x00ECFEDF is added and the resulting
-                          values (0xF2FEDF..0xF3FEDC) are represented by three
-                          bytes.
+- 0x060000..0x06FFFD  For encoding, 0xECFEDF is added and the resulting values
+                      (0xF2FEDF..0xF3FEDC) are represented by three bytes.
 
-- 0x00070000..0x0007FFFD  For encoding, 0x00ECFEDD is added and the resulting
-                          values (0xF3FEDD..0xF4FEDA) are represented by three
-                          bytes.
+- 0x070000..0x07FFFD  For encoding, 0xECFEDD is added and the resulting values
+                      (0xF3FEDD..0xF4FEDA) are represented by three bytes.
 
-- 0x00080000..0x0008FFFD  For encoding, 0x00ECFEDB is added and the resulting
-                          values (0xF4FEDB..0xF5FED8) are represented by three
-                          bytes.
+- 0x080000..0x08FFFD  For encoding, 0xECFEDB is added and the resulting values
+                      (0xF4FEDB..0xF5FED8) are represented by three bytes.
 
-- 0x00090000..0x0009FFFD  For encoding, 0x00ECFED9 is added and the resulting
-                          values (0xF5FED9..0xF6FED6) are represented by three
-                          bytes.
+- 0x090000..0x09FFFD  For encoding, 0xECFED9 is added and the resulting values
+                      (0xF5FED9..0xF6FED6) are represented by three bytes.
 
-- 0x000A0000..0x000AFFFD  For encoding, 0x00ECFED7 is added and the resulting
-                          values (0xF6FED7..0xF7FED4) are represented by three
-                          bytes.
+- 0x0A0000..0x0AFFFD  For encoding, 0xECFED7 is added and the resulting values
+                      (0xF6FED7..0xF7FED4) are represented by three bytes.
 
-- 0x000B0000..0x000BFFFD  For encoding, 0x00ECFED5 is added and the resulting
-                          values (0xF7FED5..0xF8FED2) are represented by three
-                          bytes.
+- 0x0B0000..0x0BFFFD  For encoding, 0xECFED5 is added and the resulting values
+                      (0xF7FED5..0xF8FED2) are represented by three bytes.
 
-- 0x000C0000..0x000CFFFD  For encoding, 0x00ECFED3 is added and the resulting
-                          values (0xF8FED3..0xF9FED0) are represented by three
-                          bytes.
+- 0x0C0000..0x0CFFFD  For encoding, 0xECFED3 is added and the resulting values
+                      (0xF8FED3..0xF9FED0) are represented by three bytes.
 
-- 0x000D0000..0x000DFFFD  For encoding, 0x00ECFED1 is added and the resulting
-                          values (0xF9FED1..0xFAFECE) are represented by three
-                          bytes.
+- 0x0D0000..0x0DFFFD  For encoding, 0xECFED1 is added and the resulting values
+                      (0xF9FED1..0xFAFECE) are represented by three bytes.
 
-- 0x000E0000..0x000EFFFD  For encoding, 0x00ECFECF is added and the resulting
-                          values (0xFAFECF..0xFBFECC) are represented by three
-                          bytes.
+- 0x0E0000..0x0EFFFD  For encoding, 0xECFECF is added and the resulting values
+                      (0xFAFECF..0xFBFECC) are represented by three bytes.
 
-- 0x000F0000..0x000FFFFD  For encoding, 0x00ECFECD is added and the resulting
-                          values (0xFBFEDD..0xFCFECA) are represented by three
-                          bytes.
+- 0x0F0000..0x0FFFFD  For encoding, 0xECFECD is added and the resulting values
+                      (0xFBFEDD..0xFCFECA) are represented by three bytes.
 
-- 0x00100000..0x0010FFFD  For encoding, 0x00ECFECB is added and the resulting
-                          values (0xFCFEDB..0xFDFEC8) are represented by three
-                          bytes.
+- 0x100000..0x10FFFD  For encoding, 0xECFECB is added and the resulting values
+                      (0xFCFEDB..0xFDFEC8) are represented by three bytes.
 
-- 0x00110000..0x00110136  For encoding, 0x00ECFEC9 is added and the resulting
-                          values (0xFDFEC9..0xFDFFFF) are represented by three
-                          bytes.
+- 0x110000..0x110136  For encoding, 0xECFEC9 is added and the resulting values
+                      (0xFDFEC9..0xFDFFFF) are represented by three bytes.
 
 The following bytes represent string terminators:
 
@@ -668,7 +650,8 @@ occurence of an escape character:
   would have one in the specific context (in particular, the escape character
   itself may be represented this way).
 
-- One of the following single characters represents a specific characters:
+- One of the following single characters represent specific characters:
+  - 'C' represents codepoint 0x03 (ETX, end of text)
   - 'a' represents codepoint 0x07 (BEL, alert)
   - 'b' represents codepoint 0x08 (BS, backspace)
   - 't' represents codepoint 0x09 (HT, horizontal tab)
@@ -677,14 +660,14 @@ occurence of an escape character:
   - 'f' represents codepoint 0x0C (FF, form feed)
   - 'r' represents codepoint 0x0D (CR, carriage return)
   - 'Z' represents codepoint 0x1A (SUB, substitute)
-  - 'E' represents codepoint 0x1B (ESC, escape)
+  - 'e' represents codepoint 0x1B (ESC, escape)
   - 'X' represents codepoint 0x20 (' ', space)
   - 'D' represents codepoint 0x7F (DEL, delete)
-  - 'N' represents codepoint 0x85 (NEL, next line)
+  - 'E' represents codepoint 0x85 (NEL, next line / EOL, end of line)
   - 'L' represents codepoint 0x2028 (LS, line separator)
   - 'P' represents codepoint 0x2029 (PS, paragraph separator)
-  - 'C' represents codepoint 0x110000 (CRLF, CR/LF sequence)
-  - 'c' represents codepoint 0x110001 (LFCR, LF/CR sequence)
+  - 'R' represents codepoint 0x110000 (CRLF, CR/LF sequence)
+  - 'N' represents codepoint 0x110001 (LFCR, LF/CR sequence)
 
 - A sequence of hexadecimal digits in uppercase ('0'..'9', 'A'..'F') represents
   a single codepoint in the range 0x00000000..0x00FFFFFF. A comma (',') after
@@ -710,7 +693,7 @@ Examples:
 
 - "^t" represents the codepoint 0x09 (HT, horizontal tab).
 
-- "^X" represents the codepoint 0x20 (' ', space)
+- "^X" represents the codepoint 0x20 (' ', space).
 
 - "^P" represents the codepoint 0x2029 (PS, paragraph separator).
 
