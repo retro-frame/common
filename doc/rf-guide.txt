@@ -315,7 +315,7 @@ execute the SOFTWARE.
 
 Thus, Retro-Frame is agnostic regarding the development environment as long as
 the constraints of the translation environment respectively the execution
-environments are met. In oder to ensure that development is possible on a wide
+environments are met. In oder to ensure that development is possible in a wide
 range of environments, only a few aspects have to be considered:
 
 - The repository must be accessible from the development environment. While,
@@ -371,9 +371,15 @@ proper translation:
 
 - The APIs (including dynamic link libraries) of the execution environment.
 
+The SOFTWARE (e.g. the readme file and/or the SOURCE CODE) shall indicate the
+requirements regarding the translation environment (envrionmental constraints).
+
 
 3.3 Execution environment
 -------------------------------------------------------------------------------
+
+The SOFTWARE (e.g. the readme file and/or the DOCUMENTATION) shall indicate the
+requirements regarding the execution environment (envrionmental constraints).
 
 
 
