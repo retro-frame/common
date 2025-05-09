@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-05 : 01.00!07 : Ingo : Draft
+2025-05-09 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -299,10 +299,10 @@ ENVIRONMENTS are the most important concept of retro programming. On the one
 hand, in most cases the original equipment (e.g. hardware, operating systems,
 compilers etc.) might not be available and must be surrogated. On the other
 hand, modern concepts (e.g. programming languages, networking capabilities,
-standards like Unicode etc.) might be used. Thus, ENVIRONMENTS (i.e. abstract
-classes of systems for data processing with specific common characteristics)
-are used to specify the conditions for development, translation and execution
-of the SOFTWARE.
+standards like Unicode etc.) might be applied in cases where those capabilities
+were originally not given. Thus, ENVIRONMENTS (i.e. abstract classes of systems
+for data processing with specific common characteristics) are used to specify
+the conditions for development, translation and execution of the SOFTWARE.
 
 
 3.1 Development environment
@@ -339,7 +339,7 @@ range of environments, only a few aspects have to be considered:
   directory, see chapter 5.5). In worst case, CONTROL FILES must be created
   manually and may not be part of the repository.
 
-Note that all these aspects, particularly if manual interventions are required,
+Note that all these aspects, particularly if manual intervention is required,
 must be reversible (i.e. the WORK FILES and optionally CONTROL FILES must be
 transferred or encoded from the repository to the development environment as
 well as back from the development environment to the repository).
@@ -359,17 +359,18 @@ exception that transfers or encoding need not be reversible.
 Additionally, all aspects must be taken into account which are required for
 proper translation:
 
-- The syntax and semantics of the SOURCE CODE or RESOURCE files.
+- The syntax and semantics of the SOURCE CODE or RESOURCE files (i.e. the
+  programming language).
 
-- The compatibility of the resulting binary code (e.g. the instruction set).
+- Libraries, APIs or CONTROL FILES which are required for translation.
 
-- The CHARACTER ENCODING of character and string literals (in general, those
-  literals are translated to native encoding of the execution environment).
+- The size, type and CHARACTER ENCODING of character and string literals (in
+  general, those   literals are translated to native encoding of the execution
+  environment which may or may not be known) as well as of characters and
+  strings used by Libaries or APIs.
 
-- The size and the encoding of other data types (e.g. integers and floating
-  point numbers).
-
-- The APIs (including dynamic link libraries) of the execution environment.
+- The size and the encoding of other data types (e.g. integers, floating point
+  numbers).
 
 The SOFTWARE (e.g. the readme file and/or the SOURCE CODE) shall indicate the
 requirements regarding the translation environment (envrionmental constraints).
@@ -377,6 +378,26 @@ requirements regarding the translation environment (envrionmental constraints).
 
 3.3 Execution environment
 -------------------------------------------------------------------------------
+
+If translation was required to build a PRODUCT, the resulting binary code (e.g.
+the instruction set) must be compatible to the execution environment.
+
+If translation was not required (e.g. if an interpreter or scrip language is
+used), all same aspects like for the translation environment apply.
+
+Additionally, all aspects must be taken into account which are required for
+proper execution:
+
+- If used, the APIs (including dynamic link libraries) (e.g. the operating
+  system or frameworks).
+
+- If used, the hardware or implementation related properties of the execution
+  environment (e.g. hardware I/O, memory locations containing the characters
+  displayed on the screen or assumption or internal memory maintained by the
+  operating system which is not part of the API).
+
+- The CHARACTER ENCODING of native characters and strings which is used by the
+  APIs or text files.
 
 The SOFTWARE (e.g. the readme file and/or the DOCUMENTATION) shall indicate the
 requirements regarding the execution environment (envrionmental constraints).
