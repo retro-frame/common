@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!06
+Version:     01.00!07
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-03 : 01.00!06 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -121,8 +121,7 @@ Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
 The intended use of the metasyntax is the specification of a syntax in this or
 other documents. Thus, the meaning of whitespace, line breaks and end of text
 should be clear as the text appears (a page break is considered a line break).
-The defined character set includes all non-whitespace and non-control ASCII
-characters.
+Otherwise, a STANDARD CHARACTER SET is assumed.
 
 
 2.1 Literals

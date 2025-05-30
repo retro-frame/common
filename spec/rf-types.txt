@@ -13,7 +13,7 @@ Data Types Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-types.txt//
-Version:     01.00!05
+Version:     01.00!07
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!05 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -356,9 +356,9 @@ part of the mantissa), the bias would be 129.
 
 A single byte character encoding represents each character (i.e. CODEPOINT) by
 exactly one byte. Due to the limited number of representable CODEPOINTS,
-CODEPAGES may be used. While this document only specifies ASCII characters
-(i.e. the codepoints 0..127 according to [UNICODE]), other CODEPAGES may be
-specified by [SPECIFICATIONS].
+CODEPAGES may be used. While this document only specifies single byte character
+encodings in the ASCII CHARACTER DOMAIN (i.e. the codepoints 0..127 according
+to [UNICODE]), other CODEPAGES may be specified by [SPECIFICATIONS].
 
 Note that unknown CODEPOINTS may still be processed using direct encoding if
 translated to a Retro-Frame character (see /spec/rf-char.txt//).

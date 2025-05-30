@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-09 : 01.00!07 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -597,9 +597,9 @@ encoding is not supported, the following encoding rules are to be taken into
 account:
 
 - DOCUMENTATION and - if possible - SOURCE CODE should be restricted to the
-  EXTENDED CHARACTER SET.
+  STANDARD CHARACTER SET.
 
-- Text files which are limited to the EXTENDED CHARACTER SET shall be encoded
+- Text files which are limited to the STANDARD CHARACTER SET shall be encoded
   by plain ASCII.
 
 - Other text files shall be encoded by UTF-8 with a Byte Order Mark (BOM) which

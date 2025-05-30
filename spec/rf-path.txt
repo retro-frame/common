@@ -13,7 +13,7 @@ Universal Path Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-path.txt//
-Version:     01.00!05
+Version:     01.00!07
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-01 : 01.00!05 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -93,7 +93,7 @@ independent version numbers.
 
 This document provides a SPECIFICATION of a universal path representation which
 is used to locate an object on a file system in an environment-independent
-manner using the STANDARD CHARACTER SET. In addition, the translation of a
+manner using the BASIC CHARACTER SET. In addition, the translation of a
 universal path from or to a native (i.e. environment-dependent) path is
 specified.
 
@@ -113,7 +113,7 @@ Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
 2.1 Character set
 -------------------------------------------------------------------------------
 
-Universal path requires a STANDARD CHARACTER SET for representation.
+Universal path requires a BASIC CHARACTER SET for representation.
 
 If the Retro-Frame character set is used to represent a universal path (see
 /spec/rf-char.txt//), the non-character 0x00110130 (PATH_SEPARATOR) is used to

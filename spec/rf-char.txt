@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00!06
+Version:     01.00!07
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-03 : 01.00!06 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -71,8 +71,8 @@ Contents
 
 4. PRINTABLE AND REPLACEMENT CHARACTERS
    4.1  Level 1 (minimum printable)
-   4.2  Level 2 (standard printable)
-   4.3  Level 3 (extended printable)
+   4.2  Level 2 (basic printable)
+   4.3  Level 3 (standard printable)
    4.4  Level 4 (codepage printable)
    4.5  Level 5 (Unicode printable)
 
@@ -412,11 +412,11 @@ A character which is not printable may be omitted or replaced by a question
 mark ('?').
 
 
-4.2 Level 2 (standard printable)
+4.2 Level 2 (basic printable)
 -------------------------------------------------------------------------------
 
-The characters of the STANDARD CHARACTER SET are expected to be printable in
-most environments which are in primary scope of Retro-Frame (level 2).
+The characters of the BASIC CHARACTER SET are expected to be printable in most
+environments which are in primary scope of Retro-Frame (level 2).
 
 In this level, the following characters are considered the same codepoint even
 if the grapheme is different:
@@ -431,10 +431,10 @@ A character which is not printable may be omitted, escaped (see chapter 5.5) or
 replaced by a question mark ('?').
 
 
-4.3 Level 3 (extended printable)
+4.3 Level 3 (standard printable)
 -------------------------------------------------------------------------------
 
-The characters of the EXTENDED CHARACTER SET are printable in all ASCII
+The characters of the STANDARD CHARACTER SET are printable in all ASCII
 environments and even in most EBCDIC environments (level 3).
 
 A character which is not printable may be omitted, escaped (see chapter 5.5) or
@@ -466,7 +466,7 @@ replaced in a system-dependent manner. However, if a character is intentionally
 replaced, the Unicode replacement character (0xFFFD) shall be used.
 
 If it is important that all printable characters are actually represented, only
-CODEPOINTS of the EXTENDED CHARACTER SET (i.e. ASCII printable) shall be used
+CODEPOINTS of the STANDARD CHARACTER SET (i.e. ASCII printable) shall be used
 and all other CODEPOINTS shall be escaped (see chapter 5.5). In this case, it
 must be considered whether the line break CODEPOINTS 0x0085 NEL, 0x2028 LS and
 0x2029 PS shall be translated to 0x000D CR and/or 0x000A LF or escaped.

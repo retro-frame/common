@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.00!06
+Version:     01.00!07
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-03 : 01.00!06 : Ingo : Draft
+2025-05-30 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -88,8 +88,8 @@ Contents
    5.3  Codepoint
    5.4  Character set
    5.5  Minimal character set
-   5.6  Standard character set
-   5.7  Extended character set
+   5.6  Basic character set
+   5.7  Standard character set
    5.8  Sortable character set
    5.9  Character encoding
    5.10 Single byte character set
@@ -422,11 +422,11 @@ and the CODEPOINTS of the digits as well as the CODEPOINTS of the uppercase
 letters 'A'-'I', 'J'-'R' and 'S'-'Z' are consecutive.
 
 
-5.6 Standard character set
+5.6 Basic character set
 -------------------------------------------------------------------------------
 
-A 'STANDARD CHARACTER SET' is a MINIMAL CHARACTER SET which additionally
-includes CODEPOINTS for at least the following CHARACTERS:
+A 'BASIC CHARACTER SET' is a MINIMAL CHARACTER SET which additionally includes
+CODEPOINTS for at least the following CHARACTERS:
 
 - the lowercase letters 'a'..'z' and
 - the symbols '!', '$', '%', '&', ''' and '^'
@@ -435,11 +435,11 @@ and the CODEPOINTS of the lowercase letters 'a'-'i', 'j'-'t' and 's'-'z' are
 consecutive.
 
 
-5.7 Extended character set
+5.7 Standard character set
 -------------------------------------------------------------------------------
 
-An 'EXTENDED CHARACTER SET' is a STANDARD CHARACTER SET which additionally
-includes CODEPOINTS for at least the following CHARACTERS:
+A 'STANDARD CHARACTER SET' is a BASIC CHARACTER SET which additionally includes
+CODEPOINTS for at least the following CHARACTERS:
 
 - the symbols '#', '@', '[', '\', ']', '_', '`', '{', '|', '}' and '~'.
 
