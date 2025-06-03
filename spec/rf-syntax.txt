@@ -170,6 +170,7 @@ The metasyntax predefines the following terminal symbols:
   A       An arbitrary uppercase letter (i.e. 'A'-'Z')
   a       An arbitrary lowercase letter (i.e. 'a'-'z')
   ?       An arbitrary letter (i.e. A | a)
+  !       An arbitrary character of the defined character set
   .       An arbitrary character of the input text
 
 In a specific context, additional terminal symbols may be specified. However,
@@ -266,11 +267,8 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
   Symbol       Definition
   -----------  ------------------------------------------------------
-  !            A character which is may occur in a format identifier
-               (i.e. 9 | A | '*' | '+' | '-' | '.' | '/')
   TEXT-BODY    A sequence or unspecified characters (i.e. [ . ]*)
   TEXT-FORMAT  A TEXT-BODY which represents a Retro-Frame data format
-               (i.e. (_!_)*_[_"/"_(_9_)*_"."_(_9_)*_]_[_TEXT-BODY_])
   NUL          Control character null
   SOH          Control character start of heading
   STX          Control character start of text
@@ -324,7 +322,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <terminal-symbol>:
 
-  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "." | "!" |
+  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
   "NUL" | "SOH" | "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" |
   "LF" | "VT" | "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" |
   "DC4" | "NAK" | "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" |
@@ -340,7 +338,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <line-break>:
 
-  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
+  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
 
 <spacing>:
 
@@ -446,7 +444,7 @@ that the literal does not match.
 
 <line-break>:
 
-  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
+  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
 
 <dec-value>:
 
