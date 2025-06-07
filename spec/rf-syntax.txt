@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-04 : 01.00!07 : Ingo : Draft
+2025-06-07 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -170,7 +170,7 @@ The metasyntax predefines the following terminal symbols:
   A       An arbitrary uppercase letter (i.e. 'A'-'Z')
   a       An arbitrary lowercase letter (i.e. 'a'-'z')
   ?       An arbitrary letter (i.e. A | a)
-  !       An arbitrary character of the defined character set
+  !       An arbitrary character of the MINIMAL CHARACTER SET
   .       An arbitrary character of the input text
 
 In a specific context, additional terminal symbols may be specified. However,
@@ -338,7 +338,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <line-break>:
 
-  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
+  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
 
 <spacing>:
 
@@ -444,7 +444,7 @@ that the literal does not match.
 
 <line-break>:
 
-  [ ";" [ ! ]* [ LB WS ";" [ ! ]* ]* ] LB
+  [ ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
 
 <dec-value>:
 
