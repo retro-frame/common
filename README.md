@@ -33,11 +33,11 @@ in retro programming and may be used as a whole or partially for other purposes:
   specifications. This repository is online available from
   \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>
 
-* Also part of Retro-Frame is the **Retro-Frame Specifications** repository
-  which provides individual specifications covering specific topics (i.e.
-  algorithms, data formats, protocols and environments). This repository is
+* Also part of Retro-Frame are the **Retro-Frame Specifications** repositories
+  which provide individual specifications covering specific topics (i.e. data
+  formats, codepages, algorithms or protocols). These repositories may be
   online available from
-  \<[http://source.retro-frame.net/spec](http://source.retro-frame.net/spec)\>
+  \<[http://source.retro-frame.net/](http://source.retro-frame.net/)\>
 
 As Retro-Frame is evolving, declarations of compliance should always refer to a
 specific release version of the Retro-Frame Common Documentation respository.
