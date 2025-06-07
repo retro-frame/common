@@ -13,7 +13,7 @@ Copyright (c) 2025 Ingo Boehmer \<ingo@retro-leisure.net\>
 
 1. Overview
 
-2. General documentation
+2. General common documentation
 
 3. Common specifications
 
@@ -40,18 +40,19 @@ in retro programming and may be used as a whole or partially for other purposes:
   \<[http://source.retro-frame.net/spec](http://source.retro-frame.net/spec)\>
 
 As Retro-Frame is evolving, declarations of compliance should always refer to a
-specific release version. If a general intention of compliance is expressed, a
-reference to the major version may be given by "Retro-Frame 1.x". However, an
-actual reference should specify the minor version as well (e.g. "Retro-Frame
-1.0").
+specific release version of the Retro-Frame Common Documentation respository.
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.0").
 
 Note that the individual Retro-Frame specifications (e.g. data formats) may use
-independent version numbers.
+independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
 
 
-## 2. General documentation
+## 2. General common documentation
 
-The directory `doc/` contains the following general documentation:
+The directory `doc/` contains the following general common documentation:
 
 * `doc/rf-def.txt` provides common definitions. Additional definitions may be
   part of any documentation.

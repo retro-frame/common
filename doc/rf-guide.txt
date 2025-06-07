@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-30 : 01.00!07 : Ingo : Draft
+2025-06-07 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -978,13 +978,17 @@ changed for the patch.
 7.5 Data format version numbers
 -------------------------------------------------------------------------------
 
-DATA FORMAT version numbers are in the format
+While text DATA FORMAT versions are represented as regular release version
+numbers, including the allowed ranges, the binary DATA FORMAT versions are
+represented in the format
 
-  <major-version>_'.'_<minor-version>
+  <major-version>_':'_<minor-version>
 
-where both, <major-version> and <minor-version>, are in the range 0..255.
-However, for each major version the allowed range of the minor version may be
-more restricted.
+where both, <major-version> and <minor-version>, are in the range 0..255 (this
+is the only case where the major version may be zero).
+
+However, in both cases, for each major version the allowed range of the minor
+version may be more restricted.
 
 Implementations which support data format versions should be upward compatible,
 if the major version number is unchanged, for increasing minor version numbers

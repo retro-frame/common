@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-03 : 01.00!07 : Ingo : Draft
+2025-06-04 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -163,7 +163,7 @@ The metasyntax predefines the following terminal symbols:
   END     End of text (e.g. end of chapter)
   LB      Line break (i.e. end of line), including END
   WS      Any whitespace, excluding LB
-  SPC     A single space (i.e. ' ')
+  SP      A single space (i.e. ' ')
   9       An arbitrary digit (i.e. '0'-'9')
   X       An arbitrary uppercase hexadecimal digit (i.e. '0'-'9' | 'A'-'F')
   x       An arbitrary lowercase hexadecimal digit (i.e. '0'-'9' | 'a'-'f')
@@ -312,7 +312,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <literal-char>:
 
-  9 | ? | SPC | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" |
+  9 | ? | SP | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" |
   "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" | "?" | "@" |
   "[" | "\" | "]" | "^" | "_" | "`" | "{" | "|" | "}" | "~"
 
@@ -322,7 +322,7 @@ to uppercase. Furthermore, additional terminal symbols will be predefined.
 
 <terminal-symbol>:
 
-  "END" | "LB" | "WS" | "SPC" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
+  "END" | "LB" | "WS" | "SP" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
   "NUL" | "SOH" | "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" |
   "LF" | "VT" | "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" |
   "DC4" | "NAK" | "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" |
