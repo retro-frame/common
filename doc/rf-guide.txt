@@ -984,8 +984,9 @@ represented in the format
 
   <major-version>_':'_<minor-version>
 
-where both, <major-version> and <minor-version>, are in the range 0..255 (this
-is the only case where the major version may be zero).
+where both, <major-version> and <minor-version>, are represented by hexacecimal
+digits in the range 00..FF (this is the only case where the major version may
+be zero).
 
 However, in both cases, for each major version the allowed range of the minor
 version may be more restricted.
