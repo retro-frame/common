@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-30 : 01.00!07 : Ingo : Draft
+2025-06-08 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -288,6 +288,8 @@ The following extended characters are defined:
                              and is considered a line break (see chapter 2.3)
   0x110001   LFCR  Control   Represents a LF/CR sequence as a single character
                              and is considered a line break (see chapter 2.3)
+  0x110002   TSP   Spacing   Tentative space (represents a space (' ') if it
+                             stands alone or no space precedes or follows)
 
 The remaining, currently unspecified codepoints 0x110002..0x110136 are
 reserved.
