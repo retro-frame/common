@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-10 : 01.00!07 : Ingo : Draft
+2025-06-11 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -232,8 +232,12 @@ context:
 - 0x0009  HT (horizontal tab)
 - 0x0020  ' ' (space)
 
-Thus, other characters of the category spacing are, in general, not considered
-a whitespace.
+In addition, Retro-Frame defines a tentative space as an extended character
+(see chapter 3.2) which should be recognized as whitespace if no whitespace
+is preceding or following it.
+
+Other characters of the category spacing are, in general, not considered a
+whitespace.
 
 
 2.5 Digits
@@ -268,10 +272,13 @@ Note that the following codepoints of Unicode must never be used:
 - 0x0?FFFE..0x0?FFFF  (? = 0..F)
 - 0x10FFFE..0x10FFFF
 
-However, if such codepoints occur, they may be preserved by direct encoding
-(see chapter 3.4). Note that in this case the codepoints change (e.g. sorting
-may produce different results than if those codepoints, although invalid, were
-left unchanged).
+However, if such codepoints occur on input, they may be preserved by direct
+encoding (see chapter 3.4). Note that in this case the codepoints change (e.g.
+sorting may produce different results than if those codepoints, although
+invalid, were left unchanged).
+
+While some of the ranges may be used by 16 bit character representation (see
+chapter 5.2), the codepoint 0xDFFF is always considered invalid.
 
 
 3.2 Extended characters
@@ -280,15 +287,15 @@ left unchanged).
 Retro-Frame specifies extended characters which are assigned to two separate
 ranges of codepoints which are not used by Unicode. The low codepoints use the
 surrogate codepoints in the range 0xD800..0xDCFF and can be represented by a
-single 16 bit character (see chapter 5.2). The other extended character use the
-range 0x110000..0x126FC1 above the Unicode codepoints.
+single 16 bit character (see chapter 5.2). The other extended characters use
+the range 0x110000..0x126FC1 above the Unicode codepoints.
 
 The following extended characters are defined:
 
   Codepoint  Name  Category  Description
   ---------  ----  --------  -------------------------------------------------
   0xD800     TSP   Spacing   Tentative space (represents a space (' ') if it
-                             stands alone or no space precedes or follows)
+                             stands alone or no whitespace precedes or follows)
   0xD801     CRLF  Control   Represents a CR/LF sequence as a single character
                              and is considered a line break (see chapter 2.3)
   0xD802     LFCR  Control   Represents a LF/CR sequence as a single character
@@ -303,7 +310,7 @@ and 0x110000..0x126FC1 are reserved.
 
 The range 0x126FC2..0xFFFFFF of Retro-Frame character codepoints is reserved
 for no-characters. No-characters may be used to encode additional information
-or states (e.g. error codes) by a character type.
+or states (e.g. error or keyboard codes) by a character type.
 
 The following no-characters are defined:
 
@@ -360,7 +367,7 @@ If n shift parts precede an m bit low part of a direct encoding, the total bit
 length of the resulting value is n * 30 + m. If n and m are zero (i.e. the
 direct encoding codepoint 0x01000001 occurs without any preceding shift part),
 direct encoding of zero bits which does never match. However, the codepoint
-0x01000001, which matches any bit length, may exist without a preceding shift
+0x01000000, which matches any bit length, may exist without a preceding shift
 part and result in a codepoint of zero. If n is greater than 1, the shift parts
 must be in big endian order (i.e. the most significant bits are in the first
 shift part). A shift part must be followed by another shift part or a direct
