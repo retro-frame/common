@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-08 : 01.00!07 : Ingo : Draft
+2025-06-10 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -277,46 +277,39 @@ left unchanged).
 3.2 Extended characters
 -------------------------------------------------------------------------------
 
-The range 0x110000..0x110136 of Retro-Frame character codepoints is reserved
-for extended characters.
+Retro-Frame specifies extended characters which are assigned to two separate
+ranges of codepoints which are not used by Unicode. The low codepoints use the
+surrogate codepoints in the range 0xD800..0xDCFF and can be represented by a
+single 16 bit character (see chapter 5.2). The other extended character use the
+range 0x110000..0x126FC1 above the Unicode codepoints.
 
 The following extended characters are defined:
 
   Codepoint  Name  Category  Description
   ---------  ----  --------  -------------------------------------------------
-  0x110000   CRLF  Control   Represents a CR/LF sequence as a single character
-                             and is considered a line break (see chapter 2.3)
-  0x110001   LFCR  Control   Represents a LF/CR sequence as a single character
-                             and is considered a line break (see chapter 2.3)
-  0x110002   TSP   Spacing   Tentative space (represents a space (' ') if it
+  0xD800     TSP   Spacing   Tentative space (represents a space (' ') if it
                              stands alone or no space precedes or follows)
+  0xD801     CRLF  Control   Represents a CR/LF sequence as a single character
+                             and is considered a line break (see chapter 2.3)
+  0xD802     LFCR  Control   Represents a LF/CR sequence as a single character
+                             and is considered a line break (see chapter 2.3)
 
-The remaining, currently unspecified codepoints 0x110002..0x110136 are
-reserved.
+The remaining currently unspecified codepoints in the ranges 0xD803..0xDCFF
+and 0x110000..0x126FC1 are reserved.
 
 
 3.3 No-characters
 -------------------------------------------------------------------------------
 
-The range 0x110137..0x800000 of Retro-Frame character codepoints is reserved
+The range 0x126FC2..0xFFFFFF of Retro-Frame character codepoints is reserved
 for no-characters. No-characters may be used to encode additional information
 or states (e.g. error codes) by a character type.
 
-With regards to 16 bit character implementations (see chapter 5.2), this range
-is divided into a low range codepoints (which can be represented by 16 bit
-characters) and a high range codepoints (which cannot be represented by 16 bit
-characters).
+The following no-characters are defined:
 
-The following no-characters are defined in the low range:
-
-- 0x110137              NO_CHAR (generic no-character)
-- 0x110138..0x0011017F  private use area (will always remain unspecified)
-- 0x110180              PATH_SEPARATOR
-- 0x110181..0x001101FF  (reserved)
-
-The following no-characters are defined in the high range:
-
-- 0x110200..0x007FF7FF  (reserved)
+- 0x126FC2              NO_CHAR (generic no-character)
+- 0x126FC3              PATH_SEPARATOR
+- 0x126FC4..0x007FFFFF  (reserved)
 - 0x800000..0x00FFFFFF  private use area (will always remain unspecified)
 
 
@@ -495,30 +488,33 @@ only representable by a character string (see chapter 3.4).
 A Retro-Frame character may be implemented by 16 bit unsigned integer values
 with some limitations under the following rules:
 
-- Unicode codepoints > 0xFFFF are represented as UTF-16 (i.e. a high surrogate
-  immediately followed by a low surrogate).
+- Direct encodings are limited to 8 bit in the range 0xDD00..0xDDFF with 8 bit
+  shifts in the range 0xDE00..0xDEFF (i.e. Unicode low surrogates):
 
-- Extended characters are represented in the range 0xD800..0xD936 (i.e. a low
-  surrogate which was not predeced by a high surrogate).
+  - 0xDD00          arbitrary bit length direct encoding of shift parts
+  - 0xDD01          0 bit direct encoding, low part
+  - 0xDD02..0xDD03  1 bit direct encoding, low part
+  - 0xDD04..0xDD07  2 bit direct encoding, low part
+  - 0xDD08..0xDD0F  3 bit direct encoding, low part
+  - 0xDD10..0xDD1F  4 bit direct encoding, low part
+  - 0xDD20..0xDD3F  5 bit direct encoding, low part
+  - 0xDD40..0xDD7F  6 bit direct encoding, low part
+  - 0xDD80..0xDDFF  7 bit direct encoding, low part
+  - 0xDE00..0xDEFF  8 bit direct encoding, shift part
 
-- No-characters are limited to the low range codepoints and represented in the
-  range 0xD937..0xD9FF (i.e. a low surrogate which was not predeced by a high
-  surrogate and surrogates cannot be represented as a no-character).
+- Codepoints > 0xFFFF are represented by a value in the range 0xDF00..0xDFFE
+  (i.e. a Unicode low surrogate), followed by a second value. The 8 bits of the
+  first value are used as the high bits, the 16 bits of the second value as the
+  low bits and 0x010000 is added. The resulting range is 0x010000..0xFFFFFF.
 
-- Direct encodings are limited to 8 bit in the range 0xDA00..0xDAFF with 8 bit
-  shifts in the range 0xDB00..0xDBFF (i.e. a low surrogate which was not
-  predeced by a high surrogate):
+  As a consequence, codepoints >= 0x010000 cannot be represented by a single
+  value.
 
-  - 0xDA00          arbitrary bit length direct encoding of shift parts
-  - 0xDA01          0 bit direct encoding, low part
-  - 0xDA02..0xDA03  1 bit direct encoding, low part
-  - 0xDA04..0xDA07  2 bit direct encoding, low part
-  - 0xDA08..0xDA0F  3 bit direct encoding, low part
-  - 0xDA10..0xDA1F  4 bit direct encoding, low part
-  - 0xDA20..0xDA3F  5 bit direct encoding, low part
-  - 0xDA40..0xDA7F  6 bit direct encoding, low part
-  - 0xDA80..0xDAFF  7 bit direct encoding, low part
-  - 0xDB00..0xDBFF  8 bit direct encoding, shift part
+- The codepoint 0xDFFF remains invalid.
+
+- No-characters may be represented in the range 0xFDD0..0xFDEF. However, the
+  codepoints specified in chapter 3.3 must be mapped, if required, and care
+  must be taken to identify no-characters properly.
 
 - String terminators are limited to TRUNCATED (0xFFFE) and TERMINATED (0xFFFF).
   
@@ -554,68 +550,68 @@ Codepoints are encoded as follows:
 - 0x000000..0x0000BF  Codepoints are unchanged and represented by a single
                       byte.
 
-- 0x0000C0..0x002DF4  For encoding, 0x00BF40 is added and the resulting values
-                      (0xC000..0xED34) are represented by two bytes.
+- 0x0000C0..0x002C7F  For encoding, 0x00BF40 is added and the resulting values
+                      (0xC000..0xEBBF) are represented by two bytes.
 
-- 0x002DF5..0x00D7FF  For encoding, 0xED070B is added and the resulting values
-                      (0xED3500..0xEDDF0A) are represented by three bytes.
+- 0x002C80..0x00DCFF  For encoding, 0xEB9380 is added and the resulting values
+                      (0xEBC000..0xEC707F) are represented by three bytes.
 
-- 0x00E000..0x00FDCF  For encoding, 0xECFF0B is added and the resulting values
-                      (0xEDDF0B..0xEDFCDA) are represented by three bytes.
+- 0x00E000..0x00FDCF  For encoding, 0xEB9080 is added and the resulting values
+                      (0xEC7080..0xEC8E4F) are represented by three bytes.
 
-- 0x00FDF0..0x00FFFD  For encoding, 0xECFEEB is added and the resulting values
-                      (0xEDFCDB..0xEDFEE8) are represented by three bytes.
+- 0x00FDF0..0x00FFFD  For encoding, 0xEB9060 is added and the resulting values
+                      (0xEC8E50..0xEC905D) are represented by three bytes.
 
-- 0x010000..0x01FFFD  For encoding, 0xECFEE9 is added and the resulting values
-                      (0xEDFEE9..0xEEFEE6) are represented by three bytes.
+- 0x010000..0x01FFFD  For encoding, 0xEB905E is added and the resulting values
+                      (0xEC905E..0xED905B) are represented by three bytes.
 
-- 0x020000..0x02FFFD  For encoding, 0xECFEE7 is added and the resulting values
-                      (0xEEFEE7..0xEFFEE4) are represented by three bytes.
+- 0x020000..0x02FFFD  For encoding, 0xEB905C is added and the resulting values
+                      (0xED905C..0xEE9059) are represented by three bytes.
 
-- 0x030000..0x03FFFD  For encoding, 0xECFEE5 is added and the resulting values
-                      (0xEFFEE5..0xF0FEE2) are represented by three bytes.
+- 0x030000..0x03FFFD  For encoding, 0xEB905A is added and the resulting values
+                      (0xEE905A..0xEF9057) are represented by three bytes.
 
-- 0x040000..0x04FFFD  For encoding, 0xECFEE3 is added and the resulting values
-                      (0xF0FEE3..0xF1FEE0) are represented by three bytes.
+- 0x040000..0x04FFFD  For encoding, 0xEB9058 is added and the resulting values
+                      (0xEF9058..0xF09055) are represented by three bytes.
 
-- 0x050000..0x05FFFD  For encoding, 0xECFEE1 is added and the resulting values
-                      (0xF1FEE1..0xF2FEDE) are represented by three bytes.
+- 0x050000..0x05FFFD  For encoding, 0xEB9056 is added and the resulting values
+                      (0xF09056..0xF19053) are represented by three bytes.
 
-- 0x060000..0x06FFFD  For encoding, 0xECFEDF is added and the resulting values
-                      (0xF2FEDF..0xF3FEDC) are represented by three bytes.
+- 0x060000..0x06FFFD  For encoding, 0xEB9054 is added and the resulting values
+                      (0xF19054..0xF29051) are represented by three bytes.
 
-- 0x070000..0x07FFFD  For encoding, 0xECFEDD is added and the resulting values
-                      (0xF3FEDD..0xF4FEDA) are represented by three bytes.
+- 0x070000..0x07FFFD  For encoding, 0xEB9052 is added and the resulting values
+                      (0xF29052..0xF3904F) are represented by three bytes.
 
-- 0x080000..0x08FFFD  For encoding, 0xECFEDB is added and the resulting values
-                      (0xF4FEDB..0xF5FED8) are represented by three bytes.
+- 0x080000..0x08FFFD  For encoding, 0xEB9050 is added and the resulting values
+                      (0xF39050..0xF4904D) are represented by three bytes.
 
-- 0x090000..0x09FFFD  For encoding, 0xECFED9 is added and the resulting values
-                      (0xF5FED9..0xF6FED6) are represented by three bytes.
+- 0x090000..0x09FFFD  For encoding, 0xEB904E is added and the resulting values
+                      (0xF4904E..0xF5904B) are represented by three bytes.
 
-- 0x0A0000..0x0AFFFD  For encoding, 0xECFED7 is added and the resulting values
-                      (0xF6FED7..0xF7FED4) are represented by three bytes.
+- 0x0A0000..0x0AFFFD  For encoding, 0xEB904C is added and the resulting values
+                      (0xF5904C..0xF69049) are represented by three bytes.
 
-- 0x0B0000..0x0BFFFD  For encoding, 0xECFED5 is added and the resulting values
-                      (0xF7FED5..0xF8FED2) are represented by three bytes.
+- 0x0B0000..0x0BFFFD  For encoding, 0xEB904A is added and the resulting values
+                      (0xF6904A..0xF79047) are represented by three bytes.
 
-- 0x0C0000..0x0CFFFD  For encoding, 0xECFED3 is added and the resulting values
-                      (0xF8FED3..0xF9FED0) are represented by three bytes.
+- 0x0C0000..0x0CFFFD  For encoding, 0xEB9048 is added and the resulting values
+                      (0xF79048..0xF89045) are represented by three bytes.
 
-- 0x0D0000..0x0DFFFD  For encoding, 0xECFED1 is added and the resulting values
-                      (0xF9FED1..0xFAFECE) are represented by three bytes.
+- 0x0D0000..0x0DFFFD  For encoding, 0xEB9046 is added and the resulting values
+                      (0xF89046..0xF99043) are represented by three bytes.
 
-- 0x0E0000..0x0EFFFD  For encoding, 0xECFECF is added and the resulting values
-                      (0xFAFECF..0xFBFECC) are represented by three bytes.
+- 0x0E0000..0x0EFFFD  For encoding, 0xEB9044 is added and the resulting values
+                      (0xF99044..0xFA9041) are represented by three bytes.
 
-- 0x0F0000..0x0FFFFD  For encoding, 0xECFECD is added and the resulting values
-                      (0xFBFEDD..0xFCFECA) are represented by three bytes.
+- 0x0F0000..0x0FFFFD  For encoding, 0xEB9042 is added and the resulting values
+                      (0xFA9042..0xFB903F) are represented by three bytes.
 
-- 0x100000..0x10FFFD  For encoding, 0xECFECB is added and the resulting values
-                      (0xFCFEDB..0xFDFEC8) are represented by three bytes.
+- 0x100000..0x10FFFD  For encoding, 0xEB9040 is added and the resulting values
+                      (0xFB9040..0xFC903D) are represented by three bytes.
 
-- 0x110000..0x110136  For encoding, 0xECFEC9 is added and the resulting values
-                      (0xFDFEC9..0xFDFFFF) are represented by three bytes.
+- 0x110000..0x126FC1  For encoding, 0xEB903E is added and the resulting values
+                      (0xFC903E..0xFDFFFF) are represented by three bytes.
 
 The following bytes represent string terminators:
 
