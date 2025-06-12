@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-11 : 01.00!07 : Ingo : Draft
+2025-06-12 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -65,7 +65,7 @@ Contents
 3. CHARACTER CODEPOINTS
    3.1  Unicode characters
    3.2  Extended characters
-   3.3  No-characters
+   3.3  Non-characters
    3.4  Direct encodings
    3.5  String terminators
 
@@ -169,7 +169,7 @@ related to one or more general categories defined by [UNICODE]:
                   Separator, paragraph        Format
                   Other, control              Control
                   Other, format               Format
-  No-character    Other, surrogate            Surrogate
+  Non-character   Other, surrogate            Surrogate
                   Other, not assigned         Noncharacter
   Unspecified     Other, private use          Private-use
                   Other, not assigned         Reserved
@@ -183,7 +183,7 @@ assignment). All non-Unicode codepoints are explicitly assigned to a category
 2.2 Names
 -------------------------------------------------------------------------------
 
-All grapheme, spacing, control as well as the Retro-Frame defined no-character
+All grapheme, spacing, control as well as the Retro-Frame defined non-character
 codepoints have a name assigned.
 
 For grapheme and spacing characters, the [UNICODE] names are used in lowercase
@@ -197,7 +197,7 @@ spelled in uppercase letters), if given, are used as names. The aliases may
 be used but are not considered the name. For Retro-Frame defined control
 characters, similar names are assigned (see chapter 3.2).
 
-While Unicode no-character codepoints do not have a name assigned, Retro-Frame
+While Unicode non-character codepoints do not have a name assigned, Retro-Frame
 defined codepoints have a name in uppercase letters and optional low lines (see
 chapter 3.3).
 
@@ -265,20 +265,22 @@ Together, these are the (only) letters.
 The range 0x000000..0x10FFFF of a Retro-Frame character is specified as the
 [UNICODE] character of the corresponding codepoint.
 
-Note that the following codepoints of Unicode must never be used:
+The following codepoints of Unicode must never be used:
 
-- 0x00D800..0x00DFFF  (may be used as surrogates in UTF-16)
-- 0x00FDD0..0x00FDEF
+- 0x00D800..0x00DFFF  (may occur as surrogates in UTF-16 encodings)
+- 0x00FDD0..0x00FDEF  (may be used internally as non-characters)
 - 0x0?FFFE..0x0?FFFF  (? = 0..F)
 - 0x10FFFE..0x10FFFF
 
-However, if such codepoints occur on input, they may be preserved by direct
-encoding (see chapter 3.4). Note that in this case the codepoints change (e.g.
-sorting may produce different results than if those codepoints, although
-invalid, were left unchanged).
+However, if such codepoints occur on Unicode input, they may be preserved by
+direct encoding (see chapter 3.4). Note that in this case the codepoints
+change (e.g. sorting may produce different results than if those codepoints,
+although invalid, were left unchanged).
 
-While some of the ranges may be used by 16 bit character representation (see
-chapter 5.2), the codepoint 0xDFFF is always considered invalid.
+While the range 0xD800..0xDCFF is used for Retro-Frame extended characters
+(see chapter 3.2), some of the codepoints may be used by 16 bit character
+representation (see chapter 5.2). Note that the codepoint 0xDFFF is always
+considered invalid.
 
 
 3.2 Extended characters
@@ -305,73 +307,39 @@ The remaining currently unspecified codepoints in the ranges 0xD803..0xDCFF
 and 0x110000..0x126FC1 are reserved.
 
 
-3.3 No-characters
+3.3 Non-characters
 -------------------------------------------------------------------------------
 
-The range 0x126FC2..0xFFFFFF of Retro-Frame character codepoints is reserved
-for no-characters. No-characters may be used to encode additional information
-or states (e.g. error or keyboard codes) by a character type.
+The ranges 0x00FDD0..0x00FDEF and 0x126FC2..0xFFFFFF of Retro-Frame character
+codepoints is reserved for non-characters. Non-characters may be used to encode
+internal states (e.g. separators or keyboard codes) by a character type.
 
-The following no-characters are defined:
+The following non-characters are defined:
 
-- 0x126FC2              NO_CHAR (generic no-character)
-- 0x126FC3              PATH_SEPARATOR
-- 0x126FC4..0x007FFFFF  (reserved)
-- 0x800000..0x00FFFFFF  private use area (will always remain unspecified)
+- 0x126FC2            NO_CHAR (generic non-character)
+- 0x126FC3            PATH_SEPARATOR
+- 0x126FC4..0x7FFFFF  (reserved)
+- 0x800000..0xFFFFFF  private use area (will always remain unspecified)
 
 
 3.4 Direct encodings
 -------------------------------------------------------------------------------
 
-Direct encoding is a feature to preserve a character value of arbitrary bit
+Direct encoding is a feature to preserve a character value of arbitrary byte
 length which cannot or should not be mapped to a defined codepoint. However,
-lengths of more than 29 bits require one or even more shifted part so that in
+lengths of more than 30 bits require one or even more shifted parts so that in
 this case, a direct encoding is restricted to a string.
 
 The following ranges are defined for direct encoding:
 
-- 0x01000000              arbitrary bit length direct encoding of shift parts
-- 0x01000001              0 bit direct encoding, low part
-- 0x01000002..0x01000003  1 bit direct encoding, low part
-- 0x01000004..0x01000007  2 bit direct encoding, low part
-- 0x01000008..0x0100000F  3 bit direct encoding, low part
-- 0x01000010..0x0100001F  4 bit direct encoding, low part
-- 0x01000020..0x0100003F  5 bit direct encoding, low part
-- 0x01000040..0x0100007F  6 bit direct encoding, low part
-- 0x01000080..0x010000FF  7 bit direct encoding, low part
-- 0x01000100..0x010001FF  8 bit direct encoding, low part
-- 0x01000200..0x010003FF  9 bit direct encoding, low part
-- 0x01000400..0x010007FF  10 bit direct encoding, low part
-- 0x01000800..0x01000FFF  11 bit direct encoding, low part
-- 0x01001000..0x01001FFF  12 bit direct encoding, low part
-- 0x01002000..0x01003FFF  13 bit direct encoding, low part
-- 0x01004000..0x01007FFF  14 bit direct encoding, low part
-- 0x01008000..0x0100FFFF  15 bit direct encoding, low part
-- 0x01010000..0x0101FFFF  16 bit direct encoding, low part
-- 0x01020000..0x0103FFFF  17 bit direct encoding, low part
-- 0x01040000..0x0107FFFF  18 bit direct encoding, low part
-- 0x01080000..0x010FFFFF  19 bit direct encoding, low part
-- 0x01100000..0x011FFFFF  20 bit direct encoding, low part
-- 0x01200000..0x013FFFFF  21 bit direct encoding, low part
-- 0x01400000..0x017FFFFF  22 bit direct encoding, low part
-- 0x01800000..0x01FFFFFF  23 bit direct encoding, low part
-- 0x02000000..0x02FFFFFF  24 bit direct encoding, low part
-- 0x03000000..0x04FFFFFF  25 bit direct encoding, low part
-- 0x05000000..0x08FFFFFF  26 bit direct encoding, low part
-- 0x09000000..0x10FFFFFF  27 bit direct encoding, low part
-- 0x11000000..0x20FFFFFF  28 bit direct encoding, low part
-- 0x21000000..0x40FFFFFF  29 bit direct encoding, low part
-- 0x41000000..0x80FFFFFF  30 bit direct encoding, shift part
+- 0x0F000000..0x0FFFFFFF  3 bytes shift part of a direct encoding
+- 0x10000000..0x100000FF  1 byte direct encoding low part
+- 0x20000000..0x2000FFFF  2 bytes direct encoding low part
+- 0x30000000..0x30FFFFFF  3 bytes direct encoding low part
+- 0x40000000..0x7FFFFFFF  4 bytes direct encoding low part <= 0x3FFFFFFF
 
-If n shift parts precede an m bit low part of a direct encoding, the total bit
-length of the resulting value is n * 30 + m. If n and m are zero (i.e. the
-direct encoding codepoint 0x01000001 occurs without any preceding shift part),
-direct encoding of zero bits which does never match. However, the codepoint
-0x01000000, which matches any bit length, may exist without a preceding shift
-part and result in a codepoint of zero. If n is greater than 1, the shift parts
-must be in big endian order (i.e. the most significant bits are in the first
-shift part). A shift part must be followed by another shift part or a direct
-encoding low part.
+If n shift parts precede an m byte direct encoding low part, the total byte
+length of the resulting value is 3 * n + m.
 
 Direct encodings are not not assigned to a category. There should be no
 interpretation of direct encodings and processing is limited to copying or
@@ -385,7 +353,7 @@ String terminators indicate the end of a character string (see chapter 5.3).
 
 The following ranges are defined for string terminators:
 
-- 0x81000000..0xFFFFFFFD  unspecified string terminator
+- 0x80000000..0xFFFFFFFD  unspecified string terminator
 - 0xFFFFFFFE              TRUNCATED (string resulted from a longer string)
 - 0xFFFFFFFF              TERMINATED (normal end of string)
 
@@ -481,11 +449,11 @@ must be considered whether the line break CODEPOINTS 0x0085 NEL, 0x2028 LS and
 5.1 Internal 32 bit representation
 -------------------------------------------------------------------------------
 
-If 32 bit integers are supported by the environment, codepoints should be
+If 32 bit integers are supported by the environment, codepoints may be
 represented by a 32 bit unsigned integer value.
 
 In this case, all codepoints can be represented by a single value. However,
-direct encodings of more than 29 bits require shifted high parts and are thus
+direct encodings of more than 30 bits require shifted high parts and are thus
 only representable by a character string (see chapter 3.4).
 
 
@@ -495,19 +463,8 @@ only representable by a character string (see chapter 3.4).
 A Retro-Frame character may be implemented by 16 bit unsigned integer values
 with some limitations under the following rules:
 
-- Direct encodings are limited to 8 bit in the range 0xDD00..0xDDFF with 8 bit
-  shifts in the range 0xDE00..0xDEFF (i.e. Unicode low surrogates):
-
-  - 0xDD00          arbitrary bit length direct encoding of shift parts
-  - 0xDD01          0 bit direct encoding, low part
-  - 0xDD02..0xDD03  1 bit direct encoding, low part
-  - 0xDD04..0xDD07  2 bit direct encoding, low part
-  - 0xDD08..0xDD0F  3 bit direct encoding, low part
-  - 0xDD10..0xDD1F  4 bit direct encoding, low part
-  - 0xDD20..0xDD3F  5 bit direct encoding, low part
-  - 0xDD40..0xDD7F  6 bit direct encoding, low part
-  - 0xDD80..0xDDFF  7 bit direct encoding, low part
-  - 0xDE00..0xDEFF  8 bit direct encoding, shift part
+- Direct encodings are limited to 1 byte in the range 0xDE00..0xDEFF and 1 byte
+  shift parts in the range 0xDD00..0xDDFF (i.e. Unicode low surrogates).
 
 - Codepoints > 0xFFFF are represented by a value in the range 0xDF00..0xDFFE
   (i.e. a Unicode low surrogate), followed by a second value. The 8 bits of the
@@ -515,13 +472,12 @@ with some limitations under the following rules:
   low bits and 0x010000 is added. The resulting range is 0x010000..0xFFFFFF.
 
   As a consequence, codepoints >= 0x010000 cannot be represented by a single
-  value.
+  value but only in strings.
 
 - The codepoint 0xDFFF remains invalid.
 
-- No-characters may be represented in the range 0xFDD0..0xFDEF. However, the
-  codepoints specified in chapter 3.3 must be mapped, if required, and care
-  must be taken to identify no-characters properly.
+- Non-characters can only be represented as a single codepoint in the range
+  0xFDD0..0xFDEF.
 
 - String terminators are limited to TRUNCATED (0xFFFE) and TERMINATED (0xFFFF).
   
@@ -537,9 +493,9 @@ leading count value or if the string is at the end of a delimited data format).
 While the string count is always the number of valid character values
 (excluding string terminators, if given), the string length may be defined in
 the specific context. While characters (including control characters) should
-always be counted, no-characters and direct encodings may or may not be counted
-(however, in any case, the shift part of a direct encoding as well as string
-terminators should never be counted for the string length).
+always be counted, non-characters and direct encodings may or may not be
+counted (however, in any case, the shift part of a direct encoding as well as
+string terminators should never be counted for the string length).
 
 
 5.4 Packed Character Strings (PCS)
@@ -625,7 +581,7 @@ The following bytes represent string terminators:
 - 0xFE  TRUNCATED
 - 0xFF  TERMINATED
 
-Thus, a packed character string cannot represent no-characters or direct
+Thus, a packed character string cannot represent non-characters or direct
 encodings.
 
 
@@ -633,10 +589,10 @@ encodings.
 -------------------------------------------------------------------------------
 
 If Retro-Frame characters are represented as text (i.e. printed), non-printable
-characters, no-characters and direct encodings have no graphical representation
-(i.e. a defined grapheme). In addition, control characters which normally
-control output (e.g. a new line), should not be interpreted in some cases (e.g.
-if part of a file name).
+characters, non-characters and direct encodings have no graphical
+representation (i.e. a defined grapheme). In addition, control characters which
+normally control output (e.g. a new line), should not be interpreted in some
+cases (e.g. if part of a file name).
 
 Those characters may be omitted or replaced by a common replacement character.
 However, in this case, the codepoint would be lost on output and it would not
