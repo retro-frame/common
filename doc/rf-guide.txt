@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-07 : 01.00!07 : Ingo : Draft
+2025-06-29 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -188,15 +188,15 @@ each new version of a DOCUMENT that is considered final (i.e. a release or
 correction version, see chapters 4.2 and 4.3). The format of a change history
 entry is determined by the document template (see /template/rf-doc.txt//).
 
-While a version is not considered final yet, the description should be "Draft"
-and the date may be updated at discretion.
+As long as a version is not considered final yet, the description should be
+"Draft" and the date may be updated at discretion.
 
 When a version becomes final, the description should be "Initial version" on
 the first entry or a brief summary of the changes in relation to the previous
 entry otherwise. Also, the date must be updated each time the document is
 changed.
 
-In case a document becomes deprecated (but should not be deleted for any
+In case a document becomes deprecated (but should not be deleted for some
 reason), a final entry should be made, using "INVALID" instead of the version
 number, and the description should be "Deprecated".
 
@@ -295,14 +295,15 @@ directory).
 3. ENVIRONMENTS
 ===============================================================================
 
-ENVIRONMENTS are the most important concept of retro programming. On the one
-hand, in most cases the original equipment (e.g. hardware, operating systems,
-compilers etc.) might not be available and must be surrogated. On the other
-hand, modern concepts (e.g. programming languages, networking capabilities,
-standards like Unicode etc.) might be applied in cases where those capabilities
-were originally not given. Thus, ENVIRONMENTS (i.e. abstract classes of systems
-for data processing with specific common characteristics) are used to specify
-the conditions for development, translation and execution of the SOFTWARE.
+ENVIRONMENTS are the most important concept of retro programming. They are
+specifications of abstract classes of systems for data processing with
+specific common characteristics which may representt the original equipment
+(e.g. hardware, operating systems, compilers etc.) which might not be available
+any more. However, modern concepts (e.g. programming languages, networking
+capabilities, standards like Unicode etc.) might be applied in cases where
+those capabilities were originally not given. Thus, ENVIRONMENTS are used to
+specify the conditions for development, translation and execution of the
+SOFTWARE.
 
 
 3.1 Development environment
@@ -326,17 +327,17 @@ range of environments, only a few aspects have to be considered:
 - The file and path names must be supported. In order to avoid the minimum
   standard which would be supported by all development systems, slightly
   restricted conventions are used which allow the mapping to native file and
-  path names (see chapters 2.4, 5.1 and 5.5). However, in worst case, files
+  path names (see chapters 2.4, 5.1 and 5.5). However, in the worst case, files
   and paths must be renamend manually.
 
 - If text files in repositories are not automatically translated to the native
   character encoding (see chapter 5.2), the development environment must be
-  capable to read plain ASCII and, if required, UTF-8 encoded files. In worst
-  case, text files must be translated manually.
+  capable of reading plain ASCII and, if required, UTF-8 encoded files. In the
+  worst case, text files must be translated manually.
 
 - If possible, CONTROL FILES of different environments shall be kept in
   parallel (e.g. in different files or even sub-directories in the /build/
-  directory, see chapter 5.5). In worst case, CONTROL FILES must be created
+  directory, see chapter 5.5). In the worst case, CONTROL FILES must be created
   manually and may not be part of the repository.
 
 Note that all these aspects, particularly if manual intervention is required,
