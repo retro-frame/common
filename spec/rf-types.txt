@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-30 : 01.00!07 : Ingo : Draft
+2025-07-17 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -367,8 +367,8 @@ translated to a Retro-Frame character (see /spec/rf-char.txt//).
   ----------  ----------------------------------------------------------------
   CHAR        unspecified single byte character type
   ASCII       7 bit ASCII character, most significant bit must be zero
-  ASCII-E     7 bit ASCII character, most significant bit set to even parity
-  ASCII-O     7 bit ASCII character, most significant bit set to odd parity
+  ASCII-PE    7 bit ASCII character, most significant bit set to even parity
+  ASCII-PO    7 bit ASCII character, most significant bit set to odd parity
   ASCII-CP    8 bit character codepage, codepoints 0..127 are ASCII characters
               (ASCII CHARACTER DOMAIN)
   CP          8 bit character codepage with unspecified CHARACTER DOMAIN
