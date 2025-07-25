@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-30 : 01.00!07 : Ingo : Draft
+2025-07-25 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -416,10 +416,10 @@ least the following CHARACTERS:
 - the digits '0'..'9',
 - the uppercase letters 'A'..'Z' and
 - the symbols '"', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
-  '>'and '?'
+  '>'and '?',
 
-and the CODEPOINTS of the digits as well as the CODEPOINTS of the uppercase
-letters 'A'-'I', 'J'-'R' and 'S'-'Z' are consecutive.
+where the CODEPOINTS of the digits and the uppercase letters 'A'..'I', 'J'..'R'
+and 'S'..'Z' are consecutive.
 
 
 5.6 Basic character set
@@ -429,10 +429,11 @@ A 'BASIC CHARACTER SET' is a MINIMAL CHARACTER SET which additionally includes
 CODEPOINTS for at least the following CHARACTERS:
 
 - the lowercase letters 'a'..'z' and
-- the symbols '!', '$', '%', '&', ''' and '^'
+- the symbols '!', '$', '%', '&', ''' and '^',
 
-and the CODEPOINTS of the lowercase letters 'a'-'i', 'j'-'t' and 's'-'z' are
-consecutive.
+where the CODEPOINTS of the lowercase letters have all the same offset to the
+CODEPOINTS of the corresponding uppercase letters (as a consequence, 'a'..'i',
+'j'..'t' and 's'..'z' are also consecutive).
 
 
 5.7 Standard character set
