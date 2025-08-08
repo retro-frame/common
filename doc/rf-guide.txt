@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-29 : 01.00!07 : Ingo : Draft
+2025-08-08 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -838,7 +838,7 @@ comply with it.
 7.1 Regular version numbers
 -------------------------------------------------------------------------------
 
-A <major-version> number is a decimal value in the range 1..16 and, if it
+A <major-version> number is a decimal value in the range 1..32 and, if it
 stands for its own, represented as by one of the following formats:
 
 - Fixed width major version number representations always use two decimal
@@ -869,7 +869,7 @@ Pre-release version numbers are in the format
   <major-version>_'.'_<minor-version>_'!'_<pre-release>
 
 where <major-version> is in the same range as described above, <minor-version>
-is in the range 0..31 and <pre-release> is in the range 0..94 (e.g. 01.23!08
+is in the range 0..31 and <pre-release> is in the range 0..30 (e.g. 01.23!08
 respectively v1.23!8). For a new pre-release, <pre-release> is incremented by
 one until the version is released.
 
@@ -889,8 +889,8 @@ Support version numbers are in the format
   <major-version>_'.'_<minor-version>_'.'_<patch>
 
 where the range of <major-version> and <minor-version> are in the same range
-as described above and <patch> should be in the range 0..31 (e.g. 15.02.03
-respectively v15.2.3). The initial release version has always <patch> set to
+as described above and <patch> should be in the range 0..31 (e.g. 25.02.03
+respectively v25.2.3). The initial release version has always <patch> set to
 zero. For each new support version, <patch> is incremented by one.
 
 
