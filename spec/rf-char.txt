@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00.00
+Version:     01.00.02
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -44,6 +44,7 @@ Change history
 -------------------------------------------------------------------------------
 
 2025-08-10 : 01.00.00 : Ingo : Initial version
+2025-08-10 : 01.00.02 : Ingo : Direct encoding rules corrected in chapter 5.5
 
 
 Contents
@@ -639,14 +640,10 @@ occurence of an escape character:
 - The letter 'x', followed by a sequence of hexadecimal digits in uppercase
   ('0'..'9', 'A'..'F') represents a value which is represented by direct
   encoding. A comma (',') after the value indicates that another value follows.
-  A solidus ('/') after one or more values indicates a fixed bit length for the
-  direct encoding and the bit length must follow in decimal representation
-  (e.g. "/16"). Otherwise, an arbitrary bit length direct encoding is assumed.
-  The sequence of one or more values and an option bit length must be
-  terminated by a semicolon (';'). Note that a single direct encoding may be
-  represented by multiple characters (in this case, all characters but one are
-  shift parts). In all cases, leading zeros are ignored on input but should not
-  be present at output.
+  The sequence of one or more values must be terminated by a semicolon (';').
+  Note that a single direct encoding may be represented by multiple characters
+  (in this case, all characters but one are shift parts). In all cases, leading
+  zeros are ignored on input but should not be present at output.
 
 Examples:
 
@@ -665,11 +662,16 @@ Examples:
 - "^5E,61;" represents the codepoints 0x0000005E and 0x00000061 ("^a") which
   do not in turn represent an escape sequence.
 
-- "^x0;" represents the codepoint 0x01000000 (direct encoding of value zero
-  which matches arbitrary bit lengths).
+- "^x0;" represents the codepoint 0x01000000 (value zero represented by a 1
+  byte direct encoding low part).
 
-- "^x1,FFFF/24;" represents the codepoints 0x02000001 and 0x0200FFFF (values
-  0x000001 and 0x00FFFF of 24 bit direct encoding).
+- "^x1,FFFF;" represents the codepoints 0x01000001 and 0x0200FFFF (value 0x1
+  represented by a 1 byte direct encoding low part and value 0xFFFF represented
+   by a 2 bytes direct encoding low part).
 
-- "^x0/32;" represents the codepoints 0x41000000 and 0x01000004 (value
-  0x00000000 zero of 32 bit direct encoding).
+- "^x2000000;" represents the codepoint 0x60000000 (value 0x2000000 represented
+  by a 4 bytes direct encoding low part).
+
+- "^x0004000000;" represents the codepoints 0x0F040000 and 0x10000000 (value
+  0x4000000 represented by a 3 bytes direct encoding shift part, followed by a
+  1 byte direct encoding low part).
