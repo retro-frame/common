@@ -2,7 +2,7 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.0!7 (beta)**  
+**Version: 1.0!8 (gamma)**  
 **Compliance: Retro-Frame 1.0**  
 **License: MIT (see `LICENSE`)**  
 
@@ -31,13 +31,13 @@ in retro programming and may be used as a whole or partially for other purposes:
 * This README file is part of the **Retro-Frame Common Documentation**
   repository which provides common definitions, guidelines, templates and
   specifications. This repository is online available from
-  \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>
+  \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>.
 
 * Also part of Retro-Frame are the **Retro-Frame Specifications** repositories
   which provide individual specifications covering specific topics (i.e. data
   formats, codepages, algorithms or protocols). These repositories may be
   online available from
-  \<[http://source.retro-frame.net/](http://source.retro-frame.net/)\>
+  \<[http://source.retro-frame.net/](http://source.retro-frame.net/)\>.
 
 As Retro-Frame is evolving, declarations of compliance should always refer to a
 specific release version of the Retro-Frame Common Documentation respository.
@@ -67,8 +67,8 @@ The directory `doc/` contains the following general common documentation:
 
 The directory `spec/` contains the following common specifications:
 
-* `spec/rf-char.txt` provides a provides a specification of Retro-Frame
-  characters, which are a superset of Unicode, and character encodings.
+* `spec/rf-char.txt` provides a specification of Retro-Frame characters, which
+  are a superset of Unicode, and character encodings.
 
 * `spec/rf-path.txt` provides a specification of a universal path
   representation which is used to locate an object on a file system in an
@@ -117,5 +117,5 @@ For the Retro-Frame Common Documentation repository, see
 
 ### Retro-Frame Specifications
 
-For the Retro-Frame Specifications repository, see
-\<[http://source.retro-frame.net/spec](http://source.retro-frame.net/spec)\>.
+For the Retro-Frame Specifications repositories, see
+\<[http://source.retro-frame.net/](http://source.retro-frame.net/)\>.

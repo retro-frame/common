@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.00!07 (beta)
+Version:     01.00!08 (gamma)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-08-10 : 01.00!07 : Ingo : Draft
+2025-08-10 : 01.00!08 : Ingo : Draft
 
 
 Contents
@@ -84,7 +84,7 @@ Contents
 
 5. CHARACTER-RELATED TERMS
    5.1  Character
-   5.2  No-character
+   5.2  Non-character
    5.3  Codepoint
    5.4  Character set
    5.5  Minimal character set
@@ -239,7 +239,7 @@ implies conformance to all higher related SPECIFICATIONS).
 
 A 'CODE LIST' is a set of homogeneous DEFINITIONS as part of a SPECIFICATION
 where the simple term is represented as a code (i.e. a sequence of alphanumeric
-and possible non-delimiting symbol characters). 
+and possible non-delimiting symbol characters like a hyphen '-'). 
 
 The entire CODE LIST or parts of it may or may not be a taxonomy. Apart from
 relations possibly constituted by a taxonomy, a CODE LIST should not depend on
@@ -382,28 +382,28 @@ interpret or to arrange the other characters (e.g. indicating a line break). If
 the meaning of a character is not known, it is called unspecified.
 
 
-5.2 No-character
+5.2 Non-character
 -------------------------------------------------------------------------------
 
-A 'NO-CHARACTER' is a number which has a specific meaning but is not considered
-a CHARACTER.
+A 'NON-CHARACTER' is a number which has a specific meaning but is not
+considered a CHARACTER.
 
 
 5.3 Codepoint
 -------------------------------------------------------------------------------
 
 A 'CODEPOINT' is a number which distinctly represents a CHARACTER or a
-NO-CHARACTER.
+NON-CHARACTER.
 
 
 5.4 Character set
 -------------------------------------------------------------------------------
 
 A 'CHARACTER SET' is a set of contiguous CODEPOINTS, starting from zero, which
-represent at least one CHARACTER. Thus, NO-CHARACTERS may or may not be
+represent at least one CHARACTER. Thus, NON-CHARACTERS may or may not be
 contained (however, a CHARACTER SET must not consist only of CODEPOINTS which
-represent NO-CHARACTERS). As a consequence, if a CHARACTER SET consists of n
-CHARACTERS and NO-CHARACTERS, the CODEPOINTS are 0 to n - 1.
+represent NON-CHARACTERS). As a consequence, if a CHARACTER SET consists of n
+CHARACTERS and NON-CHARACTERS, the CODEPOINTS are 0 to n - 1.
 
 
 5.5 Minimal character set
@@ -433,7 +433,7 @@ CODEPOINTS for at least the following CHARACTERS:
 
 where the CODEPOINTS of the lowercase letters have all the same offset to the
 CODEPOINTS of the corresponding uppercase letters (as a consequence, 'a'..'i',
-'j'..'t' and 's'..'z' are also consecutive).
+'j'..'t' and 's'..'z' are consecutive).
 
 
 5.7 Standard character set
@@ -483,8 +483,8 @@ byte and character encoding is trivial.
 A 'MULTI BYTE CHARACTER SET' (MBCS) is a CHARACTER SET which consists of more
 than 256 CODEPOINTS. Thus, at least some CODEPOINTS require more than one byte
 to be represented by CHARACTER ENCODING. Note that CODEPOINTS of a MULTI BYTE
-CHARACTER SET may still be represented by a single element (which in this case
-must be of a size greater than one byte).
+CHARACTER SET may still be represented fixed-width by a single element (which
+in this case must be of a size greater than one byte).
 
 
 5.12 Character domain
@@ -511,7 +511,7 @@ CHARACTER SET.
 
 A 'CHARACTER STRING' (or just 'STRING' if it is clear that a CHARACTER STRING
 is meant) is an array (i.e. a sequence of elements of equal size) which
-represents a sequence of CHARACTERS or NO-CHARACTERS (even none in which case
+represents a sequence of CHARACTERS or NON-CHARACTERS (even none in which case
 the STRING is called empty) in a specific CHARACTER ENCODING. If the CHARACTER
 ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
 
@@ -519,7 +519,7 @@ ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
 5.15 String terminator
 -------------------------------------------------------------------------------
 
-A 'STRING TERMINATOR' is a CHARACTER or NO-CHARACTER which indicates the end
+A 'STRING TERMINATOR' is a CHARACTER or NON-CHARACTER which indicates the end
 of a STRING. Thus, the STRING TERMINATOR itself cannot be represented by the
 STRING. A STRING may or may not use STRING TERMINATORS.
 
@@ -527,7 +527,7 @@ STRING. A STRING may or may not use STRING TERMINATORS.
 5.16 String length
 -------------------------------------------------------------------------------
 
-The 'STRING LENGTH' denotes the number of CHARACTERS and NO-CHARACTERS (i.e.
+The 'STRING LENGTH' denotes the number of CHARACTERS and NON-CHARACTERS (i.e.
 CODEPOINTS) in a STRING (if the STRING is empty, the STRING LENGTH is zero). If
 STRING TERMINATORS are used, they are not included in the STRING LENGTH.
 
