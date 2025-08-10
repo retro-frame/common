@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00!07
+Version:     01.00!07 (beta)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-08-08 : 01.00!07 : Ingo : Draft
+2025-08-10 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -234,7 +234,7 @@ optional suffix (i.e. file name extension):
 
 The prefix, if given, must be equal for all files in the same directory, should
 start with a letter ('A'-'Z', 'a'-'z'), followed by a sequence of letters,
-digits ('0'-'9'), hyphens ('-') or low lines ('_'), and end with a hypen or a
+digits ('0'-'9'), hyphens ('-') or low lines ('_'), and end with a hyphen or a
 low line:
 
 <work-file-prefix>:
@@ -273,7 +273,7 @@ may exceed 3 characters but should not exceed 6 characters.
 -------------------------------------------------------------------------------
 
 Files and directories should be referenced by a [URL] if accessible over the
-Internet, or by a universal path (see /spec/rf-path.txt) if located on a file
+Internet, or by a universal path (see /spec/rf-path.txt//) if located on a file
 system (e.g. repository, local disc or mounted network drive).
 
 A URL should always be enclosed by '<' and '>'.
@@ -282,7 +282,7 @@ If a universal path is used, native encodings (including native selectors)
 should be avoided whenever possible (an exception may be, for example, a
 specification concerning a specific native environment). However, native
 selectors may be used to describe an unknown native base path. In this case,
-the description should be enclosed by '<' and '>' (e.g. [<base-path>]). The
+the description should be enclosed by '<' and '>' (e.g. $<base-path>/). The
 universal root selector (i.e. "/") refers to the repository of which the work
 file belongs to (for expample, the root of universal path references in this
 document is the repository <http://source.retro-frame.net/doc>). A universal
@@ -316,13 +316,13 @@ execute the SOFTWARE.
 
 Thus, Retro-Frame is agnostic regarding the development environment as long as
 the constraints of the translation environment respectively the execution
-environments are met. In oder to ensure that development is possible in a wide
+environments are met. In order to ensure that development is possible in a wide
 range of environments, only a few aspects have to be considered:
 
-- The repository must be accessible from the development environment. While,
-  depending on the repository type (see chapter 6), the repository may be
-  natively supported, in worst case the files of a repository must be copied
-  manually between the repository and the development environment.
+- The repository must be accessible from the development environment. While the
+  repository may be natively supported, depending on the repository type (see
+  chapter 6), in worst case the files of a repository must be copied manually
+  between the repository and the development environment.
 
 - The file and path names must be supported. In order to avoid the minimum
   standard which would be supported by all development systems, slightly
@@ -350,9 +350,9 @@ well as back from the development environment to the repository).
 -------------------------------------------------------------------------------
 
 If translation is required to build a PRODUCT from SOURCE CODE and/or RESOURCES
-(e.g. by means of an assembler or compiler), a translation environment, which
-may or may not be identical or compatible to the development and/or execution
-environment, is used.
+(e.g. by means of an assembler or compiler), a translation environment is used,
+which may or may not be identical or compatible to the development and/or
+execution environment.
 
 At first, the same aspects like for the development environment apply with
 exception that transfers or encoding need not be reversible.
@@ -548,7 +548,7 @@ example:
   $<native-base-directory>/RB/
   $<native-base-directory>/RC/
 
-In each Retro-Endeavor directory, the following sub-directories should be used
+In each Retro-Endeavor directory, the following sub-directories shall be used
 as the mount point for REPOSITORIES:
 
 - The sub-directory dev/ should be the mount point for development repositories
@@ -576,8 +576,8 @@ Examples:
 - Local path for development of the Retro-Frame repository "common":
   $<native-base-directory>/Retro-Frame/dev/common/
 
-- Local path for releases of the Retro-BASIC repository "test":
-  $<native-base-directory>/Retro-BASIC/release/test/
+- Local path for releases v2.1 of the Retro-BASIC repository "test":
+  $<native-base-directory>/Retro-BASIC/release/test/02.01/
 
 - Local path for development of the Retro-C repository "comp.stdc.recma55":
   $<native-base-directory>/Retro-C/dev/comp/stdc/recma55/
@@ -989,12 +989,12 @@ where both, <major-version> and <minor-version>, are represented by hexacecimal
 digits in the range 00..FF (this is the only case where the major version may
 be zero).
 
-However, in both cases, for each major version the allowed range of the minor
-version may be more restricted.
+However, in both cases (i.e. text or binary data formats), the allowed range of
+minor versions may explicitly be restricted for each major version.
 
-Implementations which support data format versions should be upward compatible,
-if the major version number is unchanged, for increasing minor version numbers
-(i.e. elements which are not recognized are ignored).
+Implementations which support data format versions should be upward compatible
+for increasing minor version numbers as long as the major version number is
+unchanged (i.e. elements which are not recognized are ignored).
 
 The specification of the data format may deprecate a version. In this case,
 implementations should not create data formats of this version but may still
@@ -1051,8 +1051,9 @@ Thus, two classes of security threats should be distinguished:
 - Threats which affect the information processed by the PRODUCT which is build
   from SOFTWARE developed by a Retro-Endeavor. In order to respect the
   individual values those information may have to the user, the classification
-  of information (see chapter 8.2) is used to assess the potential impact in
-  case of loss of confidentiality, integrity and/or availability.
+  scheme for impact levels (see chapter 8.2) shall be used to assess the
+  potential impact in case of loss of confidentiality, integrity and/or
+  availability.
 
 - Threats which affect the ENVIRONMENT (e.g. the operating system) in which the
   product is executed. While the potential impact in these cases may vary, this
@@ -1111,7 +1112,7 @@ Impact level "medium":
   in terms of integrity and/or availability.
 
 - The environment in which the program file(s) are executed will result in
-  limited harm if compromised (e.g. a computer an which no secret or critical
+  limited harm if compromised (e.g. a computer on which no secret or critical
   information is stored).
 
 Impact level "high":
@@ -1190,7 +1191,7 @@ Security level "medium":
 
 - This security level is considered the default mode of retro programming.
   Thus, an explicit warning or even confirmation is not required but a hint
-  shall be printed on the version / license output.
+  shall be printed on the version/license output.
 
 Security level "high":
 

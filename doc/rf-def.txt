@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.00!07
+Version:     01.00!07 (beta)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-07-25 : 01.00!07 : Ingo : Draft
+2025-08-10 : 01.00!07 : Ingo : Draft
 
 
 Contents

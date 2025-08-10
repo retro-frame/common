@@ -13,7 +13,7 @@ Universal Path Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-path.txt//
-Version:     01.00!07
+Version:     01.00!07 (beta)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-05-30 : 01.00!07 : Ingo : Draft
+2025-08-10 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -116,8 +116,8 @@ Retro-Frame Common Documentation, see <http://source.retro-frame.net/common>.
 Universal path requires a BASIC CHARACTER SET for representation.
 
 If the Retro-Frame character set is used to represent a universal path (see
-/spec/rf-char.txt//), the non-character 0x00110130 (PATH_SEPARATOR) is used to
-represent the path separator.
+/spec/rf-char.txt//), the non-character 0x126FC3 (PATH_SEPARATOR) shall be used
+to represent the path separator.
 
 Otherwise, universal paths use the printable characters which depends on the
 printable level (see /spec/rf-char.txt//, chapter 4) and the PATH_SEPARATOR is

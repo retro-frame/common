@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!07
+Version:     01.00!07 (beta)
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-06-07 : 01.00!07 : Ingo : Draft
+2025-08-10 : 01.00!07 : Ingo : Draft
 
 
 Contents
@@ -237,7 +237,7 @@ An expression may a combination of the following:
     square bracket, the element may occur arbitrary times (even not at all).
 
   If an element is optional or may occur multiple times and the next element
-  is a subset and matches, the later element matches rather than the optional
+  is a subset and matches, the latter element matches rather than the optional
   or repeated one (e.g. [ . ]* ? matches a sequence of arbitrary characters and
   the first occurence of a letter).
 
