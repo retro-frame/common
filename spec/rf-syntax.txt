@@ -13,7 +13,7 @@ Syntax Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-syntax.txt//
-Version:     01.00!08 (gamma)
+Version:     01.00.00
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2025-08-10 : 01.00!08 : Ingo : Draft
+2025-08-10 : 01.00.00 : Ingo : Initial version
 
 
 Contents
