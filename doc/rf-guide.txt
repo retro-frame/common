@@ -1,0 +1,1268 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Guidelines
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /doc/rf-guide.txt//
+Version:     01.00.00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-02-14 : 01.00.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. CONVENTIONS
+   2.1  Name spelling
+   2.2  Change histories
+   2.3  Quotes and syntax notations
+   2.4  Work file names
+   2.5  File and directory references
+   2.6  Retro-Endeavor common documentation and references
+
+3. ENVIRONMENTS
+   3.1  Development environment
+   3.2  Translation environment
+   3.3  Execution environment
+
+4. SOFTWARE RELEASE LIFE CYCLE AND COMPATIBILITY REQUIREMENTS
+   4.1  Pre-release (development, test)
+   4.2  Release (initial, major or minor)
+   4.3  Support (patches, additions, corrections and deprecation)
+
+5. FILE SYSTEM AND REPOSITORIES
+   5.1  Local paths
+   5.2  Text encoding
+   5.3  Commits and tags
+   5.4  License and readme files
+   5.5  Directory structures and exclusions
+   5.6  Branching, merging and pull requests
+
+6. REPOSITORY TYPES AND LICENSING
+   6.1  Manual repositories
+   6.2  Offline repositories
+   6.3  Private repositories
+   6.4  Public repositories
+   6.5  Collaborative repositories
+
+7. VERSIONING
+   7.1  Regular version numbers
+   7.2  Repository versioning
+   7.3  Work file versioning
+   7.4  Product versioning
+   7.5  Data format version numbers
+
+8. SECURITY CONSIDERATIONS
+   8.1  Security objectives and potential threats
+   8.2  Impact levels
+   8.3  Security levels
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.0").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides GUIDELINES (i.e. normative rules) which shall be
+observed, depending on the [REQUIREMENT LEVEL KEYWORDS] used, in order to
+comply to this version of the repository.
+
+While all Retro-Frame guidelines are covered by this single document, other
+Retro-Endeavors may provide subsidiary guidelines.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[MARKDOWN]
+Markdown homepage by John Gruber, Daring Fireball Company LLC., see
+<https://daringfireball.net/projects/markdown/>.
+
+[MIT LICENSE]
+MIT License, see <https://en.wikipedia.org/wiki/MIT_License>.
+
+[REQUIREMENT LEVEL KEYWORDS]
+RFC: 2119 - Key words for use in RFCs to Indicate Requirement Levels, see
+<https://datatracker.ietf.org/doc/html/rfc2119>.
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+[SEMANTIC VERSIONING]
+Semantic Versioning 2.0.0, originally authored by Tom Preston-Werner, see
+<https://semver.org/>.
+
+[URL]
+RFC: 3986 - Uniform Resource Identifier (URI): Generic Syntax, see
+<https://datatracker.ietf.org/doc/html/rfc3986>.
+
+
+
+2. CONVENTIONS
+===============================================================================
+
+
+2.1 Name spelling
+-------------------------------------------------------------------------------
+
+If part of a text, including comments of source files, the "Retro" prefixed
+words should be hyphenated and capitalized (e.g. Retro-Leisure, Retro-Frame,
+Retro-BASIC or Retro-C). Note that BASIC is considered an acronym and thus
+fully capitalized.
+
+If part of an account or domain name, all words should be spelled in lower case
+(e.g. retro-leisure, retro-frame, retro-basic or retro-c).
+
+In cases where text is fully capitalized (e.g. a top level caption), the words
+shall be fully capitalized just like the rest (e.g. RETRO-LEISURE, RETRO-FRAME,
+RETRO-BASIC or RETRO-C).
+
+
+2.2 Change histories
+-------------------------------------------------------------------------------
+
+In order to keep formal guidelines low, a change history is only required for
+each new version of a DOCUMENT that is considered final (i.e. a release or
+correction version, see chapters 4.2 and 4.3). The format of a change history
+entry is determined by the document template (see /template/rf-doc.txt//).
+
+As long as a version is not considered final yet, the description should be
+"Draft." and the date may be updated at discretion.
+
+When a version becomes final, the description should be "Initial version." on
+the first entry or a brief summary of the changes in relation to the previous
+entry otherwise. Also, the date must be updated each time the document is
+changed.
+
+In case a document becomes deprecated (but should not be deleted for some
+reason), a final entry shall be made, using "INVALID" instead of the version
+number, and the description shall be "Deprecated.".
+
+
+2.3 Quotes and syntax notations
+-------------------------------------------------------------------------------
+
+A single character should be enclosed by single quotes (i.e. apostrophes ''').
+Note that an apostrophe itself may be represented in that way and that a
+sequence of more than one character enclosed by apostrophes is considered a
+term to be defined (see /doc/rf-def.txt//, chapter 2.1).
+
+A text literal (i.e. a fixed sequence of characters) should be enclosed by
+double quotes (i.e. quotation marks '"'). If a quotation mark itself is part of
+the text literal, it is represented by two quotation marks (e.g. """X"""). 
+
+In order to specifiy a more complex syntax of a text (e.g. in a document), the
+Retro-Frame metasyntax should be used (see /spec/rf-syntax.txt//, chapter 2).
+Additional terminal symbols may be defined in the respective context.
+
+In order to specifiy the syntax of a text data format, the text data format
+specification syntax should be used (see /spec/rf-syntax.txt//, chapter 3).
+
+In order to specifiy the syntax of a binary data format, the binary data format
+specification syntax should be used (see /spec/rf-syntax.txt//, chapter 4).
+
+
+2.4 Work file names
+-------------------------------------------------------------------------------
+
+A WORK FILE name should consist of an optional prefix, the base name and an
+optional suffix (i.e. file name extension):
+
+  [_<work-file-prefix>_]_<work-file-base-name>_[_<work-file-suffix>_]
+
+The prefix, if given, must be equal for all files in the same directory, should
+start with a letter ('A'-'Z', 'a'-'z'), followed by a sequence of letters,
+digits ('0'-'9'), hyphens ('-') or low lines ('_'), and end with a hyphen or a
+low line:
+
+<work-file-prefix>:
+
+  ?_[_?_|_9_|_"-"_|_"_"]*_(_"-"_|_"_"_)
+
+The base name should start with a letter, digit or dollar sign ('$'), followed
+by a sequence of letters, digits, hyphens, low lines or dollar signs:
+
+<work-file-base-name>:
+
+  (_?_|_9_|_"$"_)_[_?_|_9_|_"-"_|_"_"_|_"$"_]*
+
+The suffix, if given, should start with a period ('.'), followed by a non-
+empty sequence of letters, digits or dollar signs:
+
+<work-file-suffix>:
+
+  "."_(_?_|_9_|_"$"_)*
+
+In general, work file names are stored case sensitive but compared case
+insensitive. Thus, even if a file system or REPOSITORY compares file names case
+sensitive, two work file names in the same directory must always be different
+if compared ignoring the case.
+
+The total length prefix and base name together should not exceed 39 characters,
+the length of a base name should not exceed 8 characters and the length of a
+suffix should not exceed 3 characters. However, if the repository is limited
+to specific development and translation environments (see chapter 3), which all
+support file names of up to 39 characters and suffixes of up to 6 characters,
+the length of a base name may exceed 8 characters and the length of a suffix
+may exceed 3 characters but should not exceed 6 characters.
+
+
+2.5 File and directory references
+-------------------------------------------------------------------------------
+
+Files and directories should be referenced by a [URL] if accessible over the
+Internet, or by a universal path (see /spec/rf-path.txt//) if located on a file
+system (e.g. repository, local disc or mounted network drive).
+
+A URL should always be enclosed by '<' and '>'.
+
+If a universal path is used, native encodings (including native selectors)
+should be avoided whenever possible (an exception may be, for example, a
+specification concerning a specific native environment). However, native
+selectors may be used to describe an unknown native base path. In this case,
+the description should be enclosed by '<' and '>' (e.g. $<base-path>/). The
+universal root selector (i.e. "/") refers to the repository of which the work
+file belongs to (for expample, the root of universal path references in this
+document is the repository <http://source.retro-frame.net/doc>). A universal
+path should always end with a type mark (i.e. "//" for a file respectively "/"
+for a directory) unless the path may refer to either (i.e. a file or a
+directory).
+
+
+2.6 Retro-Endeavor common documentation and references
+-------------------------------------------------------------------------------
+
+All Retro-Endeavors should provide a repository named "common" which contains
+common documentation and may be used as a starting point for exploring that
+endeavor.
+
+The name of a Retro-Endeavor without any additions, if used outside that
+endeavor, should refer to the common documentation. External references should
+refer to the respective "common" repository.
+
+Within a specific Retro-Endeavor, its own name without any additions (e.g.
+"Retro-Frame") refers to all repositories of that endeavor. External references
+should refer to the homepage (e.g. <http://source.retro-frame.net/>).
+
+
+
+3. ENVIRONMENTS
+===============================================================================
+
+ENVIRONMENTS are the most important concept of retro programming. They are
+specifications of abstract classes of systems for data processing with
+specific common characteristics which may representt the original equipment
+(e.g. hardware, operating systems, compilers etc.) which might not be available
+any more. However, modern concepts (e.g. programming languages, networking
+capabilities, standards like Unicode etc.) might be applied in cases where
+those capabilities were originally not given. Thus, ENVIRONMENTS are used to
+specify the conditions for development, translation and execution of the
+SOFTWARE.
+
+
+3.1 Development environment
+-------------------------------------------------------------------------------
+
+In general, the environment in which development of the SOFTWARE takes place is
+not specified. In particular, retro software can be developed on modern systems
+which are quite different from the systems which are intended to translate or
+execute the SOFTWARE.
+
+Thus, Retro-Frame is agnostic regarding the development environment as long as
+the constraints of the translation environment respectively the execution
+environments are met. In order to ensure that development is possible in a wide
+range of environments, only a few aspects have to be considered:
+
+- The repository must be accessible from the development environment. While the
+  repository may be natively supported, depending on the repository type (see
+  chapter 6), in worst case the files of a repository must be copied manually
+  between the repository and the development environment.
+
+- The file and path names must be supported. In order to avoid the minimum
+  standard which would be supported by all development systems, slightly
+  restricted conventions are used which allow the mapping to native file and
+  path names (see chapters 2.4, 5.1 and 5.5). However, in the worst case, files
+  and paths must be renamend manually.
+
+- If text files in repositories are not automatically translated to the native
+  character encoding (see chapter 5.2), the development environment must be
+  capable of reading plain ASCII and, if required, UTF-8 encoded files. In the
+  worst case, text files must be translated manually.
+
+- If possible, CONTROL FILES of different environments should be kept in
+  parallel (e.g. in different files or even sub-directories in the /build/
+  directory, see chapter 5.5). In the worst case, CONTROL FILES must be created
+  manually and may not be part of the repository.
+
+Note that all these aspects, particularly if manual intervention is required,
+must be reversible (i.e. the WORK FILES and optionally CONTROL FILES must be
+transferred or encoded from the repository to the development environment as
+well as back from the development environment to the repository).
+ 
+
+3.2 Translation environment
+-------------------------------------------------------------------------------
+
+If translation is required to build a PRODUCT from SOURCE CODE and/or RESOURCES
+(e.g. by means of an assembler or compiler), a translation environment is used,
+which may or may not be identical or compatible to the development and/or
+execution environment.
+
+At first, the same aspects like for the development environment apply with
+exception that transfers or encoding need not be reversible.
+
+Additionally, all aspects must be taken into account which are required for
+proper translation:
+
+- The syntax and semantics of the SOURCE CODE or RESOURCE files (i.e. the
+  programming language).
+
+- Libraries, APIs or CONTROL FILES which are required for translation.
+
+- The size, type and CHARACTER ENCODING of character and string literals (in
+  general, those   literals are translated to native encoding of the execution
+  environment which may or may not be known) as well as of characters and
+  strings used by Libaries or APIs.
+
+- The size and the encoding of other data types (e.g. integers, floating point
+  numbers).
+
+The SOFTWARE (e.g. the readme file and/or the SOURCE CODE) should indicate the
+requirements regarding the translation environment (envrionmental constraints).
+
+
+3.3 Execution environment
+-------------------------------------------------------------------------------
+
+If translation was required to build a PRODUCT, the resulting binary code (e.g.
+the instruction set) must be compatible to the execution environment.
+
+If translation was not required (e.g. if an interpreter or scrip language is
+used), all same aspects like for the translation environment apply.
+
+Additionally, all aspects must be taken into account which are required for
+proper execution:
+
+- If used, the APIs (including dynamic link libraries) (e.g. the operating
+  system or frameworks).
+
+- If used, the hardware or implementation related properties of the execution
+  environment (e.g. hardware I/O, memory locations containing the characters
+  displayed on the screen or assumption or internal memory maintained by the
+  operating system which is not part of the API).
+
+- The CHARACTER ENCODING of native characters and strings which is used by the
+  APIs or text files.
+
+The SOFTWARE (e.g. the readme file and/or the DOCUMENTATION) should indicate
+the requirements regarding the execution environment (i.e. environmental
+constraints).
+
+
+
+4. SOFTWARE RELEASE LIFE CYCLE AND COMPATIBILITY REQUIREMENTS
+===============================================================================
+
+Retro-Frame uses a simplified concept for the SOFTWARE release life cycle using
+the stages pre-release, release and support. In general, the software release
+life cycle also applies on DOCUMENTATION.
+
+As development and support depends on uncertain contribution, there is no
+explicit end-of-life stage. A retro software product may suddenly become
+end-of-life because there are no more contributions to it. On the other hand, a
+new contributor may continue a retro software which already has been considered
+end-of-life.
+
+
+4.1 Pre-release (development, test)
+-------------------------------------------------------------------------------
+
+During development, if a version of a SOFTWARE is at least partially usable, it
+may be marked as a pre-release. While the version of a pre-release is fixed and
+can be referred to by means of an individual version number, the development
+process has not been finished and the software may still be changed. In fact,
+there are no compatibility requirements between pre-releases so that a software
+may even be entirely redeveloped during pre-release.
+
+If a software is considered final and ready for test, pre-release stages may be
+indicated by using the greek alphabet (alpha, beta et cetera). In this case,
+changes on the software should be restricted to bug fixing and minor changes
+and after each fix, the pre-release version number should be increased (while
+the stage may or may not be changed, see chapter 7.2).
+
+
+4.2 Release (initial, major or minor)
+-------------------------------------------------------------------------------
+
+Goal of development is always the release of a SOFTWARE which may be either an
+initial, major or minor release.
+
+While the initial release is the first release of a software at all, a major
+release may entail substancial changes of the software and no compatibility
+requirements must be met (just like between pre-releases). Thus, a major
+release may be entirely different from previous major releases or the initial
+release. In extreme consequence, just the name of the software remains the
+same.
+
+In contrast, a minor release is based on an initial or major release and must
+meet compatibility requirements. In general, a minor release is expected to be
+fully backward compatible:
+
+- A minor release of a software may add functionalitiy or capabilities but must
+  provide all functionality and capabilities of previous minor releases. In
+  addition, there should be no significant modifications of the user interface.
+
+- A minor release of a DOCUMENTATION has relaxed compatibility requirements:
+
+  - DEFINITIONS and GUIDELINES would be fully backward compatible only in the
+    case if compliance to a minor release implied compliance to all previous
+    minor releases. However, this is only given if existing definitions remain
+    unchanged and additional definitions do not conflict with previous use of
+    the defined term while guidelines may be tightened but not relaxed. In
+    order to avoid too many major releases of documentation which contains
+    definitions and guidelines, such changes may be made, however carefully,
+    in minor releases but shall all be decribed in the change history. As a
+    consequence, compliance may not be fully backward compatible.
+
+  - DESCRIPTIONS and INSTRUCTIONS have no compatibility requirements at all.
+
+  - TEMPLATES may include additional elements but should not remove existing
+    ones.
+
+  - SPECIFICATIONS have individual compatibility rules (see below). However,
+    the documentation which contains specifications should maintain all
+    specifications from previous minor versions even if parts may become
+    deprecated (see chapter 7.5).
+
+While substancial changes in DEFINITIONS or GUIDELINES always require a new
+minor version, additional DESCRIPTIONS, INSTRUCTIONS and/or SPECIFICATIONS may
+be introduced by a support version (see chapter 4.3) instead.
+
+Regarding SPECIFICATIONS, the compatibility requirements depend on the type of
+the specification:
+
+- A minor release of an API may add functions or declarations but must provide
+  all functions or declarations of previous minor releases. Existing functions
+  may have additional parameters or capabilities as long as functions calls
+  conforming to the previous minor release of the API remain compatible (e.g.
+  if optional parameters are provided, a new optional parameter may be appended
+  to the parameter list or a function parameter specifies an action, additional
+  actions may be recognized while existing actions remain unchanged).
+
+- A minor release of a DATA FORMAT may add elements or interpretations but
+  remain a valid format according to previous minor releases. This results in
+  forward compatibility of implementations which expect a specific minor
+  version data format and ignore the added elements or interpretations. In
+  general, a major release of a data format should be backward compatible (i.e.
+  a valid data format of a specific major release should also be a valid data
+  format of all higher major releases). In some cases it may be neccessary to
+  introduce elements in the data format which will not maintain full backward
+  compatibility in a strong sense as described above. However, even in such
+  cases, implementations which support a specific data format release should
+  also support lower major releases unless deprecated (see chapter 7.5).
+
+- A minor release of an ENVIRONMENT must support all features of the previous
+  minor releases.
+
+- A minor release of a PROTOCOL should accept previous minor releases of one or
+  more of the participants. If this is not implicitly achieved by the design of
+  the protocol, the minimum minor release should be negotiated.
+
+For types of specifications which are not included in this list, an analogous
+meaning of compatibility shall be applied.
+
+
+4.3 Support (patches, additions, corrections and deprecation)
+-------------------------------------------------------------------------------
+
+After release, a software may still be supported in order to fix bugs and/or
+security issues when they become known by means of a patch. In terms of
+documentation, errors which need correction may be identified after release.
+
+A patch is not supposed to add or change functionality except fixing the
+problem.
+
+If a severe bug and/or security issue is known but fixing is not possible or
+considered too complex, the release may be deprecated. In this case, a patch
+should be created anyway which at least indicates deprecation. A new patch
+which fixes the problem may be created so that the release becomes valid again
+(thus, deprecation of a release is not considered final).
+
+Beside fixes, support versions may contain additional DESCRIPTIONS,
+INSTRUCTIONS and/or SPECIFICATIONS.
+
+
+
+5. FILE SYSTEM AND REPOSITORIES
+===============================================================================
+
+All workfiles should be part of a REPOSITORY. Access control, version control
+(i.e. commits, tags, branches, merges and pull requests), backup and licensing
+always affects the entire repository.
+
+
+5.1 Local paths
+-------------------------------------------------------------------------------
+
+There should be a dedicated directory for each Retro-Endeavor, which is of
+interest, on the local file system. It is recommended to choose an appropriate
+common native base directory and to create a directory for each Retro-Endeavor
+using its name as the directory name (if possible), for example:
+
+  $<native-base-directory>/Retro-Frame/
+  $<native-base-directory>/Retro-BASIC/
+  $<native-base-directory>/Retro-C/
+
+If not all directory names would be allowed by the file system, the initials
+of the Retro-Endeavors may be used in uppercase and without the hyphen, for
+example:
+
+  $<native-base-directory>/RF/
+  $<native-base-directory>/RB/
+  $<native-base-directory>/RC/
+
+In each Retro-Endeavor directory, the following sub-directories should be used
+as the mount point for REPOSITORIES:
+
+- The sub-directory dev/ should be the mount point for development repositories
+  whose work files may be modified by development activities. Note that during
+  development, the repository may not have a valid version (see chapter 7.2).
+
+- The sub-directory release/ should be the mount point for release repositories
+  whose work files must have a fixed version state and must not be modified any
+  more. If all versions and dependencies haven been chosen properly, a clean
+  build may be performed and/or program files may be executed.
+
+Additional sub-directories may be used (e.g. to keep multiple versions of
+documentation or libraries in parallel, to make program files executable from
+the command line or to collect individual files of a PRODUCT). However, those
+parts remain unspecified.
+
+If a repository is created, exported or cloned to such a mount point, the local
+relative path of the repository should be the name of the repository except
+that if the name contains periods ('.'), each part of the name separated by the
+periods should be a separate directory (i.e. the periods should be replaced by
+an environment-dependent path separator).
+
+Examples:
+
+- Local path for development of the Retro-Frame repository "common":
+  $<native-base-directory>/Retro-Frame/dev/common/
+
+- Local path for releases v2.1 of the Retro-BASIC repository "test":
+  $<native-base-directory>/Retro-BASIC/release/test/02.01/
+
+- Local path for development of the Retro-C repository "comp.stdc.recma55":
+  $<native-base-directory>/Retro-C/dev/comp/stdc/recma55/
+
+
+5.2 Text encoding
+-------------------------------------------------------------------------------
+
+In order to support a wide range of environments (see chapter 3), it would be
+desireable that the version control systems, if used, automatically encodes
+text in the native CHARACTER ENCODING of the current environment. In this case,
+the actual character encoding of text files in the repository would be
+transparent. It must be ensured that CHARACTERS which cannot be represented by
+the native CHARACTER SET are preserved (e.g. by means of escape sequences).
+
+However, if no version control system is used or if automatic character
+encoding is not supported, the following encoding rules are to be taken into
+account:
+
+- DOCUMENTATION shall and SOURCE CODE should be restricted to the STANDARD
+  CHARACTER SET.
+
+- Text files which are limited to the STANDARD CHARACTER SET should be encoded
+  by plain ASCII.
+
+- Other text files should be encoded by UTF-8 with a Byte Order Mark (BOM)
+  which would be the only difference to plain ASCII if all characters were
+  encoded by a single byte.
+
+- Line breaks should be represented by a single LF as this is assumed to be
+  recognized properly by most environments. However, if required, CR/LF, CR,
+  NEL or a native line break character sequence may be used instead.
+
+- No control characters should be used except HT (horizontal tab) and line
+  breaks (see above).
+
+These rules do not apply on cases where a specific CHARACTER ENCODING or
+CHARACTER SET is intended (e.g. test files or CONTROL FILES).
+
+
+5.3 Commits and tags
+-------------------------------------------------------------------------------
+
+A REPOSITORY must provide a commit mechanism, which preserves a certain state
+of all comprised files and may be called a snapshot.
+
+Each commit shall be identifiable by a timestamp, representing the current
+date and time when the commit took place. The timestamp shall be UTC except
+while the repository resides on the local file system, in which case the
+timestamp may also be local time.
+
+In addition, a repository shall provide tags (sometimes called labels) which
+may be used to associate a specific commit with a text string. Each tag should
+be up to eight characters, consisting of alphanumeric characters, the hyphen
+'-', the period '.' and the exclamation mark '!', at minimum. Tags may or may
+not be case sensitive.
+
+It must be possible to retrieve (i.e. check out or export) an arbitrary commit
+state at any time.
+
+
+5.4 License and readme files
+-------------------------------------------------------------------------------
+
+If licensing is provided for a repository (see chapter 6), the license text
+including a copyright notice should be stored as a plain text file "LICENSE"
+which should be located in the root directory of the repository.
+
+In addition, each repository should contain a readme file which should comprise
+the following elements:
+
+- The repository's title
+- A reference to the Retro-Endeavor
+- The repository's location
+- The repository's version (see chapter 7.2)
+- Environmental constraints, if applicable
+- Dependencies, if applicable
+- Compliance
+- License type and file, if applicable
+- Copyright notice
+- Table of contents
+- Overview of the contents of the repository
+- Instructions how to build an executable from the source, if applicable
+- Usage (i.e. instructions how to use the SOFTWARE), if applicable
+- Configuration options, if applicable
+- Descriptions of the DOCUMENTATION parts, if applicable
+- Security considerations, if applicable (see chapter 8)
+- References (including one to the Retro-Frame Common Documentation)
+
+There should be a seperate copyright notice for each contributer and for each
+such notice, the years in which the contributer publicly published changes
+should be listed (separated by commas ',', consecutive years should be shown
+as a range separated by a hypen '-'). If a private repository (see chapter 6.3)
+becomes publicly published, the year of publication must be set (which may
+require changes in WORK FILES just to set the correct year). Multiple copyright
+notices should be ordered by the first time of contribution (e.g. timestamp of
+the first commit to a repository), starting with the earliest one.
+
+Examples:
+
+- Copyright (c) 2026 <contributer-1>
+
+- Copyright (c) 2025-2026 <contributer-1>
+  Copyright (c) 2025 <contributer-2>
+
+- Copyright (c) 2021-2023, 2025 <contributer-1>
+  Copyright (c) 2021, 2024 <contributer-2>
+  Copyright (c) 2025-2026 <contributer-3>
+
+The readme file should either be a plain text file "README" or a [MARKDOWN]
+file "README.md" and should also be located in the root directory of the
+repository. A generic template is provided by /template/rf-readme.md//.
+
+
+5.5 Directory structures and exclusions
+-------------------------------------------------------------------------------
+
+In general, the contents of a repository is unspecified. However, the following
+directories in the root of the repository should be used if applicable:
+
+- /doc/ should contain general DOCUMENTATION
+- /spec/ should contain SPECIFICATIONS
+- /src/ should contain all SOURCE FILES
+- /res/ should contain all RESOURCE FILES
+- /bin/ should contain translated SOURCE or RESOURCE FILES (i.e. no WORK FILES)
+- /build/ should contain CONTROL FILES
+- /test/ should contain test files
+- /notes/ may contain DOCUMENTS which maintain open issues (e.g. backlog or to
+  do lists), temporary documentation during development, test logs including
+  identified bugs during test stages, reported bugs or security vulnerabilities
+  after release and release notes.
+
+Directories or sub-directories starting with a commercial at symbol ('@')
+should be excluded from all repositories. Such directories may be used for
+files which are related to the repository but should remain on the local
+file system only.
+
+In addition, directories and/or files which contain temporary or generated data
+(i.e. are neither WORK FILES or CONTROL FILES) should also be excluded. The
+specification of such files depends on the development environment.
+
+
+5.6 Branching, merging and pull requests
+-------------------------------------------------------------------------------
+
+If a REPOSITORY provides branching, the initial branch should be named "main".
+This shall remain the default branch, if the repository supports one.
+
+For each release, a dedicated branch with the fixed width version number of the
+release as the name shall be created in order to allow support versions for
+this release (e.g. by providing a patch) without affecting other releases. Note
+that the commit on which a release branch is applied will also have a version
+tag of that release (e.g. the commit where the branch "02.07" forks will also
+have the version tag "02.07.00").
+
+Additional working branches may be used during development. When work on such a
+branch is finished, the results should be merged into the parent branch (e.g.
+the main branch). Pull requests, if provided, may be used to indicate that such
+a merge is requested. If conflicts occur during merge, automatic resolving may
+take place but in some cases manual resolving is required.
+
+The branches of a repository may be depicted as follows:
+
+main branch <--------+
+|                    | merge
++-- working branch --+
+|                    |
++-- working branch --+
+|   ...
+|
++-- release branch <-----+
+|   |                    | merge
+|   +-- working branch --+
+|   |                    |
+|   +-- working branch --+
+|       ...
+|
++-- release branch
+    ...
+
+
+
+6. REPOSITORY TYPES AND LICENSING
+===============================================================================
+
+
+6.1 Manual repositories
+-------------------------------------------------------------------------------
+
+A manual REPOSITORY is maintained on a local disk. Access control, branching
+and backup must be performed manually on the file system. Commits are done by
+packing the entire repository as a ZIP file whose name should consist of the
+repository's name, a timestamp in the format YYYYMMDDHHMM and one or more
+optional tags, all separated by low lines ('_'). If the file system does not
+allow such file names (see chapter 5.3 regarding the character set of tags),
+the ZIP files should be numbered in ascending order and a text file should be
+maintained to provide timestamp and tag information.
+
+As the repository is not published, no licensing is required.
+
+
+6.2 Offline repositories
+-------------------------------------------------------------------------------
+
+An offline REPOSITORY is maintained on the local file system by means of a
+version control system (e.g. Git) for commits, branching and merging. Access
+control and backup has to be performed manually.
+
+As the repository is not published, no licensing is required.
+
+
+6.3 Private repositories
+-------------------------------------------------------------------------------
+
+A private REPOSITORY is maintained on a version control platform (e.g. GitHub)
+which should provide access control and backup facilities. A pull request
+mechanism is recommended.
+
+The owner of such a repository may be a person or a technical user. The owner
+may grant read access to individual users and write access to contributers.
+Each contributer may maintain a local clone of the online repository.
+
+The online repository should be referenced by a fixed URL. This URL may be the
+standard URL of the version control platform or a private URL.
+
+As the repository is not published to the public, licensing is not required but
+recommended.
+
+
+6.4 Public repositories
+-------------------------------------------------------------------------------
+
+A public REPOSITORY is maintained on a version control platform (e.g. GitHub)
+which shall provide access control and backup facilities. A pull request
+mechanism is recommended.
+
+The owner of such a repository may be a person or a technical user. Read access
+is not restricted (i.e. the repository is public readable). The owner may grant
+write access to contributers. Each contributer may maintain a local clone of
+the online repository.
+
+The online repository should be referenced by a fixed URL. This URL may be the
+standard URL of the version control platform or a private URL.
+
+As the repository is published to the public, licensing is required. In order
+to ensure high license compatibility, each Retro-Frame compliant public
+repository should be published under the [MIT LICENSE].
+
+
+6.5 Collaborative repositories
+-------------------------------------------------------------------------------
+
+A collaborative REPOSITORY is maintained on a version control platform (e.g.
+GitHub) which shall provide access control and should provide backup facilities
+and a pull request mechanism.
+
+The owner of such a repository should be a technical user. Read access is not
+restricted (i.e. the repository is public readable). The owner may grant write
+access to maintainers and pull requests to individual contributers or public.
+Each contributer may maintain a local clone of the online repository.
+
+The collaborative repository should be referenced by a fixed URL. This URL may
+be the standard URL of the version control platform or a private URL.
+
+As the repository is published to the public, licensing is required. In order
+to ensure high license compatibility, each Retro-Frame compliant collaborative
+repository should be published under the [MIT LICENSE].
+
+
+
+7. VERSIONING
+===============================================================================
+
+Retro-Frame follows the ideas of [SEMANTIC VERSIONING] but does not fully
+comply with it.
+
+
+7.1 Regular version numbers
+-------------------------------------------------------------------------------
+
+A <major-version> number is a decimal value in the range 1..32 and, if it
+stands for its own, represented as by one of the following formats:
+
+- Fixed width major version number representations always use two decimal
+  digits. If the value of the major version is less than 10, a leading zero
+  ('0') is prepended.
+
+- Variable width major version number representations also use decimal digits
+  but no leading zeros and ".x" (or ".X" if lowercase letters are not provided)
+  is appended.
+
+All other regular version numbers consist of two or three version elements,
+where each element is a decimal number and the elements are separated by
+a period ('.') or an exclamation mark ('!'). There are two textual
+representations of regular version numbers (binary representations are
+unspecified):
+
+- Fixed width version number representations always use two decimal digits for
+  each element. If the value of one element is less than 10, a leading zero
+  ('0') is prepended.
+
+- Variable width version number representations also use decimal digits but no
+  leading zeros. If it is not clear by context that the format represents a
+  version number, a leading 'v' (or 'V' if lowercase letters are not provided)
+  is prepended.
+
+Pre-release version numbers are in the format
+
+  <major-version>_'.'_<minor-version>_'!'_<pre-release>
+
+where <major-version> is in the same range as described above, <minor-version>
+is in the range 0..31 and <pre-release> is in the range 0..30 (e.g. 01.23!08
+respectively v1.23!8). For a new pre-release, <pre-release> is incremented by
+one until the version is released.
+
+Release version numbers are in the format
+
+  <major-version>_'.'_<minor-version>
+
+where <major-version> and <minor-version> are in the same range as described
+above (e.g. 01.23 respectively v1.23). An initial release always has version
+number 01.00 respectively v1.0 and for a new major release, <major-version> is
+incremented by one while <minor-version> is set to zero. For a new minor
+release, <major-version> remains unchanged and <minor-version> is incremented
+by one. 
+
+Support version numbers are in the format
+
+  <major-version>_'.'_<minor-version>_'.'_<patch>
+
+where the range of <major-version> and <minor-version> are in the same range
+as described above and <patch> shall be in the range 0..31 (e.g. 25.02.03
+respectively v25.2.3). The initial release version has always <patch> set to
+zero. For each new support version, <patch> is incremented by one.
+
+
+7.2 Repository versioning
+-------------------------------------------------------------------------------
+
+As a REPOSITORY represents a sequence of individual commits, the repository
+itself has no version. However, a specific commit may be considered a version.
+In this case, the pre-release or support version should be specified by means
+of a tag.
+
+Thus, if a specific commit associated with a version tag is retrieved from the
+repository, the resulting files have a defined version according to the tag.
+
+In the following cases, as second tag should be added:
+
+- If a pre-release version is considered a new test stage, a tag representing
+  the stage (i.e. "alpha", "beta" et cetera). If a pre-release version is
+  incremented during a test stage which remains unchanged, the existing tag
+  remains unchanged as well.
+
+- If a support version indicates deprecation of the release, the tag
+  "deprecated".
+
+Commits without a version tag do not have a version. The latest commit is
+called the head. Thus, the head represents the current state of development
+(which may not have a version yet).
+
+If branches are used and commits with the same tag(s) occur in multiple
+branches, the state must be identical. However, each branch has its own head.
+
+The readme file of the repository should always represent the current version
+number. If changes are made after a commit with a version tag, the pre-release
+respectively support version should be incremented by one and "(dev)" should be
+appended to the version number until the changes become a new version. In
+addition, the test stage (if given) should be appended within parenthesis.
+
+
+7.3 Work file versioning
+-------------------------------------------------------------------------------
+
+If a WORK FILE shows a version number (either in the source or as output when
+executed), the release version number must be set to the same release version
+number like the repository when changed or not released yet (i.e. if a work
+file has been released but not changed, the version nummer remains unchanged).
+
+The pre-relase or support version of a work file may be individual for the
+file. However, it must not be higher than the one of the current version tag,
+if one is given. If the work file is in the head an the head does not have a
+version tag, the pre-release or support version must equal the one of the last
+tag incremented by one (or zero if no tag exists).
+
+Examples:
+
+- Work files A and B are part of a commit with tag 01.00!00. Both should show
+  the same pre-release version number.
+
+- In a new commit, work file A is changed to pre-release version 01.00!01. Work
+  file B still shows version 01.00!00.
+
+- This or a subsequent commit is versioned by the tag 01.00!01.
+
+- In a new commit, work file B is changed from pre-release version 01.00!00 to
+  pre-release version 01.00!02.
+
+- The next version tag of a commit should be 01.00!02.
+
+If the version tag is a release (i.e. the support version is zero), or a test
+stage tag has been set (i.e. a pre-release version is considered a new test
+stage), all work files with the current release version must also show the same
+pre-relase or support version. Note that this does not apply on work files
+whose version number did not change at all (see above).
+
+
+7.4 Product versioning
+-------------------------------------------------------------------------------
+
+If a PRODUCT comprises multiple SOFTWARE and/or DOCUMENTATION components, each
+component should have the same release version like the product.
+
+The pre-relase or support version of the product should be the maximum of those
+of the individual components. Thus, if a patch is applied to one or more
+components, the product's support version number should be incremented by one
+and the resulting number should be used for all components which have been
+changed for the patch.
+
+
+7.5 Data format version numbers
+-------------------------------------------------------------------------------
+
+While text DATA FORMAT versions are represented as regular release version
+numbers, including the allowed ranges, the binary DATA FORMAT versions are
+represented in the format
+
+  <major-version>_':'_<minor-version>
+
+where both, <major-version> and <minor-version>, are represented by hexacecimal
+digits in the range 00..FF (this is the only case where the major version may
+be zero).
+
+However, in both cases (i.e. text or binary data formats), the allowed range of
+minor versions may explicitly be restricted for each major version.
+
+Implementations which support data format versions shall be upward compatible
+for increasing minor version numbers as long as the major version number is
+unchanged (i.e. elements which are not recognized are ignored).
+
+The specification of the data format may deprecate a version. In this case,
+implementations should not create data formats of this version but may still
+read them (in which case the user should be warned that a deprecated data
+format is used). Either the entire major version number or a minor version
+number of the data format may become deprecated. In the first case, deprecation
+affects only the single major version. In the second case, deprecation also
+affects all lower minor version numbers of the same major version number. In
+both cases, deprecation should be permanent.
+
+Thus, for each major version, the minimum and maximum minor version as well as
+an optional deprecated minor version (which must be in that range) must be
+recognized. If a deprecated minor version equals the maximum minor version, the
+entire major version is considered deprecated.
+
+Implementations should always support lower major version numbers or lower
+minor version numbers of the same major version number unless deprecated. Thus,
+no new minor version number must be created as soon as a new major version
+number is released. Deprecated versions shall be recognized as soon as the
+implementation becomes aware of deprecation.
+
+
+
+8. SECURITY CONSIDERATIONS
+===============================================================================
+
+Security is a rather difficult aspect of retro programming. On the one hand,
+even retro software should be secure. On the other hand, security has often
+been neglected in the past and it may be necessary (e.g. due to cryptographic
+compatibility) or even fun (e.g. to try to exploit a retro software) to
+produce less secure programs.
+
+As the Retro-Endeavors focus on development, security considerations are
+limited to the SOFTWARE itself. Other environmental aspects which may have
+great influence on the security respectively the risks (e.g. network access
+control, user rights, system configuration or sandboxing) are out of scope and
+need to be considered separately.
+
+
+8.1 Security objectives and potential threats
+-------------------------------------------------------------------------------
+
+In general, all threats which may result in a loss of one or more of the
+following security objectives should be considered:
+
+- Confidentiality (i.e. no unauthorized disclosure of information).
+
+- Integrity (i.e. no unauthorized modification of information).
+
+- Availability (i.e. information can be processed when required).
+
+Thus, two classes of security threats should be distinguished:
+
+- Threats which affect the information processed by the PRODUCT which is build
+  from SOFTWARE developed by a Retro-Endeavor. In order to respect the
+  individual values those information may have to the user, the classification
+  scheme for impact levels (see chapter 8.2) should be used to assess the
+  potential impact in case of loss of confidentiality, integrity and/or
+  availability.
+
+- Threats which affect the ENVIRONMENT (e.g. the operating system) in which the
+  product is executed. While the potential impact in these cases may vary, this
+  is always considered to have the highest impact.
+
+Those two cases may not only distinguished in terms of the potential impact but
+also in terms of attack vectors:
+
+- The information may be attacked by gaining unauthorized access to the data
+  processing itself or while data is being transmitted or stored (or, in rare
+  cases, processed in virtual environments), if the attacker is able to bypass
+  the data processing through direct access to parts of the environment (e.g.
+  the system, storage or network).
+
+- The environment may be attacked by exploiting vulnerabilities of the programs
+  which may lead to unintended behavior (e.g. unauthorized code execution,
+  privilege escalation, system information disclosure etc.). In some cases the
+  vulnerabilities are inherent and cannot entirely be avoided (e.g. distributed
+  denial of service on a network).
+
+
+8.2 Impact levels
+-------------------------------------------------------------------------------
+
+The impact of security threats heavily depends on the value which the affected
+asset (i.e. information or environment) has to the user. In order to respect
+the individual values of assets in a simplified manner, the following impact
+levels are specified:
+
+Impact level "none":
+
+- There is no security objective or the loss a security objective would be
+  insignificant.
+
+- Information may be publicly available.
+
+- The environment in which the program file(s) are executed will cause no harm
+  if compromised (e.g. a sandbox or honeypot).
+
+Impact level "low":
+
+- The loss of a security objective would be neglectable.
+
+- Information is considered internal (i.e. not intended to be publicly
+  available but not sensitive).
+
+- The environment in which the program file(s) are executed will result in
+  minimal harm if compromised (e.g. a virtual test system which can be reverted
+  to a snapshot).
+
+Impact level "medium":
+
+- The loss of a security objective could have moderate impact.
+
+- Information is considered sensitive but not secret respectively not critical
+  in terms of integrity and/or availability.
+
+- The environment in which the program file(s) are executed will result in
+  limited harm if compromised (e.g. a computer on which no secret or critical
+  information is stored).
+
+Impact level "high":
+
+- The loss of a security objective could have severe impact.
+
+- Information is considered secret respectively critical in terms of integrity
+  and/or availability.
+
+- The environment in which the program file(s) are executed will result in
+  significant harm if compromised (e.g. a server).
+
+If the levels of sensitivity differ for the individual security objectives, the
+highest (i.e. maximum) level shall be chosen.
+
+
+8.3 Security levels
+-------------------------------------------------------------------------------
+
+The aimed level of security should be defined for each PROGRAM FILE. It may
+either be fixed (and should not be changed within the major release) or the
+security level may be selectable on compile-time or even on run-time.
+
+Security level "insecure":
+
+- The security level "insecure" indicates that a program file is intentionally
+  insecure. The execution of such a program file may cause severe harm not only
+  regarding the information but also for the environment.
+
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
+  impact level "none" should be used.
+
+- Whenever a program file on this security level is started, the user must be
+  warned in a clear and emphasized manner and explicitly and interactively
+  confirm (e.g. by typing a sequence of characters which is randomly chosen by
+  the program) before any insecure operation is executed.
+
+Security level "low":
+
+- The security level "low" indicates that security has not been explicitly
+  considered or known weak operations are included, which however must not
+  entail any known risk for the environment.
+
+- Cryptographic algorithms which are known to be broken are always considered
+  weak operations (this may lead to cases where unencrypted processing of non-
+  sensitive data is not considered a weak operation while encrypting the same
+  data with a broken algorithm is considered a weak operation in order to avoid
+  a false sense of security).
+
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
+  maximum impact level "low" should be used.
+
+- Whenever a program file on this security level is started, the user must be
+  warned. Before weak operations become effective, the user's agreement should
+  be confirmed by a simple mechanism (e.g. a defined keystroke or a command
+  line argument). If the user's agreement is given before the program file is
+  started, the warning may be omitted.
+
+Security level "medium":
+
+- The security level "medium" indicates that security has been considered but
+  not explicitly verified (e.g. by means of a peer-review or a penetration
+  test). In addition, weak user choices, which may impact the confidentiality
+  or integrity of the data processed, are not prevented (e.g. less complex
+  passwords).
+
+- This includes cryptographic algorithms which are considered weak or
+  deprecated (e.g. DES or MD5) and may be chosen by the user arbitrarily or
+  negotiated (e.g. by a network protocol).
+
+- Unless the environment in which the program file(s) are executed as well as
+  data is transmitted or stored is trusted, only information or environments of
+  maximum impact level "medium" should be used.
+
+- This security level is considered the default mode of retro programming.
+  Thus, an explicit warning or even confirmation is not required but a hint
+  should be printed on the version/license output.
+
+Security level "high":
+
+- The security level "high" indicates that security has been considered and is
+  considered strong according to current standards. No insecure operations are
+  allowed. Weak or deprecated operations or cryptographic algorithms are
+  allowed but require an explicit warning and confirmation by the user.
+
+- This security level must only be assumed if stated explicitly.
+
+Details regarding the security level(s) and specific security risks should be
+described in the readme file (see chapter 5.4).

@@ -1,0 +1,685 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Character Specification
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-char.txt//
+Version:     01.00.00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-02-14 : 01.00.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. CHARACTER PROPERTIES
+   2.1  Codepoints
+   2.2  Categories
+   2.3  Names
+   2.4  Line breaks
+   2.5  Whitespace
+   2.6  Digits
+   2.7  Letters
+
+3. CHARACTER SET
+   3.1  Unicode characters
+   3.2  Extended characters
+   3.3  Non-characters
+   3.4  Direct encodings
+   3.5  String terminators
+
+4. PRINTABLE AND REPLACEMENT CHARACTERS
+   4.1  Level 1 (minimum printable)
+   4.2  Level 2 (basic printable)
+   4.3  Level 3 (standard printable)
+   4.4  Level 4 (codepage printable)
+   4.5  Level 5 (Unicode printable)
+
+5. CHARACTER ENCODINGS
+   5.1  Internal 32 bit representation
+   5.2  Internal 16 bit representation
+   5.3  Character Strings (CS)
+   5.4  Packed Character Strings (PCS)
+   5.5  Escape sequences
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.0").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides a SPECIFICATION of Retro-Frame characters, which are a
+superset of [UNICODE], and corresponding character encodings.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[ISO 6429]
+International Standard ISO/IEC 6429:1992 - Information technology - Control
+functions for coded characters sets, Edition 3, 1992.
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+[UNICODE]
+The Unicode(R) Standard, The Unicode Consortium, for latest version see
+<https://www.unicode.org/versions/latest/>.
+
+
+
+2. CHARACTER PROPERTIES
+===============================================================================
+
+
+2.1 Codepoints
+-------------------------------------------------------------------------------
+
+The codepoints of Retro-Frame characters are represented by a sequence of four
+or six uppercase hexadecimal digits ('0'..'9', 'A'..'F'), prefixed by "R+".
+
+
+2.2 Categories
+-------------------------------------------------------------------------------
+
+Each Retro-Frame character (i.e. its codepoint) is assigned to a category. The
+categories are related to one or more general categories defined by [UNICODE]:
+
+  Category        Unicode category            Unicode basic type
+  --------------  --------------------------  ------------------
+  Grapheme        Letter, uppercase           Graphic
+                  Letter, lowercase           Graphic
+                  Letter, titlecase           Graphic
+                  Letter, modifier            Graphic
+                  Letter, other               Graphic
+                  Mark, nonspacing            Graphic
+                  Mark, spacing combined      Graphic
+                  Mark, enclosing             Graphic
+                  Number, decimal digit       Graphic
+                  Number, letter              Graphic
+                  Number, other               Graphic
+                  Punctuation, connector      Graphic
+                  Punctuation, dash           Graphic
+                  Punctuation, open           Graphic
+                  Punctuation, close          Graphic
+                  Punctuation, initial quote  Graphic
+                  Punctuation, final quote    Graphic
+                  Punctuation, other          Graphic
+                  Symbol, math                Graphic
+                  Symbol, currency            Graphic
+                  Symbol, modifier            Graphic
+                  Symbol, other               Graphic
+  Spacing         Separator, space            Graphic
+  Control         Separator, line             Format
+                  Separator, paragraph        Format
+                  Other, control              Control
+                  Other, format               Format
+  Non-character   Other, surrogate            Surrogate
+                  Other, not assigned         Noncharacter
+  Unspecified     Other, private use          Private-use
+                  Other, not assigned         Reserved
+
+As each Unicode codepoint is assigned to exactly one Unicode general category,
+the assignment to a Retro-Frame character category can be derived (implicit
+assignment). All non-Unicode codepoints are explicitly assigned to a category
+(see chapter 3).
+
+
+2.3 Names
+-------------------------------------------------------------------------------
+
+All grapheme, spacing, control as well as the Retro-Frame defined non-character
+codepoints have a name assigned.
+
+For grapheme and spacing characters, the [UNICODE] names are used in lowercase
+letters, if available. Otherwise (i.e. for Retro-Frame defined grapheme and
+spacing characters), an individual name is assigned (see chapter 3.2). Aliases
+may be used but are not considered the name. If a character name is formally
+used, all letters are uppercase and spaces are replaced by low lines ('_').
+
+For Unicode control characters, the [UNICODE] abbreviations (which are all
+spelled in uppercase letters), if given, are used as names. The aliases may
+be used but are not considered the name. For Retro-Frame defined control
+characters, similar names are assigned (see chapter 3.2).
+
+While Unicode non-character codepoints do not have a name assigned, Retro-Frame
+defined codepoints have a name in uppercase letters and optional low lines (see
+chapter 3.3).
+
+
+2.4 Line breaks
+-------------------------------------------------------------------------------
+
+The following control characters are considered a line break unless specified
+otherwise in a specific context:
+
+- R+000A  LF (line feed)
+- R+000B  VT (vertical tab)
+- R+000C  FF (form feed)
+- R+000D  CR (carriage return)
+- R+0085  NEL (next line)
+- R+2028  LS (line separator)
+- R+2029  PS (paragraph separator)
+- R+D801  CRLF (CR/LF sequence)
+- R+D802  LFCR (LF/CR sequence)
+
+If a CR is immediately followed by an LF, or vice versa, the combination is
+considered a single line break (see chapter 3.2).
+
+
+2.5 Whitespace
+-------------------------------------------------------------------------------
+
+Whitespace are considered word separators. While a line break (see chapter 2.4)
+is always a word separator, the following [UNICODE] characters are considered a
+whitespace (i.e. a word separator) if not specified otherwise in a specific
+context:
+
+- R+0009  HT (horizontal tab)
+- R+0020  ' ' (space)
+- R+D800  TSP (tentative space, see chapter 3.2)
+
+In addition, Retro-Frame defines a tentative space as an extended character
+(see chapter 3.2) which should be recognized as whitespace if no whitespace
+is preceding or following it.
+
+Other characters of the category spacing are, in general, not considered a
+whitespace.
+
+
+2.6 Digits
+-------------------------------------------------------------------------------
+
+Retro-Frame defines the codepoints R+0030..R+0039 ('0'..'9') as decimal digits.
+
+
+2.7 Letters
+-------------------------------------------------------------------------------
+
+Retro-Frame defines the codepoints R+0041..R+005A ('A'..'Z') as uppercase
+letters and the codepoints R+0061..R+007A ('a'..'z') as lowercase letters.
+Together, these are the (only) letters.
+
+
+
+3. CHARACTER SET
+===============================================================================
+
+
+3.1 Unicode characters
+-------------------------------------------------------------------------------
+
+The range R+000000..R+10FFFF of a Retro-Frame character is specified as the
+[UNICODE] character of the corresponding codepoint (i.e. U+000000..U+10FFFF).
+
+The following codepoints of Unicode must never be used:
+
+- U+00D800..U+00DFFF  (may occur as surrogates in UTF-16 encodings)
+- U+00FDD0..U+00FDEF  (may be used internally as non-characters)
+- U+0?FFFE..U+0?FFFF  (? = 0..F)
+- U+10FFFE..U+10FFFF
+
+However, if such codepoints occur on Unicode input, they may be preserved by
+direct encoding (see chapter 3.4). Note that in this case the codepoints
+change (e.g. sorting may produce different results than if those codepoints,
+although invalid, were left unchanged).
+
+While the range R+D800..R+DCFF is used for Retro-Frame extended characters
+(see chapter 3.2), some of the codepoints may be used by 16 bit character
+representation (see chapter 5.2). Note that the codepoint R+DFFF is always
+considered invalid.
+
+
+3.2 Extended characters
+-------------------------------------------------------------------------------
+
+Retro-Frame specifies extended characters which are assigned to two separate
+ranges of codepoints which are not used by Unicode. The low codepoints use the
+surrogate codepoints in the range R+D800..R+DCFF and can be represented by a
+single 16 bit character (see chapter 5.2). The other extended characters use
+the range R+110000..R+126FC1 above the Unicode codepoints.
+
+The following extended characters are defined:
+
+  Codepoint  Name  Category  Description
+  ---------  ----  --------  -------------------------------------------------
+  R+D800     TSP   Spacing   Tentative space (represents a space (' ') if it
+                             stands alone or no whitespace precedes or follows)
+  R+D801     CRLF  Control   Represents a CR/LF sequence as a single character
+                             and is considered a line break (see chapter 2.4)
+  R+D802     LFCR  Control   Represents a LF/CR sequence as a single character
+                             and is considered a line break (see chapter 2.4)
+
+The remaining currently unspecified codepoints in the ranges R+D803..R+DCFF
+and R+110000..R+126FC1 are reserved.
+
+
+3.3 Non-characters
+-------------------------------------------------------------------------------
+
+The ranges R+00FDD0..R+00FDEF and R+126FC2..R+FFFFFF of Retro-Frame character
+codepoints is reserved for non-characters. Non-characters may be used to encode
+internal states (e.g. separators or keyboard codes) by a character type.
+
+The following non-characters are defined:
+
+- R+126FC2            NO_CHAR (generic non-character)
+- R+126FC3            PATH_SEPARATOR
+- R+126FC4..R+7FFFFF  (reserved)
+- R+800000..R+FFFFFF  private use area (will always remain unspecified)
+
+
+3.4 Direct encodings
+-------------------------------------------------------------------------------
+
+Direct encoding is a feature to preserve a character value of arbitrary byte
+length which cannot or should not be mapped to a defined codepoint. However,
+lengths of more than 30 bits require one or even more shifted parts so that in
+this case, a direct encoding is restricted to a string.
+
+The following ranges are defined for direct encoding:
+
+- 0x0F000000..0x0FFFFFFF  3 bytes shift part of a direct encoding
+- 0x10000000..0x100000FF  1 byte direct encoding low part
+- 0x20000000..0x2000FFFF  2 bytes direct encoding low part
+- 0x30000000..0x30FFFFFF  3 bytes direct encoding low part
+- 0x40000000..0x7FFFFFFF  4 bytes direct encoding low part <= 0x3FFFFFFF
+
+If n shift parts precede an m byte direct encoding low part, the total byte
+length of the resulting value is 3 * n + m.
+
+Direct encodings are not not assigned to a category. There should be no
+interpretation of direct encodings and processing is limited to copying or
+deleting.
+
+
+3.5 String terminators
+-------------------------------------------------------------------------------
+
+String terminators indicate the end of a character string (see chapter 5.3).
+
+The following ranges are defined for string terminators:
+
+- 0x80000000..0xFFFFFFFD  unspecified string terminator
+- 0xFFFFFFFE              TRUNCATED (string resulted from a longer string)
+- 0xFFFFFFFF              TERMINATED (normal end of string)
+
+While two string terminators, TRUNCATED and TERMINATED, have a predefined
+meanings, unspecified string terminators may be used to encode further string
+information (e.g. the original encoding of a string). They may also be used to
+indicate errors on character or string operations (in this case, they may also
+be used as a value of a single character).
+
+
+
+4. PRINTABLE AND REPLACEMENT CHARACTERS
+===============================================================================
+
+
+4.1 Level 1 (minimum printable)
+-------------------------------------------------------------------------------
+
+The characters of the MINIMAL CHARACTER SET are expected to be printable in all
+environments (level 1).
+
+However, as this set of printable characters is extremely limited, it should
+be used only if it is important that output is accurate on all systems.
+
+A character which is not printable may be omitted or replaced by a question
+mark ('?').
+
+
+4.2 Level 2 (basic printable)
+-------------------------------------------------------------------------------
+
+The characters of the BASIC CHARACTER SET are expected to be printable in most
+environments which are in primary scope of Retro-Frame (level 2).
+
+A character which is not printable may be omitted, escaped (see chapter 5.5) or
+replaced by a question mark ('?').
+
+
+4.3 Level 3 (standard printable)
+-------------------------------------------------------------------------------
+
+The characters of the STANDARD CHARACTER SET are printable in all ASCII
+environments and even in most EBCDIC environments (level 3).
+
+A character which is not printable may be omitted, escaped (see chapter 5.5) or
+replaced by a question mark ('?').
+
+
+4.4 Level 4 (codepage printable)
+-------------------------------------------------------------------------------
+
+If a CODEPAGE is used, all grapheme or spacing CODEPOINTS of the associated
+CHARACTER SET are printable. Note that this level may not entail all the
+printable characters of the previous levels. However, in this level all
+printable characters of the CODEPAGE are covered.
+
+A character which is not printable may be omitted, escaped (see chapter 5.5) or
+replaced by a question mark ('?') respectively a CODEPAGE-specific replacement
+character.
+
+
+4.5 Level 5 (Unicode printable)
+-------------------------------------------------------------------------------
+
+If Unicode is used, all grapheme or spacing CODEPOINTS are printable. However,
+for characters other than Latin-1 (i.e. CODEPOINTS > R+00FF), it depends on the
+chosen font whether or not a character is actually printable.
+
+It is expected that a character which is not printable is implicitly omitted or
+replaced in a system-dependent manner. However, if a character is intentionally
+replaced, the Unicode replacement character (R+FFFD) shall be used.
+
+If it is important that all printable characters are actually represented, only
+CODEPOINTS of the STANDARD CHARACTER SET (i.e. ASCII printable) shall be used
+and all other CODEPOINTS shall be escaped (see chapter 5.5). In this case, it
+must be considered whether the line break CODEPOINTS R+0085 NEL, R+2028 LS and
+R+2029 PS shall be translated to R+000D CR and/or R+000A LF or escaped.
+
+
+5. CHARACTER ENCODINGS
+===============================================================================
+
+
+5.1 Internal 32 bit representation
+-------------------------------------------------------------------------------
+
+If 32 bit integers are supported by the environment, codepoints may be
+represented by a 32 bit unsigned integer value.
+
+In this case, all codepoints can be represented by a single value. However,
+direct encodings of more than 30 bits require shifted high parts and are thus
+only representable by a character string (see chapter 3.4).
+
+
+5.2 Internal 16 bit representation
+-------------------------------------------------------------------------------
+
+A Retro-Frame character may be implemented by 16 bit unsigned integer values
+with some limitations under the following rules:
+
+- Direct encodings are limited to 1 byte in the range 0xDE00..0xDEFF and 1 byte
+  shift parts in the range 0xDD00..0xDDFF (i.e. Unicode low surrogates).
+
+- Codepoints >= R+010000 are represented by a value in the range 0xDF00..0xDFFE
+  (i.e. a Unicode low surrogate), followed by a second value. The 8 bits of the
+  first value are used as the high bits, the 16 bits of the second value as the
+  low bits and 0x010000 is added. The resulting range is 0x010000..0xFFFFFF.
+
+  As a consequence, codepoints >= R+010000 cannot be represented by a single
+  value but only in strings.
+
+- The codepoint R-DFFF remains invalid.
+
+- Non-characters can only be represented as a single codepoint in the range
+  0xFDD0..0xFDEF.
+
+- String terminators are limited to TRUNCATED (0xFFFE) and TERMINATED (0xFFFF).
+  
+
+5.3 Character Strings (CS)
+-------------------------------------------------------------------------------
+
+A character string (CS) is a sequence of Retro-Frame character values and may
+be terminated by a string terminator (see chapter 3.5). However, the count of
+valid characters in a string may also be maintained in a different way (e.g. a
+leading count value or if the string is at the end of a delimited data format).
+
+While the string count is always the number of valid character values
+(excluding string terminators, if given), the string length may be defined in
+the specific context. While characters (including control characters) should
+always be counted, non-characters and direct encodings may or may not be
+counted (however, in any case, the shift part of a direct encoding as well as
+string terminators should never be counted for the string length).
+
+
+5.4 Packed Character Strings (PCS)
+-------------------------------------------------------------------------------
+
+A packed character string (PCS) is a sequence of one to three bytes (i.e. 8 bit
+unsigned integer values) in big endian order (i.e. the values representing the
+most significant bits come first) that are used to represent the Retro-Frame
+character codepoints. Unlike UTF-8, the individual values overlap so that
+packed character strings must always be interpreted from the beginning of the
+string.
+
+Codepoints are encoded as follows:
+
+- 0x000000..0x0000BF  Codepoints are unchanged and represented by a single
+                      byte.
+
+- 0x0000C0..0x002C7F  For encoding, 0x00BF40 is added and the resulting values
+                      (0xC000..0xEBBF) are represented by two bytes.
+
+- 0x002C80..0x00DCFF  For encoding, 0xEB9380 is added and the resulting values
+                      (0xEBC000..0xEC707F) are represented by three bytes.
+
+- 0x00E000..0x00FDCF  For encoding, 0xEB9080 is added and the resulting values
+                      (0xEC7080..0xEC8E4F) are represented by three bytes.
+
+- 0x00FDF0..0x00FFFD  For encoding, 0xEB9060 is added and the resulting values
+                      (0xEC8E50..0xEC905D) are represented by three bytes.
+
+- 0x010000..0x01FFFD  For encoding, 0xEB905E is added and the resulting values
+                      (0xEC905E..0xED905B) are represented by three bytes.
+
+- 0x020000..0x02FFFD  For encoding, 0xEB905C is added and the resulting values
+                      (0xED905C..0xEE9059) are represented by three bytes.
+
+- 0x030000..0x03FFFD  For encoding, 0xEB905A is added and the resulting values
+                      (0xEE905A..0xEF9057) are represented by three bytes.
+
+- 0x040000..0x04FFFD  For encoding, 0xEB9058 is added and the resulting values
+                      (0xEF9058..0xF09055) are represented by three bytes.
+
+- 0x050000..0x05FFFD  For encoding, 0xEB9056 is added and the resulting values
+                      (0xF09056..0xF19053) are represented by three bytes.
+
+- 0x060000..0x06FFFD  For encoding, 0xEB9054 is added and the resulting values
+                      (0xF19054..0xF29051) are represented by three bytes.
+
+- 0x070000..0x07FFFD  For encoding, 0xEB9052 is added and the resulting values
+                      (0xF29052..0xF3904F) are represented by three bytes.
+
+- 0x080000..0x08FFFD  For encoding, 0xEB9050 is added and the resulting values
+                      (0xF39050..0xF4904D) are represented by three bytes.
+
+- 0x090000..0x09FFFD  For encoding, 0xEB904E is added and the resulting values
+                      (0xF4904E..0xF5904B) are represented by three bytes.
+
+- 0x0A0000..0x0AFFFD  For encoding, 0xEB904C is added and the resulting values
+                      (0xF5904C..0xF69049) are represented by three bytes.
+
+- 0x0B0000..0x0BFFFD  For encoding, 0xEB904A is added and the resulting values
+                      (0xF6904A..0xF79047) are represented by three bytes.
+
+- 0x0C0000..0x0CFFFD  For encoding, 0xEB9048 is added and the resulting values
+                      (0xF79048..0xF89045) are represented by three bytes.
+
+- 0x0D0000..0x0DFFFD  For encoding, 0xEB9046 is added and the resulting values
+                      (0xF89046..0xF99043) are represented by three bytes.
+
+- 0x0E0000..0x0EFFFD  For encoding, 0xEB9044 is added and the resulting values
+                      (0xF99044..0xFA9041) are represented by three bytes.
+
+- 0x0F0000..0x0FFFFD  For encoding, 0xEB9042 is added and the resulting values
+                      (0xFA9042..0xFB903F) are represented by three bytes.
+
+- 0x100000..0x10FFFD  For encoding, 0xEB9040 is added and the resulting values
+                      (0xFB9040..0xFC903D) are represented by three bytes.
+
+- 0x110000..0x126FC1  For encoding, 0xEB903E is added and the resulting values
+                      (0xFC903E..0xFDFFFF) are represented by three bytes.
+
+The following bytes, which are neither CHARACTERS nor NON-CHARACTERS, represent
+string terminators:
+
+- 0xFE  TRUNCATED
+- 0xFF  TERMINATED
+
+Thus, a packed character string cannot represent non-characters or direct
+encodings.
+
+
+5.5 Escape sequences
+-------------------------------------------------------------------------------
+
+If Retro-Frame characters are represented as text (i.e. printed), non-printable
+characters, non-characters and direct encodings have no graphical
+representation (i.e. a defined grapheme). In addition, control characters which
+normally control output (e.g. a new line), should not be interpreted in some
+cases (e.g. if part of a file name).
+
+Those characters may be omitted or replaced by a common replacement character.
+However, in this case, the codepoint would be lost on output and it would not
+be possible to enter the codepoint on input.
+
+In order to represent a non-printable codepoint, escape sequences may be used.
+The default Retro-Frame escape character is the circumflex accent ('^', caret).
+However, for local input or output, a native escape character may also be
+defined.
+
+If escaping is recognized, the following sequences are defined after the
+occurence of an escape character:
+
+- Any character which is neither a digit ('0'..'9') nor a letter ('A'..'Z',
+  'a'..'z') stands for itself and will not have a special meaning, even it
+  would have one in the specific context (in particular, the escape character
+  itself may be represented this way).
+
+- One of the following single characters represent specific characters:
+  - '0' represents codepoint R+0000 (NUL, null)
+  - 'C' represents codepoint R+0003 (ETX, end of text)
+  - 'a' represents codepoint R+0007 (BEL, alert)
+  - 'b' represents codepoint R+0008 (BS, backspace)
+  - 't' represents codepoint R+0009 (HT, horizontal tab)
+  - 'n' represents codepoint R+000A (LF, line feed)
+  - 'v' represents codepoint R+000B (VT, vertical tab)
+  - 'f' represents codepoint R+000C (FF, form feed)
+  - 'r' represents codepoint R+000D (CR, carriage return)
+  - 'Z' represents codepoint R+001A (SUB, substitute)
+  - 'e' represents codepoint R+001B (ESC, escape)
+  - 'X' represents codepoint R+0020 (' ', space)
+  - 'D' represents codepoint R+007F (DEL, delete)
+  - 'E' represents codepoint R+0085 (NEL, next line / EOL, end of line)
+  - 'L' represents codepoint R+2028 (LS, line separator)
+  - 'P' represents codepoint R+2029 (PS, paragraph separator)
+  - 'R' represents codepoint R+110000 (CRLF, CR/LF sequence)
+  - 'N' represents codepoint R+110001 (LFCR, LF/CR sequence)
+
+- A sequence of two or more uppercase hexadecimal digits ('0'..'9', 'A'..'F')
+  represents a single codepoint in the range R+000000..R+FFFFFF. A comma (',')
+  after the value indicates that another value follows. The sequence of one or
+  more values must be terminated by a semicolon (';'). Note that not all such
+  codepoints may be representable by 16 bit representations.
+
+- The letter 'x', followed by a sequence of hexadecimal digits in uppercase
+  ('0'..'9', 'A'..'F') represents a value which is represented by direct
+  encoding. A comma (',') after the value indicates that another value follows.
+  The sequence of one or more values must be terminated by a semicolon (';').
+  Note that a single direct encoding may be represented by multiple characters
+  (in this case, all characters but one are shift parts). In all cases, leading
+  zeros are ignored on input but should not be present at output.
+
+Examples:
+
+- "^^" represents the circumflex accent itself.
+
+- "^t" represents the codepoint 0x09 (HT, horizontal tab).
+
+- "^X" represents the codepoint 0x20 (' ', space).
+
+- "^P" represents the codepoint 0x2029 (PS, paragraph separator).
+
+- "^0" represents the codepoint 0x00 (NUL, null).
+
+- "^00;" represents the codepoint 0x00 (NUL, null).
+
+- "^A0;" represents the codepoint 0xA0 (no-break space).
+
+- "^5E,61;" represents the codepoints 0x0000005E and 0x00000061 ("^a") which
+  do not in turn represent an escape sequence.
+
+- "^x0;" represents the codepoint 0x01000000 (value zero represented by a 1
+  byte direct encoding low part).
+
+- "^x1,FFFF;" represents the codepoints 0x01000001 and 0x0200FFFF (value 0x1
+  represented by a 1 byte direct encoding low part and value 0xFFFF represented
+   by a 2 bytes direct encoding low part).
+
+- "^x2000000;" represents the codepoint 0x60000000 (value 0x2000000 represented
+  by a 4 bytes direct encoding low part).
+
+- "^x0004000000;" represents the codepoints 0x0F040000 and 0x10000000 (value
+  0x4000000 represented by a 3 bytes direct encoding shift part, followed by a
+  1 byte direct encoding low part).

@@ -1,0 +1,645 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Definitions
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /doc/rf-def.txt//
+Version:     01.00.00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-02-14 : 01.00.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. DOCUMENTATION-RELATED TERMS
+   2.1  Definition
+   2.2  Taxonomy
+   2.3  Guidelines
+   2.4  Description
+   2.5  Instruction
+   2.6  Template
+
+3. SPECIFICATION-RELATED TERMS
+   3.1  Specification
+   3.2  Code list
+   3.3  Algorithm
+   3.4  Algorithm specification
+   3.5  Data format
+   3.6  Data format specification
+   3.7  Protocol
+   3.8  Protocol specification
+   3.9  Environment
+   3.10 Environment specification
+
+4. SOFTWARE-RELATED TERMS
+   4.1  Documentation
+   4.2  Program
+   4.3  Source code
+   4.4  Resource
+   4.5  Software
+   4.6  Product
+
+5. CHARACTER-RELATED TERMS
+   5.1  Character
+   5.2  Non-character
+   5.3  Codepoint
+   5.4  Character set
+   5.5  Minimal character set
+   5.6  Basic character set
+   5.7  Standard character set
+   5.8  Sortable character set
+   5.9  Character encoding
+   5.10 Character code / code
+   5.11 Single byte character set
+   5.12 Multi byte character set
+   5.13 Character domain
+   5.14 Codepage
+   5.15 Character string / string
+   5.16 String terminator
+   5.17 String length
+   5.18 String count
+   5.19 String size
+
+6. FILE-RELATED TERMS
+   6.1  Work file
+   6.2  Document
+   6.3  Source file
+   6.4  Unit
+   6.5  Resource file
+   6.6  Control file
+   6.7  Executable
+   6.8  Program file
+   6.9  Repository
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.0").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document contains common definitions.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[REQUIREMENT LEVEL KEYWORDS]
+RFC: 2119 - Key words for use in RFCs to Indicate Requirement Levels, see
+<https://datatracker.ietf.org/doc/html/rfc3986>.
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+
+
+2. DOCUMENTATION-RELATED TERMS
+===============================================================================
+
+
+2.1 Definition
+-------------------------------------------------------------------------------
+
+A 'DEFINITION' is a mapping of a simple term to a complex term, expressed as
+text, in order to clarify terminology (i.e. a word or a phrase is explained by
+other words) or to introduce a simplified code which may be used equivalently
+to a (e.g. more complex or less memorizable) term. The simple term should be
+capitalized and enclosed by apostrophes (''') at the first occurence in the
+DEFINITION. It should be replaceable by the defined complex term in any context
+outside the DEFINITION and may be capitalized to emphasize that it is a defined
+term. In DOCUMENTS, apostrophes which are enclosing more than one character
+should only be used outside a DEFINITION if their meaning is clear (e.g.
+according to the rules of a metasyntax). The complex term should consist only
+of terms that have already been defined or do not need to be defined and ends
+at the first full stop (if given). Further explaining text, including examples,
+may follow.
+
+
+2.2 Taxonomy
+-------------------------------------------------------------------------------
+
+A 'TAXONOMY' is a set of related definitions where each definition is relating
+to exactly one other definition of the same TAXONOMY an hierarchical order
+(i.e. there must be no circle of definitions). In most cases, the relating
+definition adds further attributes to the related definition which results in
+a more special term of a more generic term.
+
+
+2.3 Guidelines
+-------------------------------------------------------------------------------
+
+'GUIDELINES' are a set of normative rules expressed as text using [REQUIREMENT
+LEVEL KEYWORDS], regardless whether in uppercase or lowercase letters, to
+indicate under which circumstances each rule must be observed in order to
+comply.
+
+
+2.4 Description
+-------------------------------------------------------------------------------
+
+A 'DESCRIPTION' is a non-defining and non-normative explaining text to support
+understanding.
+
+
+2.5 Instruction
+-------------------------------------------------------------------------------
+
+An 'INSTRUCTION' is a non-defining and non-normative explaining text to enable
+the proper usage of a program, product or application.
+
+
+2.6 Template
+-------------------------------------------------------------------------------
+
+A 'TEMPLATE' is a layout of a text structure without any content.
+
+
+
+3. SPECIFICATION-RELATED TERMS
+===============================================================================
+
+
+3.1 Specification
+-------------------------------------------------------------------------------
+
+A 'SPECIFICATION' is an explaining text which defines normative and possible
+optional rules for a particular subject identified by a term (called the
+"identifier", e.g. a name or a code) and a version number. Conformance to a
+particular SPECIFICATION is given if all normative (i.e. non-optional) rules
+are fulfilled. The identifiers of multiple SPECIFICATIONS may or may not form a
+taxonomy. If they do, the SPECIFICATION of a subject must be a superset of all
+higher related SPECIFICATIONS (i.e. conformance to a SPECIFICATION always
+implies conformance to all higher related SPECIFICATIONS).
+
+
+3.2 Code list
+-------------------------------------------------------------------------------
+
+A 'CODE LIST' is a set of homogeneous DEFINITIONS as part of a SPECIFICATION
+where the simple term is represented as a code (i.e. a sequence of alphanumeric
+and possible non-delimiting symbol characters like a hyphen '-'). 
+
+The entire CODE LIST or parts of it may or may not be a taxonomy. Apart from
+relations possibly constituted by a taxonomy, a CODE LIST should not depend on
+the order of the definitions.
+
+
+3.3 Algorithm
+-------------------------------------------------------------------------------
+
+An 'ALGORITHM' is a sequence of operations to translate a defined input into a
+defined output. Each operation is either another ALGORITHM (which may even be
+recursively the ALGORITHM itself) or an atomic operation which is clear how to
+be executed.
+
+
+3.4 Algorithm specification
+-------------------------------------------------------------------------------
+
+An 'ALGORITHM SPECIFICATION' is a SPECIFICATION whose subject is a specific
+ALGORITHM.
+
+
+3.5 Data format
+-------------------------------------------------------------------------------
+
+A 'DATA FORMAT' is a combination of syntax and semantics which allows the
+interpretation of a sequence of characters or bytes. While the syntax is used
+to arrange multiple elements of data, the semantics determine the meaning of
+those elements.
+
+
+3.6 Data format specification
+-------------------------------------------------------------------------------
+
+A 'DATA FORMAT SPECIFICATION' is a SPECIFICATION whose subject is a specific
+DATA FORMAT.
+
+
+3.7 Protocol
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL' is a set of rules to exchange information between two or more
+parties by means of data transmission.
+
+
+3.8 Protocol specification
+-------------------------------------------------------------------------------
+
+A 'PROTOCOL SPECIFICATION' is a SPECIFICATION whose subject is a specific
+PROTOCOL.
+
+
+3.9 Environment
+-------------------------------------------------------------------------------
+
+An 'ENVIRONMENT' is an abstract class of systems for data processing with
+specific common characteristics (e.g. properties, capabilities and/or
+constraints). While all systems of a specific ENVIRONMENT must be identical
+regarding those characteristics, the may be different otherwise.
+
+
+3.10 Environment specification
+-------------------------------------------------------------------------------
+
+An 'ENVIRONMENT SPECIFICATION' is a SPECIFICATION whose subject is a specific
+ENVIRONMENT.
+
+
+
+4. SOFTWARE-RELATED TERMS
+===============================================================================
+
+
+4.1 Documentation
+-------------------------------------------------------------------------------
+
+'DOCUMENTATION' is a set of DEFINITIONS, GUIDELINES, DESCRIPTIONS,
+INSTRUCTIONS, TEMPLATES and/or SPECIFICATIONS.
+
+
+4.2 Program
+-------------------------------------------------------------------------------
+
+A 'PROGRAM' is a set of optional declarations, optional internal data and
+sequences of instructions which can be executed by a machine.
+
+
+4.3 Source code
+-------------------------------------------------------------------------------
+
+'SOURCE CODE' is a human-readable text that represents an entire or a part of
+a PROGRAM. Thus, a SOURCE CODE may or may not be a PROGRAM. In case it only
+represents a part of a PROGRAM, which is not entirely executable by a machine,
+it is considered a PROGRAM fragment (e.g. a module or an include file).
+
+
+4.4 Resource
+-------------------------------------------------------------------------------
+
+'RESOURCE' is text or binary data which is supplementary to a program in order
+to execute as intended (i.e. not SOURCE CODE) or to a user in order to use a
+program as intended (i.e. not DOCUMENTATION). Thus, a RESOURCE is considered
+additional external data (e.g. configuration, images or strings) but not a
+PROGRAM or even a part of it.
+
+
+4.5 Software
+-------------------------------------------------------------------------------
+
+'SOFTWARE' is a set of one or more PROGRAMS and/or RESOURCES which are
+considered a unity in order to serve one or more specific purposes. While
+related or associated DOCUMENTATION is not implicitly considered part of a
+SOFTWARE, it may be covered if explicitly stated (e.g. by the MIT license).
+Note that a software may or may not include SOURCE CODE.
+
+
+4.6 Product
+-------------------------------------------------------------------------------
+
+A 'PRODUCT' is SOFTWARE in a DATA FORMAT which can be processed in a specific
+execution ENVIRONMENT and optionally related DOCUMENTATION. Thus, a PRODUCT is
+the outcome of software development process which does not require and further
+translation (e.g. compilation) and may include additional DOCUMENTATION, if not
+already part of the SOFTWARE.
+
+
+
+5. CHARACTER-RELATED TERMS
+===============================================================================
+
+
+5.1 Character
+-------------------------------------------------------------------------------
+
+A 'CHARACTER' is the smallest entity that represents a human-readable text and
+is binary representable (i.e. by a number). It may be printable, in which case
+it is either a grapheme (i.e. have a graphical representation) or spacing (i.e.
+blank space of a certain width), or a control character, which advises how to
+interpret or to arrange the other characters (e.g. indicating a line break). If
+the meaning of a character is not known, it is called unspecified.
+
+
+5.2 Non-character
+-------------------------------------------------------------------------------
+
+A 'NON-CHARACTER' is a number which has a specific meaning but is not
+considered a CHARACTER.
+
+
+5.3 Codepoint
+-------------------------------------------------------------------------------
+
+A 'CODEPOINT' is a number which distinctly represents a CHARACTER or a
+NON-CHARACTER.
+
+
+5.4 Character set
+-------------------------------------------------------------------------------
+
+A 'CHARACTER SET' is a set of contiguous CODEPOINTS, starting from zero, which
+represent at least one CHARACTER. Thus, NON-CHARACTERS may or may not be
+contained (however, a CHARACTER SET must not consist only of CODEPOINTS which
+represent NON-CHARACTERS). As a consequence, if a CHARACTER SET consists of n
+CHARACTERS and NON-CHARACTERS, the CODEPOINTS are 0 to n - 1.
+
+
+5.5 Minimal character set
+-------------------------------------------------------------------------------
+
+A 'MINIMAL CHARACTER SET' is a CHARACTER SET which includes CODEPOINTS for at
+least the following CHARACTERS:
+
+- the space ' ',
+- the digits '0'..'9',
+- the uppercase letters 'A'..'Z' and
+- the symbols '"', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
+  '>'and '?',
+
+where the CODEPOINTS of the digits and the uppercase letters 'A'..'I', 'J'..'R'
+and 'S'..'Z' are consecutive.
+
+
+5.6 Basic character set
+-------------------------------------------------------------------------------
+
+A 'BASIC CHARACTER SET' is a MINIMAL CHARACTER SET which additionally includes
+CODEPOINTS for at least the following CHARACTERS:
+
+- the lowercase letters 'a'..'z',
+- the symbols '!', '%', '&' and ''',
+- the symbol '$', optionally represented by a generic currency symbol
+  (codepoint R+00A4) if the dollar sign is not included, and
+- the symbol '^', optionally represented by an upwards arrow (codepoint R+2191)
+  if the circumflex accent is not included,
+
+where the CODEPOINTS of the lowercase letters have all the same offset to the
+CODEPOINTS of the corresponding uppercase letters (as a consequence, 'a'..'i',
+'j'..'t' and 's'..'z' are consecutive).
+
+
+5.7 Standard character set
+-------------------------------------------------------------------------------
+
+A 'STANDARD CHARACTER SET' is a BASIC CHARACTER SET which explicitly includes
+the symbols '$' and '^' and additionally includes CODEPOINTS for at least the
+following CHARACTERS:
+
+- the symbols '#', '@', '[', '\', ']', '_', '`', '{', '|', '}' and '~'.
+
+
+5.8 Sortable character set
+-------------------------------------------------------------------------------
+
+A 'SORTABLE CHARACTER SET' is a CHARACTER SET where the CODEPOINTS of the
+uppercase letters are consecutive and, if lowercase letters are given, also the
+CODEPOINTS of the lowercase letters are consecutive.
+
+Note that on case sensitive sort the order of uppercase letters and lowercase
+letters may be different (i.e. whether 'A' < 'a' or 'A' > 'a' is true) and that
+language-specific letters may be mapped to regular letters for sorting (e.g.
+the Umlaute and the sharp S in German).
+
+
+5.9 Character encoding
+-------------------------------------------------------------------------------
+
+A 'CHARACTER ENCODING' is the binary representation of CODEPOINTS by elements
+of equal size. If one element is capable to represent the entire CHARACTER SET,
+each element represents exactly one CODEPOINT and the CHARACTER ENCODING is
+called fixed-width. In contrast, if one or more consecutive elements represent
+a CODEPOINT according to a specified encoding rule, the CHARACTER ENCODING is
+called variable-width.
+
+
+5.10 Character code / code
+-------------------------------------------------------------------------------
+
+A 'CHARACTER CODE' (or just 'CODE' if it is clear that a CHARACTER CODE is
+meant) is the value of an element of a CHARACTER ENCODING. Note that a
+CHARACTER CODE may or may not be equal to the represented CODEPOINT.
+
+
+5.11 Single byte character set
+-------------------------------------------------------------------------------
+
+A 'SINGLE BYTE CHARACTER SET' (SBCS) is a CHARACTER SET which consists of no
+more than 256 CODEPOINTS. Thus, each CODEPOINT can be represented by a single
+byte and character encoding is trivial.
+
+
+5.12 Multi byte character set
+-------------------------------------------------------------------------------
+
+A 'MULTI BYTE CHARACTER SET' (MBCS) is a CHARACTER SET which consists of more
+than 256 CODEPOINTS. Thus, at least some CODEPOINTS require more than one byte
+to be represented by CHARACTER ENCODING. Note that CODEPOINTS of a MULTI BYTE
+CHARACTER SET may still be represented fixed-width by a single element (which
+in this case must be of a size greater than one byte).
+
+
+5.13 Character domain
+-------------------------------------------------------------------------------
+
+A 'CHARACTER DOMAIN' denotes a CHARACTER SET which may not be entirely known
+but of which at least some CODEPOINTS are known or required. Thus, a CHARACTER
+DOMAIN may be a CHARACTER SET which is entirely or partially known, but not
+entirely unknown.
+
+
+5.14 Codepage
+-------------------------------------------------------------------------------
+
+A 'CODEPAGE' is a CHARACTER ENCODING with an element size of one byte assigned
+to a specific CHARACTER SET. Note that the CHARACTER SET of the CODEPAGE may be
+a SINGLE BYTE CHARACTER SET or a variable-width MULTI BYTE CHARACTER SET (which
+includes fixed-width MULTI BYTE CHARACTER SETS as a special case).
+
+
+5.15 Character string / string
+-------------------------------------------------------------------------------
+
+A 'CHARACTER STRING' (or just 'STRING' if it is clear that a CHARACTER STRING
+is meant) is an array (i.e. a sequence of elements of equal size) which
+represents a sequence of CHARACTERS or NON-CHARACTERS (even none in which case
+the STRING is called empty) in a specific CHARACTER ENCODING. If the CHARACTER
+ENCODING is not fixed-width (i.e. variable-width), the STRING is called packed.
+
+
+5.16 String terminator
+-------------------------------------------------------------------------------
+
+A 'STRING TERMINATOR' is a value of an element of a CHARACTER ENCODING which
+indicates the end of a STRING. It may or may not be a CHARACTER CODE (i.e. a
+CHARACTER or NON-CHARACTER). However, in this case, the STRING TERMINATOR
+itself cannot be represented by the STRING. A STRING may or may not use STRING
+TERMINATORS.
+
+
+5.17 String length
+-------------------------------------------------------------------------------
+
+The 'STRING LENGTH' denotes the number of CHARACTERS and NON-CHARACTERS (i.e.
+CODEPOINTS) in a STRING (if the STRING is empty, the STRING LENGTH is zero). If
+STRING TERMINATORS are used, they are not included in the STRING LENGTH.
+
+
+5.18 String count
+-------------------------------------------------------------------------------
+
+The 'STRING COUNT' denotes the number of elements in a STRING (if the STRING
+is empty, the STRING COUNT is zero). If STRING TERMINATORS are used, they are
+not included in the STRING COUNT. If the STRING is not packed, the STRING COUNT
+equals the STRING LENGTH.
+
+
+5.19 String size
+-------------------------------------------------------------------------------
+
+The 'STRING SIZE' denotes the size occupied by a STRING in bytes (if the STRING
+is empty, the STRING SIZE is zero). If STRING TERMINATORS are used, they are
+not included in the STRING SIZE. If the elements of a STRING are single bytes,
+the STRING SIZE equals the STRING COUNT.
+
+
+
+6. FILE-RELATED TERMS
+===============================================================================
+
+
+6.1 Work file
+-------------------------------------------------------------------------------
+
+A 'WORK FILE' is a file which contains non-deducible data and is required to
+develop a SOFTWARE including related or associated DOCUMENTATION. Creating,
+editing and/or deleting WORK FILES is performed through the software
+development process. Files which are deducible (e.g. translation results or
+temporary files) are not considered WORK FILES.
+
+
+6.2 Document
+-------------------------------------------------------------------------------
+
+A 'DOCUMENT' is a WORK FILE which contains DOCUMENTATION.
+
+
+6.3 Source file
+-------------------------------------------------------------------------------
+
+A 'SOURCE FILE' is a WORK FILE which contains SOURCE CODE.
+
+
+6.4 Unit
+-------------------------------------------------------------------------------
+
+A 'UNIT' is a set of one or more SOURCE FILES which are considered an entity
+which is a part of a PROGRAM and independently translateable and/or partially
+executable (i.e. if invoked in a specific manner which is not necessarily
+provided by the execution ENVIRONMENT).
+
+
+6.5 Resource file
+-------------------------------------------------------------------------------
+
+A 'RESOURCE FILE' is a WORK FILE which contains original RESOURCES. Thus, if a
+RESOURCE FILE is translated during build, the resulting file is not considered
+a WORK FILE or RESOURCE file.
+
+
+6.6 Control file
+-------------------------------------------------------------------------------
+
+A 'CONTROL FILE' is a WORK FILE which contains data used for the software
+development process but not being part of the SOFTWARE itself (e.g. build,
+project and/or configuration files of the translation ENVIRONMENT).
+
+
+6.7 Executable
+-------------------------------------------------------------------------------
+
+An 'EXECUTABLE' is a binary (i.e. not human-readable) file which can be
+processed in a specific execution ENVIRONMENT.
+
+
+6.8 Program file
+-------------------------------------------------------------------------------
+
+A 'PROGRAM FILE' is an EXECUTABLE or a SOURCE FILE which can be processed in a
+specific execution ENVIRONMENT (e.g. by an interpreter). Thus, a SOURCE FILE
+which needs translation in order to be executable (e.g. by a compiler) is still
+considered a PROGRAM but not a PROGRAM FILE.
+
+
+6.9 Repository
+-------------------------------------------------------------------------------
+
+A 'REPOSITORY' is a set of related WORK FILES and optionally other related
+files (e.g. CONTROL FILES) with version control (i.e. on changes, older
+versions of the files are kept).

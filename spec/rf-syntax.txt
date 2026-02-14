@@ -1,0 +1,611 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Syntax Specification
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-syntax.txt//
+Version:     01.00.00
+Compliance:  Retro-Frame 1.0
+License:     MIT
+
+Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-02-14 : 01.00.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. METASYNTAX
+   2.1  Literals
+   2.2  Comments
+   2.3  Terminal symbols
+   2.4  Non-terminal symbols
+
+3. TEXT DATA FORMAT SPECIFICATION SYNTAX
+   3.1  Additional terminal symbols
+   3.2  Syntax
+   3.3  Semantics
+
+4. BINARY DATA FORMAT SPECIFICATION SYNTAX
+   4.1  Additional terminal symbols
+   4.2  Syntax
+   4.3  Semantics
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.0").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides a SPECIFICATION of a metasyntax based on [BNF] which is
+used to specify a respective syntax for text and binary data format
+specifications. Despite their intended use, the metasyntax and/or the syntax
+specifications may also be used for other purposes.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[BNF]
+Backus-Naur Form, Wikipedia, see
+<https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form>.
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+
+
+2. METASYNTAX
+===============================================================================
+
+The intended use of the metasyntax is the specification of a syntax in this or
+other documents. Thus, the meaning of whitespace, line breaks and end of text
+should be clear as the text appears (a page break is considered a line break).
+Otherwise, a STANDARD CHARACTER SET is assumed.
+
+
+2.1 Literals
+-------------------------------------------------------------------------------
+
+A literal is a fixed sequence of non-whitespace characters, enclosed in
+quotation marks. A quotation mark itself within the sequence is represented by
+two quotation marks (e.g. """" represents a literal consisting of a single
+quotation mark). There must be no line breaks or end of text after the first
+quotation mark until the last quotation mark is reached.
+
+A literal is matched if the same sequence of characters, without any whitespace
+or line breaks in between, appears in the input text. As a special case, an
+empty literal (i.e. "") always matches.
+
+
+2.2 Comments
+-------------------------------------------------------------------------------
+
+A comment starts with a semicolon (';') which is not part of a literal and ends
+at a line break or end of text. Comments consist of an arbitrary sequence of
+defined characters (including the semicolon) and/or whitespace and are ignored.
+
+
+2.3 Terminal symbols
+-------------------------------------------------------------------------------
+
+A terminal symbol has a predefined meaning and is represented by a sequence of
+one or more characters of the following character set:
+
+- uppercase letters ('A'-'Z')
+- digits ('0'-'9')
+- '!', '#', '$', '%', '&', '+', '-', '.', ':', '?', '@', '^' or '~'
+
+The metasyntax predefines the following terminal symbols:
+
+  Symbol  Definition
+  ------  -------------------------------------------------------------------
+  END     End of text (e.g. end of chapter)
+  LB      Line break (i.e. end of line), including END
+  WS      Any whitespace, excluding LB
+  SP      A single space (i.e. ' ')
+  9       An arbitrary digit (i.e. '0'-'9')
+  X       An arbitrary uppercase hexadecimal digit (i.e. '0'-'9' | 'A'-'F')
+  x       An arbitrary lowercase hexadecimal digit (i.e. '0'-'9' | 'a'-'f')
+  A       An arbitrary uppercase letter (i.e. 'A'-'Z')
+  a       An arbitrary lowercase letter (i.e. 'a'-'z')
+  ?       An arbitrary letter (i.e. A | a)
+  !       An arbitrary character of the MINIMAL CHARACTER SET
+  .       An arbitrary character of the input text, excluding WS and LB
+
+In a specific context, additional terminal symbols may be specified. However,
+when using the metasyntax, the predefined terminal symbols as specified above
+should be used without change of meaning.
+
+A terminal symbol is matched if a character or a sequence of characters or any
+other condition according to the definition appears in the input text.
+
+
+2.4 Non-terminal symbols
+-------------------------------------------------------------------------------
+
+A non-terminal symbol defines a syntax by an expression. The input text matches
+a non-terminal symbol if it matches the expression.
+
+The symbol is represented by a sequence of characters, starting with a
+lowercase letter and optionally followed by one or more lowercase letters,
+digits and/or minus signs ('-'), enclosed in '<' and '>'. It may be used
+before, after or even within its definition (i.e. a recursive definition is
+allowed).
+
+The symbol is defined if it occurs at the beginning of a line (i.e. not
+preceded by whitespace), followed by a colon (':'). The expression follows and
+may span multiple lines if the lines belonging to the expression are indented
+by at least one whitespace and are not empty (i.e. consist of at least one
+non-whitespace character) except after the colon where no more than one empty
+line is allowed.
+
+An expression may a combination of the following:
+
+- A sequence of literals and terminal or non-terminal symbols matches if each
+  of the elements matches the input text in this order with the following rules
+  regarding whitespace (in this order):
+
+  - If the terminal symbol WS is given, a whitespace is required.
+
+  - If a low line ('_') is given between two elements (i.e. trailing the first
+    element and/or preceding the second element), no whitespace is allowed.
+
+  - Otherwise, whitespace is optional.
+
+- Elements or sequences of elements which are separated by a vertical bar ('|')
+  are considered variants and match if one of the variants match.
+
+- A single element, a sequence of elements or variant elements which are
+  enclosed in parenthesis ('(' and ')') is evaluated as a single element.
+
+- Single elements, sequences of elements or variant elements which are enclosed
+  in parenthesis ('(' and ')') or square brackets ('[' and ']'), possibly
+  immediately followed by an asterisk ('*') are evaluated as a single element
+  by the following rules:
+
+  - If parenthesis are used and no asterisk immediately follows the right
+    parenthesis, the element must occur exactly once.
+
+  - If parenthesis are used and an asterisk immediately follows the right
+    parenthesis, the element must occur at least once.
+
+  - If square brackets are used and no asterisk immediately follows the right
+    square bracket, the element is optional (i.e. may not occur or occur once).
+
+  - If square brackets are used and an asterisk immediately follows the right
+    square bracket, the element may occur arbitrary times (even not at all).
+
+  If an element is optional or may occur multiple times and the next element
+  is a subset and matches, the latter element matches rather than the optional
+  or repeated one (e.g. [ . ]* ? matches a sequence of arbitrary characters and
+  the first occurence of a letter).
+
+Example:
+
+<non-terminal-symbol-01>: [ "LITERAL"_]
+  <indented-other-non-terminal-symbol>
+  ( WS | LB )*                ; terminal symbols, one or more occurences
+  | <non-terminal-symbol-01>  ; recursive definition
+
+
+
+3. TEXT DATA FORMAT SPECIFICATION SYNTAX
+===============================================================================
+
+The text data format specification syntax is not only expressed by the
+metasyntax but also widely identical to it (in fact, it may also be called a
+metasyntax). However, while the metasyntax is applied to documents, text data
+formats require environmental considerations regarding characters, which
+includes implicit rules regarding spacing (so that spacing is not needed to be
+defined explicitly everywhere) and an optional implicit translation of letters
+to uppercase. Furthermore, additional terminal symbols will be predefined.
+
+
+3.1 Additional terminal symbols
+-------------------------------------------------------------------------------
+
+  Symbol       Definition
+  -----------  ------------------------------------------------------
+  TEXT-BODY    A sequence or unspecified characters (i.e. [ . ]*)
+  TEXT-FORMAT  A TEXT-BODY which represents a Retro-Frame data format
+  NUL          Control character null
+  SOH          Control character start of heading
+  STX          Control character start of text
+  ETX          Control character end of text
+  EOT          Control character end of transmission
+  ENQ          Control character enquiry
+  ACK          Control character acknowledge
+  BEL          Control character bell
+  BS           Control character backspace
+  HT           Control character horizontal tab
+  LF           Control character line feed
+  VT           Control character vertical tab
+  FF           Control character form feed
+  CR           Control character carriage return
+  SO           Control character shift out
+  SI           Control character shift in
+  DLE          Control character data link escape
+  DC1          Control character device control 1
+  DC2          Control character device control 2
+  DC3          Control character device control 3
+  DC4          Control character device control 4
+  NAK          Control character negative acknowledge
+  SYN          Control character synchronous idle
+  ETB          Control character end of transmission block
+  CAN          Control character cancel
+  EM           Control character end of medium
+  SUB          Control character substitution
+  ESC          Control character escape
+  FS           Control character file separator
+  GS           Control character group separator
+  RS           Control character record separator
+  US           Control character unit separator
+  DEL          Control character delete
+  NEL          Control character next line
+  LS           Control character line separator
+  PS           Control character paragraph separator
+
+
+3.2 Syntax
+-------------------------------------------------------------------------------
+
+<literal-char>:
+
+  9 | ? | SP | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" |
+  "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" | "?" | "@" |
+  "[" | "\" | "]" | "^" | "_" | "`" | "{" | "|" | "}" | "~"
+
+<literal>:
+
+  """"_[_<literal-char>_|_""""""_]*_""""
+
+<terminal-symbol>:
+
+  "END" | "LB" | "WS" | "SP" | "9" | "X" | "x" | "A" | "a" | "?" | "!" | "." |
+  "NUL" | "SOH" | "STX" | "ETX" | "EOT" | "ENQ" | "ACK" | "BEL" | "BS" | "HT" |
+  "LF" | "VT" | "FF" | "CR" | "SO" | "SI" | "DLE" | "DC1" | "DC2" | "DC3" |
+  "DC4" | "NAK" | "SYN" | "ETB" | "CAN" | "EM" | "SUB" | "ESC" | "FS" | "GS" |
+  "RS" | "US" | "DEL" | "NEL" | "LS" | "PS"
+
+<non-terminal-symbol-char>:
+
+  9 | a | "-"
+
+<non-terminal-symbol>:
+
+  "<"_a_[_<non-terminal-symbol-char>_]*_">"
+
+<line-break>:
+
+  [ ";" [ . | WS ]* [ LB [ WS ]* ";" [ . | WS ]* ]* ] LB
+
+<spacing>:
+
+  <line-break> WS | (_WS_|_"_"_)
+
+<element>:
+
+  <literal> | <terminal-symbol> | <non-terminal-symbol> | <variant-list>
+
+<sequence>:
+
+  (_<spacing>_<element>_)*
+
+<variant-sequence>:
+
+  <sequence>_[_<spacing>_"|"_<sequence>_]*
+
+<variant-list>:
+
+  ( "("_<variant-sequence>_<spacing>_")" |
+    "["_<variant-sequence>_<spacing>_"]" ) [_"*" ]
+
+<definition>:
+
+  <non-terminal-symbol>_":" [ <line-break> ] <variant-sequence> <line-break>
+
+<specification>:
+
+  (_<definition> LB )*
+
+
+3.3 Semantics
+-------------------------------------------------------------------------------
+
+As text data formats refer to characters, the binary representation (i.e. the
+character encoding) is not subject to the specification syntax. As the
+character encoding implies the character set, not all of the characters used
+by a text data format specification may be available in an environment.
+
+Furthermore, control characters may be treatened in different ways depending on
+the environment or configuration. In terms of the specification syntax, the
+following cases must be specified by the respective environment:
+
+- Characters which are treatened as end of file or end of text, even if further
+  characters may follow (which would be ignored). They are represented by the
+  terminal symbol END (see chapter 2.3).
+
+- Characters or character sequences which are considered a line break. They are
+  represented by the terminal symbol LB (see chapter 2.3).
+
+- Characters other than END and LB which are considered whitespace. They may
+  be represented explicitly by the terminal symbol WS but may also be allowed
+  or required implicitly by the spacing rules (see chapter 2.3).
+
+- Other control characters may be processed in an environmental-specific manner
+  (e.g. be ignored), result in an error or or be considered a valid character
+  which must match the syntax (as literals must not contain control characters,
+  an appropriate terminal symbol is required).
+
+Whether or not whitespace or other control characters are allowed but ignored
+within the sequence of characters, must be specified otherwise. In order to
+keep syntax definition simple, a literal must not contain such characters. By
+default, unless specified otherwise, if a whitespace or control character
+appears in the input text while a literal character is expected, the result is
+that the literal does not match.
+
+The text data format may specify general tokenizing rules which require or
+forbid whitespace between specific characters or tokens. Those rules only apply
+in absence of a low line ('_'), which inhibits implicit whitespace, and the WS
+symbol, which requires whitespace, in the syntax specification.
+
+
+
+4. BINARY DATA FORMAT SPECIFICATION SYNTAX
+===============================================================================
+
+
+4.1 Additional terminal symbols
+-------------------------------------------------------------------------------
+
+  Symbol           Definition
+  ---------------  ---------------------------------------------------
+  TYPE-IDENTIFIER  A type identifier according to /spec/rf-types.txt//
+
+
+4.2 Syntax
+-------------------------------------------------------------------------------
+
+<item-name>:
+
+  A [_9 |_A |_"_" ]*
+
+<variable>:
+
+  a [_9 |_? ]*
+
+<function>:
+
+  A [_9 |_? ]*
+
+<line-break>:
+
+  [ WS ";" [ . ]* [ LB WS ";" [ . ]* ]* ] LB
+
+<dec-value>:
+
+  9 [_9 ]*
+
+<hex-value>:
+
+  "0x"_(_X )*
+
+<constant>:
+
+  <dec-value> | <hex-value>
+
+<size>:
+
+  "1" "BYTE" | ( <constant> | <variable> | "?" ) "BYTES"
+
+<subscript>:
+
+  "[" <or-expression> "]"
+
+<param-list>:
+
+  "(" <or-expression> [ "," <or-expression> ]* ")"
+
+<value>:
+
+  <constant> | <variable> [ <subscript> ]* | <function> <param-list>
+
+<operand>:
+
+  [ <line-break> ":" ] [ "+" | "-" | "~" ]* ( <value> | "(" <expression> ")" )
+
+<mul-div-expression>:
+
+  [ <mul-div-expression> ( "*" | "/" | "%" ) ] <operand>
+
+<add-sub-expression>:
+
+  [ <add-sub-expression> ( "+" | "-" ) ] <mul-div-expression>
+
+<shift-expression>:
+
+   [ <shift-expression> ( "<<" | ">>" ) ] <add-sub-expression>
+
+<and-expression>:
+
+  [ <and-expression> "&" ] <shift-expression>
+
+<xor-expression>:
+
+  [ <xor-expression> "^" ] <and-expression>
+
+<or-expression>:
+
+  [ <or-expression> "|" ] <xor-expression>
+
+<item-assignment>:
+
+  [ <line-break> ":" ] "=" <or-expression>
+
+<variable-assignment>:
+
+  [ <line-break> ":" ] <variable> "=" <or-expression>
+
+<item-spec>:
+
+  ":" [ TYPE-IDENTIFIER ]
+  [
+    ( <item-assignment> [ <item-assignment> ]* | <variable-assignment> )
+    [ "," <variable-assignment> ]*
+  ]
+
+<relational-expression>:
+
+  [ <relational-expression> ( "<" | "<=" | ">" | ">=" ) ] <or-expression>
+
+<equality-expression>:
+
+  [ <equality-expression> ( "==" | "!=" ) ] <relational-expression>
+
+<logical-and-expression>:
+
+  [ <logical-and-expression> "&&" ] <equality-expression>
+
+<logical-or-expression>:
+
+  [ <logical-or-expression> "||" ] <logical-and-expression>
+
+<condition>:
+
+  WS "[" <logical-or-expression> "]" <line-break>
+
+<mask-item>:
+
+  [ <condition> ]
+  WS "MASK" WS <hex-value> WS <item-name> [ <item-spec> ] <line-break>
+
+<item>:
+
+  WS <size> WS <item-name>
+
+<block-item>:
+
+  [ <condition> ]
+  ( <item> | "[" <item> WS "]" ) [ <item-spec> ] <line-break>
+  [ <mask-item> ]*
+
+<fixed-array>:
+
+  <item> "[" "0" "]" [ <item-spec> ] <line-break>
+  WS "..." <line-break>
+  <item> "[" <variable> "-" "1" "]" [ <item-spec> ] <line-break>
+
+<variable-array>:
+
+  <item> [ <item-spec> ] <line-break>
+  WS "..." <line-break>
+  <item> [ <item-spec> ] <line-break>
+
+<block-array>:
+
+  [ <condition> ]
+  ( <fixed-array> | <variable-array> )
+
+<block>:
+
+  <item-name> WS "format:" LB LB ( <block-array> | <block-item> )*
+
+<specification>:
+
+  (_<block> LB )*
+
+
+4.3 Semantics
+-------------------------------------------------------------------------------
+
+The size of an <item> should be specified if known, either by a constant value
+or by a variable which may be determined by a previous <item-spec>. If an item
+has a type specification, the size must match the size of the type exactly. The
+size of a block is the sum of the size of all items. If the size of an item or
+a block is not known, a question mark ('?') is used instead.
+
+The mask values should be in the range of the item type and not overlap.
+
+If a condition is given, all subsequent block items until the next condition or
+the end of the block are only present if the condition is true. A condition
+consisting of a single asterisk ('*') is always true.
+
+Expressions and conditions are evaluated similar like C expressions. However,
+the rank of operators is slightly different. Variables may be defined by an
+<item-spec> or defined outside the format syntax. Functions are always defined
+outside the format syntax.
+
+A <block-array> is either a <fixed-array> or a <variable-array>. In the first
+case, the number of <item> elements must be given by a <variable> which was
+defined by a previous <item-spec>. In the second case, the number of <item>
+elements cannot be determined in advance and the array must be terminated, if
+not by the end of the stream, by the next <item> which must be different from
+any possible <item> element (e.g. a terminating value).
+
+The last block of a specification should have the format name as the
+<item-name>.
