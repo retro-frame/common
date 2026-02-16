@@ -13,7 +13,7 @@ Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.00.00
+Version:     01.00.01
 Compliance:  Retro-Frame 1.0
 License:     MIT
 
@@ -46,6 +46,10 @@ Change history
 2026-02-14 : 01.00.00 : Ingo
 
   Initial version.
+
+2026-02-16 : 01.00.01 : Ingo
+
+  Corrections in chapter 5.4.
 
 
 Contents
@@ -515,70 +519,70 @@ string.
 
 Codepoints are encoded as follows:
 
-- 0x000000..0x0000BF  Codepoints are unchanged and represented by a single
+- R+000000..R+0000BF  Codepoints are unchanged and represented by a single
                       byte.
 
-- 0x0000C0..0x002C7F  For encoding, 0x00BF40 is added and the resulting values
+- R+0000C0..R+002C7F  For encoding, 0x00BF40 is added and the resulting values
                       (0xC000..0xEBBF) are represented by two bytes.
 
-- 0x002C80..0x00DCFF  For encoding, 0xEB9380 is added and the resulting values
+- R+002C80..R+00DCFF  For encoding, 0xEB9380 is added and the resulting values
                       (0xEBC000..0xEC707F) are represented by three bytes.
 
-- 0x00E000..0x00FDCF  For encoding, 0xEB9080 is added and the resulting values
+- R+00E000..R+00FDCF  For encoding, 0xEB9080 is added and the resulting values
                       (0xEC7080..0xEC8E4F) are represented by three bytes.
 
-- 0x00FDF0..0x00FFFD  For encoding, 0xEB9060 is added and the resulting values
+- R+00FDF0..R+00FFFD  For encoding, 0xEB9060 is added and the resulting values
                       (0xEC8E50..0xEC905D) are represented by three bytes.
 
-- 0x010000..0x01FFFD  For encoding, 0xEB905E is added and the resulting values
+- R+010000..R+01FFFD  For encoding, 0xEB905E is added and the resulting values
                       (0xEC905E..0xED905B) are represented by three bytes.
 
-- 0x020000..0x02FFFD  For encoding, 0xEB905C is added and the resulting values
+- R+020000..R+02FFFD  For encoding, 0xEB905C is added and the resulting values
                       (0xED905C..0xEE9059) are represented by three bytes.
 
-- 0x030000..0x03FFFD  For encoding, 0xEB905A is added and the resulting values
+- R+030000..R+03FFFD  For encoding, 0xEB905A is added and the resulting values
                       (0xEE905A..0xEF9057) are represented by three bytes.
 
-- 0x040000..0x04FFFD  For encoding, 0xEB9058 is added and the resulting values
+- R+040000..R+04FFFD  For encoding, 0xEB9058 is added and the resulting values
                       (0xEF9058..0xF09055) are represented by three bytes.
 
-- 0x050000..0x05FFFD  For encoding, 0xEB9056 is added and the resulting values
+- R+050000..R+05FFFD  For encoding, 0xEB9056 is added and the resulting values
                       (0xF09056..0xF19053) are represented by three bytes.
 
-- 0x060000..0x06FFFD  For encoding, 0xEB9054 is added and the resulting values
+- R+060000..R+06FFFD  For encoding, 0xEB9054 is added and the resulting values
                       (0xF19054..0xF29051) are represented by three bytes.
 
-- 0x070000..0x07FFFD  For encoding, 0xEB9052 is added and the resulting values
+- R+070000..R+07FFFD  For encoding, 0xEB9052 is added and the resulting values
                       (0xF29052..0xF3904F) are represented by three bytes.
 
-- 0x080000..0x08FFFD  For encoding, 0xEB9050 is added and the resulting values
+- R+080000..R+08FFFD  For encoding, 0xEB9050 is added and the resulting values
                       (0xF39050..0xF4904D) are represented by three bytes.
 
-- 0x090000..0x09FFFD  For encoding, 0xEB904E is added and the resulting values
+- R+090000..R+09FFFD  For encoding, 0xEB904E is added and the resulting values
                       (0xF4904E..0xF5904B) are represented by three bytes.
 
-- 0x0A0000..0x0AFFFD  For encoding, 0xEB904C is added and the resulting values
+- R+0A0000..R+0AFFFD  For encoding, 0xEB904C is added and the resulting values
                       (0xF5904C..0xF69049) are represented by three bytes.
 
-- 0x0B0000..0x0BFFFD  For encoding, 0xEB904A is added and the resulting values
+- R+0B0000..R+0BFFFD  For encoding, 0xEB904A is added and the resulting values
                       (0xF6904A..0xF79047) are represented by three bytes.
 
-- 0x0C0000..0x0CFFFD  For encoding, 0xEB9048 is added and the resulting values
+- R+0C0000..R+0CFFFD  For encoding, 0xEB9048 is added and the resulting values
                       (0xF79048..0xF89045) are represented by three bytes.
 
-- 0x0D0000..0x0DFFFD  For encoding, 0xEB9046 is added and the resulting values
+- R+0D0000..R+0DFFFD  For encoding, 0xEB9046 is added and the resulting values
                       (0xF89046..0xF99043) are represented by three bytes.
 
-- 0x0E0000..0x0EFFFD  For encoding, 0xEB9044 is added and the resulting values
+- R+0E0000..R+0EFFFD  For encoding, 0xEB9044 is added and the resulting values
                       (0xF99044..0xFA9041) are represented by three bytes.
 
-- 0x0F0000..0x0FFFFD  For encoding, 0xEB9042 is added and the resulting values
+- R+0F0000..R+0FFFFD  For encoding, 0xEB9042 is added and the resulting values
                       (0xFA9042..0xFB903F) are represented by three bytes.
 
-- 0x100000..0x10FFFD  For encoding, 0xEB9040 is added and the resulting values
+- R+100000..R+10FFFD  For encoding, 0xEB9040 is added and the resulting values
                       (0xFB9040..0xFC903D) are represented by three bytes.
 
-- 0x110000..0x126FC1  For encoding, 0xEB903E is added and the resulting values
+- R+110000..R+126FC1  For encoding, 0xEB903E is added and the resulting values
                       (0xFC903E..0xFDFFFF) are represented by three bytes.
 
 The following bytes, which are neither CHARACTERS nor NON-CHARACTERS, represent
