@@ -9,10 +9,10 @@
 
 COMMON - Retro-Frame Common Documentation
 
-Textual Representation of Binary Data
+Textual Representation of Binary Values
 
 Repository:  <http://source.retro-frame.net/common>
-File:        /spec/rf-trbd.txt//
+File:        /spec/rf-trbv.txt//
 Version:     01.01.00
 Compliance:  Retro-Frame 1.1
 License:     MIT
@@ -45,7 +45,7 @@ Change history
 
 2026-02-21 : 01.01.00 : Ingo
 
-  Initial version.
+  Draft.
 
 
 Contents
@@ -56,7 +56,7 @@ Contents
    1.2  Scope
    1.3  References
 
-2. TRBD
+2. TRBV
 
 
 
@@ -87,8 +87,8 @@ versions than the Retro-Frame Common Documentation respository.
 1.2 Scope
 -------------------------------------------------------------------------------
 
-This document provides a SPECIFICATION of a directory-based authentication code
-which may be used...
+This document provides a SPECIFICATION of the textual representation of binary
+values which may be used...
 
 
 1.3 References
@@ -99,10 +99,10 @@ Retro-Frame homepage, see <http://source.retro-frame.net/>.
 
 
 
-2. TRBD
+2. TRBV
 ===============================================================================
 
-TRBD-32: 32 bit pattern (length=19):
+TRBV-32: 32 bit pattern (length=19):
 
   4word-4word-4word-4word
 
@@ -110,7 +110,7 @@ TRBD-32: 32 bit pattern (length=19):
   to lowest bits (e.g. 0x01234567 ==> 0x01 bits for first word, 0x23 bits for
   second word and so on).
 
-TRBD-64: 64 bit pattern (length=37):
+TRBV-64: 64 bit pattern (length=37):
 
   0x000:  4word-4word-4word-5word-4word-5word-5word
   0x001:  4word-4word-4word-5word-5word-4word-5word
@@ -267,3 +267,8 @@ TRBD-64: 64 bit pattern (length=37):
   0x1E8:  VIRUS  VISIT  VITAL  VIVID  VOICE  WAGON  WATCH  WATER
   0x1F0:  WEIRD  WHEEL  WIDOW  WIDTH  WOMEN  WORLD  WORRY  WORTH
   0x1F8:  WRIST  WRITE  WRONG  XENON  YACHT  YIELD  YOUNG  ZEBRA
+
+Each word differs from all other words on at least two positions. Words with a
+similar pronunciation have been avoided. However, a "phonetic distinctiveness"
+like the PGP word list (see <https://en.wikipedia.org/wiki/PGP_word_list>) is
+not achieved.
