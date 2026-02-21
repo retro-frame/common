@@ -1,0 +1,269 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Dictionary-Based Authentication Code
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-dbac.txt//
+Version:     01.01.00
+Compliance:  Retro-Frame 1.1
+License:     MIT
+
+Copyright (c) 2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-02-21 : 01.01.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. DBAC
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.1").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides a SPECIFICATION of a directory-based authentication code
+which may be used...
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+
+
+2. DBAC
+===============================================================================
+
+32 bit pattern (length=19):
+
+  4word-4word-4word-4word
+
+  The bits for the words are taken from a 32 bit big endian value from highest
+  to lowest bits (e.g. 0x01234567 ==> 0x01 bits for first word, 0x23 bits for
+  second word and so on).
+
+64 bit pattern (length=37):
+
+  0x000:  4word-4word-4word-5word-4word-5word-5word
+  0x001:  4word-4word-4word-5word-5word-4word-5word
+  0x002:  4word-4word-4word-5word-5word-5word-4word
+  0x003:  4word-4word-5word-4word-4word-5word-5word
+  0x004:  4word-4word-5word-4word-5word-4word-5word
+  0x005:  4word-4word-5word-4word-5word-5word-4word
+  0x006:  4word-4word-5word-5word-4word-4word-5word
+  0x007:  4word-4word-5word-5word-4word-5word-4word
+  0x008:  4word-5word-4word-4word-4word-5word-5word
+  0x009:  4word-5word-4word-4word-5word-4word-5word
+  0x00A:  4word-5word-4word-4word-5word-5word-4word
+  0x00B:  4word-5word-4word-5word-4word-4word-5word
+  0x00C:  4word-5word-4word-5word-4word-5word-4word
+  0x00D:  4word-5word-4word-5word-5word-4word-4word
+  0x00E:  4word-5word-5word-4word-4word-4word-5word
+  0x00F:  4word-5word-5word-4word-4word-5word-4word
+  0x010:  4word-5word-5word-4word-5word-4word-4word
+  0x011:  4word-5word-5word-5word-4word-4word-4word
+  0x012:  5word-4word-4word-4word-4word-5word-5word
+  0x013:  5word-4word-4word-4word-5word-4word-5word
+  0x014:  5word-4word-4word-4word-5word-5word-4word
+  0x015:  5word-4word-4word-5word-4word-4word-5word
+  0x016:  5word-4word-4word-5word-4word-5word-4word
+  0x017:  5word-4word-4word-5word-5word-4word-4word
+  0x018:  5word-4word-5word-4word-4word-4word-5word
+  0x019:  5word-4word-5word-4word-4word-5word-4word
+  0x01A:  5word-4word-5word-4word-5word-4word-4word
+  0x01B:  5word-4word-5word-5word-4word-4word-4word
+  0x01C:  5word-5word-4word-4word-4word-4word-5word
+  0x01D:  5word-5word-4word-4word-4word-5word-4word
+  0x01E:  5word-5word-4word-4word-5word-4word-4word
+  0x01F:  5word-5word-4word-5word-4word-4word-4word
+
+  The bits for the pattern are taken from a 64 bit big endian value from
+  highest bits. The bits for the words are taken from the value in order of
+  the pattern from highest to lowest bits.
+
+  Example: 0x0F1E2D3C4B5A6789
+
+  ==> Pattern 0x001: 4word-4word-4word-5word-5word-4word-5word
+  ==> 4word 0x0E3: TRIO
+  ==> 4word 0x0C5: SIGN
+  ==> 4word 0x0A7: PALM
+  ==> 5word 0x112: MICRO
+  ==> 5word 0x1AD: STEAM
+  ==> 4word 0x033: DIVE
+  ==> 5word 0x189: SHARP
+
+  TRIO-SIGN-PALM-MICRO-STEAM-DIVE-SHARP
+
+4word (4-letter words):
+
+          + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
+          -----  -----  -----  -----  -----  -----  -----  -----
+  0x000:   ACID   AREA   ATOM   AUNT   AURA   AUTO   AWAY   AXIS
+  0x008:   BABY   BAIT   BANG   BASE   BEAM   BELT   BETA   BIAS
+  0x010:   BIKE   BILL   BIRD   BLUR   BOAT   BODY   BOIL   BOSS
+  0x018:   BULB   BUSY   CAGE   CALL   CENT   CHAT   CHEF   CHIP
+  0x020:   CITY   CLUB   COIN   COLD   COPY   CORE   COUP   CREW
+  0x028:   CUBE   DARE   DATA   DAWN   DEBT   DEEP   DEMO   DENY
+  0x030:   DESK   DIET   DISH   DIVE   DOLL   DOME   DOOR   DRAG
+  0x038:   DROP   DRUM   DUAL   DUCK   DUMB   DUTY   EACH   EARL
+  0x040:   EASY   ECHO   EDGE   ENVY   EPIC   EVEN   EVIL   EXAM
+  0x048:   EXIT   FACE   FARM   FEET   FILM   FIRE   FIST   FLAG
+  0x050:   FLIP   FORK   FOUL   FROG   FUEL   FUSE   GAIN   GALA
+  0x058:   GAZE   GENE   GIFT   GIRL   GLAD   GLUE   GOAL   GOOD
+  0x060:   GRID   GROW   HAIR   HALF   HAND   HAWK   HEAD   HELL
+  0x068:   HERO   HIGH   HINT   HOOK   HOPE   HORN   HOST   HOUR
+  0x070:   HUGE   HURT   IDEA   IDLE   INCH   INFO   IRON   ITEM
+  0x078:   JAZZ   JOKE   JUMP   JURY   JUST   KEEN   KILO   KIND
+  0x080:   KISS   KITE   KIWI   KNEE   KNOT   LAMP   LATE   LAZY
+  0x088:   LEAP   LEFT   LENS   LIFE   LINK   LION   LOCK   LOGO
+  0x090:   LOOP   LOSE   LOUD   LUNG   MAID   MARS   MEAN   MEGA
+  0x098:   MENU   MESH   MILK   MOON   MOVE   MUCH   MYTH   NAIL
+  0x0A0:   NECK   NEON   NEWS   NICE   ODDS   OPEN   OVAL   PALM
+  0x0A8:   PARK   PASS   PEER   PILE   PLAN   PLUG   POEM   PONY
+  0x0B0:   PULP   QUIZ   RELY   RICH   RISK   ROAD   ROLE   ROOT
+  0x0B8:   RUBY   RUDE   RUIN   RUSH   SACK   SAFE   SALT   SCAR
+  0x0C0:   SEAL   SEEK   SELF   SHOW   SHUT   SIGN   SIZE   SKIP
+  0x0C8:   SLIM   SOAP   SOFA   SOLO   SONG   SORT   SPIN   SPOT
+  0x0D0:   STEP   SUIT   SWAN   TAPE   TASK   TAXI   TECH   TERM
+  0x0D8:   TEST   TICK   TIDE   TIER   TILT   TINY   TONE   TOOL
+  0x0E0:   TOWN   TRAP   TREE   TRIO   TUNA   TURN   TWIN   UGLY
+  0x0E8:   UNIT   UPON   USER   VARY   VAST   VERB   VETO   VIEW
+  0x0F0:   VINE   VOID   WALK   WANT   WAVE   WEAK   WHOM   WILD
+  0x0F8:   WING   WIPE   WORM   YARD   YEAR   YOGA   ZOOM   ZULU
+
+5word (5-letter words):
+
+          + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
+          -----  -----  -----  -----  -----  -----  -----  -----
+  0x000:  ABBEY  ABOUT  ABOVE  ABUSE  ACTOR  ADAPT  ADMIT  ADULT
+  0x008:  AFTER  AGAIN  AGENT  AGONY  AGREE  AHEAD  AISLE  ALARM
+  0x010:  ALBUM  ALIAS  ALIBI  ALIEN  ALIKE  ALLOW  ALONE  ALPHA
+  0x018:  AMBER  AMEND  AMONG  ANGEL  ANGRY  ANKLE  APART  APPLY
+  0x020:  APRIL  ARENA  ARGON  ARGUE  ARISE  ARMOR  ARRAY  ASSET
+  0x028:  ATLAS  AUDIT  AWAIT  AWAKE  AWARD  AWFUL  BACON  BADGE
+  0x030:  BADLY  BASIL  BEACH  BEGIN  BEIGE  BELOW  BERRY  BIRTH
+  0x038:  BLANK  BLAST  BLIND  BLOCK  BLOOD  BOARD  BONUS  BOOST
+  0x040:  BOXER  BRAIN  BRAKE  BRASS  BRAVO  BREAK  BREED  BRICK
+  0x048:  BRIEF  BROAD  BROWN  BRUSH  BUDDY  BUILD  BURST  BUYER
+  0x050:  CABIN  CACHE  CANAL  CANDY  CARGO  CAROL  CARRY  CEASE
+  0x058:  CHAIR  CHALK  CHAOS  CHARM  CHEAP  CHECK  CHESS  CHILD
+  0x060:  CIVIL  CLAIM  CLEAR  CLERK  CLICK  CLIFF  CLOSE  CLOUD
+  0x068:  CLOWN  COACH  COAST  COLOR  COMIC  COURT  COVER  CRANE
+  0x070:  CRASH  CRAZY  CREEK  CRIES  CRIME  CRISP  CROSS  CRUEL
+  0x078:  CUBIC  CURVE  CYCLE  DAILY  DANCE  DATED  DEBIT  DELAY
+  0x080:  DELTA  DEPTH  DERBY  DEVIL  DIARY  DIGIT  DIODE  DIRTY
+  0x088:  DISCO  DOUBT  DOZEN  DRAFT  DRAMA  DREAM  DRESS  DRILL
+  0x090:  DRINK  DRIVE  DUSTY  EAGLE  EARTH  ELBOW  ELDER  ELECT
+  0x098:  EMPTY  ENEMY  ENJOY  ENTER  EQUAL  ERROR  ESSAY  ETHIC
+  0x0A0:  EXACT  EXILE  EXTRA  FAIRY  FAITH  FALSE  FANCY  FATAL
+  0x0A8:  FAULT  FAVOR  FEAST  FENCE  FETCH  FINAL  FIRST  FLAME
+  0x0B0:  FLASH  FLEET  FLIES  FLOAT  FLUID  FLUOR  FORCE  FORUM
+  0x0B8:  FRANK  FRAUD  FRESH  FRIED  FROST  FRUIT  FUNNY  GAMMA
+  0x0C0:  GAUGE  GENRE  GHOST  GIANT  GIVEN  GLASS  GLOBE  GLORY
+  0x0C8:  GOING  GRACE  GRAND  GRAPH  GRASP  GREAT  GREEN  GROUP
+  0x0D0:  GUARD  GUESS  GUIDE  HABIT  HAPPY  HARSH  HAVEN  HEART
+  0x0D8:  HEAVY  HEDGE  HOBBY  HONOR  HORSE  HOTEL  HUMAN  HUMOR
+  0x0E0:  HURRY  IMAGE  IMPLY  INCUR  INDEX  INNER  INPUT  ISSUE
+  0x0E8:  IVORY  JEWEL  JUDGE  JUICE  KIOSK  KNIFE  KNOCK  KOALA
+  0x0F0:  LABEL  LABOR  LARGE  LASSO  LAUGH  LAYER  LEARN  LEAVE
+  0x0F8:  LEGAL  LEMON  LEVEL  LIMIT  LINEN  LITER  LIVES  LOCAL
+  0x100:  LODGE  LOGIC  LOOSE  LUCKY  LUNCH  LYING  MAGIC  MAJOR
+  0x108:  MAKER  MAPLE  MARCH  MAYBE  MEDIA  MERCY  MERGE  METAL
+  0x110:  METER  METRO  MICRO  MINUS  MIXED  MODEL  MOIST  MONEY
+  0x118:  MORAL  MOTIF  MOTOR  MOTTO  MOUNT  MOUSE  MOUTH  MOVIE
+  0x120:  MUSIC  NAIVE  NASAL  NASTY  NEVER  NEWLY  NIGHT  NOBLE
+  0x128:  NOISE  NOTED  NOVEL  NURSE  NYLON  OCCUR  OCEAN  OFFER
+  0x130:  OLIVE  OMEGA  ONION  ONSET  OPERA  OPTIC  ORBIT  ORDER
+  0x138:  ORGAN  OUGHT  OUTER  OXIDE  OZONE  PANDA  PANEL  PANIC
+  0x140:  PAPER  PARTY  PASTA  PATIO  PAUSE  PEARL  PEDAL  PENNY
+  0x148:  PHASE  PHONE  PHOTO  PIANO  PIECE  PILOT  PITCH  PIXEL
+  0x150:  PIZZA  PLACE  PLAZA  PLUTO  POINT  POLKA  POWER  PRIOR
+  0x158:  PRIZE  PROOF  PROXY  PULSE  PUPIL  QUARK  QUEEN  QUERY
+  0x160:  QUEUE  QUICK  QUIET  QUOTE  RADAR  RADIO  RADON  RAISE
+  0x168:  RALLY  RANGE  RAPID  REACT  READY  REALM  REBEL  REFER
+  0x170:  RELAX  RENEW  REPLY  RESIN  RIGID  RIVER  ROBOT  ROMAN
+  0x178:  ROUGH  ROUTE  RUGBY  RURAL  SALAD  SALON  SAUCE  SCALE
+  0x180:  SCENE  SCOPE  SCOUT  SCREW  SENSE  SERVE  SETUP  SHADE
+  0x188:  SHAKY  SHARP  SHEET  SHELF  SHINY  SHIRT  SHOCK  SHORE
+  0x190:  SILLY  SINCE  SKIES  SKILL  SLEEP  SLIDE  SMALL  SMASH
+  0x198:  SMILE  SMOKE  SNACK  SOLAR  SOLID  SOLVE  SOUND  SPACE
+  0x1A0:  SPARK  SPEED  SPELL  SPLIT  SPOON  SPORT  SPRAY  SQUAD
+  0x1A8:  STAGE  STAMP  STAND  START  STEAM  STICK  STONE  STORY
+  0x1B0:  STRAW  STRIP  STUDY  STUFF  STUNT  STYLE  SUGAR  SUPER
+  0x1B8:  SURGE  SWEAR  SWIFT  SWING  SWORD  TABLE  TANGO  TASTE
+  0x1C0:  TAXES  TEDDY  THIEF  THING  THUMB  TIGER  TILDE  TIMES
+  0x1C8:  TIRED  TITLE  TODAY  TOKEN  TOOTH  TORCH  TOTAL  TOXIC
+  0x1D0:  TRACK  TRADE  TREND  TRIAL  TRIBE  TRUNK  TRUTH  TUTOR
+  0x1D8:  TWIST  ULTRA  UNCLE  UNDER  UPPER  UPSET  URBAN  USUAL
+  0x1E0:  UTTER  VALID  VALUE  VENUS  VERSE  VIDEO  VILLA  VINYL
+  0x1E8:  VIRUS  VISIT  VITAL  VIVID  VOICE  WAGON  WATCH  WATER
+  0x1F0:  WEIRD  WHEEL  WIDOW  WIDTH  WOMEN  WORLD  WORRY  WORTH
+  0x1F8:  WRIST  WRITE  WRONG  XENON  YACHT  YIELD  YOUNG  ZEBRA
