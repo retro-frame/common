@@ -156,7 +156,7 @@ TRBD-64: 64 bit pattern (length=37):
   ==> 4word 0x0C5: SIGN
   ==> 4word 0x0A7: PALM
   ==> 5word 0x112: MICRO
-  ==> 5word 0x1AD: STEAM
+  ==> 5word 0x1AD: STICK
   ==> 4word 0x033: DIVE
   ==> 5word 0x189: SHARP
 
