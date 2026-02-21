@@ -120,30 +120,30 @@ Retro-Frame homepage, see <http://source.retro-frame.net/>.
   0x005:  4word-4word-5word-4word-5word-5word-4word
   0x006:  4word-4word-5word-5word-4word-4word-5word
   0x007:  4word-4word-5word-5word-4word-5word-4word
-  0x008:  4word-5word-4word-4word-4word-5word-5word
-  0x009:  4word-5word-4word-4word-5word-4word-5word
-  0x00A:  4word-5word-4word-4word-5word-5word-4word
-  0x00B:  4word-5word-4word-5word-4word-4word-5word
-  0x00C:  4word-5word-4word-5word-4word-5word-4word
-  0x00D:  4word-5word-4word-5word-5word-4word-4word
-  0x00E:  4word-5word-5word-4word-4word-4word-5word
-  0x00F:  4word-5word-5word-4word-4word-5word-4word
-  0x010:  4word-5word-5word-4word-5word-4word-4word
-  0x011:  4word-5word-5word-5word-4word-4word-4word
-  0x012:  5word-4word-4word-4word-4word-5word-5word
-  0x013:  5word-4word-4word-4word-5word-4word-5word
-  0x014:  5word-4word-4word-4word-5word-5word-4word
-  0x015:  5word-4word-4word-5word-4word-4word-5word
-  0x016:  5word-4word-4word-5word-4word-5word-4word
-  0x017:  5word-4word-4word-5word-5word-4word-4word
-  0x018:  5word-4word-5word-4word-4word-4word-5word
-  0x019:  5word-4word-5word-4word-4word-5word-4word
-  0x01A:  5word-4word-5word-4word-5word-4word-4word
-  0x01B:  5word-4word-5word-5word-4word-4word-4word
-  0x01C:  5word-5word-4word-4word-4word-4word-5word
-  0x01D:  5word-5word-4word-4word-4word-5word-4word
-  0x01E:  5word-5word-4word-4word-5word-4word-4word
-  0x01F:  5word-5word-4word-5word-4word-4word-4word
+  0x008:  4word-4word-5word-5word-5word-4word-4word
+  0x009:  4word-5word-4word-4word-4word-5word-5word
+  0x00A:  4word-5word-4word-4word-5word-4word-5word
+  0x00B:  4word-5word-4word-4word-5word-5word-4word
+  0x00C:  4word-5word-4word-5word-4word-4word-5word
+  0x00D:  4word-5word-4word-5word-4word-5word-4word
+  0x00E:  4word-5word-4word-5word-5word-4word-4word
+  0x00F:  4word-5word-5word-4word-4word-4word-5word
+  0x010:  4word-5word-5word-4word-4word-5word-4word
+  0x011:  4word-5word-5word-4word-5word-4word-4word
+  0x012:  4word-5word-5word-5word-4word-4word-4word
+  0x013:  5word-4word-4word-4word-4word-5word-5word
+  0x014:  5word-4word-4word-4word-5word-4word-5word
+  0x015:  5word-4word-4word-4word-5word-5word-4word
+  0x016:  5word-4word-4word-5word-4word-4word-5word
+  0x017:  5word-4word-4word-5word-4word-5word-4word
+  0x018:  5word-4word-4word-5word-5word-4word-4word
+  0x019:  5word-4word-5word-4word-4word-4word-5word
+  0x01A:  5word-4word-5word-4word-4word-5word-4word
+  0x01B:  5word-4word-5word-4word-5word-4word-4word
+  0x01C:  5word-4word-5word-5word-4word-4word-4word
+  0x01D:  5word-5word-4word-4word-4word-4word-5word
+  0x01E:  5word-5word-4word-4word-4word-5word-4word
+  0x01F:  5word-5word-4word-4word-5word-4word-4word
 
   The bits for the pattern are taken from a 64 bit big endian value from
   highest bits. The bits for the words are taken from the value in order of
