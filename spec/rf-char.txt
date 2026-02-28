@@ -47,9 +47,9 @@ Change history
 
   Initial version.
 
-2026-02-16 : 01.01!00 : Ingo
+2026-02-28 : 01.01!00 : Ingo
 
-  Corrections in chapter 5.4.
+  Corrections in chapters 5.4 and 5.5.
 
 
 Contents
@@ -616,14 +616,17 @@ defined.
 If escaping is recognized, the following sequences are defined after the
 occurence of an escape character:
 
-- Any character which is neither a digit ('0'..'9') nor a letter ('A'..'Z',
-  'a'..'z') stands for itself and will not have a special meaning, even it
-  would have one in the specific context (in particular, the escape character
-  itself may be represented this way).
+- Control characters and spaces (' ', R+0020) shall be ignored (e.g. the escape
+  character may be used for line concatenation or additional spacing).
+
+- Any character which is neither a control character, a space (' '), a digit
+  ('0'..'9') nor a letter ('A'..'Z', 'a'..'z') stands for itself and will not
+  have a special meaning, even it would have one in the specific context (in
+  particular, the escape character itself may be represented this way).
 
 - One of the following single characters represent specific characters:
   - '0' represents codepoint R+0000 (NUL, null)
-  - 'C' represents codepoint R+0003 (ETX, end of text)
+  - 'c' represents codepoint R+0003 (ETX, end of text)
   - 'a' represents codepoint R+0007 (BEL, alert)
   - 'b' represents codepoint R+0008 (BS, backspace)
   - 't' represents codepoint R+0009 (HT, horizontal tab)
@@ -631,23 +634,24 @@ occurence of an escape character:
   - 'v' represents codepoint R+000B (VT, vertical tab)
   - 'f' represents codepoint R+000C (FF, form feed)
   - 'r' represents codepoint R+000D (CR, carriage return)
-  - 'Z' represents codepoint R+001A (SUB, substitute)
+  - 'z' represents codepoint R+001A (SUB, substitute)
   - 'e' represents codepoint R+001B (ESC, escape)
-  - 'X' represents codepoint R+0020 (' ', space)
-  - 'D' represents codepoint R+007F (DEL, delete)
-  - 'E' represents codepoint R+0085 (NEL, next line / EOL, end of line)
+  - 'x' represents codepoint R+0020 (' ', space)
+  - 'd' represents codepoint R+007F (DEL, delete)
+  - 'l' represents codepoint R+0085 (NEL, next line / EOL, end of line)
   - 'L' represents codepoint R+2028 (LS, line separator)
   - 'P' represents codepoint R+2029 (PS, paragraph separator)
-  - 'R' represents codepoint R+110000 (CRLF, CR/LF sequence)
-  - 'N' represents codepoint R+110001 (LFCR, LF/CR sequence)
+  - 'T' represents codepoint R+D800 (TSP, tentative space)
+  - 'R' represents codepoint R+D801 (CRLF, CR/LF sequence)
+  - 'N' represents codepoint R+D802 (LFCR, LF/CR sequence)
 
-- A sequence of two or more uppercase hexadecimal digits ('0'..'9', 'A'..'F')
+- A non-zero uppercase hexadecimal digit ('1'..'9', 'A'..'F'), optionally
+  followed by a sequence of uppercase hexadecimal digits ('0'..'9', 'A'..'F'),
   represents a single codepoint in the range R+000000..R+FFFFFF. A comma (',')
   after the value indicates that another value follows. The sequence of one or
-  more values must be terminated by a semicolon (';'). Note that not all such
-  codepoints may be representable by 16 bit representations.
+  more values must be terminated by a semicolon (';').
 
-- The letter 'x', followed by a sequence of hexadecimal digits in uppercase
+- The letter 'X', followed by a sequence of hexadecimal digits in uppercase
   ('0'..'9', 'A'..'F') represents a value which is represented by direct
   encoding. A comma (',') after the value indicates that another value follows.
   The sequence of one or more values must be terminated by a semicolon (';').
@@ -659,31 +663,29 @@ Examples:
 
 - "^^" represents the circumflex accent itself.
 
-- "^t" represents the codepoint 0x09 (HT, horizontal tab).
+- "^[" represents a left square bracket which has no special meaning.
 
-- "^X" represents the codepoint 0x20 (' ', space).
+- "^x" represents the codepoint R+0020 (' ', space).
 
-- "^P" represents the codepoint 0x2029 (PS, paragraph separator).
+- "^P" represents the codepoint R+2029 (PS, paragraph separator).
 
-- "^0" represents the codepoint 0x00 (NUL, null).
+- "^0" represents the codepoint R+0000 (NUL, null).
 
-- "^00;" represents the codepoint 0x00 (NUL, null).
+- "^9;" represents the codepoint R+0009 (HT, horizontal tab).
 
-- "^A0;" represents the codepoint 0xA0 (no-break space).
+- "^A0;" represents the codepoint R+00A0 (no-break space).
 
-- "^5E,61;" represents the codepoints 0x0000005E and 0x00000061 ("^a") which
-  do not in turn represent an escape sequence.
+- "^61,62,63;" represents the codepoints R+0061, R+0062 and R+0063 ("abc").
 
-- "^x0;" represents the codepoint 0x01000000 (value zero represented by a 1
-  byte direct encoding low part).
+- "^X0;" represents the direct encoding of value 0x00 (encoded as 0x10000000
+  for 32 bit characters or 0xDE00 for 16 bit characters).
 
-- "^x1,FFFF;" represents the codepoints 0x01000001 and 0x0200FFFF (value 0x1
-  represented by a 1 byte direct encoding low part and value 0xFFFF represented
-   by a 2 bytes direct encoding low part).
+- "^X1,FFFF;" represents the direct encodings of the values 0x01 and 0xFFFF
+  (encoded as the sequences 0x10000001 0x2000FFFF for 32 bit characters or
+  0xDE00 0xDDFF 0xDEFF for 16 bit characters).
 
-- "^x2000000;" represents the codepoint 0x60000000 (value 0x2000000 represented
-  by a 4 bytes direct encoding low part).
+- "^X000400000000;" represents the direct encoding of the value 0x400000000.
 
-- "^x0004000000;" represents the codepoints 0x0F040000 and 0x10000000 (value
-  0x4000000 represented by a 3 bytes direct encoding shift part, followed by a
-  1 byte direct encoding low part).
+The characters resulting from an escape sequence are never considered another
+escape sequence (e.g. "^5E,61;" represents the codepoints R+005E and R+0061
+(i.e. "^a") which do not in turn represent an escape sequence.
