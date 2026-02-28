@@ -686,7 +686,7 @@ Examples:
 
 - "^X1,FFFF;" represents the direct encodings of the values 0x01 and 0xFFFF
   (encoded as the sequences 0x10000001 0x2000FFFF for 32 bit characters or
-  0xDE00 0xDDFF 0xDEFF for 16 bit characters).
+  0xDE01 0xDDFF 0xDEFF for 16 bit characters).
 
 - "^X000400000000;" represents the direct encoding of the value 0x400000000.
 
