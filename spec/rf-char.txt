@@ -49,7 +49,7 @@ Change history
 
 2026-02-28 : 01.01!00 : Ingo
 
-  Corrections in chapters 5.4 and 5.5.
+  Clarifications in chapter 3.3; corrections in chapters 5.4 and 5.5.
 
 
 Contents
@@ -328,16 +328,22 @@ and R+110000..R+126FC1 are reserved.
 3.3 Non-characters
 -------------------------------------------------------------------------------
 
-The ranges R+00FDD0..R+00FDEF and R+126FC2..R+FFFFFF of Retro-Frame character
+The ranges R+FDD0..R+FDEF and R+126FC2..R+FFFFFF of Retro-Frame character
 codepoints is reserved for non-characters. Non-characters may be used to encode
 internal states (e.g. separators or keyboard codes) by a character type.
 
 The following non-characters are defined:
 
+- R+FDD0..R+FDEF      private use area (will always remain unspecified)
 - R+126FC2            NO_CHAR (generic non-character)
 - R+126FC3            PATH_SEPARATOR
 - R+126FC4..R+7FFFFF  (reserved)
 - R+800000..R+FFFFFF  private use area (will always remain unspecified)
+
+Note that the range R+FDD0..R+FDEF is deliberately marked as a private use area
+in order to provide at least 16 non-character codepoints in the 16 bit encoding
+range. The implementation may chose to map defined non-characters into that
+range, if convenient (e.g. use R+FDD0 as the PATH_SEPARATOR).
 
 
 3.4 Direct encodings
@@ -682,7 +688,7 @@ Examples:
 
 - "^X1,FFFF;" represents the direct encodings of the values 0x01 and 0xFFFF
   (encoded as the sequences 0x10000001 0x2000FFFF for 32 bit characters or
-  0xDE00 0xDDFF 0xDEFF for 16 bit characters).
+  0xDE01 0xDDFF 0xDEFF for 16 bit characters).
 
 - "^X000400000000;" represents the direct encoding of the value 0x400000000.
 
