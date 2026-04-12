@@ -13,8 +13,8 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.00.00
-Compliance:  Retro-Frame 1.0
+Version:     01.01!00
+Compliance:  Retro-Frame 1.1
 License:     MIT
 
 Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
@@ -46,6 +46,11 @@ Change history
 2026-02-14 : 01.00.00 : Ingo
 
   Initial version.
+
+2026-04-12 : 01.01!00 : Ingo
+
+  Compliance switched to Retro-Frame 1.1; clearifications and corrections in
+  chapters 5.6, 7.2 and 7.3.
 
 
 Contents
@@ -120,7 +125,7 @@ As Retro-Frame is evolving, declarations of compliance should always refer to
 a specific release version of this repository (i.e. the common documentation).
 If a general intention of compliance is expressed, a reference to the major
 version may be given by "Retro-Frame 1.x". However, an actual reference should
-specify the minor version as well (e.g. "Retro-Frame 1.0").
+specify the minor version as well (e.g. "Retro-Frame 1.1").
 
 Note that the individual topic-related specifications (e.g. a data format)
 use independent version numbers and the repositories may have different minor
@@ -764,14 +769,15 @@ specification of such files depends on the development environment.
 -------------------------------------------------------------------------------
 
 If a REPOSITORY provides branching, the initial branch should be named "main".
-This shall remain the default branch, if the repository supports one.
+The initial branch shall remain the default branch, if the repository supports
+one (i.e. the default branch shall never be changed).
 
 For each release, a dedicated branch with the fixed width version number of the
 release as the name shall be created in order to allow support versions for
 this release (e.g. by providing a patch) without affecting other releases. Note
 that the commit on which a release branch is applied will also have a version
 tag of that release (e.g. the commit where the branch "02.07" forks will also
-have the version tag "02.07.00").
+have the version tag "02.07.00", see chapter 7.2).
 
 Additional working branches may be used during development. When work on such a
 branch is finished, the results should be merged into the parent branch (e.g.
@@ -965,15 +971,17 @@ of a tag.
 Thus, if a specific commit associated with a version tag is retrieved from the
 repository, the resulting files have a defined version according to the tag.
 
-In the following cases, as second tag should be added:
+The version tag should be the fixed width version number representation. In the
+following cases, a suffix shall be appended to the version number:
 
-- If a pre-release version is considered a new test stage, a tag representing
-  the stage (i.e. "alpha", "beta" et cetera). If a pre-release version is
-  incremented during a test stage which remains unchanged, the existing tag
-  remains unchanged as well.
+- If a pre-release version is considered a new test stage, a low line '_',
+  followed by the name of the stage (i.e. "_alpha", "_beta" et cetera). Note
+  that if a pre-release version is incremented but there is no new test stage,
+  no such suffix shall be appended. Thus, the name of a stage will not appear
+  more than once for each release version.
 
-- If a support version indicates deprecation of the release, the tag
-  "deprecated".
+- If a support version indicates deprecation of a release, a low line '_',
+  followed by the word "deprecated" (i.e. "_deprecated").
 
 Commits without a version tag do not have a version. The latest commit is
 called the head. Thus, the head represents the current state of development
@@ -985,8 +993,9 @@ branches, the state must be identical. However, each branch has its own head.
 The readme file of the repository should always represent the current version
 number. If changes are made after a commit with a version tag, the pre-release
 respectively support version should be incremented by one and "(dev)" should be
-appended to the version number until the changes become a new version. In
-addition, the test stage (if given) should be appended within parenthesis.
+appended to the version number until the changes become a new version or test
+stage (in the latter case, the name of test stage in parenthesis should be
+appended instead).
 
 
 7.3 Work file versioning
@@ -994,16 +1003,15 @@ addition, the test stage (if given) should be appended within parenthesis.
 
 If a WORK FILE shows a version number (either in the source or as output when
 executed), the release version number must be set to the same release version
-number like the repository when changed or not released yet (i.e. if a work
-file has been released but not changed, the version nummer remains unchanged).
+number like the repository when added or changed (i.e. if a work file was part
+of a previous release and is unchanged, its version nummer remains unchanged).
 
 The pre-relase or support version of a work file may be individual for the
-file. However, it must not be higher than the one of the current version tag,
-if one is given. If the work file is in the head an the head does not have a
-version tag, the pre-release or support version must equal the one of the last
-tag incremented by one (or zero if no tag exists).
+file. If the work file is in the head an the head does not have a version tag,
+the pre-release or support version must equal those of the last tag incremented
+by one (or zero if no tag exists).
 
-Examples:
+Example:
 
 - Work files A and B are part of a commit with tag 01.00!00. Both should show
   the same pre-release version number.
@@ -1018,11 +1026,11 @@ Examples:
 
 - The next version tag of a commit should be 01.00!02.
 
-If the version tag is a release (i.e. the support version is zero), or a test
-stage tag has been set (i.e. a pre-release version is considered a new test
-stage), all work files with the current release version must also show the same
-pre-relase or support version. Note that this does not apply on work files
-whose version number did not change at all (see above).
+If the version tag is a release (i.e. the support version is zero), or if a
+pre-release version is considered a new test stage, all work files with the
+current release version must also show the same pre-relase or support version.
+Note that this does not apply on work files whose version number did not change
+at all (see above).
 
 
 7.4 Product versioning

@@ -13,8 +13,8 @@ Data Types Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-types.txt//
-Version:     01.00.00
-Compliance:  Retro-Frame 1.0
+Version:     01.01!00
+Compliance:  Retro-Frame 1.1
 License:     MIT
 
 Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
@@ -46,6 +46,10 @@ Change history
 2026-02-14 : 01.00.00 : Ingo
 
   Initial version.
+
+2026-04-12 : 01.01!00 : Ingo
+
+  Compliance switched to Retro-Frame 1.1.
 
 
 Contents
@@ -91,7 +95,7 @@ As Retro-Frame is evolving, declarations of compliance should always refer to
 a specific release version of this repository (i.e. the common documentation).
 If a general intention of compliance is expressed, a reference to the major
 version may be given by "Retro-Frame 1.x". However, an actual reference should
-specify the minor version as well (e.g. "Retro-Frame 1.0").
+specify the minor version as well (e.g. "Retro-Frame 1.1").
 
 Note that the individual topic-related specifications (e.g. a data format)
 use independent version numbers and the repositories may have different minor

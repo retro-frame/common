@@ -13,7 +13,7 @@ Textual Representation of Binary Values
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-trbv.txt//
-Version:     01.01.00
+Version:     01.01!00
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2026-02-21 : 01.01.00 : Ingo
+2026-02-21 : 01.01!00 : Ingo
 
   Draft.
 
