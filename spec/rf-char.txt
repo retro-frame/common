@@ -626,10 +626,11 @@ occurence of an escape character:
 - Control characters and spaces (' ', R+0020) shall be ignored (e.g. the escape
   character may be used for line concatenation or additional spacing).
 
-- Any character which is neither a control character, a space (' '), a digit
-  ('0'..'9') nor a letter ('A'..'Z', 'a'..'z') stands for itself and will not
-  have a special meaning, even it would have one in the specific context (in
-  particular, the escape character itself may be represented this way).
+- Any character of the STANDARD CHARACTER SET which is neither a control
+  character, space (' '), a digit ('0'..'9') nor a letter ('A'..'Z', 'a'..'z')
+  stands for itself and will not have a special meaning, even it would have one
+  in the specific context (in particular, the escape character itself may be
+  represented this way).
 
 - One of the following single characters represent specific characters:
   - '0' represents codepoint R+0000 (NUL, null)

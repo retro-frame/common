@@ -200,7 +200,7 @@ specified:
 
 <type-mark>:
 
-  [ "/" ] "/"
+  [ "/"_] "/"
 
 <universal-representation>:
 
