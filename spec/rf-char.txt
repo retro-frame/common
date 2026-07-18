@@ -9,7 +9,7 @@
 
 COMMON - Retro-Frame Common Documentation
 
-Character Specification
+Retro Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
@@ -47,10 +47,11 @@ Change history
 
   Initial version.
 
-2026-04-12 : 01.01!00 : Ingo
+2026-07-18 : 01.01!00 : Ingo
 
   Compliance switched to Retro-Frame 1.1; clarifications in chapter 3.3;
-  corrections in chapters 5.4 and 5.5.
+  corrections in chapters 5.4 and 5.5; "Retro-Frame character" renamed to
+  "Retro character".
 
 
 Contents
@@ -87,7 +88,7 @@ Contents
 5. CHARACTER ENCODINGS
    5.1  Internal 32 bit representation
    5.2  Internal 16 bit representation
-   5.3  Character Strings (CS)
+   5.3  Retro Character Strings (RCS)
    5.4  Packed Character Strings (PCS)
    5.5  Escape sequences
 
@@ -120,7 +121,7 @@ versions than the Retro-Frame Common Documentation respository.
 1.2 Scope
 -------------------------------------------------------------------------------
 
-This document provides a SPECIFICATION of Retro-Frame characters, which are a
+This document provides a SPECIFICATION of Retro characters, which are a
 superset of [UNICODE], and corresponding character encodings.
 
 
@@ -147,14 +148,14 @@ The Unicode(R) Standard, The Unicode Consortium, for latest version see
 2.1 Codepoints
 -------------------------------------------------------------------------------
 
-The codepoints of Retro-Frame characters are represented by a sequence of four
-or six uppercase hexadecimal digits ('0'..'9', 'A'..'F'), prefixed by "R+".
+The codepoints of Retro characters are represented by a sequence of four or six
+uppercase hexadecimal digits ('0'..'9', 'A'..'F'), prefixed by "R+".
 
 
 2.2 Categories
 -------------------------------------------------------------------------------
 
-Each Retro-Frame character (i.e. its codepoint) is assigned to a category. The
+Each Retro character (i.e. its codepoint) is assigned to a category. The
 categories are related to one or more general categories defined by [UNICODE]:
 
   Category        Unicode category            Unicode basic type
@@ -191,32 +192,31 @@ categories are related to one or more general categories defined by [UNICODE]:
   Unspecified     Other, private use          Private-use
                   Other, not assigned         Reserved
 
-As each Unicode codepoint is assigned to exactly one Unicode general category,
-the assignment to a Retro-Frame character category can be derived (implicit
-assignment). All non-Unicode codepoints are explicitly assigned to a category
-(see chapter 3).
+Retro character codepoints which are Unicode codepoints are assigned to the
+respective general category (implicit assignment). All non-Unicode codepoints
+are explicitly assigned to a category (see chapter 3).
 
 
 2.3 Names
 -------------------------------------------------------------------------------
 
-All grapheme, spacing, control as well as the Retro-Frame defined non-character
-codepoints have a name assigned.
+All grapheme, spacing, control as well as the defined non-character codepoints
+have a name assigned.
 
 For grapheme and spacing characters, the [UNICODE] names are used in lowercase
-letters, if available. Otherwise (i.e. for Retro-Frame defined grapheme and
-spacing characters), an individual name is assigned (see chapter 3.2). Aliases
-may be used but are not considered the name. If a character name is formally
-used, all letters are uppercase and spaces are replaced by low lines ('_').
+letters, if available. Otherwise (i.e. for defined grapheme and spacing Retro
+characters), an individual name is assigned (see chapter 3.2). Aliases may be
+used but are not considered the name. If a character name is formally used, all
+letters are uppercase and spaces are replaced by low lines ('_').
 
 For Unicode control characters, the [UNICODE] abbreviations (which are all
 spelled in uppercase letters), if given, are used as names. The aliases may
-be used but are not considered the name. For Retro-Frame defined control
-characters, similar names are assigned (see chapter 3.2).
+be used but are not considered the name. For defined Retro control characters,
+similar names are assigned (see chapter 3.2).
 
-While Unicode non-character codepoints do not have a name assigned, Retro-Frame
-defined codepoints have a name in uppercase letters and optional low lines (see
-chapter 3.3).
+While Unicode non-character codepoints do not have a name assigned, defined
+Retro non-character codepoints have a name in uppercase letters and optional
+low lines (see chapter 3.3).
 
 
 2.4 Line breaks
@@ -251,9 +251,9 @@ context:
 - R+0020  ' ' (space)
 - R+D800  TSP (tentative space, see chapter 3.2)
 
-In addition, Retro-Frame defines a tentative space as an extended character
-(see chapter 3.2) which should be recognized as whitespace if no whitespace
-is preceding or following it.
+In addition, Retro-Frame defines a tentative space as an extended Retro
+character (see chapter 3.2) which should be recognized as whitespace if no
+whitespace is preceding or following it.
 
 Other characters of the category spacing are, in general, not considered a
 whitespace.
@@ -281,8 +281,8 @@ Together, these are the (only) letters.
 3.1 Unicode characters
 -------------------------------------------------------------------------------
 
-The range R+000000..R+10FFFF of a Retro-Frame character is specified as the
-[UNICODE] character of the corresponding codepoint (i.e. U+000000..U+10FFFF).
+The range R+000000..R+10FFFF of a Retro character is specified as the [UNICODE]
+character of the corresponding codepoint (i.e. U+000000..U+10FFFF).
 
 The following codepoints of Unicode must never be used:
 
@@ -296,8 +296,8 @@ direct encoding (see chapter 3.4). Note that in this case the codepoints
 change (e.g. sorting may produce different results than if those codepoints,
 although invalid, were left unchanged).
 
-While the range R+D800..R+DCFF is used for Retro-Frame extended characters
-(see chapter 3.2), some of the codepoints may be used by 16 bit character
+While the range R+D800..R+DCFF is used for extended Retro characters (see
+chapter 3.2), some of the other codepoints may be used by 16 bit character
 representation (see chapter 5.2). Note that the codepoint R+DFFF is always
 considered invalid.
 
@@ -314,7 +314,7 @@ the range R+110000..R+126FC1 above the Unicode codepoints.
 The following extended characters are defined:
 
   Codepoint  Name  Category  Description
-  ---------  ----  --------  -------------------------------------------------
+  ---------  ----  --------  --------------------------------------------------
   R+D800     TSP   Spacing   Tentative space (represents a space (' ') if it
                              stands alone or no whitespace precedes or follows)
   R+D801     CRLF  Control   Represents a CR/LF sequence as a single character
@@ -329,9 +329,9 @@ and R+110000..R+126FC1 are reserved.
 3.3 Non-characters
 -------------------------------------------------------------------------------
 
-The ranges R+FDD0..R+FDEF and R+126FC2..R+FFFFFF of Retro-Frame character
-codepoints is reserved for non-characters. Non-characters may be used to encode
-internal states (e.g. separators or keyboard codes) by a character type.
+The ranges R+FDD0..R+FDEF and R+126FC2..R+FFFFFF of Retro character codepoints
+is reserved for non-characters. Non-characters may be used to encode internal
+states (e.g. separators or keyboard codes) by a character type.
 
 The following non-characters are defined:
 
@@ -465,8 +465,8 @@ R+2029 PS shall be translated to R+000D CR and/or R+000A LF or escaped.
 5.1 Internal 32 bit representation
 -------------------------------------------------------------------------------
 
-If 32 bit integers are supported by the environment, codepoints may be
-represented by a 32 bit unsigned integer value.
+If 32 bit integers are supported by the environment, Retro character codepoints
+may be represented by a 32 bit unsigned integer value.
 
 In this case, all codepoints can be represented by a single value. However,
 direct encodings of more than 30 bits require shifted high parts and are thus
@@ -476,7 +476,7 @@ only representable by a character string (see chapter 3.4).
 5.2 Internal 16 bit representation
 -------------------------------------------------------------------------------
 
-A Retro-Frame character may be implemented by 16 bit unsigned integer values
+Retro character support may be implemented by 16 bit unsigned integer values
 with some limitations under the following rules:
 
 - Direct encodings are limited to 1 byte in the range 0xDE00..0xDEFF and 1 byte
@@ -498,11 +498,11 @@ with some limitations under the following rules:
 - String terminators are limited to TRUNCATED (0xFFFE) and TERMINATED (0xFFFF).
   
 
-5.3 Character Strings (CS)
+5.3 Retro Character Strings (RCS)
 -------------------------------------------------------------------------------
 
-A character string (CS) is a sequence of Retro-Frame character values and may
-be terminated by a string terminator (see chapter 3.5). However, the count of
+A Retro character string (RCS) is a sequence of Retro characters and may be
+terminated by a string terminator (see chapter 3.5). However, the count of
 valid characters in a string may also be maintained in a different way (e.g. a
 leading count value or if the string is at the end of a delimited data format).
 
@@ -519,10 +519,9 @@ string terminators should never be counted for the string length).
 
 A packed character string (PCS) is a sequence of one to three bytes (i.e. 8 bit
 unsigned integer values) in big endian order (i.e. the values representing the
-most significant bits come first) that are used to represent the Retro-Frame
-character codepoints. Unlike UTF-8, the individual values overlap so that
-packed character strings must always be interpreted from the beginning of the
-string.
+most significant bits come first) that are used to represent Retro character
+codepoints. Unlike UTF-8, the individual byte values overlap so that packed
+character strings must always be interpreted from the beginning of the string.
 
 Codepoints are encoded as follows:
 
@@ -605,11 +604,10 @@ encodings.
 5.5 Escape sequences
 -------------------------------------------------------------------------------
 
-If Retro-Frame characters are represented as text (i.e. printed), non-printable
-characters, non-characters and direct encodings have no graphical
-representation (i.e. a defined grapheme). In addition, control characters which
-normally control output (e.g. a new line), should not be interpreted in some
-cases (e.g. if part of a file name).
+If Retro characters are printed, non-printable characters, non-characters and
+direct encodings have no graphical representation (i.e. a defined grapheme). In
+addition, control characters which normally control output (e.g. a new line),
+should not be interpreted in some cases (e.g. if part of a file name).
 
 Those characters may be omitted or replaced by a common replacement character.
 However, in this case, the codepoint would be lost on output and it would not
