@@ -352,7 +352,7 @@ range, if convenient (e.g. use R+FDD0 as the PATH_SEPARATOR).
 
 Direct encoding is a feature to preserve a character value of arbitrary byte
 length which cannot or should not be mapped to a defined codepoint. However,
-lengths of more than 30 bits require one or even more shifted parts so that in
+lengths of more than 31 bits require one or even more shifted parts so that in
 this case, a direct encoding is restricted to a string.
 
 The following ranges are defined for direct encoding:
