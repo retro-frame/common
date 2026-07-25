@@ -47,7 +47,7 @@ Change history
 
   Initial version.
 
-2026-07-18 : 01.01!00 : Ingo
+2026-07-25 : 01.01!00 : Ingo
 
   Compliance switched to Retro-Frame 1.1; clarifications in chapter 3.3;
   corrections in chapters 5.4 and 5.5; "Retro-Frame character" renamed to
@@ -621,8 +621,9 @@ defined.
 If escaping is recognized, the following sequences are defined after the
 occurence of an escape character:
 
-- Control characters and spaces (' ', R+0020) shall be ignored (e.g. the escape
-  character may be used for line concatenation or additional spacing).
+- Spaces (' ', R+0020) and control characters other than NUL (R+0000) may be
+  considered invalid or interpreted in a context-specific manner (e.g. the
+  escape character may be used for line concatenation or additional spacing).
 
 - Any character of the STANDARD CHARACTER SET which is neither a control
   character, space (' '), a digit ('0'..'9') nor a letter ('A'..'Z', 'a'..'z')
