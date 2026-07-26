@@ -47,9 +47,10 @@ Change history
 
   Initial version.
 
-2026-04-12 : 01.01!00 : Ingo
+2026-07-26 : 01.01!00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1.
+  Compliance switched to Retro-Frame 1.1; chapter 2.4 now states that directory
+  names "." and ".." in locators are forbidden.
 
 
 Contents
@@ -267,7 +268,7 @@ directory of the <locator>. The following types of selectors are specified:
 
 - <native-selector> represents the base directory by a native path. Thus, a
   native selector is environment-dependent. A native selector starts with a
-  dollar sign ('$') and ends with a solidus ('/'). Ther must be at least one
+  dollar sign ('$') and ends with a solidus ('/'). There must be at least one
   character in between (otherwise, it would be considered the prefix of a
   native path). If the solidus itself occurs in a native selector, it must be
   escaped as usual.
@@ -284,6 +285,8 @@ directory of the <locator>. The following types of selectors are specified:
 
   - "$C://"   invalid universal path as <name-part> is missing after the first
               solidus ('/').
+
+The <name-part> of a locator must neither be "." nor "..".
 
 A <type-mark> is an optional component of a universal path that specifies
 whether the object is a directory or a file:
@@ -344,7 +347,7 @@ When a universal path is translated to a native path, the following rules
 should apply (note that relative paths cannot be translated):
 
 - All escape sequences and direct encodings, if given, are translated to the
-  actual codepoints. No no-character except PATH_SEPARATOR should be left.
+  actual codepoints. No non-character except PATH_SEPARATOR should be left.
 
 - A native encoding (i.e. a native selector or a native representation), if
   given, are validated according to the native path specification of the
