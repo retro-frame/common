@@ -47,11 +47,13 @@ Change history
 
   Initial version.
 
-2026-07-25 : 01.01!00 : Ingo
+2026-08-04 : 01.01!00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1; clarifications in chapter 3.3;
-  corrections in chapters 5.4 and 5.5; "Retro-Frame character" renamed to
-  "Retro character"; direct encoding range changed.
+  Compliance switched to Retro-Frame 1.1; clarifications in chapters 2.1, 3.3,
+  4.4, 5.6 and 5.7; the term "Retro-Frame character" was renamed to "Retro
+  character"; direct encoding range changed; chapters "direct encodings" and
+  "string terminators" moved to chapter 5 as, in a strict sense, they are not
+  part of the character set; chapter "internal 24 bit representation" added.
 
 
 Contents
@@ -75,8 +77,6 @@ Contents
    3.1  Unicode characters
    3.2  Extended characters
    3.3  Non-characters
-   3.4  Direct encodings
-   3.5  String terminators
 
 4. PRINTABLE AND REPLACEMENT CHARACTERS
    4.1  Level 1 (minimum printable)
@@ -86,11 +86,14 @@ Contents
    4.5  Level 5 (Unicode printable)
 
 5. CHARACTER ENCODINGS
-   5.1  Internal 32 bit representation
-   5.2  Internal 16 bit representation
-   5.3  Retro Character Strings (RCS)
-   5.4  Packed Character Strings (PCS)
-   5.5  Escape sequences
+   5.1  Direct encodings
+   5.2  String terminators
+   5.3  Internal 32 bit representation
+   5.4  Internal 24 bit representation
+   5.5  Internal 16 bit representation
+   5.6  Retro Character Strings (RCS)
+   5.7  Packed Character Strings (PCS)
+   5.8  Escape sequences
 
 
 
@@ -148,8 +151,15 @@ The Unicode(R) Standard, The Unicode Consortium, for latest version see
 2.1 Codepoints
 -------------------------------------------------------------------------------
 
-The codepoints of Retro characters are represented by a sequence of four or six
-uppercase hexadecimal digits ('0'..'9', 'A'..'F'), prefixed by "R+".
+The codepoints of Retro characters are in the range 0x000000..0xFFFFFF and are
+represented by a sequence of four or six uppercase hexadecimal digits ('0'..'9'
+and 'A'..'F'), prefixed by "R+". This includes the specified non-characters.
+
+However, the following parts of the codepoint range are considered illegal but
+may be used for character encoding (see chapter 5):
+
+- U+00DD00..U+00DFFF
+- U+??FFFE..U+??FFFF  (?? = 00..10)
 
 
 2.2 Categories
@@ -287,19 +297,17 @@ character of the corresponding codepoint (i.e. U+000000..U+10FFFF).
 The following codepoints of Unicode must never be used:
 
 - U+00D800..U+00DFFF  (may occur as surrogates in UTF-16 encodings)
-- U+00FDD0..U+00FDEF  (may be used internally as non-characters)
-- U+0?FFFE..U+0?FFFF  (? = 0..F)
-- U+10FFFE..U+10FFFF
+- U+00FDD0..U+00FDEF  (Unicode non-characters)
+- U+??FFFE..U+??FFFF  (?? = 00..10)
 
 However, if such codepoints occur on Unicode input, they may be preserved by
-direct encoding (see chapter 3.4). Note that in this case the codepoints
+direct encoding (see chapter 5.1). Note that in this case the codepoints
 change (e.g. sorting may produce different results than if those codepoints,
 although invalid, were left unchanged).
 
 While the range R+D800..R+DCFF is used for extended Retro characters (see
-chapter 3.2), some of the other codepoints may be used by 16 bit character
-representation (see chapter 5.2). Note that the codepoint R+DFFF is always
-considered invalid.
+chapter 3.2), some of the other codepoints may be used by 24 or 16 bit encoding
+(see chapter 5.2). Note that the codepoint R+DFFF is always considered invalid.
 
 
 3.2 Extended characters
@@ -308,7 +316,7 @@ considered invalid.
 Retro-Frame specifies extended characters which are assigned to two separate
 ranges of codepoints which are not used by Unicode. The low codepoints use the
 surrogate codepoints in the range R+D800..R+DCFF and can be represented by a
-single 16 bit character (see chapter 5.2). The other extended characters use
+single 16 bit character (see chapter 5.5). The other extended characters use
 the range R+110000..R+126FC1 above the Unicode codepoints.
 
 The following extended characters are defined:
@@ -347,48 +355,6 @@ range. The implementation may chose to map defined non-characters into that
 range, if convenient (e.g. use R+FDD0 as the PATH_SEPARATOR).
 
 
-3.4 Direct encodings
--------------------------------------------------------------------------------
-
-Direct encoding is a feature to preserve a character value of arbitrary byte
-length which cannot or should not be mapped to a defined codepoint. However,
-lengths of more than 31 bits require one or even more shifted parts so that in
-this case, a direct encoding is restricted to a string.
-
-The following ranges are defined for direct encoding:
-
-- 0x0F000000..0x0FFFFFFF  3 bytes shift part of a direct encoding
-- 0x10000000..0x100000FF  1 byte direct encoding low part
-- 0x20000000..0x2000FFFF  2 bytes direct encoding low part
-- 0x30000000..0x30FFFFFF  3 bytes direct encoding low part
-- 0x40000000..0xBFFFFFFF  4 bytes direct encoding low part <= 0x7FFFFFFF
-
-If n shift parts precede an m byte direct encoding low part, the total byte
-length of the resulting value is 3 * n + m.
-
-Direct encodings are not not assigned to a category. There should be no
-interpretation of direct encodings and processing is limited to copying or
-deleting.
-
-
-3.5 String terminators
--------------------------------------------------------------------------------
-
-String terminators indicate the end of a character string (see chapter 5.3).
-
-The following ranges are defined for string terminators:
-
-- 0xC0000000..0xFFFFFFFD  unspecified string terminator
-- 0xFFFFFFFE              TRUNCATED (string resulted from a longer string)
-- 0xFFFFFFFF              TERMINATED (normal end of string)
-
-While two string terminators, TRUNCATED and TERMINATED, have a predefined
-meanings, unspecified string terminators may be used to encode further string
-information (e.g. the original encoding of a string). They may also be used to
-indicate errors on character or string operations (in this case, they may also
-be used as a value of a single character).
-
-
 
 4. PRINTABLE AND REPLACEMENT CHARACTERS
 ===============================================================================
@@ -413,7 +379,7 @@ mark ('?').
 The characters of the BASIC CHARACTER SET are expected to be printable in most
 environments which are in primary scope of Retro-Frame (level 2).
 
-A character which is not printable may be omitted, escaped (see chapter 5.5) or
+A character which is not printable may be omitted, escaped (see chapter 5.8) or
 replaced by a question mark ('?').
 
 
@@ -423,7 +389,7 @@ replaced by a question mark ('?').
 The characters of the STANDARD CHARACTER SET are printable in all ASCII
 environments and even in most EBCDIC environments (level 3).
 
-A character which is not printable may be omitted, escaped (see chapter 5.5) or
+A character which is not printable may be omitted, escaped (see chapter 5.8) or
 replaced by a question mark ('?').
 
 
@@ -431,13 +397,9 @@ replaced by a question mark ('?').
 -------------------------------------------------------------------------------
 
 If a CODEPAGE is used, all grapheme or spacing CODEPOINTS of the associated
-CHARACTER SET are printable. Note that this level may not entail all the
-printable characters of the previous levels. However, in this level all
+CHARACTER SET are assumed printable. Note that this level may not entail all
+the printable characters of the previous levels. However, in this level all
 printable characters of the CODEPAGE are covered.
-
-A character which is not printable may be omitted, escaped (see chapter 5.5) or
-replaced by a question mark ('?') respectively a CODEPAGE-specific replacement
-character.
 
 
 4.5 Level 5 (Unicode printable)
@@ -458,29 +420,105 @@ must be considered whether the line break CODEPOINTS R+0085 NEL, R+2028 LS and
 R+2029 PS shall be translated to R+000D CR and/or R+000A LF or escaped.
 
 
+
 5. CHARACTER ENCODINGS
 ===============================================================================
 
 
-5.1 Internal 32 bit representation
+5.1 Direct encodings
+-------------------------------------------------------------------------------
+
+Direct encoding is a feature to preserve a character value of arbitrary length
+which cannot or should not be mapped to a defined codepoint. However, due to
+limitations of the Retro character representations, direct encodings of more
+than a specific length (i.e. 31 respective 8 bits) require one or even more
+shifted parts in big endian order. However, such direct encodings are only
+representable by a character string.
+
+The direct encoding scheme depends on the internal representation (see below).
+
+Direct encodings are no Retro character codepoints and thus not assigned to a
+category. There should be no interpretation of direct encodings and processing
+is limited to copying or deleting.
+
+
+5.2 String terminators
+-------------------------------------------------------------------------------
+
+String terminators indicate the end of a character string. Note that in a
+specific context, Retro character codepoints may also indicate the end of a
+string (e.g. the NUL character). In general, a string terminator should be
+considered to limit the length of a string (i.e. if a maximum length is given,
+a string terminator may be treatened as if the maximum length would be the
+position of the string terminator).
+
+While two string terminators, TRUNCATED and TERMINATED, have a predefined
+meaning, unspecified string terminators may be used to encode further string
+information (e.g. the original encoding of a string). They may also be used to
+indicate errors on character or string operations (in this case, they may also
+be used as a value of a single Retro character).
+
+
+5.3 Internal 32 bit representation
 -------------------------------------------------------------------------------
 
 If 32 bit integers are supported by the environment, Retro character codepoints
 may be represented by a 32 bit unsigned integer value.
 
-In this case, all codepoints can be represented by a single value. However,
-direct encodings of more than 30 bits require shifted high parts and are thus
-only representable by a character string (see chapter 3.4).
+The following ranges are defined for direct encoding:
+
+- 0x0F000000..0x0FFFFFFF  3 bytes shift part of a direct encoding
+- 0x10000000..0x100000FF  1 byte direct encoding low part
+- 0x20000000..0x2000FFFF  2 bytes direct encoding low part
+- 0x30000000..0x30FFFFFF  3 bytes direct encoding low part
+- 0x40000000..0xBFFFFFFF  4 bytes direct encoding <= 0x7FFFFFFF
+
+If n shift parts precede an m byte direct encoding low part, the total byte
+length of the resulting value is 3 * n + m (m = 1..3).
+
+The following ranges are defined for string terminators:
+
+- 0xC0000000..0xFFFFFFFD  unspecified string terminator
+- 0xFFFFFFFE              TRUNCATED (string resulted from a longer string)
+- 0xFFFFFFFF              TERMINATED (normal end of string)
+
+All codepoints can be represented by a single value. However, direct encodings
+of more than 31 bits require shifted high parts and are thus only representable
+by a character string.
 
 
-5.2 Internal 16 bit representation
+5.4 Internal 24 bit representation
+-------------------------------------------------------------------------------
+
+If 24 bit integers are supported by the environment, Retro character codepoints
+may be represented by a 24 bit unsigned integer value.
+
+The following ranges are defined for direct encoding:
+
+- Direct encodings are limited to 1 byte in the range 0xDE00..0xDEFF and 1 byte
+  shift parts in the range 0xDD00..0xDDFF (i.e. Unicode low surrogates).
+
+- 0x00DD00..0x00DDFF  1 byte shift part of a direct encoding
+- 0x00DE00..0x00DEFF  1 byte direct encoding low part
+
+If n shift parts precede an m byte direct encoding low part, the total byte
+length of the resulting value is 3 * n + m.
+
+The following ranges are defined for string terminators:
+
+- 0x00FFFE  TRUNCATED (string resulted from a longer string)
+- 0x00FFFF  TERMINATED (normal end of string)
+
+All codepoints can be represented by a single value. However, direct encodings
+of more than 8 bits require shifted high parts and are thus only representable
+by a character string.
+
+
+5.5 Internal 16 bit representation
 -------------------------------------------------------------------------------
 
 Retro character support may be implemented by 16 bit unsigned integer values
 with some limitations under the following rules:
-
-- Direct encodings are limited to 1 byte in the range 0xDE00..0xDEFF and 1 byte
-  shift parts in the range 0xDD00..0xDDFF (i.e. Unicode low surrogates).
 
 - Codepoints >= R+010000 are represented by a value in the range 0xDF00..0xDFFE
   (i.e. a Unicode low surrogate), followed by a second value. The 8 bits of the
@@ -490,31 +528,32 @@ with some limitations under the following rules:
   As a consequence, codepoints >= R+010000 cannot be represented by a single
   value but only in strings.
 
-- The codepoint R-DFFF remains invalid.
+- The codepoint R+DFFF remains invalid.
 
 - Non-characters can only be represented as a single codepoint in the range
-  0xFDD0..0xFDEF.
+  R+FDD0..R+FDEF.
 
-- String terminators are limited to TRUNCATED (0xFFFE) and TERMINATED (0xFFFF).
+Direct encodings and string terminators are encoded like 24 bit representations
+(see chapter 5.4).
   
 
-5.3 Retro Character Strings (RCS)
+5.6 Retro Character Strings (RCS)
 -------------------------------------------------------------------------------
 
 A Retro character string (RCS) is a sequence of Retro characters and may be
-terminated by a string terminator (see chapter 3.5). However, the count of
+terminated by a string terminator (see chapter 5.2). However, the count of
 valid characters in a string may also be maintained in a different way (e.g. a
 leading count value or if the string is at the end of a delimited data format).
 
-While the string count is always the number of valid character values
-(excluding string terminators, if given), the string length may be defined in
-the specific context. While characters (including control characters) should
-always be counted, non-characters and direct encodings may or may not be
-counted (however, in any case, the shift part of a direct encoding as well as
-string terminators should never be counted for the string length).
+While the string count is always the number of string elements (excluding
+string terminators, if given), the string length may be defined in the specific
+context. While characters (including control characters) should always be
+counted, non-characters and direct encodings may or may not be counted
+(however, in any case, the shift part of a direct encoding as well as string
+terminators should never be counted for the string length).
 
 
-5.4 Packed Character Strings (PCS)
+5.7 Packed Character Strings (PCS)
 -------------------------------------------------------------------------------
 
 A packed character string (PCS) is a sequence of one to three bytes (i.e. 8 bit
@@ -591,7 +630,7 @@ Codepoints are encoded as follows:
 - R+110000..R+126FC1  For encoding, 0xEB903E is added and the resulting values
                       (0xFC903E..0xFDFFFF) are represented by three bytes.
 
-The following bytes, which are neither CHARACTERS nor NON-CHARACTERS, represent
+The following bytes, which are neither characters nor non-characters, represent
 string terminators:
 
 - 0xFE  TRUNCATED
@@ -601,7 +640,7 @@ Thus, a packed character string cannot represent non-characters or direct
 encodings.
 
 
-5.5 Escape sequences
+5.8 Escape sequences
 -------------------------------------------------------------------------------
 
 If Retro characters are printed, non-printable characters, non-characters and
@@ -685,14 +724,14 @@ Examples:
 - "^61,62,63;" represents the codepoints R+0061, R+0062 and R+0063 ("abc").
 
 - "^X0;" represents the direct encoding of value 0x00 (encoded as 0x10000000
-  for 32 bit characters or 0xDE00 for 16 bit characters).
+  for 32 bit encoding or 0xDE00 for 24 or 16 bit encodings).
 
 - "^X1,FFFF;" represents the direct encodings of the values 0x01 and 0xFFFF
-  (encoded as the sequences 0x10000001 0x2000FFFF for 32 bit characters or
-  0xDE01 0xDDFF 0xDEFF for 16 bit characters).
+  (encoded as the sequences 0x10000001 0x2000FFFF for 32 bit encodings or
+  0xDE01 0xDDFF 0xDEFF for 24 or 16 bit encodings).
 
 - "^X000400000000;" represents the direct encoding of the value 0x400000000.
 
 The characters resulting from an escape sequence are never considered another
 escape sequence (e.g. "^5E,61;" represents the codepoints R+005E and R+0061
-(i.e. "^a") which do not in turn represent an escape sequence.
+(i.e. "^a") which in turn do not represent an escape sequence.
