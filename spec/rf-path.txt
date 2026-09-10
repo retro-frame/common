@@ -17,7 +17,7 @@ Version:     01.01!00
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
-Copyright (c) 2025 Ingo Boehmer <ingo@retro-leisure.net>
+Copyright (c) 2025-2026 Ingo Boehmer <ingo@retro-leisure.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,10 +47,13 @@ Change history
 
   Initial version.
 
-2026-07-26 : 01.01!00 : Ingo
+2026-09-10 : 01.01!00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1; chapter 2.4 now states that directory
-  names "." and ".." in locators are forbidden.
+  Compliance switched to Retro-Frame 1.1; chapters 2.1 and 2.4 no longer allow
+  non-characters for universal paths; chapters 3.1 and 3.2 now describe how to
+  translate invalid codepoints or encodings from or to direct encodings;
+  security considerations added to chapter 3.2.
+  
 
 
 Contents
@@ -134,16 +137,16 @@ replaced by a solidus ('/') and escape sequences (see /spec/rf-char.txt//,
 chapter 5.5) are used to represent the following codepoints:
 
 - control characters,
-- no-characters,
-- direct encodings,
 - a circumflex accent ('^'),
 - a solidus ('/'), unless representing a PATH_SEPARATOR,
 - non-printable characters (i.e. characters which cannot be represented by
   a native character in the environment in which the universal path is
-  represented).
+  represented),
+- direct encodings to represent non-characters or invalid encodings.
 
 The representation of other codepoints by escape sequences may be accepted or
-even required in a context-specific manner.
+even required in a context-specific manner. Non-characters are not allowed as
+codepoints in universal paths but may be represented as direct encodings.
 
 Universal paths are case sensitive. Thus, special care must be taken when
 translating a universal path to a case-insensitive native path (see chapter
@@ -221,8 +224,9 @@ specified:
 
 A <universal-path> is a character sequence. All characters which are not
 printable or have a special meaning are represented as an escape sequence which
-is introduced by a circumflex accent ('^') as specified in /spec/rf-char.txt//.
-A character that results of an escape sequence stands for its own and has no
+is introduced by a circumflex accent ('^') as specified in /spec/rf-char.txt//,
+except that non-character codepoints are not allowed (see chapter 2.1). Any
+character that results from an escape sequence stands for its own and has no
 special meaning (e.g. "^^" results in a single circumflex accent but does not
 introduce another escape sequence).
 
@@ -286,8 +290,6 @@ directory of the <locator>. The following types of selectors are specified:
   - "$C://"   invalid universal path as <name-part> is missing after the first
               solidus ('/').
 
-The <name-part> of a locator must neither be "." nor "..".
-
 A <type-mark> is an optional component of a universal path that specifies
 whether the object is a directory or a file:
 
@@ -321,10 +323,13 @@ should apply:
   If one or more references to the parent directories remain, they may be
   represented by exclamation marks ('!') if the absolute selector "./" is
   used (e.g. "./test/x/./../y/../../z" is resolved to ".!/z"), or considered
-  invalid otherwise.
+  invalid otherwise. Note that "." or ".." are valid directory parts in a
+  universal path but do not represent the current or parent directory (see
+  chapter 3.2).
 
 - In the locator, a native path separator is represented by a PATH_SEPARATOR
-  character.
+  character. Non-characters, invalid encodings or codepoints which cannot be
+  represented as Retro Characters are represented by direct encodings.
 
 - If the native path represents a directory, one PATH_SEPARATOR character
   should be appended, if it represents a file, two PATH_SEPARATOR characters
@@ -347,21 +352,32 @@ When a universal path is translated to a native path, the following rules
 should apply (note that relative paths cannot be translated):
 
 - All escape sequences and direct encodings, if given, are translated to the
-  actual codepoints. No non-character except PATH_SEPARATOR should be left.
+  actual codepoints. Codepoints which cannot be represented by the native path
+  result in a path conflict (see below).
 
 - A native encoding (i.e. a native selector or a native representation), if
-  given, are validated according to the native path specification of the
+  given, is validated according to the native path specification of the
   environment. If required, appropriate characters may be appended to a native
-  selector (e.g. a native path separator).
+  selector (e.g. a native path separator). Invalid encodings result in a path
+  conflict (see below).
 
 - An absolute selector, if given, is replaced by the current relating base
-  path, if specified.
+  path, if specified. Selectors which are not supported by the environment
+  (e.g. "~/" on MS-DOS) result in a path conflict (see below). References to
+  parent directories of the current path shall only be resolved if not security
+  risk by means of directory traversal is given or if an appropriate security
+  level is set (see /doc/rf-guide.txt//, chapter 8.3) but result in a path
+  conflict otherwise (see below).
 
 - All name parts of the locator are validated according to the native path
-  specification of the environment.
+  specification of the environment. Name parts which are syntactially invalid
+  or have a special meaning in the environment (e.g. if "." or ".." would
+  represent the current respective parent directory) result in a path conflict
+  (see below).
 
 - The name parts of the locator are appended to the selector, separated by
-  native path separators.
+  native path separators. Violations of the maximum path depth in the
+  environment result in a path conflict (see below).
 
 - Depending on the native path specification, appropriate characters may be
   appended, possibly depending on the type mark.
@@ -369,10 +385,10 @@ should apply (note that relative paths cannot be translated):
 - If the native file system is case-insenstive, possible conflicts must be
   handled in a context-specific manner. Under certain circumstances, it may
   pose a security risk if such cases are not properly handled (e.g. if a file
-  is overwritten by another file whose path only differs by case).
+  is overwritten by another file whose path only differs by case). Such a risk
+  on an inappropriate security level (see /doc/rf-guide.txt//, chapter 8.3)
+  results in a path conflict (see below).
 
-If validation fails (e.g. the resulting path cannot be represented by a valid
-native path or if conflicts occur due to case-insensitivity), the resulting
-path may be considered invalid, the user may be prompted or surrogates may be
-used (in which case the resulting native path does not comply to the rules
-specified above).
+If a path conflict occurs, the resulting path may be considered invalid, the
+user may be prompted or surrogates may be used (in which case the resulting
+native path does not comply to the rules specified above).
