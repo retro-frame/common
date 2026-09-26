@@ -49,11 +49,11 @@ Change history
 
 2026-09-10 : 01.01!00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1; chapters 2.1 and 2.4 no longer allow
-  non-characters for universal paths; chapters 3.1 and 3.2 now describe how to
-  translate invalid codepoints or encodings from or to direct encodings;
-  security considerations added to chapter 3.2.
-  
+  Compliance switched to Retro-Frame 1.1; non-characters are no longer allowed
+  in universal paths; optional connecting path references in relative universal
+  paths introduced; chapters 3.1 and 3.2 now describe how to translate invalid
+  codepoints or encodings from or to direct encodings; security considerations
+  added to chapter 3.2.
 
 
 Contents
@@ -180,7 +180,11 @@ specified:
 
 <name-part>:
 
-  (_<name-char>_)*
+  <name-char> [_<name-char> ]*
+
+<path-ref>:
+
+  A [ [_"-" ] (_9 |_A ) ]*
 
 <native-selector>:
 
@@ -188,11 +192,11 @@ specified:
 
 <relative-selector>:
 
-  ":"
+  [ <path-ref>_] ":"
 
 <absolute-selector>:
 
-  "/" | "."_[_"!"_]*_"/" | "~/" | "+/" | "?/"
+  "/" | "?/" | "+/" | "."_[_"!"_]*_"/" | "~/"
 
 <selector>:
 
@@ -200,7 +204,7 @@ specified:
 
 <locator>:
 
-  [_<name-part>_"/"_]*_<name-part>
+  [ <name-part>_"/"_]*_<name-part>
 
 <type-mark>:
 
@@ -208,11 +212,11 @@ specified:
 
 <universal-representation>:
 
-  <selector>_<locator>_[_<type-mark>_]
+  <selector>_<locator> [_<type-mark> ]
 
 <native-representation>:
 
-  "$/"_(_<name-char>_|_"/")*
+  "$/" (_<name-char> |_"/" )*
 
 <universal-path>:
 
@@ -237,49 +241,59 @@ dependent) parts.
 If the first character of a <universal-path> is a dollar sign ('$'), followed
 by a solidus ('/'), the entire remaining character sequence is considered a
 native representation (which is, however, not identical to the actual native
-path if escape sequences occur).
+path if escape sequences occur as those would be resolved).
 
-A <selector> is a component of a universal path that specifies the base
+A <selector> is the first component of a universal path that specifies the base
 directory of the <locator>. The following types of selectors are specified:
 
-- <relative-selector> is represented by a colon (':'). The base directory is
-  intentionally unspecified (e.g. a path in an archive). A universal path with
-  a relative selector cannot be directly translated to a native path.
+- <relative-selector> is represented by a colon (':'), optionally preceded by
+  an identifier which may be used as a reference to the connecting universal
+  path (i.e. the base path). Note that a connecting path reference, if given,
+  is not part of the resulting path itself but may be used to chose the proper
+  base path (e.g. "DOC:test.txt" or "BUILD-PATH:prog/makefile") and that such
+  a prefix may be distinguished from a URL scheme as a solidus ('/') must never
+  follow the colon (':') of the selector. As the base path is intentionally
+  unspecified, a universal path with a relative selector cannot be directly
+  translated to a native path.
 
 - <absolute-selector> refers to an abstract base path which can be translated
   to an environment-specific respective context-specific native base path. The
   following absolute selectors are defined:
 
   - "/"   Represents a context-specific root directory (i.e. the root directory
-          of the file system, current drive or a repository).
+          of the file system, current drive or a repository). This selector
+          should be supported by all environments.
+
+  - "?/"  Represents a temporary directory of the file system. This selector
+          should be supported by all environments.
+
+  - "+/"  Represents the program directory of the file system. If the
+          program directory is not specified or cannot be determined, this
+          selector cannot be translated to a native path.
 
   - "./"  Represents the current directory of the file system. After the full
           stop ('.') an optional sequence of exclamation marks ('!') may
           follow, each one representing the parent directory. This may pose a
           security risk (directory traversal) if not properly handled. However,
-          as parent directories cannot occur within a <locator>, the acceptable
-          number of parent directories may be validated easily.
+          as parent directory references cannot occur within a <locator>, the
+          acceptable number of parent directory references may be validated
+          easily. If the environment does not support current directories, this
+          selector cannot be translated to a native path.
 
   - "~/"  Represents the user's home directory of the file system. If the
-          environment does not specify a home directory, this selector cannot
-          be used.
+          environment does not support home directories, this selector cannot
+          be translated to a native path.
 
-  - "+/"  Represents the program directory of the file system. If the
-          program directory is not specified or cannot be determined, this
-          selector cannot be used.
-
-  - "?/"  Represents a temporary directory of the file system.
-
-- <native-selector> represents the base directory by a native path. Thus, a
+- <native-selector> represents the base directory as a native path. Thus, a
   native selector is environment-dependent. A native selector starts with a
   dollar sign ('$') and ends with a solidus ('/'). There must be at least one
   character in between (otherwise, it would be considered the prefix of a
   native path). If the solidus itself occurs in a native selector, it must be
   escaped as usual.
 
-  Examples for MS-DOS native selectors (note that the usual path separator is
-  the reverse solidus ('\') but the solidus ('/') is also accepted as a native
-  path separator:
+  Examples for MS-DOS native selectors (note that the usual native path
+  separator is the reverse solidus ('\') but the solidus ('/') is also accepted
+  as a native path separator:
 
   - "$C:/"    represents the current directory of drive C:.
 
@@ -328,13 +342,19 @@ should apply:
   chapter 3.2).
 
 - In the locator, a native path separator is represented by a PATH_SEPARATOR
-  character. Non-characters, invalid encodings or codepoints which cannot be
-  represented as Retro Characters are represented by direct encodings.
+  character respective solidus ('/'). A solidus which is not a native path
+  separator and a circumflex-accent ('^') must be escaped (e.g. by preceding a
+  circumflex-accent). Non-characters, invalid encodings or codepoints which
+  cannot be represented as Retro Characters may be represented by direct
+  encodings or are considered invalid otherwise.
 
-- If the native path represents a directory, one PATH_SEPARATOR character
-  should be appended, if it represents a file, two PATH_SEPARATOR characters
-  should be appended as the type mark. If it is not known whether the native
-  path represents a directory or a file, no type mark should be appended.
+- If the native path represents a directory, one PATH_SEPARATOR character or
+  a single solidus ("/") should be appended. If the native path represents a
+  file, two PATH_SEPARATOR characters or a double solidus ("//") should be
+  appended. If no type mark is appended (e.g. because it is not known whether
+  the native path represents a directory or a file), the path must not end with
+  a PATH_SEPARATOR character or solidus ('/') which does not result from an
+  escape sequence.
 
 - If the native path contains other components (e.g. a version or alternate
   data stream identifiers), those information is lost or must, if required, be
