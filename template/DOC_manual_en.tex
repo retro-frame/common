@@ -1,0 +1,96 @@
+\documentclass{scrartcl}
+
+\usepackage{tabularx}
+
+\title{$\langle$Title$\rangle$}
+\author{$\langle$Author$\rangle$}
+\date{$\langle$yyyy-mm-dd$\rangle$}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\vspace{300pt}
+
+\noindent \texttt{Endeavor:~~~$\langle$Retro-Endeavor$\rangle$}\\
+\noindent \texttt{Repository:~<source.$\langle$retro-endeavor$\rangle$.net/$\langle$repository$\rangle$>}\\
+\noindent \texttt{Version:~~~~$\langle$external version$\rangle$}\\
+\noindent \texttt{Compliance:~Retro-Frame 1.1}\\
+\noindent \texttt{License:~~~~MIT (see LICENSE)}
+
+\vspace{10pt}
+\noindent \textit{Copyright (c) $\langle$Year(s)$\rangle$ $\langle$Contributer full name$\rangle$ $\langle\langle$Contributer e-mail address$\rangle\rangle$}
+
+\vspace{10pt}
+\noindent \textit{All product names, logos, and brands are property of their respective owners.}
+
+\newpage
+
+\section*{Change history}
+
+\vspace{10pt}
+\begin{tabularx}{\textwidth}{|p{52pt}|p{42pt}|p{65pt}|X|}
+\hline
+\textbf{Date} & \textbf{Version} & \textbf{Author} & \textbf{Description}\\
+\hline
+$\langle$yyyy-mm-dd$\rangle$ & $\langle$internal version$\rangle$ & $\langle$User-ID$\rangle$ $[,~\langle$User-ID$\rangle~]$ [...] & $[~\langle$Description~of~change$\rangle$~;$~]$ [...] $\langle$Description~of~change.$\rangle$\\
+\hline
+\end{tabularx}
+
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+\noindent $\langle$Paragraph$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$
+
+\section{Chapter}
+
+\noindent $\langle$Paragraph$\rangle$ (see \cite{bookRef1}, chapter 2)
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$ (see \cite{websiteRef1}, /file)
+
+\subsection{Subchapter}
+
+\noindent $\langle$Paragraph$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$
+
+\subsubsection{Sub-Subchapter}
+
+\noindent $\langle$Paragraph$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$
+
+\addcontentsline{toc}{section}{Appendix A}
+\section*{Appendix A}
+
+\noindent $\langle$Paragraph$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$
+
+\addcontentsline{toc}{section}{Appendix B}
+\section*{Appendix B}
+
+\noindent $\langle$Paragraph$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Paragraph$\rangle$
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain}
+\bibliography{DOC_manual}
+
+\end{document}

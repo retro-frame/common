@@ -13,7 +13,7 @@ Definitions
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-def.txt//
-Version:     01.01!00
+Version:     01.01.00
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -47,9 +47,9 @@ Change history
 
   Initial version.
 
-2026-04-12 : 01.01!00 : Ingo
+2026-10-11 : 01.01.00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1.
+  Compliance switched to Retro-Frame 1.1; minor addition in chapter 1.2.
 
 
 Contents
@@ -149,7 +149,8 @@ versions than the Retro-Frame Common Documentation respository.
 1.2 Scope
 -------------------------------------------------------------------------------
 
-This document contains common definitions.
+This document contains common definitions. Additional definitions may be part
+of any documentation.
 
 
 1.3 References

@@ -47,7 +47,7 @@ Change history
 
   Initial version.
 
-2026-09-10 : 01.01!00 : Ingo
+2026-10-11 : 01.01.00 : Ingo
 
   Compliance switched to Retro-Frame 1.1; non-characters are no longer allowed
   in universal paths; optional connecting path references in relative universal

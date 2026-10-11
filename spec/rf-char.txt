@@ -13,7 +13,7 @@ Retro Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.01!00
+Version:     01.01.00
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -47,7 +47,7 @@ Change history
 
   Initial version.
 
-2026-09-10 : 01.01!00 : Ingo
+2026-10-11 : 01.01.00 : Ingo
 
   Compliance switched to Retro-Frame 1.1; clarifications in chapters 2.1, 3.3,
   4.4, 5.6 and 5.7; the term "Retro-Frame character" was renamed to "Retro

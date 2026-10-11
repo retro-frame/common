@@ -1,0 +1,97 @@
+\documentclass{scrartcl}
+
+\usepackage{tabularx}
+\usepackage[ngerman]{babel}
+
+\title{$\langle$Titel$\rangle$}
+\author{$\langle$Autor$\rangle$}
+\date{$\langle$tt.mm.jjjj$\rangle$}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\vspace{300pt}
+
+\noindent \texttt{Endeavor:~~~$\langle$Retro-Endeavor$\rangle$}\\
+\noindent \texttt{Repository:~<source.$\langle$retro-endeavor$\rangle$.net/$\langle$repository$\rangle$>}\\
+\noindent \texttt{Version:~~~~$\langle$Externe Version$\rangle$}\\
+\noindent \texttt{Compliance:~Retro-Frame 1.1}\\
+\noindent \texttt{License:~~~~MIT (see LICENSE)}
+
+\vspace{10pt}
+\noindent \textit{Copyright (c) $\langle$Jahr(e)$\rangle$ $\langle$Voller Name des Autors$\rangle$ $\langle\langle$E-Mail-Adresse des Autors$\rangle\rangle$}
+
+\vspace{10pt}
+\noindent \textit{Alle Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber.}
+
+\newpage
+
+\section*{Änderungshistorie}
+
+\vspace{10pt}
+\begin{tabularx}{\textwidth}{|p{52pt}|p{42pt}|p{65pt}|X|}
+\hline
+\textbf{Datum} & \textbf{Version} & \textbf{Autor} & \textbf{Beschreibung}\\
+\hline
+$\langle$tt.mm.jjjj$\rangle$ & $\langle$Interne Version$\rangle$ & $\langle$User-ID$\rangle$ $[,~\langle$User-ID$\rangle~]$ [...] & $[~\langle$Beschreibung~der~Änderung$\rangle$~;$~]$ [...] $\langle$Beschreibung~der~Änderung.$\rangle$\\
+\hline
+\end{tabularx}
+
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Einleitung}
+
+\noindent $\langle$Absatz$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$
+	
+\section{Kapitel}
+
+\noindent $\langle$Absatz$\rangle$ (siehe \cite{bookRef1}, Kapitel 2)
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$ (siehe \cite{websiteRef1}, /datei)
+
+\subsection{Unterkapitel}
+
+\noindent $\langle$Absatz$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$
+
+\subsubsection{Unter-Unterkapitel}
+
+\noindent $\langle$Absatz$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$
+
+\addcontentsline{toc}{section}{Anhang A}
+\section*{Anhang A}
+
+\noindent $\langle$Absatz$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$
+
+\addcontentsline{toc}{section}{Anhang B}
+\section*{Anhang B}
+
+\noindent $\langle$Absatz$\rangle$
+
+\vspace{10pt}
+\noindent $\langle$Absatz$\rangle$
+
+\addcontentsline{toc}{section}{Literatur}
+\bibliographystyle{plain}
+\bibliography{DOC_manual}
+
+\end{document}

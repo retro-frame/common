@@ -13,7 +13,7 @@ Data Types Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-types.txt//
-Version:     01.01!00
+Version:     01.01.00
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -47,9 +47,11 @@ Change history
 
   Initial version.
 
-2026-04-12 : 01.01!00 : Ingo
+2026-10-11 : 01.01.00 : Ingo
 
-  Compliance switched to Retro-Frame 1.1.
+  Compliance switched to Retro-Frame 1.1; identifiers adjusted in chapter 4.1;
+  identifier changed to RCHAR and 24 bit versions added for Retro Characters in
+  chapter 4.3; minor corrections.
 
 
 Contents
@@ -173,10 +175,10 @@ is always n / 8 bytes.
 
   Identifier   Size         Endianness   Description
   -----------  -----------  -----------  -------------------------------------
-  UINT-8       1 byte       n/a          8 bit unsigned integer
-  UINT-<n>     n / 8 bytes  unspecified  n bit unsigned integer
-  UINT-<n>LE   n / 8 bytes  little       n bit unsigned integer, little endian
-  UINT-<n>BE   n / 8 bytes  big          n bit unsigned integer, big endian
+  UINT-8       1 byte       n/a          8-bit unsigned integer
+  UINT-<n>     n / 8 bytes  unspecified  n-bit unsigned integer
+  UINT-<n>LE   n / 8 bytes  little       n-bit unsigned integer, little endian
+  UINT-<n>BE   n / 8 bytes  big          n-bit unsigned integer, big endian
 
 The placedholder <n> in the identifier should be replaced by the actual value
 n, which must be a multiple of and greater than 8, in decimal representation.
@@ -192,10 +194,10 @@ is no negative zero.
 
   Identifier   Size         Endianness   Description
   -----------  -----------  -----------  -----------------------------------
-  SINT-8      1 byte       n/a           8 bit signed integer
-  SINT-<n>    n / 8 bytes  unspecified   n bit signed integer
-  SINT-<n>LE  n / 8 bytes  little        n bit signed integer, little endian
-  SINT-<n>BE  n / 8 bytes  big           n bit signed integer, big endian
+  SINT-8      1 byte       n/a           8-bit signed integer
+  SINT-<n>    n / 8 bytes  unspecified   n-bit signed integer
+  SINT-<n>LE  n / 8 bytes  little        n-bit signed integer, little endian
+  SINT-<n>BE  n / 8 bytes  big           n-bit signed integer, big endian
 
 The placedholder <n> in the identifier should be replaced by the actual value
 n, which must be a multiple of and greater than 8, in decimal representation.
@@ -212,8 +214,8 @@ appropriately to match even respective odd parity.
 
   Identifier  Size    Endianness  Description
   ----------  ------  ----------  -----------------------------------
-  UINT-7E     1 byte  n/a         7 bit unsigned integer, even parity
-  UINT-7O     1 byte  n/a         7 bit unsigned integer, odd parity
+  UINT-7E     1 byte  n/a         7-bit unsigned integer, even parity
+  UINT-7O     1 byte  n/a         7-bit unsigned integer, odd parity
 
 
 
@@ -361,13 +363,17 @@ translated to a Retro-Frame character (see /spec/rf-char.txt//).
 
   Identifier  Description
   ----------  ----------------------------------------------------------------
-  CHAR        unspecified single byte character type
-  ASCII       7 bit ASCII character, most significant bit must be zero
-  ASCII-PE    7 bit ASCII character, most significant bit set to even parity
-  ASCII-PO    7 bit ASCII character, most significant bit set to odd parity
-  ASCII-CP    8 bit character codepage, codepoints 0..127 are ASCII characters
+  ASCII-7     7-bit ASCII character
+  ASCII       8-bit ASCII character, most significant bit must be zero
+  ASCII-PE    8-bit ASCII character, most significant bit set to even parity
+  ASCII-PO    8-bit ASCII character, most significant bit set to odd parity
+  ASCII-CP    8-bit character codepage, codepoints 0..127 are ASCII characters
               (ASCII CHARACTER DOMAIN)
-  CP          8 bit character codepage with unspecified CHARACTER DOMAIN
+  CP          8-bit character codepage with unspecified CHARACTER DOMAIN
+  CP-<n>      <n>-bit character codepage with unspecified CHARACTER DOMAIN
+
+The placedholder <n> in the identifier should be replaced by the actual value n
+in decimal representation.
 
 
 4.2 Multibyte character encodings
@@ -445,15 +451,21 @@ Retro-Frame characters may use shifted values to represent a direct encoding
   UTF-32      4 bytes      unspecified  Unicode        UTF-32
   UTF-32LE    4 bytes      little       Unicode        UTF-32
   UTF-32BE    4 bytes      big          Unicode        UTF-32
-  CHAR-16     n * 2 bytes  unspecified  Retro-Frame    16 bit Retro-Frame
-                                                       character representation
-  CHAR-16LE   n * 2 bytes  little       Retro-Frame    16 bit Retro-Frame
-                                                       character representation
-  CHAR-16BE   n * 4 bytes  big          Retro-Frame    16 bit Retro-Frame
-                                                       character representation
-  CHAR-32     n * 4 bytes  unspecified  Retro-Frame    32 bit Retro-Frame
-                                                       character representation
-  CHAR-32LE   n * 4 bytes  little       Retro-Frame    32 bit Retro-Frame
-                                                       character representation
-  CHAR-32BE   n * 4 bytes  big          Retro-Frame    32 bit Retro-Frame
-                                                       character representation
+  RCHAR-16    n * 2 bytes  unspecified  Retro-Frame    16-bit Retro Character
+                                                       representation
+  RCHAR-16LE  n * 2 bytes  little       Retro-Frame    16-bit Retro Character
+                                                       representation
+  RCHAR-16BE  n * 4 bytes  big          Retro-Frame    16-bit Retro Character
+                                                       representation
+  RCHAR-24    n * 2 bytes  unspecified  Retro-Frame    24-bit Retro Character
+                                                       representation
+  RCHAR-24LE  n * 2 bytes  little       Retro-Frame    24-bit Retro Character
+                                                       representation
+  RCHAR-24BE  n * 4 bytes  big          Retro-Frame    24-bit Retro Character
+                                                       representation
+  RCHAR-32    n * 4 bytes  unspecified  Retro-Frame    32-bit Retro Character
+                                                       representation
+  RCHAR-32LE  n * 4 bytes  little       Retro-Frame    32-bit Retro Character
+                                                       representation
+  RCHAR-32BE  n * 4 bytes  big          Retro-Frame    32-bit Retro Character
+                                                       representation
