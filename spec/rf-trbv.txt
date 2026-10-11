@@ -56,7 +56,15 @@ Contents
    1.2  Scope
    1.3  References
 
-2. TRBV
+2. TRBV WORD LISTS
+   2.1  4-letter word list (4word)
+   2.2  5-letter word list (5word)
+
+3. TRBV PATTERN
+   3.1  32-bit pattern
+   3.2  64-bit pattern
+
+4. TRBV STRINGS
 
 
 
@@ -95,75 +103,30 @@ bits using language rather than digits.
 1.3 References
 -------------------------------------------------------------------------------
 
+[PGP WORD LIST]
+PGP word list, Wikipedia, see <https://en.wikipedia.org/wiki/PGP_word_list>.
+
 [RETRO-FRAME]
 Retro-Frame homepage, see <http://source.retro-frame.net/>.
 
 
 
-2. TRBV
+2. TRBV WORD LISTS
 ===============================================================================
 
-TRBV-32: 32 bit pattern (length=19):
+TRBV specifies two separate word lists, one consisting of 4-letter words and
+the other one consisting of 5-letter words.
 
-  4word-4word-4word-4word
+Each word differs from all other words on at least two positions. Words with a
+similar pronunciation have been avoided. However, a "phonetic distinctiveness"
+like the [PGP WORD LIST] is not achieved.
 
-  The bits for the words are taken from a 32 bit big endian value from highest
-  to lowest bits (e.g. 0x01234567 ==> 0x01 bits for first word, 0x23 bits for
-  second word and so on).
 
-TRBV-64: 64 bit pattern (length=37):
+2.1 4-letter word list (4word)
+-------------------------------------------------------------------------------
 
-  0x000:  4word-4word-4word-5word-4word-5word-5word
-  0x001:  4word-4word-4word-5word-5word-4word-5word
-  0x002:  4word-4word-4word-5word-5word-5word-4word
-  0x003:  4word-4word-5word-4word-4word-5word-5word
-  0x004:  4word-4word-5word-4word-5word-4word-5word
-  0x005:  4word-4word-5word-4word-5word-5word-4word
-  0x006:  4word-4word-5word-5word-4word-4word-5word
-  0x007:  4word-4word-5word-5word-4word-5word-4word
-  0x008:  4word-4word-5word-5word-5word-4word-4word
-  0x009:  4word-5word-4word-4word-4word-5word-5word
-  0x00A:  4word-5word-4word-4word-5word-4word-5word
-  0x00B:  4word-5word-4word-4word-5word-5word-4word
-  0x00C:  4word-5word-4word-5word-4word-4word-5word
-  0x00D:  4word-5word-4word-5word-4word-5word-4word
-  0x00E:  4word-5word-4word-5word-5word-4word-4word
-  0x00F:  4word-5word-5word-4word-4word-4word-5word
-  0x010:  4word-5word-5word-4word-4word-5word-4word
-  0x011:  4word-5word-5word-4word-5word-4word-4word
-  0x012:  4word-5word-5word-5word-4word-4word-4word
-  0x013:  5word-4word-4word-4word-4word-5word-5word
-  0x014:  5word-4word-4word-4word-5word-4word-5word
-  0x015:  5word-4word-4word-4word-5word-5word-4word
-  0x016:  5word-4word-4word-5word-4word-4word-5word
-  0x017:  5word-4word-4word-5word-4word-5word-4word
-  0x018:  5word-4word-4word-5word-5word-4word-4word
-  0x019:  5word-4word-5word-4word-4word-4word-5word
-  0x01A:  5word-4word-5word-4word-4word-5word-4word
-  0x01B:  5word-4word-5word-4word-5word-4word-4word
-  0x01C:  5word-4word-5word-5word-4word-4word-4word
-  0x01D:  5word-5word-4word-4word-4word-4word-5word
-  0x01E:  5word-5word-4word-4word-4word-5word-4word
-  0x01F:  5word-5word-4word-4word-5word-4word-4word
-
-  The bits for the pattern are taken from a 64 bit big endian value from
-  highest bits. The bits for the words are taken from the value in order of
-  the pattern from highest to lowest bits.
-
-  Example: 0x0F1E2D3C4B5A6789
-
-  ==> Pattern 0x001: 4word-4word-4word-5word-5word-4word-5word
-  ==> 4word 0x0E3: TRIO
-  ==> 4word 0x0C5: SIGN
-  ==> 4word 0x0A7: PALM
-  ==> 5word 0x112: MICRO
-  ==> 5word 0x1AD: STICK
-  ==> 4word 0x033: DIVE
-  ==> 5word 0x189: SHARP
-
-  TRIO-SIGN-PALM-MICRO-STEAM-DIVE-SHARP
-
-4word (4-letter words):
+The 4-letter word list is called 4word and maps each 8-bit value to a
+distinguished word according to the following table:
 
           + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
           -----  -----  -----  -----  -----  -----  -----  -----
@@ -200,7 +163,12 @@ TRBV-64: 64 bit pattern (length=37):
   0x0F0:   VINE   VOID   WALK   WANT   WAVE   WEAK   WHOM   WILD
   0x0F8:   WING   WIPE   WORM   YARD   YEAR   YOGA   ZOOM   ZULU
 
-5word (5-letter words):
+
+2.2 5-letter word list (5word)
+-------------------------------------------------------------------------------
+
+The 5-letter word list is called 4word and maps each 9-bit value to a
+distinguished word according to the following table:
 
           + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
           -----  -----  -----  -----  -----  -----  -----  -----
@@ -269,7 +237,121 @@ TRBV-64: 64 bit pattern (length=37):
   0x1F0:  WEIRD  WHEEL  WIDOW  WIDTH  WOMEN  WORLD  WORRY  WORTH
   0x1F8:  WRIST  WRITE  WRONG  XENON  YACHT  YIELD  YOUNG  ZEBRA
 
-Each word differs from all other words on at least two positions. Words with a
-similar pronunciation have been avoided. However, a "phonetic distinctiveness"
-like the PGP word list (see <https://en.wikipedia.org/wiki/PGP_word_list>) is
-not achieved.
+
+
+3. TRBV PATTERN
+===============================================================================
+
+TRBV specifies two patterns which represent a sequence of 4-letter respectively
+5-letter words from the two word lists 4word and 5word. As both word lists are
+disjunct, a 4word-5word pattern is different from a 5word-4word pattern.
+
+The hyphen-minus '-' character is used to separate two adjacent words.
+
+
+3.1 32-bit pattern
+-------------------------------------------------------------------------------
+
+A 32-bit value is represented by four 4-letter words, i.e. the following
+pattern:
+
+  4word-4word-4word-4word
+
+The first word is determined by the highest 8 bits of the value, followed by
+the next 8 bits and so on. The resulting pattern has a length of 19 characters.
+
+
+3.2 64-bit pattern
+-------------------------------------------------------------------------------
+
+A 64-bit value is represented by a mix of 4-letter words and 5-letter, three of
+each, where the pattern depends on the highest 5 bits of the value:
+
+  0x00:  4word-4word-4word-5word-4word-5word-5word
+  0x01:  4word-4word-4word-5word-5word-4word-5word
+  0x02:  4word-4word-4word-5word-5word-5word-4word
+  0x03:  4word-4word-5word-4word-4word-5word-5word
+  0x04:  4word-4word-5word-4word-5word-4word-5word
+  0x05:  4word-4word-5word-4word-5word-5word-4word
+  0x06:  4word-4word-5word-5word-4word-4word-5word
+  0x07:  4word-4word-5word-5word-4word-5word-4word
+  0x08:  4word-4word-5word-5word-5word-4word-4word
+  0x09:  4word-5word-4word-4word-4word-5word-5word
+  0x0A:  4word-5word-4word-4word-5word-4word-5word
+  0x0B:  4word-5word-4word-4word-5word-5word-4word
+  0x0C:  4word-5word-4word-5word-4word-4word-5word
+  0x0D:  4word-5word-4word-5word-4word-5word-4word
+  0x0E:  4word-5word-4word-5word-5word-4word-4word
+  0x0F:  4word-5word-5word-4word-4word-4word-5word
+  0x10:  4word-5word-5word-4word-4word-5word-4word
+  0x11:  4word-5word-5word-4word-5word-4word-4word
+  0x12:  4word-5word-5word-5word-4word-4word-4word
+  0x13:  5word-4word-4word-4word-4word-5word-5word
+  0x14:  5word-4word-4word-4word-5word-4word-5word
+  0x15:  5word-4word-4word-4word-5word-5word-4word
+  0x16:  5word-4word-4word-5word-4word-4word-5word
+  0x17:  5word-4word-4word-5word-4word-5word-4word
+  0x18:  5word-4word-4word-5word-5word-4word-4word
+  0x19:  5word-4word-5word-4word-4word-4word-5word
+  0x1A:  5word-4word-5word-4word-4word-5word-4word
+  0x1B:  5word-4word-5word-4word-5word-4word-4word
+  0x1C:  5word-4word-5word-5word-4word-4word-4word
+  0x1D:  5word-5word-4word-4word-4word-4word-5word
+  0x1E:  5word-5word-4word-4word-4word-5word-4word
+  0x1F:  5word-5word-4word-4word-5word-4word-4word
+
+The first word is determined by the highest 8 or 9 bits of the value after the
+5 bits which determine the pattern (see above). The next word is determined by
+the following 8 or 9 bits and so on. The resulting pattern has a length of 37
+characters.
+
+NEW (no more than 3 consecutive 4word/5word even on longer values, last word
+is 5word in general with 4 exceptions in which case the last three words are
+5word-5word-4word):
+
+0x0:  4455455
+0x1:  4545455
+0x2:  5445455
+0x3:  4554455
+0x4:  5454455
+0x5:  4455545
+0x6:  4545545
+0x7:  5445545
+0x8:  4554545
+0x9:  5454545
+0xA:  4555445
+0xB:  5455445
+0xC:  4545554
+0xD:  5445554
+0xE:  4554554
+0xF:  5454554
+
+
+
+4. TRBV STRINGS
+===============================================================================
+
+
+
+2. TRBV
+===============================================================================
+
+
+TRBV-64: 64 bit pattern (length=37):
+
+  The bits for the pattern are taken from a 64 bit big endian value from
+  highest bits. The bits for the words are taken from the value in order of
+  the pattern from highest to lowest bits.
+
+  Example: 0x0F1E2D3C4B5A6789
+
+  ==> Pattern 0x001: 4word-4word-4word-5word-5word-4word-5word
+  ==> 4word 0x0E3: TRIO
+  ==> 4word 0x0C5: SIGN
+  ==> 4word 0x0A7: PALM
+  ==> 5word 0x112: MICRO
+  ==> 5word 0x1AD: STICK
+  ==> 4word 0x033: DIVE
+  ==> 5word 0x189: SHARP
+
+  TRIO-SIGN-PALM-MICRO-STEAM-DIVE-SHARP
