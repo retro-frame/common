@@ -43,7 +43,7 @@ SOFTWARE.
 Change history
 -------------------------------------------------------------------------------
 
-2026-10-11 : 01.01!00 : Ingo
+2026-10-12 : 01.01!00 : Ingo
 
   Draft.
 
@@ -61,10 +61,14 @@ Contents
    2.2  5-letter word list (5word)
 
 3. TRBV PATTERN
-   3.1  32-bit pattern
-   3.2  64-bit pattern
+   3.1  8-bit pattern
+   3.2  16-bit pattern
+   3.3  32-bit pattern
+   3.4  64-bit pattern
 
-4. TRBV STRINGS
+4. TRBV MODES
+
+5. TRBV TEST VECTORS
 
 
 
@@ -96,7 +100,7 @@ versions than the Retro-Frame Common Documentation respository.
 -------------------------------------------------------------------------------
 
 This document provides a SPECIFICATION of the textual representation of binary
-values which may be used to transmit, identify or verify a long sequence of
+values which may be used to transmit, identify or verify arbitrary sequences of
 bits using language rather than digits.
 
 
@@ -125,50 +129,50 @@ like the [PGP WORD LIST] is not achieved.
 2.1 4-letter word list (4word)
 -------------------------------------------------------------------------------
 
-The 4-letter word list is called 4word and maps each 8-bit value to a
-distinguished word according to the following table:
+The 4-letter word list is called 4word and assigns a distinguished word to each
+8-bit value according to the following table:
 
-          + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
-          -----  -----  -----  -----  -----  -----  -----  -----
-  0x000:   ACID   AREA   ATOM   AUNT   AURA   AUTO   AWAY   AXIS
-  0x008:   BABY   BAIT   BANG   BASE   BEAM   BELT   BETA   BIAS
-  0x010:   BIKE   BILL   BIRD   BLUR   BOAT   BODY   BOIL   BOSS
-  0x018:   BULB   BUSY   CAGE   CALL   CENT   CHAT   CHEF   CHIP
-  0x020:   CITY   CLUB   COIN   COLD   COPY   CORE   COUP   CREW
-  0x028:   CUBE   DARE   DATA   DAWN   DEBT   DEEP   DEMO   DENY
-  0x030:   DESK   DIET   DISH   DIVE   DOLL   DOME   DOOR   DRAG
-  0x038:   DROP   DRUM   DUAL   DUCK   DUMB   DUTY   EACH   EARL
-  0x040:   EASY   ECHO   EDGE   ENVY   EPIC   EVEN   EVIL   EXAM
-  0x048:   EXIT   FACE   FARM   FEET   FILM   FIRE   FIST   FLAG
-  0x050:   FLIP   FORK   FOUL   FROG   FUEL   FUSE   GAIN   GALA
-  0x058:   GAZE   GENE   GIFT   GIRL   GLAD   GLUE   GOAL   GOOD
-  0x060:   GRID   GROW   HAIR   HALF   HAND   HAWK   HEAD   HELL
-  0x068:   HERO   HIGH   HINT   HOOK   HOPE   HORN   HOST   HOUR
-  0x070:   HUGE   HURT   IDEA   IDLE   INCH   INFO   IRON   ITEM
-  0x078:   JAZZ   JOKE   JUMP   JURY   JUST   KEEN   KILO   KIND
-  0x080:   KISS   KITE   KIWI   KNEE   KNOT   LAMP   LATE   LAZY
-  0x088:   LEAP   LEFT   LENS   LIFE   LINK   LION   LOCK   LOGO
-  0x090:   LOOP   LOSE   LOUD   LUNG   MAID   MARS   MEAN   MEGA
-  0x098:   MENU   MESH   MILK   MOON   MOVE   MUCH   MYTH   NAIL
-  0x0A0:   NECK   NEON   NEWS   NICE   ODDS   OPEN   OVAL   PALM
-  0x0A8:   PARK   PASS   PEER   PILE   PLAN   PLUG   POEM   PONY
-  0x0B0:   PULP   QUIZ   RELY   RICH   RISK   ROAD   ROLE   ROOT
-  0x0B8:   RUBY   RUDE   RUIN   RUSH   SACK   SAFE   SALT   SCAR
-  0x0C0:   SEAL   SEEK   SELF   SHOW   SHUT   SIGN   SIZE   SKIP
-  0x0C8:   SLIM   SOAP   SOFA   SOLO   SONG   SORT   SPIN   SPOT
-  0x0D0:   STEP   SUIT   SWAN   TAPE   TASK   TAXI   TECH   TERM
-  0x0D8:   TEST   TICK   TIDE   TIER   TILT   TINY   TONE   TOOL
-  0x0E0:   TOWN   TRAP   TREE   TRIO   TUNA   TURN   TWIN   UGLY
-  0x0E8:   UNIT   UPON   USER   VARY   VAST   VERB   VETO   VIEW
-  0x0F0:   VINE   VOID   WALK   WANT   WAVE   WEAK   WHOM   WILD
-  0x0F8:   WING   WIPE   WORM   YARD   YEAR   YOGA   ZOOM   ZULU
+         + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
+         -----  -----  -----  -----  -----  -----  -----  -----
+  0x00:   ACID   AREA   ATOM   AUNT   AURA   AUTO   AWAY   AXIS
+  0x08:   BABY   BAIT   BANG   BASE   BEAM   BELT   BETA   BIAS
+  0x10:   BIKE   BILL   BIRD   BLUR   BOAT   BODY   BOIL   BOSS
+  0x18:   BULB   BUSY   CAGE   CALL   CENT   CHAT   CHEF   CHIP
+  0x20:   CITY   CLUB   COIN   COLD   COPY   CORE   COUP   CREW
+  0x28:   CUBE   DARE   DATA   DAWN   DEBT   DEEP   DEMO   DENY
+  0x30:   DESK   DIET   DISH   DIVE   DOLL   DOME   DOOR   DRAG
+  0x38:   DROP   DRUM   DUAL   DUCK   DUMB   DUTY   EACH   EARL
+  0x40:   EASY   ECHO   EDGE   ENVY   EPIC   EVEN   EVIL   EXAM
+  0x48:   EXIT   FACE   FARM   FEET   FILM   FIRE   FIST   FLAG
+  0x50:   FLIP   FORK   FOUL   FROG   FUEL   FUSE   GAIN   GALA
+  0x58:   GAZE   GENE   GIFT   GIRL   GLAD   GLUE   GOAL   GOOD
+  0x60:   GRID   GROW   HAIR   HALF   HAND   HAWK   HEAD   HELL
+  0x68:   HERO   HIGH   HINT   HOOK   HOPE   HORN   HOST   HOUR
+  0x70:   HUGE   HURT   IDEA   IDLE   INCH   INFO   IRON   ITEM
+  0x78:   JAZZ   JOKE   JUMP   JURY   JUST   KEEN   KILO   KIND
+  0x80:   KISS   KITE   KIWI   KNEE   KNOT   LAMP   LATE   LAZY
+  0x88:   LEAP   LEFT   LENS   LIFE   LINK   LION   LOCK   LOGO
+  0x90:   LOOP   LOSE   LOUD   LUNG   MAID   MARS   MEAN   MEGA
+  0x98:   MENU   MESH   MILK   MOON   MOVE   MUCH   MYTH   NAIL
+  0xA0:   NECK   NEON   NEWS   NICE   ODDS   OPEN   OVAL   PALM
+  0xA8:   PARK   PASS   PEER   PILE   PLAN   PLUG   POEM   PONY
+  0xB0:   PULP   QUIZ   RELY   RICH   RISK   ROAD   ROLE   ROOT
+  0xB8:   RUBY   RUDE   RUIN   RUSH   SACK   SAFE   SALT   SCAR
+  0xC0:   SEAL   SEEK   SELF   SHOW   SHUT   SIGN   SIZE   SKIP
+  0xC8:   SLIM   SOAP   SOFA   SOLO   SONG   SORT   SPIN   SPOT
+  0xD0:   STEP   SUIT   SWAN   TAPE   TASK   TAXI   TECH   TERM
+  0xD8:   TEST   TICK   TIDE   TIER   TILT   TINY   TONE   TOOL
+  0xE0:   TOWN   TRAP   TREE   TRIO   TUNA   TURN   TWIN   UGLY
+  0xE8:   UNIT   UPON   USER   VARY   VAST   VERB   VETO   VIEW
+  0xF0:   VINE   VOID   WALK   WANT   WAVE   WEAK   WHOM   WILD
+  0xF8:   WING   WIPE   WORM   YARD   YEAR   YOGA   ZOOM   ZULU
 
 
 2.2 5-letter word list (5word)
 -------------------------------------------------------------------------------
 
-The 5-letter word list is called 4word and maps each 9-bit value to a
-distinguished word according to the following table:
+The 5-letter word list is called 5word and assigns a distinguished word to each
+9-bit value according to the following table:
 
           + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
           -----  -----  -----  -----  -----  -----  -----  -----
@@ -242,116 +246,201 @@ distinguished word according to the following table:
 3. TRBV PATTERN
 ===============================================================================
 
-TRBV specifies two patterns which represent a sequence of 4-letter respectively
-5-letter words from the two word lists 4word and 5word. As both word lists are
-disjunct, a 4word-5word pattern is different from a 5word-4word pattern.
-
-The hyphen-minus '-' character is used to separate two adjacent words.
+TRBV specifies 4 patterns which represent a sequence of 4-letter respectively
+5-letter words from the two word lists 4word and 5word.
 
 
-3.1 32-bit pattern
+3.1  8-bit pattern
 -------------------------------------------------------------------------------
 
-A 32-bit value is represented by four 4-letter words, i.e. the following
-pattern:
+An 8-bit value is represented by one 4-letter word, i.e. the following pattern:
 
-  4word-4word-4word-4word
+  4word
+
+The resulting pattern has a length of 4 characters.
+
+
+3.2 16-bit pattern
+-------------------------------------------------------------------------------
+
+A 16-bit value is represented by one 4-letter word and one 5-letter word as the
+following pattern:
+
+  4word-5word
+
+The first word is determined by the high 8 bits of the value. The second word
+is determined by the low 8 bits, multiplied by 2 (thus, for the 5word, only
+the columns with the even numbers are used).
+
+Both words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 10 characters.
+
+
+3.3 32-bit pattern
+-------------------------------------------------------------------------------
+
+A 32-bit value is represented by a mix of two 4-letter words and two 5-letter
+words as the following pattern:
+
+  4word-5word-4word-5word
 
 The first word is determined by the highest 8 bits of the value, followed by
-the next 8 bits and so on. The resulting pattern has a length of 19 characters.
+the next 8 bits and so on. For the first 5word, the value is multiplied by 2
+(thus, only the columns with the even numbers are used). For the second 5word,
+the value is multiplied by 2 and 1 is added (thus, only the columns with the
+odd numbers are used).
+
+All words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 21 characters.
 
 
-3.2 64-bit pattern
+3.4 64-bit pattern
 -------------------------------------------------------------------------------
 
-A 64-bit value is represented by a mix of 4-letter words and 5-letter, three of
-each, where the pattern depends on the highest 5 bits of the value:
+A 64-bit value is represented by a mix of three 4-letter and four 5-letter
+words, where the pattern depends on the highest 4 bits of the value:
 
-  0x00:  4word-4word-4word-5word-4word-5word-5word
-  0x01:  4word-4word-4word-5word-5word-4word-5word
-  0x02:  4word-4word-4word-5word-5word-5word-4word
-  0x03:  4word-4word-5word-4word-4word-5word-5word
-  0x04:  4word-4word-5word-4word-5word-4word-5word
-  0x05:  4word-4word-5word-4word-5word-5word-4word
-  0x06:  4word-4word-5word-5word-4word-4word-5word
-  0x07:  4word-4word-5word-5word-4word-5word-4word
-  0x08:  4word-4word-5word-5word-5word-4word-4word
-  0x09:  4word-5word-4word-4word-4word-5word-5word
-  0x0A:  4word-5word-4word-4word-5word-4word-5word
-  0x0B:  4word-5word-4word-4word-5word-5word-4word
-  0x0C:  4word-5word-4word-5word-4word-4word-5word
-  0x0D:  4word-5word-4word-5word-4word-5word-4word
-  0x0E:  4word-5word-4word-5word-5word-4word-4word
-  0x0F:  4word-5word-5word-4word-4word-4word-5word
-  0x10:  4word-5word-5word-4word-4word-5word-4word
-  0x11:  4word-5word-5word-4word-5word-4word-4word
-  0x12:  4word-5word-5word-5word-4word-4word-4word
-  0x13:  5word-4word-4word-4word-4word-5word-5word
-  0x14:  5word-4word-4word-4word-5word-4word-5word
-  0x15:  5word-4word-4word-4word-5word-5word-4word
-  0x16:  5word-4word-4word-5word-4word-4word-5word
-  0x17:  5word-4word-4word-5word-4word-5word-4word
-  0x18:  5word-4word-4word-5word-5word-4word-4word
-  0x19:  5word-4word-5word-4word-4word-4word-5word
-  0x1A:  5word-4word-5word-4word-4word-5word-4word
-  0x1B:  5word-4word-5word-4word-5word-4word-4word
-  0x1C:  5word-4word-5word-5word-4word-4word-4word
-  0x1D:  5word-5word-4word-4word-4word-4word-5word
-  0x1E:  5word-5word-4word-4word-4word-5word-4word
-  0x1F:  5word-5word-4word-4word-5word-4word-4word
+  0x0:  4word-5word-4word-5word-5word-4word-5word
+  0x1:  4word-5word-5word-4word-5word-4word-5word
+  0x2:  4word-5word-5word-5word-4word-4word-5word
+  0x3:  4word-5word-4word-5word-5word-5word-4word
+  0x4:  4word-5word-5word-4word-5word-5word-4word
+  0x5:  4word-5word-5word-5word-4word-5word-4word
+  0x6:  5word-4word-4word-5word-5word-4word-5word
+  0x7:  5word-4word-5word-4word-5word-4word-5word
+  0x8:  5word-4word-5word-5word-4word-4word-5word
+  0x9:  5word-4word-4word-5word-5word-5word-4word
+  0xA:  5word-4word-5word-4word-5word-5word-4word
+  0xB:  5word-4word-5word-5word-4word-5word-4word
+  0xC:  5word-5word-4word-4word-5word-5word-4word
+  0xD:  5word-5word-4word-5word-4word-5word-4word
+  0xE:  5word-5word-4word-4word-5word-4word-5word
+  0xF:  5word-5word-4word-5word-4word-4word-5word
 
 The first word is determined by the highest 8 or 9 bits of the value after the
-5 bits which determine the pattern (see above). The next word is determined by
-the following 8 or 9 bits and so on. The resulting pattern has a length of 37
-characters.
+4 bits which determine the pattern (see above). The next word is determined by
+the following 8 or 9 bits and so on.
 
-NEW (no more than 3 consecutive 4word/5word even on longer values, last word
-is 5word in general with 4 exceptions in which case the last three words are
-5word-5word-4word):
-
-0x0:  4455455
-0x1:  4545455
-0x2:  5445455
-0x3:  4554455
-0x4:  5454455
-0x5:  4455545
-0x6:  4545545
-0x7:  5445545
-0x8:  4554545
-0x9:  5454545
-0xA:  4555445
-0xB:  5455445
-0xC:  4545554
-0xD:  5445554
-0xE:  4554554
-0xF:  5454554
+All words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 38 characters.
 
 
 
-4. TRBV STRINGS
+4. TRBV MODES
 ===============================================================================
 
 
 
-2. TRBV
+5. TRBV TEST VECTORS
 ===============================================================================
 
+Value 0x00
 
-TRBV-64: 64 bit pattern (length=37):
+-  8-bit mode: ACID
 
-  The bits for the pattern are taken from a 64 bit big endian value from
-  highest bits. The bits for the words are taken from the value in order of
-  the pattern from highest to lowest bits.
+Value 0x0000
 
-  Example: 0x0F1E2D3C4B5A6789
+-  8-bit mode: ACID-ACID
+- 16-bit mode: ACID-ABBEY
 
-  ==> Pattern 0x001: 4word-4word-4word-5word-5word-4word-5word
-  ==> 4word 0x0E3: TRIO
-  ==> 4word 0x0C5: SIGN
-  ==> 4word 0x0A7: PALM
-  ==> 5word 0x112: MICRO
-  ==> 5word 0x1AD: STICK
-  ==> 4word 0x033: DIVE
-  ==> 5word 0x189: SHARP
+Value 0x000000
 
-  TRIO-SIGN-PALM-MICRO-STEAM-DIVE-SHARP
+-  8-bit mode: ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID
+
+Value 0x00000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT
+
+Value 0x0000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY-ACID
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT-ACID
+
+Value 0x000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT-ACID-ABBEY
+
+Value 0x00000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ACID
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT-ACID-ABBEY-ACID
+
+Value 0x0000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ACID-ABBEY
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT-ACID-ABBEY-ACID-ABOUT
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ABBEY-ACID-ABBEY
+
+Value 0x000000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ACID
+- 32-bit mode: ACID-ABBEY-ACID-ABOUT-ACID-ABBEY-ACID-ABOUT-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ABBEY-ACID-ABBEY-ACID
+
+Value 0xFF
+
+-  8-bit mode: ZULU
+
+Value 0xFFFF
+
+-  8-bit mode: ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG
+
+Value 0xFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU
+
+Value 0xFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA
+
+Value 0xFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG-ZULU
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA-ZULU-YOUNG
+
+Value 0xFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG-ZULU
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA-ZULU-YOUNG-ZULU
+
+Value 0xFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA-ZULU-YOUNG-ZULU-ZEBRA
+- 64-bit mode: ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-ZULU-ZEBRA
+
+Value 0xFFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG-ZULU-YOUNG-ZULU
+- 32-bit mode: ZULU-YOUNG-ZULU-ZEBRA-ZULU-YOUNG-ZULU-ZEBRA-ZULU
+- 64-bit mode: ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-ZULU-ZEBRA-ZULU
+
+Value 0x0F1E2D3C4B5A6789
+
+-  8-bit mode: BIAS-CHEF-DEEP-DUMB-FEET-GIFT-HELL-LEFT
+- 16-bit mode: BIAS-BLOOD-DEEP-CUBIC-FEET-FLUID-HELL-MICRO
+- 32-bit mode: BIAS-BLOOD-DEEP-CURVE-FEET-FLUID-HELL-MINUS
+- 64-bit mode: VOID-TIGER-PALM-MICRO-STICK-DIVE-SHARP
