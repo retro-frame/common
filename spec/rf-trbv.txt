@@ -343,13 +343,11 @@ length of 38 characters.
 4. TRBV MODES
 ===============================================================================
 
-The TRBV modes determine how a value of arbitrary maximum size is represented
-by TRBV words. While the maximum size is unlimited, modes may require a minimum
-size. It is also possible to process an arbitrary sequence of bytes, which must
-be 8 bits each, by considering the sequence as a single value in big endian
-representation (note that is not required to know the total size in advance but
-in this case the size shall be a multiple of 8 bits as zero bit padding is only
-allowed if it does not alter the value).
+The TRBV modes specify how a value of arbitrary size is represented by TRBV
+words. It is also possible to process an arbitrary sequence of bytes, which
+must be 8 bits each, by considering the sequence as a single big endian value
+(note that is not required to know the total number of bytes in advance but the
+size shall be a multiple of 8 bits in order to avoid padding).
 
 Note that the different modes always produce different sequences of words (i.e.
 it is impossible that two different modes produce the same result) and that the
@@ -359,14 +357,15 @@ mode always can be determined by the first two words (if given).
 4.1 8-bit mode
 -------------------------------------------------------------------------------
 
-The 8-bit mode does not requires a minimum value size. If the value hat less
-than 8 bits, zero bits are prepended.
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
 
 In the 8-bit mode, the value is represented by a sequence of 8-bit patterns,
 from the most significant bits to the least significant bits.
 
 All patterns are separated by a hyphen-minus '-'. The resulting sequence of
-words has a length of (n * 5) + 4 characters.
+words has a length of (n * 5) + 4 characters. If appropriate, a line break may
+be used rather than a hyphen-minus to separate two adjacent patterns.
 
 The resulting sequence of words consists of 4-letter words only. Thus, each
 TRBV sequence of words which consists of a single 4-letter word or starts with
@@ -376,68 +375,84 @@ two 4-letter words can be identified as 8-bit mode.
 4.2 16-bit mode
 -------------------------------------------------------------------------------
 
-The 16-bit mode requires a minimum value size of 9 bits. If the value hat less
-than 16 bits, zero bits are prepended.
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
 
 In the 16-bit mode, the value is represented by a sequence of 16-bit patterns,
 from the most significant bits to the least significant bits. If there are only
 8 bits left in the value, the 8-bit mode is used for the remaining bits.
 
 All patterns are separated by a hyphen-minus '-'. The resulting sequence of
-words has a length of (n * 12) + 11 characters.
+words has a length of (n * 12) + 11 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
 
 The resulting sequence of words consists of 5-letter words only except the last
-word which may be a 4-letter word. There will never be a repeating word. Each
-TRBV sequence of words whose first two words are 5-letter words and the very
-first word is from the sub-list 5wordL can be identified as 16-bit mode.
+word which may be a 4-letter word. There will never be a repeating word.
+
+If there is more than one word in a TRBV sequence of words, the 16-bit mode may
+be identified if the first two words are 5-letter words and the very first word
+is from the sub-list 5wordL. Alternatively (e.g. in cases where the word lists
+are not present), the 16-bit mode may be identified if the two very first words
+are 5-letter words and there are either no more words or the third word is also
+a 5-letter word.
 
 
 4.3 32-bit mode
 -------------------------------------------------------------------------------
 
-The 32-bit mode requires a minimum value size of 17 bits. If the value hat less
-than 32 bits, zero bits are prepended.
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
 
 In the 32-bit mode, the value is represented by a sequence of 32-bit patterns,
 from the most significant bits to the least significant bits. If there are less
-than 32 bits but at least 16 bits left in the value (i.e. 24 or 16 bits), the
-16-bit mode is used for the remaining bits. Otherwise, if there are only 8 bits
-remaining, the 8-bit mode is used.
+than 32 bits left in the value (i.e. 24, 16 or 8 bits), the 16-bit mode is used
+for the remaining bits.
 
 All patterns are separated by a hyphen-minus '-'. The resulting sequence of
-words has a length of (n * 22) + 21 characters.
+words has a length of (n * 22) + 21 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
 
 The resulting sequence of words always consists of 5-letter and 4-letter words.
 There will never be repeating 5-letter words but two repeating 4-letter words
 may occur except at the very end where up to three repeating 4-letter words may
-occur. Each TRBV sequence of words whose first two words are 5-letter words and
-the very first word is from the sub-list 5wordH can be identified as 32-bit
-mode.
+occur.
+
+If there are more than two words in a TRBV sequence of words, the 32-bit mode
+may be identified if the first two words are 5-letter words and the very first
+word is from the sub-list 5wordH. Alternatively (e.g. in cases where the word
+lists are not present), the 32-bit mode may be identified if the two very first
+words are 5-letter words and the third word a 4-letter word.
 
 
 4.4 64-bit mode
 -------------------------------------------------------------------------------
 
-The 64-bit mode requires a minimum value size of 33 bits. If the value hat less
-than 64 bits, zero bits are prepended.
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
 
 In the 64-bit mode, the value is represented by a sequence of 64-bit patterns,
 from the most significant bits to the least significant bits. If there are less
-than 64 bits but at least 32 bits left in the value (i.e. 56, 48, 40 or 32
-bits), the 32-bit mode is used for the remaining bits. If there are less than
-32 bits but at least 16 bits left in the value (i.e. 24 or 16 bits), the 16-bit
-mode is used for the remaining bits. Otherwise, if there are only 8 bits
-remaining, the 8-bit mode is used.
+than 64 bits left in the value (i.e. 56, 48, 40, 32, 24, 16 or 8 bits), the
+32-bit mode is used for the remaining bits.
 
 All patterns are separated by a hyphen-minus '-'. The resulting sequence of
-words has a length of (n * 39) + 38 characters.
+words has a length of (n * 39) + 38 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
 
 The resulting sequence of words always consists of 5-letter and 4-letter words.
 There will never be more than three repeating 5-letter words and two repeating
 4-letter words except at the very end where up to three repeating 4-letter
-words may occur. Each TRBV sequence of words whose first two words are exactly
-one 5-letter word and one 4-letter (in any order) can be identified as 64-bit
-mode.
+words may occur.
+
+If there is more than one word in a TRBV sequence of words, the 64-bit mode may
+be identified if the first two words are exactly one 5-letter word and one
+4-letter word (in any order).
 
 
 
