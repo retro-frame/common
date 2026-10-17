@@ -1,0 +1,980 @@
+
+===============================================================================
+ ____      _                   _____                         
+|  _ \ ___| |_ _ __ ___       |  ___| __ __ _ _ __ ___   ___ 
+| |_) / _ \ __| '__/ _ \ _____| |_ | '__/ _` | '_ ` _ \ / _ \
+|  _ <  __/ |_| | | (_) |_____|  _|| | | (_| | | | | | |  __/
+|_| \_\___|\__|_|  \___/      |_|  |_|  \__,_|_| |_| |_|\___|
+
+
+COMMON - Retro-Frame Common Documentation
+
+Textual Representation of Binary Values
+
+Repository:  <http://source.retro-frame.net/common>
+File:        /spec/rf-trbv.txt//
+Version:     01.01.00
+Compliance:  Retro-Frame 1.1
+License:     MIT
+
+Copyright (c) 2026 Ingo Boehmer <ingo@retro-leisure.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+
+
+Change history
+-------------------------------------------------------------------------------
+
+2026-10-17 : 01.01.00 : Ingo
+
+  Initial version.
+
+
+Contents
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+   1.1  Background
+   1.2  Scope
+   1.3  References
+
+2. TRBV WORD LISTS
+   2.1  4-letter word list (4word)
+   2.2  5-letter word list and sub-lists (5word, 5wordL and 5wordH)
+
+3. TRBV PATTERN
+   3.1  8-bit pattern
+   3.2  16-bit pattern
+   3.3  32-bit pattern
+   3.4  64-bit pattern
+
+4. TRBV MODES
+   4.1  8-bit mode
+   4.2  16-bit mode
+   4.3  32-bit mode
+   4.4  64-bit mode
+
+5. TRBV TEST VECTORS
+
+
+
+1. INTRODUCTION
+===============================================================================
+
+
+1.1 Background
+-------------------------------------------------------------------------------
+
+[RETRO-FRAME] is a Retro-Endeavor that provides common documentation (i.e.
+definitions, guidelines, templates and generic specifications, covered by this
+repository) as well as topic-related specifications (covered by individual
+repositories) which are intended for use in retrospective programming and may
+be used as a whole or partially for other purposes.
+
+As Retro-Frame is evolving, declarations of compliance should always refer to
+a specific release version of this repository (i.e. the common documentation).
+If a general intention of compliance is expressed, a reference to the major
+version may be given by "Retro-Frame 1.x". However, an actual reference should
+specify the minor version as well (e.g. "Retro-Frame 1.1").
+
+Note that the individual topic-related specifications (e.g. a data format)
+use independent version numbers and the repositories may have different minor
+versions than the Retro-Frame Common Documentation respository.
+
+
+1.2 Scope
+-------------------------------------------------------------------------------
+
+This document provides a SPECIFICATION of the textual representation of binary
+values which may be used to transmit, identify or verify arbitrary sequences of
+bits using language rather than digits.
+
+
+1.3 References
+-------------------------------------------------------------------------------
+
+[PGP WORD LIST]
+PGP word list, Wikipedia, see <https://en.wikipedia.org/wiki/PGP_word_list>.
+
+[RETRO-FRAME]
+Retro-Frame homepage, see <http://source.retro-frame.net/>.
+
+
+
+2. TRBV WORD LISTS
+===============================================================================
+
+TRBV specifies two separate word lists, one consisting of 4-letter words and
+the other one consisting of 5-letter words.
+
+Each word differs from all other words on at least two positions. Words with a
+similar pronunciation have been avoided. However, a "phonetic distinctiveness"
+like the [PGP WORD LIST] is not achieved.
+
+
+2.1 4-letter word list (4word)
+-------------------------------------------------------------------------------
+
+The 4-letter word list is called 4word and assigns a distinguished word to each
+8-bit value according to the following table:
+
+  value  + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
+  -----  -----  -----  -----  -----  -----  -----  -----  -----
+  0x00   ACID   AREA   ATOM   AUNT   AURA   AUTO   AWAY   AXIS
+  0x08   BABY   BAIT   BANG   BASE   BEAM   BELT   BETA   BIAS
+  0x10   BIKE   BILL   BIRD   BLUR   BOAT   BODY   BOIL   BOSS
+  0x18   BULB   BUSY   CAGE   CALL   CENT   CHAT   CHEF   CHIP
+  0x20   CITY   CLUB   COIN   COLD   COPY   CORE   COUP   CREW
+  0x28   CUBE   DARE   DATA   DAWN   DEBT   DEEP   DEMO   DENY
+  0x30   DESK   DIET   DISH   DIVE   DOLL   DOME   DOOR   DRAG
+  0x38   DROP   DRUM   DUAL   DUCK   DUMB   DUTY   EACH   EARL
+  0x40   EASY   ECHO   EDGE   ENVY   EPIC   EVEN   EVIL   EXAM
+  0x48   EXIT   FACE   FARM   FEET   FILM   FIRE   FIST   FLAG
+  0x50   FLIP   FORK   FOUL   FROG   FUEL   FUSE   GAIN   GALA
+  0x58   GAZE   GENE   GIFT   GIRL   GLAD   GLUE   GOAL   GOOD
+  0x60   GRID   GROW   HAIR   HALF   HAND   HAWK   HEAD   HELL
+  0x68   HERO   HIGH   HINT   HOOK   HOPE   HORN   HOST   HOUR
+  0x70   HUGE   HURT   IDEA   IDLE   INCH   INFO   IRON   ITEM
+  0x78   JAZZ   JOKE   JUMP   JURY   JUST   KEEN   KILO   KIND
+  0x80   KISS   KITE   KIWI   KNEE   KNOT   LAMP   LATE   LAZY
+  0x88   LEAP   LEFT   LENS   LIFE   LINK   LION   LOCK   LOGO
+  0x90   LOOP   LOSE   LOUD   LUNG   MAID   MARS   MEAN   MEGA
+  0x98   MENU   MESH   MILK   MOON   MOVE   MUCH   MYTH   NAIL
+  0xA0   NECK   NEON   NEWS   NICE   ODDS   OPEN   OVAL   PALM
+  0xA8   PARK   PASS   PEER   PILE   PLAN   PLUG   POEM   PONY
+  0xB0   PULP   QUIZ   RELY   RICH   RISK   ROAD   ROLE   ROOT
+  0xB8   RUBY   RUDE   RUIN   RUSH   SACK   SAFE   SALT   SCAR
+  0xC0   SEAL   SEEK   SELF   SHOW   SHUT   SIGN   SIZE   SKIP
+  0xC8   SLIM   SOAP   SOFA   SOLO   SONG   SORT   SPIN   SPOT
+  0xD0   STEP   SUIT   SWAN   TAPE   TASK   TAXI   TECH   TERM
+  0xD8   TEST   TICK   TIDE   TIER   TILT   TINY   TONE   TOOL
+  0xE0   TOWN   TRAP   TREE   TRIO   TUNA   TURN   TWIN   UGLY
+  0xE8   UNIT   UPON   USER   VARY   VAST   VERB   VETO   VIEW
+  0xF0   VINE   VOID   WALK   WANT   WAVE   WEAK   WHOM   WILD
+  0xF8   WING   WIPE   WORM   YARD   YEAR   YOGA   ZOOM   ZULU
+
+
+2.2 5-letter word list and sub-lists (5word, 5wordL and 5wordH)
+-------------------------------------------------------------------------------
+
+The 5-letter word list is called 5word and assigns a distinguished word to each
+9-bit value according to the following table:
+
+  value  + 0x0  + 0x1  + 0x2  + 0x3  + 0x4  + 0x5  + 0x6  + 0x7
+  -----  -----  -----  -----  -----  -----  -----  -----  -----
+  0x000  ABBEY  ABOUT  ABOVE  ABUSE  ACTOR  ADAPT  ADMIT  ADULT
+  0x008  AFTER  AGAIN  AGENT  AGONY  AGREE  AHEAD  AISLE  ALARM
+  0x010  ALBUM  ALIAS  ALIBI  ALIEN  ALIKE  ALLOW  ALONE  ALPHA
+  0x018  AMBER  AMEND  AMONG  ANGEL  ANGRY  ANKLE  APART  APPLY
+  0x020  APRIL  ARENA  ARGON  ARGUE  ARISE  ARMOR  ARRAY  ASSET
+  0x028  ATLAS  AUDIT  AWAIT  AWAKE  AWARD  AWFUL  BACON  BADGE
+  0x030  BADLY  BASIL  BEACH  BEGIN  BEIGE  BELOW  BERRY  BIRTH
+  0x038  BLANK  BLAST  BLIND  BLOCK  BLOOD  BOARD  BONUS  BOOST
+  0x040  BOXER  BRAIN  BRAKE  BRASS  BRAVO  BREAK  BREED  BRICK
+  0x048  BRIEF  BROAD  BROWN  BRUSH  BUDDY  BUILD  BURST  BUYER
+  0x050  CABIN  CACHE  CANAL  CANDY  CARGO  CAROL  CARRY  CEASE
+  0x058  CHAIR  CHALK  CHAOS  CHARM  CHEAP  CHECK  CHESS  CHILD
+  0x060  CIVIL  CLAIM  CLEAR  CLERK  CLICK  CLIFF  CLOSE  CLOUD
+  0x068  CLOWN  COACH  COAST  COLOR  COMIC  COURT  COVER  CRANE
+  0x070  CRASH  CRAZY  CREEK  CRIES  CRIME  CRISP  CROSS  CRUEL
+  0x078  CUBIC  CURVE  CYCLE  DAILY  DANCE  DATED  DEBIT  DELAY
+  0x080  DELTA  DEPTH  DERBY  DEVIL  DIARY  DIGIT  DIODE  DIRTY
+  0x088  DISCO  DOUBT  DOZEN  DRAFT  DRAMA  DREAM  DRESS  DRILL
+  0x090  DRINK  DRIVE  DUSTY  EAGLE  EARTH  ELBOW  ELDER  ELECT
+  0x098  EMPTY  ENEMY  ENJOY  ENTER  EQUAL  ERROR  ESSAY  ETHIC
+  0x0A0  EXACT  EXILE  EXTRA  FAIRY  FAITH  FALSE  FANCY  FATAL
+  0x0A8  FAULT  FAVOR  FEAST  FENCE  FETCH  FINAL  FIRST  FLAME
+  0x0B0  FLASH  FLEET  FLIES  FLOAT  FLUID  FLUOR  FORCE  FORUM
+  0x0B8  FRANK  FRAUD  FRESH  FRIED  FROST  FRUIT  FUNNY  GAMMA
+  0x0C0  GAUGE  GENRE  GHOST  GIANT  GIVEN  GLASS  GLOBE  GLORY
+  0x0C8  GOING  GRACE  GRAND  GRAPH  GRASP  GREAT  GREEN  GROUP
+  0x0D0  GUARD  GUESS  GUIDE  HABIT  HAPPY  HARSH  HAVEN  HEART
+  0x0D8  HEAVY  HEDGE  HOBBY  HONOR  HORSE  HOTEL  HUMAN  HUMOR
+  0x0E0  HURRY  IMAGE  IMPLY  INCUR  INDEX  INNER  INPUT  ISSUE
+  0x0E8  IVORY  JEWEL  JUDGE  JUICE  KIOSK  KNIFE  KNOCK  KOALA
+  0x0F0  LABEL  LABOR  LARGE  LASSO  LAUGH  LAYER  LEARN  LEAVE
+  0x0F8  LEGAL  LEMON  LEVEL  LIMIT  LINEN  LITER  LIVES  LOCAL
+  0x100  LODGE  LOGIC  LOOSE  LUCKY  LUNCH  LYING  MAGIC  MAJOR
+  0x108  MAKER  MAPLE  MARCH  MAYBE  MEDIA  MERCY  MERGE  METAL
+  0x110  METER  METRO  MICRO  MINUS  MIXED  MODEL  MOIST  MONEY
+  0x118  MORAL  MOTIF  MOTOR  MOTTO  MOUNT  MOUSE  MOUTH  MOVIE
+  0x120  MUSIC  NAIVE  NASAL  NASTY  NEVER  NEWLY  NIGHT  NOBLE
+  0x128  NOISE  NOTED  NOVEL  NURSE  NYLON  OCCUR  OCEAN  OFFER
+  0x130  OLIVE  OMEGA  ONION  ONSET  OPERA  OPTIC  ORBIT  ORDER
+  0x138  ORGAN  OUGHT  OUTER  OXIDE  OZONE  PANDA  PANEL  PANIC
+  0x140  PAPER  PARTY  PASTA  PATIO  PAUSE  PEARL  PEDAL  PENNY
+  0x148  PHASE  PHONE  PHOTO  PIANO  PIECE  PILOT  PITCH  PIXEL
+  0x150  PIZZA  PLACE  PLAZA  PLUTO  POINT  POLKA  POWER  PRIOR
+  0x158  PRIZE  PROOF  PROXY  PULSE  PUPIL  QUARK  QUEEN  QUERY
+  0x160  QUEUE  QUICK  QUIET  QUOTE  RADAR  RADIO  RADON  RAISE
+  0x168  RALLY  RANGE  RAPID  REACT  READY  REALM  REBEL  REFER
+  0x170  RELAX  RENEW  REPLY  RESIN  RIGID  RIVER  ROBOT  ROMAN
+  0x178  ROUGH  ROUTE  RUGBY  RURAL  SALAD  SALON  SAUCE  SCALE
+  0x180  SCENE  SCOPE  SCOUT  SCREW  SENSE  SERVE  SETUP  SHADE
+  0x188  SHAKY  SHARP  SHEET  SHELF  SHINY  SHIRT  SHOCK  SHORE
+  0x190  SILLY  SINCE  SKIES  SKILL  SLEEP  SLIDE  SMALL  SMASH
+  0x198  SMILE  SMOKE  SNACK  SOLAR  SOLID  SOLVE  SOUND  SPACE
+  0x1A0  SPARK  SPEED  SPELL  SPLIT  SPOON  SPORT  SPRAY  SQUAD
+  0x1A8  STAGE  STAMP  STAND  START  STEAM  STICK  STONE  STORY
+  0x1B0  STRAW  STRIP  STUDY  STUFF  STUNT  STYLE  SUGAR  SUPER
+  0x1B8  SURGE  SWEAR  SWIFT  SWING  SWORD  TABLE  TANGO  TASTE
+  0x1C0  TAXES  TEDDY  THIEF  THING  THUMB  TIGER  TILDE  TIMES
+  0x1C8  TIRED  TITLE  TODAY  TOKEN  TOOTH  TORCH  TOTAL  TOXIC
+  0x1D0  TRACK  TRADE  TREND  TRIAL  TRIBE  TRUNK  TRUTH  TUTOR
+  0x1D8  TWIST  ULTRA  UNCLE  UNDER  UPPER  UPSET  URBAN  USUAL
+  0x1E0  UTTER  VALID  VALUE  VENUS  VERSE  VIDEO  VILLA  VINYL
+  0x1E8  VIRUS  VISIT  VITAL  VIVID  VOICE  WAGON  WATCH  WATER
+  0x1F0  WEIRD  WHEEL  WIDOW  WIDTH  WOMEN  WORLD  WORRY  WORTH
+  0x1F8  WRIST  WRITE  WRONG  XENON  YACHT  YIELD  YOUNG  ZEBRA
+
+The 5word list may be divided into two sub-lists: If the least significant bit
+is set to 0, the resulting sub-list maps each 8-bit value to a 5-letter-word
+(i.e. columns + 0x0, + 0x2, + 0x4 and + 0x6) and is called 5wordL. Accordingly,
+if the least significant bit is set to 1, the resulting sub-list maps each
+8-bit value to a 5-letter-word (i.e. columns + 0x1, + 0x3, + 0x5 and + 0x6),
+which is different from each word in the other sub-list, and is called 5wordH.
+
+
+
+3. TRBV PATTERN
+===============================================================================
+
+TRBV specifies 4 patterns which represent a sequence of 4-letter respectively
+5-letter words from the two word lists 4word and 5word.
+
+
+3.1  8-bit pattern
+-------------------------------------------------------------------------------
+
+An 8-bit value is represented by one 4-letter word, i.e. the following pattern:
+
+  4word
+
+The resulting pattern has a length of 4 characters.
+
+
+3.2 16-bit pattern
+-------------------------------------------------------------------------------
+
+A 16-bit value is represented by two 5-letter words according to the following
+pattern:
+
+  5wordL-5wordH
+
+The first word is determined by the high 8 bits of the value using the sub-list
+5wordL while the second word is determined by the low 8 bits of the value using
+the sub-list 5wordH.
+
+Both words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 11 characters.
+
+
+3.3 32-bit pattern
+-------------------------------------------------------------------------------
+
+A 32-bit value is represented by a mix of two 5-letter words and two 4-letter
+words according to the following pattern:
+
+  5wordH-5wordL-4word-4word
+
+The first word is determined by the highest 8 bits of the value using the sub-
+list 5wordH while the second word is determined by the following 8 bits of the
+value using the sub-list 5wordL. The last two words are determined by the next
+to lowest followed by the lowest 8 bits of the value using the word list 4word
+in both cases.
+
+All words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 21 characters.
+
+
+3.4 64-bit pattern
+-------------------------------------------------------------------------------
+
+A 64-bit value is represented by a mix of four 5-letter and three 4-letter
+words, where the pattern depends on the highest 4 bits of the value according
+to the following table:
+
+  value  pattern
+  -----  -----------------------------------------   
+  0x0    4word-5word-4word-5word-4word-5word-5word
+  0x1    4word-5word-4word-5word-5word-4word-5word
+  0x2    4word-5word-4word-5word-5word-5word-4word
+  0x3    4word-5word-5word-4word-4word-5word-5word
+  0x4    4word-5word-5word-4word-5word-4word-5word
+  0x5    4word-5word-5word-4word-5word-5word-4word
+  0x6    4word-5word-5word-5word-4word-4word-5word
+  0x7    4word-5word-5word-5word-4word-5word-4word
+  0x8    5word-4word-4word-5word-4word-5word-5word
+  0x9    5word-4word-4word-5word-5word-4word-5word
+  0xA    5word-4word-4word-5word-5word-5word-4word
+  0xB    5word-4word-5word-4word-4word-5word-5word
+  0xC    5word-4word-5word-4word-5word-4word-5word
+  0xD    5word-4word-5word-4word-5word-5word-4word
+  0xE    5word-4word-5word-5word-4word-4word-5word
+  0xF    5word-4word-5word-5word-4word-5word-4word
+
+The first word is determined by the highest 8 or 9 bits of the value after the
+4 bits which determine the pattern (see above). The next word is determined by
+the following 8 or 9 bits and so on.
+
+All words are separated by a hyphen-minus '-'. The resulting pattern has a
+length of 38 characters.
+
+
+
+4. TRBV MODES
+===============================================================================
+
+The TRBV modes specify how a value of arbitrary size is represented by TRBV
+words. It is also possible to process an arbitrary sequence of bytes, which
+must be 8 bits each, by considering the sequence as a single big endian value
+(note that is not required to know the total number of bytes in advance but the
+size shall be a multiple of 8 bits in order to avoid padding).
+
+Note that the different modes always produce different sequences of words (i.e.
+it is impossible that two different modes produce the same result) and that the
+mode always can be determined by the first two words (if given).
+
+
+4.1 8-bit mode
+-------------------------------------------------------------------------------
+
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
+
+In the 8-bit mode, the value is represented by a sequence of 8-bit patterns,
+from the most significant bits to the least significant bits.
+
+All patterns are separated by a hyphen-minus '-'. The resulting sequence of
+words has a length of (n * 5) + 4 characters. If appropriate, a line break may
+be used rather than a hyphen-minus to separate two adjacent patterns.
+
+The resulting sequence of words consists of 4-letter words only. Thus, each
+TRBV sequence of words which consists of a single 4-letter word or starts with
+two 4-letter words can be identified as 8-bit mode.
+
+
+4.2 16-bit mode
+-------------------------------------------------------------------------------
+
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
+
+In the 16-bit mode, the value is represented by a sequence of 16-bit patterns,
+from the most significant bits to the least significant bits. If there are only
+8 bits left in the value, the 8-bit mode is used for the remaining bits.
+
+All patterns are separated by a hyphen-minus '-'. The resulting sequence of
+words has a length of (n * 12) + 11 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
+
+The resulting sequence of words consists of 5-letter words only except the last
+word which may be a 4-letter word. There will never be a repeating word.
+
+If there is more than one word in a TRBV sequence of words, the 16-bit mode may
+be identified if the first two words are 5-letter words and the very first word
+is from the sub-list 5wordL. Alternatively (e.g. in cases where the word lists
+are not present), the 16-bit mode may be identified if the two very first words
+are 5-letter words and there are either no more words or the third word is also
+a 5-letter word.
+
+
+4.3 32-bit mode
+-------------------------------------------------------------------------------
+
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
+
+In the 32-bit mode, the value is represented by a sequence of 32-bit patterns,
+from the most significant bits to the least significant bits. If there are less
+than 32 bits left in the value (i.e. 24, 16 or 8 bits), the 16-bit mode is used
+for the remaining bits.
+
+All patterns are separated by a hyphen-minus '-'. The resulting sequence of
+words has a length of (n * 22) + 21 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
+
+The resulting sequence of words always consists of 5-letter and 4-letter words.
+There will never be repeating 5-letter words but two repeating 4-letter words
+may occur except at the very end where up to three repeating 4-letter words may
+occur.
+
+If there are more than two words in a TRBV sequence of words, the 32-bit mode
+may be identified if the first two words are 5-letter words and the very first
+word is from the sub-list 5wordH. Alternatively (e.g. in cases where the word
+lists are not present), the 32-bit mode may be identified if the two very first
+words are 5-letter words and the third word a 4-letter word.
+
+
+4.4 64-bit mode
+-------------------------------------------------------------------------------
+
+If the bit length of the value is not a multiple of 8, zero bits are prepended
+until the bit length is a multiple of 8 (padding).
+
+In the 64-bit mode, the value is represented by a sequence of 64-bit patterns,
+from the most significant bits to the least significant bits. If there are less
+than 64 bits left in the value (i.e. 56, 48, 40, 32, 24, 16 or 8 bits), the
+32-bit mode is used for the remaining bits.
+
+All patterns are separated by a hyphen-minus '-'. The resulting sequence of
+words has a length of (n * 39) + 38 characters. If appropriate, a line break
+may be used rather than a hyphen-minus to separate two adjacent patterns (note
+that no line break shall be used to separate two adjacent words within the same
+pattern).
+
+The resulting sequence of words always consists of 5-letter and 4-letter words.
+There will never be more than three repeating 5-letter words and two repeating
+4-letter words except at the very end where up to three repeating 4-letter
+words may occur.
+
+If there is more than one word in a TRBV sequence of words, the 64-bit mode may
+be identified if the first two words are exactly one 5-letter word and one
+4-letter word (in any order).
+
+
+
+5. TRBV TEST VECTORS
+===============================================================================
+
+Value 0x0
+
+-  8-bit mode: ACID
+
+Value 0x00
+
+-  8-bit mode: ACID
+
+Value 0x000
+
+-  8-bit mode: ACID-ACID
+- 16-bit mode: ABBEY-ABOUT
+
+Value 0x0000
+
+-  8-bit mode: ACID-ACID
+- 16-bit mode: ABBEY-ABOUT
+
+Value 0x00000
+
+-  8-bit mode: ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ACID
+
+Value 0x000000
+
+-  8-bit mode: ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ACID
+
+Value 0x0000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID
+
+Value 0x00000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID
+
+Value 0x000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ACID
+
+Value 0x0000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ACID
+
+Value 0x00000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT
+
+Value 0x000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT
+
+Value 0x0000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT-ACID
+
+Value 0x00000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT-ACID
+
+Value 0x000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY
+
+Value 0x0000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY
+
+Value 0x00000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY-ACID
+
+Value 0x000000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY-ACID
+
+Value 0x00000000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT-ABBEY-ABOUT
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY-ABBEY-ABOUT
+
+Value 0x0000000000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ABOUT-ABBEY-ACID-ACID-ABBEY-ABOUT-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY-ABBEY-ABOUT-ACID
+
+Value 0x000000000000000000000000
+
+-  8-bit mode: ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID-ACID
+- 64-bit mode: ACID-ABBEY-ACID-ABBEY-ACID-ABBEY-ABBEY-ABOUT-ABBEY-ACID-ACID
+
+Value 0x01
+
+-  8-bit mode: AREA
+
+Value 0x012
+
+-  8-bit mode: ACID-BIRD
+- 16-bit mode: ABBEY-ARMOR
+
+Value 0x0123
+
+-  8-bit mode: AREA-COLD
+- 16-bit mode: ABOVE-BRICK
+
+Value 0x01234
+
+-  8-bit mode: ACID-BIRD-DOLL
+- 16-bit mode: ABBEY-ARMOR-DOLL
+
+Value 0x012345
+
+-  8-bit mode: AREA-COLD-EVEN
+- 16-bit mode: ABOVE-BRICK-EVEN
+
+Value 0x0123456
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN
+
+Value 0x01234567
+
+-  8-bit mode: AREA-COLD-EVEN-HELL
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP
+- 32-bit mode: ABUSE-BREED-EVEN-HELL
+
+Value 0x012345678
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN-JAZZ
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL-JAZZ
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN-JAZZ
+
+Value 0x0123456789
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-LEFT
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-LEFT
+
+Value 0x0123456789A
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN-JAZZ-MILK
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL-LABEL-OPTIC
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN-LABEL-OPTIC
+
+Value 0x0123456789AB
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-MICRO-PRIOR
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MICRO-PRIOR
+
+Value 0x0123456789ABC
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN-JAZZ-MILK-SACK
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL-LABEL-OPTIC-SACK
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN-LABEL-OPTIC-SACK
+
+Value 0x0123456789ABCD
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-MICRO-PRIOR-SORT
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MICRO-PRIOR-SORT
+
+Value 0x0123456789ABCDE
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN-JAZZ-MILK-SACK-TONE
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL-LABEL-OPTIC-ROUGH-TABLE
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN-LABOR-OPERA-SACK-TONE
+- 64-bit mode: AREA-BREED-LENS-SOUND-COUP-QUEEN-HUMAN
+
+Value 0x0123456789ABCDEF
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT-VIEW
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-MICRO-PRIOR-SNACK-USUAL
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MINUS-POWER-SORT-VIEW
+- 64-bit mode: BIRD-CLOWN-PLAN-VALUE-HINT-VILLA-WATER
+
+Value 0x0123456789ABCDEF0
+
+-  8-bit mode: ACID-BIRD-DOLL-GAIN-JAZZ-MILK-SACK-TONE-VINE
+- 16-bit mode: ABBEY-ARMOR-CLOWN-FINAL-LABEL-OPTIC-ROUGH-TABLE-VINE
+- 32-bit mode: ABOUT-ARISE-DOLL-GAIN-LABOR-OPERA-SACK-TONE-VINE
+- 64-bit mode: AREA-BREED-LENS-SOUND-COUP-QUEEN-HUMAN-VINE
+
+Value 0x0123456789ABCDEF01
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT-VIEW-AREA
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-MICRO-PRIOR-SNACK-USUAL-AREA
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MINUS-POWER-SORT-VIEW-AREA
+- 64-bit mode: BIRD-CLOWN-PLAN-VALUE-HINT-VILLA-WATER-AREA
+
+Value 0x0123456789ABCDEF0123
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT-VIEW-AREA-COLD
+- 16-bit mode: ABOVE-BRICK-DOZEN-GROUP-MICRO-PRIOR-SNACK-USUAL-ABOVE-BRICK
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MINUS-POWER-SORT-VIEW-ABOVE-BRICK
+- 64-bit mode: BIRD-CLOWN-PLAN-VALUE-HINT-VILLA-WATER-ABOVE-BRICK
+
+Value 0x0123456789ABCDEF012345
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT-VIEW-AREA-COLD-EVEN
+- 32-bit mode: ABUSE-BREED-EVEN-HELL-MINUS-POWER-SORT-VIEW-ABOVE-BRICK-EVEN
+- 64-bit mode: BIRD-CLOWN-PLAN-VALUE-HINT-VILLA-WATER-ABOVE-BRICK-EVEN
+
+Value 0x0123456789ABCDEF01234567
+
+-  8-bit mode: AREA-COLD-EVEN-HELL-LEFT-PILE-SORT-VIEW-AREA-COLD-EVEN-HELL
+- 64-bit mode: BIRD-CLOWN-PLAN-VALUE-HINT-VILLA-WATER-ABUSE-BREED-EVEN-HELL
+
+Value 0xF
+
+-  8-bit mode: BIAS
+
+Value 0xFE
+
+-  8-bit mode: ZOOM
+
+Value 0xFED
+
+-  8-bit mode: BIAS-VERB
+- 16-bit mode: APART-UNDER
+
+Value 0xFEDC
+
+-  8-bit mode: ZOOM-TILT
+- 16-bit mode: YACHT-SWEAR
+
+Value 0xFEDCB
+
+-  8-bit mode: BIAS-VERB-SOLO
+- 16-bit mode: APART-UNDER-SOLO
+
+Value 0xFEDCBA
+
+-  8-bit mode: ZOOM-TILT-RUIN
+- 16-bit mode: YACHT-SWEAR-RUIN
+
+Value 0xFEDCBA9
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS
+- 16-bit mode: APART-UNDER-SMALL-PLUTO
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS
+
+Value 0xFEDCBA98
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA
+- 32-bit mode: YIELD-SURGE-RUIN-MENU
+
+Value 0xFEDCBA987
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS-LAZY
+- 16-bit mode: APART-UNDER-SMALL-PLUTO-LAZY
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS-LAZY
+
+Value 0xFEDCBA9876
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-IRON
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-IRON
+
+Value 0xFEDCBA98765
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS-LAZY-HAWK
+- 16-bit mode: APART-UNDER-SMALL-PLUTO-MERGE-GRAPH
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS-MERGE-GRAPH
+
+Value 0xFEDCBA987654
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-KIOSK-FAVOR
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KIOSK-FAVOR
+
+Value 0xFEDCBA9876543
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS-LAZY-HAWK-ENVY
+- 16-bit mode: APART-UNDER-SMALL-PLUTO-MERGE-GRAPH-ENVY
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS-MERGE-GRAPH-ENVY
+
+Value 0xFEDCBA98765432
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-KIOSK-FAVOR-DISH
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KIOSK-FAVOR-DISH
+
+Value 0xFEDCBA987654321
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS-LAZY-HAWK-ENVY-CLUB
+- 16-bit mode: APART-UNDER-SMALL-PLUTO-MERGE-GRAPH-DIODE-BRASS
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS-METAL-GRAND-ENVY-CLUB
+- 64-bit mode: ZOOM-SWEAR-INFO-CLAIM-TICK-EXILE-NAIVE
+
+Value 0xFEDCBA9876543210
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH-BIKE
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-KIOSK-FAVOR-CLICK-ARENA
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KNIFE-FAULT-DISH-BIKE
+- 64-bit mode: UNDER-MEGA-FANCY-BLOCK-DATA-BEACH-BIKE
+
+Value 0xFEDCBA9876543210F
+
+-  8-bit mode: BIAS-VERB-SOLO-PASS-LAZY-HAWK-ENVY-CLUB-BIAS
+- 16-bit mode: APART-UNDER-SMALL-PLUTO-MERGE-GRAPH-DIODE-BRASS-BIAS
+- 32-bit mode: APPLY-UNCLE-SOLO-PASS-METAL-GRAND-ENVY-CLUB-BIAS
+- 64-bit mode: ZOOM-SWEAR-INFO-CLAIM-TICK-EXILE-NAIVE-BIAS
+
+Value 0xFEDCBA9876543210FE
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH-BIKE-ZOOM
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-KIOSK-FAVOR-CLICK-ARENA-ZOOM
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KNIFE-FAULT-DISH-BIKE-ZOOM
+- 64-bit mode: UNDER-MEGA-FANCY-BLOCK-DATA-BEACH-BIKE-ZOOM
+
+Value 0xFEDCBA9876543210FEDC
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH-BIKE-ZOOM-TILT
+- 16-bit mode: YACHT-SWEAR-RIGID-OMEGA-KIOSK-FAVOR-CLICK-ARENA-YACHT-SWEAR
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KNIFE-FAULT-DISH-BIKE-YACHT-SWEAR
+- 64-bit mode: UNDER-MEGA-FANCY-BLOCK-DATA-BEACH-BIKE-YACHT-SWEAR
+
+Value 0xFEDCBA9876543210FEDCBA
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH-BIKE-ZOOM-TILT-RUIN
+- 32-bit mode: YIELD-SURGE-RUIN-MENU-KNIFE-FAULT-DISH-BIKE-YACHT-SWEAR-RUIN
+- 64-bit mode: UNDER-MEGA-FANCY-BLOCK-DATA-BEACH-BIKE-YACHT-SWEAR-RUIN
+
+Value 0xFEDCBA9876543210FEDCBA98
+
+-  8-bit mode: ZOOM-TILT-RUIN-MENU-IRON-FUEL-DISH-BIKE-ZOOM-TILT-RUIN-MENU
+- 64-bit mode: UNDER-MEGA-FANCY-BLOCK-DATA-BEACH-BIKE-YIELD-SURGE-RUIN-MENU
+
+Value 0xFF
+
+-  8-bit mode: ZULU
+
+Value 0xFFF
+
+-  8-bit mode: BIAS-ZULU
+- 16-bit mode: APART-ZEBRA
+
+Value 0xFFFF
+
+-  8-bit mode: ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA
+
+Value 0xFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-ZULU
+
+Value 0xFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-ZULU
+
+Value 0xFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU
+
+Value 0xFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU
+
+Value 0xFFFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU-ZULU
+
+Value 0xFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-ZULU
+
+Value 0xFFFFFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU-YOUNG-ZEBRA
+
+Value 0xFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-YOUNG-ZEBRA
+
+Value 0xFFFFFFFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU-YOUNG-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-YOUNG-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU
+- 64-bit mode: ZULU-ZEBRA-ZULU-ZEBRA-ZULU-ZEBRA-ZEBRA
+
+Value 0xFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU
+- 64-bit mode: ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: BIAS-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: APART-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: APPLY-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU-ZULU
+- 64-bit mode: ZULU-ZEBRA-ZULU-ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-ZULU
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU-ZULU
+- 64-bit mode: ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-ZULU
+
+Value 0xFFFFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 16-bit mode: YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA-YOUNG-ZEBRA
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU-YOUNG-ZEBRA
+- 64-bit mode: ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-YOUNG-ZEBRA
+
+Value 0xFFFFFFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 32-bit mode: ZEBRA-YOUNG-ZULU-ZULU-ZEBRA-YOUNG-ZULU-ZULU-YOUNG-ZEBRA-ZULU
+- 64-bit mode: ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-YOUNG-ZEBRA-ZULU
+
+Value 0xFFFFFFFFFFFFFFFFFFFFFFFF
+
+-  8-bit mode: ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU-ZULU
+- 64-bit mode: ZEBRA-ZULU-ZEBRA-ZEBRA-ZULU-ZEBRA-ZULU-ZEBRA-YOUNG-ZULU-ZULU
+
+Value 0xF1E2D3C4B5A6789
+
+-  8-bit mode: BIAS-CHEF-DEEP-DUMB-FEET-GIFT-HELL-LEFT
+- 16-bit mode: APART-BOARD-CHAOS-CURVE-ELDER-FLUOR-GREEN-MINUS
+- 32-bit mode: APPLY-BLOOD-DEEP-DUMB-ELECT-FLUID-HELL-LEFT
+- 64-bit mode: VOID-TIGER-PALM-MICRO-TECH-ONSET-SHARP
+
+Value 0x0F1E2D3C4B5A6789
+
+-  8-bit mode: BIAS-CHEF-DEEP-DUMB-FEET-GIFT-HELL-LEFT
+- 16-bit mode: APART-BOARD-CHAOS-CURVE-ELDER-FLUOR-GREEN-MINUS
+- 32-bit mode: APPLY-BLOOD-DEEP-DUMB-ELECT-FLUID-HELL-LEFT
+- 64-bit mode: VOID-TIGER-PALM-MICRO-TECH-ONSET-SHARP
+
+Value 0xBADCAFE
+
+-  8-bit mode: BASE-PLUG-SOFA-ZOOM
+- 16-bit mode: ALONE-PULSE-SLEEP-YIELD
+- 32-bit mode: ALPHA-PROXY-SOFA-ZOOM
+
+Value 0x0BADCAFE
+
+-  8-bit mode: BASE-PLUG-SOFA-ZOOM
+- 16-bit mode: ALONE-PULSE-SLEEP-YIELD
+- 32-bit mode: ALPHA-PROXY-SOFA-ZOOM
+
+Value 0x000000000BADCAFE
+
+-  8-bit mode: ACID-ACID-ACID-ACID-BASE-PLUG-SOFA-ZOOM
+- 16-bit mode: ABBEY-ABOUT-ABBEY-ABOUT-ALONE-PULSE-SLEEP-YIELD
+- 32-bit mode: ABOUT-ABBEY-ACID-ACID-ALPHA-PROXY-SOFA-ZOOM
+- 64-bit mode: ACID-ABBEY-ACID-ABOVE-VARY-INNER-LIVES
+
+Value 0xBADCAFEEEEEEEEEE
+
+-  8-bit mode: RUIN-TILT-PONY-VETO-VETO-VETO-VETO-VETO
+- 16-bit mode: RIGID-SWEAR-QUEEN-UPSET-UPPER-UPSET-UPPER-UPSET
+- 32-bit mode: RIVER-SURGE-PONY-VETO-UPSET-UPPER-VETO-VETO
+- 64-bit mode: PULSE-MARS-XENON-RUSH-RUSH-ROMAN-KNOCK

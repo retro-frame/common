@@ -2,8 +2,8 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.1!0 (dev)**  
-**Compliance: Retro-Frame 1.0**  
+**Version: 1.1.0**  
+**Compliance: Retro-Frame 1.1**  
 **License: MIT (see `LICENSE`)**  
 
 Copyright (c) 2025-2026 Ingo Boehmer \<ingo@retro-leisure.net\>
@@ -40,12 +40,13 @@ be used as a whole or partially for other purposes.
   repositories which provide specifications covering specific topics (e.g. data
   formats, codepages, algorithms or protocols). These repositories may be
   online available from the **Retro-Frame** homepage.
+  \<[http://source.retro-frame.net/](http://source.retro-frame.net/)\>.
 
 As Retro-Frame is evolving, declarations of compliance should always refer to a
 specific release version of the Retro-Frame Common Documentation respository.
 If a general intention of compliance is expressed, a reference to the major
 version may be given by "Retro-Frame 1.x". However, an actual reference should
-specify the minor version as well (e.g. "Retro-Frame 1.0").
+specify the minor version as well (e.g. "Retro-Frame 1.1").
 
 Note that the individual topic-related specifications (e.g. a data format)
 use independent version numbers and the repositories may have different minor
@@ -82,6 +83,10 @@ The directory `spec/` contains the following common specifications:
   specifications. Despite their intended use, the metasyntax and/or the syntax
   specifications may also be used for other purposes.
 
+* `spec/rf-trbv.txt` provides a specification of textual representation of
+  binary values which may be used to transmit, identify or verify a long
+  sequence of bits using language rather than digits.
+
 * `spec/rf-types.txt` provides common Retro-Frame codes (i.e. a code list) for
   specified data types. The data types covered are integer, floating point
   number and character types.
@@ -91,13 +96,22 @@ The directory `spec/` contains the following common specifications:
 
 The directory `template/` contains the following templates:
 
-* `template/rf-readme.md` provides a generic readme file template in
-  **Markdown** format.
+* `template/DOC_manual.bib` provides a generic BibTeX file with examples used
+  by the **LaTeX** template files (see below).
+
+* `template/DOC_manual_de.tex` provides a generic manual template in **LaTeX**
+  format for German language.
+
+* `template/DOC_manual_en.tex` provides a generic manual template in **LaTeX**
+  format for English language.
 
 * `template/rf-doc.txt` contains the generic document template in text format.
   As this template may be used for endeavors other than Retro-Frame, the
   **FIGlet** of the text "\<Retro-Endeavor\>" should be replaced by the name of
   the actual endeavor in **FIGlet** standard font.
+
+* `template/rf-readme.md` provides a generic readme file template in
+  **Markdown** format.
 
 
 ## 5. References
@@ -106,6 +120,11 @@ The directory `template/` contains the following templates:
 
 Official website of FIGlet ("Frank, Ian and Glenn's LETters"), see
 \<[http://www.figlet.org/](http://www.figlet.org/)\>.
+
+### LaTeX
+
+The LaTeX Project, see
+\<[http://www.latex-project.org/](http://www.latex-project.org/)\>.
 
 ### Markdown
 

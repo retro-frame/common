@@ -16,7 +16,7 @@ File:        /<File path>//
 Version:     <INTERNAL VERSION>
 [ Environments:  <CODE> [ , <CODE> ]*
 [ Dependencies:  <Reference> [ , <Reference> ]*
-Compliance:  Retro-Frame 1.0 [ <LIMITATION> ]* [ , <Reference> ]*
+Compliance:  Retro-Frame 1.1 [ <LIMITATION> ]* [ , <Reference> ]*
 License:     MIT
 
 Copyright (c) <Year(s)> <Contributer full name> <<Contributer e-mail address>>
