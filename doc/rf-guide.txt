@@ -13,7 +13,7 @@ Guidelines
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /doc/rf-guide.txt//
-Version:     01.01.00
+Version:     01.01.01
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -51,6 +51,10 @@ Change history
 
   Compliance switched to Retro-Frame 1.1; clearifications and corrections in
   chapters 5.6, 7.2 and 7.3.
+
+2026-11-07 : 01.01.01 : Ingo
+
+  Clearifications and corrections regarding local paths in chapter 5.1.
 
 
 Contents
@@ -605,27 +609,40 @@ as the mount point for REPOSITORIES:
   more. If all versions and dependencies haven been chosen properly, a clean
   build may be performed and/or program files may be executed.
 
-Additional sub-directories may be used (e.g. to keep multiple versions of
-documentation or libraries in parallel, to make program files executable from
-the command line or to collect individual files of a PRODUCT). However, those
-parts remain unspecified.
-
 If a repository is created, exported or cloned to such a mount point, the local
 relative path of the repository should be the name of the repository except
 that if the name contains periods ('.'), each part of the name separated by the
 periods should be a separate directory (i.e. the periods should be replaced by
 an environment-dependent path separator).
 
+For Retro-Frame releases, an additional sub-directory with the fixed width
+representation of the major version of the repository (see chapters 7.1 and
+7.2) is prepended to keep multiple major versions of in parallel.
+
+For libraries, an additional sub-directory with the fixed width representation
+of the major version of the repository (see chapters 7.1 and 7.2) is appended
+to keep multiple major versions of in parallel (for both, development and
+releases).
+
 Examples:
 
-- Local path for development of the Retro-Frame repository "common":
-  $<native-base-directory>/Retro-Frame/dev/common/
+- Local path for major version 1 releases of the Retro-Frame repository
+  "common":
 
-- Local path for releases v2.1 of the Retro-BASIC repository "test":
-  $<native-base-directory>/Retro-BASIC/release/test/02.01/
+  $<native-base-directory>/Retro-Frame/release/01/common/
 
-- Local path for development of the Retro-C repository "comp.stdc.recma55":
-  $<native-base-directory>/Retro-C/dev/comp/stdc/recma55/
+- Local path for development of the Retro-BASIC repository "ecma55.test":
+
+  $<native-base-directory>/Retro-BASIC/dev/ecma55/test/
+
+- Local path for releases of the Retro-C repository "comp.stdc.recma55":
+
+  $<native-base-directory>/Retro-C/release/comp/stdc/recma55/
+
+- Local path for major version 1 development of the Retro-C library repository
+  "lib.rcbase":
+
+  $<native-base-directory>/Retro-C/dev/lib/rcbase/01/
 
 
 5.2 Text encoding
