@@ -2,7 +2,7 @@
 
 **Endeavor: Retro-Frame**  
 **Repository: \<[http://source.retro-frame.net/common](http://source.retro-frame.net/common)\>**  
-**Version: 1.1.0**  
+**Version: 1.1.1**  
 **Compliance: Retro-Frame 1.1**  
 **License: MIT (see `LICENSE`)**  
 

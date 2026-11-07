@@ -13,7 +13,7 @@ Retro Character Specification
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-char.txt//
-Version:     01.01.00
+Version:     01.01.01
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -54,6 +54,12 @@ Change history
   character"; direct encoding range changed; chapters "direct encodings" and
   "string terminators" moved to chapter 5 as, in a strict sense, they are not
   part of the character set; chapter "internal 24 bit representation" added.
+
+2026-11-07 : 01.01.01 : Ingo
+
+  KBD_ALT_* non-characters added to chapter 3.3; representation of broken UTF-8
+  and UTF-16 sequences as direct encodings added to chapter 5.1 (the changes of
+  the previous 4-bytes direct encodings are considered corrections).
 
 
 Contents
@@ -346,7 +352,34 @@ The following non-characters are defined:
 - R+FDD0..R+FDEF      private use area (will always remain unspecified)
 - R+126FC2            NO_CHAR (generic non-character)
 - R+126FC3            PATH_SEPARATOR
-- R+126FC4..R+7FFFFF  (reserved)
+- R+126FC4..R+1FFFFF  (reserved)
+- R+200000            KBD_ALT_A
+- R+200001            KBD_ALT_B
+- R+200002            KBD_ALT_C
+- R+200003            KBD_ALT_D
+- R+200004            KBD_ALT_E
+- R+200005            KBD_ALT_F
+- R+200006            KBD_ALT_G
+- R+200007            KBD_ALT_H
+- R+200008            KBD_ALT_I
+- R+200009            KBD_ALT_J
+- R+20000A            KBD_ALT_K
+- R+20000B            KBD_ALT_L
+- R+20000C            KBD_ALT_M
+- R+20000D            KBD_ALT_N
+- R+20000E            KBD_ALT_O
+- R+20000F            KBD_ALT_P
+- R+200010            KBD_ALT_Q
+- R+200011            KBD_ALT_R
+- R+200012            KBD_ALT_S
+- R+200013            KBD_ALT_T
+- R+200014            KBD_ALT_U
+- R+200015            KBD_ALT_V
+- R+200016            KBD_ALT_W
+- R+200017            KBD_ALT_X
+- R+200018            KBD_ALT_Y
+- R+200019            KBD_ALT_Z
+- R+20001A..R+7FFFFF  (reserved)
 - R+800000..R+FFFFFF  private use area (will always remain unspecified)
 
 Note that the range R+FDD0..R+FDEF is deliberately marked as a private use area
@@ -469,12 +502,45 @@ The following ranges are defined for direct encoding:
 
 - 0x01000000..0x010000FF  1 byte direct encoding
 - 0x02000000..0x0200FFFF  2 bytes direct encoding
+- 0x02600000..0x02603FFF  2 bytes direct encoding from broken UTF-8
+- 0x02700000..0x0277FFFF  3 bytes direct encoding from broken UTF-8
+- 0x02800000..0x02FFFFFF  4 bytes direct encoding from broken UTF-8
 - 0x03000000..0x03FFFFFF  3 bytes direct encoding
-- 0x04000000..0x83FFFFFF  4 bytes direct encoding <= 0x7FFFFFFF or low part
-- 0x84000000              4 bytes direct encoding high part prefix
+- 0x04000000..0x07FFFFFF  4 bytes direct encoding from broken UTF-16
+- 0x08000000..0x87FFFFFF  4 bytes direct encoding <= 0x7FFFFFFF or low part
+- 0x88000000              4 bytes direct encoding high part prefix
 
 If the high bit of a 4 bytes direct encoding is set, the high part prefix must
 precede the low part.
+
+Broken UTF-8 encodings may be represented by direct encodings in the following
+manner:
+
+- If the first byte is in the range 0xC0..0xF7 but the second byte is not in
+  the range 0x80..0xBF, the 6 low bits of the first byte and all 8 bits of the
+  second byte are represented by a value in the range 0x0000..0x3FFF and the
+  value 0x02600000 is added (2 bytes broken UTF-8).
+
+- If the first byte is in the range 0xE0..0xF7 and the second byte is in the
+  range 0x80..0xBF but the third byte is not in the range 0x80..0xBF, the 5 low
+  bits of the first byte, the 6 low bits of the second byte and all 8 bits of
+  the third byte are represented by a value in the range 0x00000..0x7FFFF and
+  the value 0x02700000 is added (3 bytes broken UTF-8).
+
+- If the first byte is in the range 0xF0..0xF7, the second and third bytes are
+  in the range 0x80..0xBF but the fourth byte is not in the range 0x80..0xBF,
+  the 3 low bits of the first byte, the 6 low bits of the second and third byte
+  and all 8 bits of the fourth byte are represented by a value in the range
+  0x000000..0x7FFFFF and the value 0x02800000 is added (4 bytes broken UTF-8).
+
+Broken UTF-16 encodings may be represented by direct encodings in the following
+manner:
+
+- If the first value is in the range 0xD800..0xDBF7 (i.e. a high surrogate) but
+  the second value is not in the range 0xDC00..0xDFFF (i.e. a low surrogate),
+  the 10 low bits of the first value and all 16 bits of the second value are
+  represented by a value in the range 0x0000000..0x3FFFFFF and the value
+  0x04000000 is added (4 bytes broken UTF-16).
 
 The following ranges are defined for string terminators:
 
