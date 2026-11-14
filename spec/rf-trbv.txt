@@ -13,7 +13,7 @@ Textual Representation of Binary Values
 
 Repository:  <http://source.retro-frame.net/common>
 File:        /spec/rf-trbv.txt//
-Version:     01.01.00
+Version:     01.01.02
 Compliance:  Retro-Frame 1.1
 License:     MIT
 
@@ -47,6 +47,10 @@ Change history
 
   Initial version.
 
+2026-11-14 : 01.01.02 : Ingo
+
+  TRBV modes named as TRBV-n.
+
 
 Contents
 -------------------------------------------------------------------------------
@@ -67,10 +71,10 @@ Contents
    3.4  64-bit pattern
 
 4. TRBV MODES
-   4.1  8-bit mode
-   4.2  16-bit mode
-   4.3  32-bit mode
-   4.4  64-bit mode
+   4.1  TRBV-8
+   4.2  TRBV-16
+   4.3  TRBV-32
+   4.4  TRBV-64
 
 5. TRBV TEST VECTORS
 
@@ -354,13 +358,13 @@ it is impossible that two different modes produce the same result) and that the
 mode always can be determined by the first two words (if given).
 
 
-4.1 8-bit mode
+4.1 TRBV-8
 -------------------------------------------------------------------------------
 
 If the bit length of the value is not a multiple of 8, zero bits are prepended
 until the bit length is a multiple of 8 (padding).
 
-In the 8-bit mode, the value is represented by a sequence of 8-bit patterns,
+In the TRBV-8 mode, the value is represented by a sequence of 8-bit patterns,
 from the most significant bits to the least significant bits.
 
 All patterns are separated by a hyphen-minus '-'. The resulting sequence of
@@ -372,13 +376,13 @@ TRBV sequence of words which consists of a single 4-letter word or starts with
 two 4-letter words can be identified as 8-bit mode.
 
 
-4.2 16-bit mode
+4.2 TRBV-16
 -------------------------------------------------------------------------------
 
 If the bit length of the value is not a multiple of 8, zero bits are prepended
 until the bit length is a multiple of 8 (padding).
 
-In the 16-bit mode, the value is represented by a sequence of 16-bit patterns,
+In the TRBV-16 mode, the value is represented by a sequence of 16-bit patterns,
 from the most significant bits to the least significant bits. If there are only
 8 bits left in the value, the 8-bit mode is used for the remaining bits.
 
@@ -399,13 +403,13 @@ are 5-letter words and there are either no more words or the third word is also
 a 5-letter word.
 
 
-4.3 32-bit mode
+4.3 TRBV-32
 -------------------------------------------------------------------------------
 
 If the bit length of the value is not a multiple of 8, zero bits are prepended
 until the bit length is a multiple of 8 (padding).
 
-In the 32-bit mode, the value is represented by a sequence of 32-bit patterns,
+In the TRBV-32 mode, the value is represented by a sequence of 32-bit patterns,
 from the most significant bits to the least significant bits. If there are less
 than 32 bits left in the value (i.e. 24, 16 or 8 bits), the 16-bit mode is used
 for the remaining bits.
@@ -428,13 +432,13 @@ lists are not present), the 32-bit mode may be identified if the two very first
 words are 5-letter words and the third word a 4-letter word.
 
 
-4.4 64-bit mode
+4.4 TRBV-64
 -------------------------------------------------------------------------------
 
 If the bit length of the value is not a multiple of 8, zero bits are prepended
 until the bit length is a multiple of 8 (padding).
 
-In the 64-bit mode, the value is represented by a sequence of 64-bit patterns,
+In the TRBV-64 mode, the value is represented by a sequence of 64-bit patterns,
 from the most significant bits to the least significant bits. If there are less
 than 64 bits left in the value (i.e. 56, 48, 40, 32, 24, 16 or 8 bits), the
 32-bit mode is used for the remaining bits.
